@@ -41,7 +41,7 @@ public class Camera_Shot : MonoBehaviour
 
     private void Start()
     {
-        screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false); // Change dimensions
     }
 
 
@@ -104,6 +104,10 @@ public class Camera_Shot : MonoBehaviour
 
         screenCapture.ReadPixels(regionToRead, 0, 0, false);
         screenCapture.Apply();
+
+        SaveSystem.SavePicture(screenCapture, target.tag);
+
+
 
         // Reset all
         Camera.main.targetTexture = null;
