@@ -1,3 +1,4 @@
+using Sirenix.Utilities;
 using System.IO;
 using Unity.AppUI.Core;
 using UnityEngine;
@@ -14,6 +15,7 @@ public static class SaveSystem
         if(!Directory.Exists(picturesFolder))
         {
             Directory.CreateDirectory(picturesFolder);
+            Debug.Log("picturesFolder created");
         }
         album = Album.Load();
     }
@@ -32,11 +34,17 @@ public static class SaveSystem
         };
 
         album.photoInfos.Add(photoInfos);
+
+        Album.Save(album);
+        Debug.Log("Picture saved");
+        Debug.Log("PhotoInfos saved " + photoInfos.imagePath + " " + photoInfos.imageTag);
+        Debug.Log("Album PhotoInfos in SaveSystem is null" + album.photoInfos.IsNullOrEmpty());
     }
 
-    public static void DeletePicture()
+    public static void DeletePicture(PhotoInfos infos)
     {
-        // TO DO
+        File.Delete(infos.imagePath);
+        album.photoInfos.Remove(infos);
     }
 
     public static void SavePosition()

@@ -105,7 +105,14 @@ public class Camera_Shot : MonoBehaviour
         screenCapture.ReadPixels(regionToRead, 0, 0, false);
         screenCapture.Apply();
 
-        SaveSystem.SavePicture(screenCapture, target.tag);
+        if (target != null)
+        {
+            SaveSystem.SavePicture(screenCapture, target.tag); //i think it's the tag the problem
+        }
+        else
+        {
+            SaveSystem.SavePicture(screenCapture, null); //i think it's the tag the problem
+        }
 
 
 
