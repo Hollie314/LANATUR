@@ -6,7 +6,6 @@ public class AnimalAI : MonoBehaviour
     [Header("Paramètres de Détection")]
     public float visionRadius = 10f;
     [Range(0, 360)] public float visionAngle = 120f;
-    public float soundRadius = 7f;
     public LayerMask playerMask;
     public LayerMask obstacleMask;
 
@@ -56,14 +55,15 @@ public class AnimalAI : MonoBehaviour
 
         float dist = Vector3.Distance(transform.position, player.position);
 
-        // Détection sonore
-        if (dist <= soundRadius)
+        //  Détection sonore avec bruit du joueur
+        PlayerNoise noise = player.GetComponent<PlayerNoise>();
+        if (noise != null && dist <= noise.currentNoiseRadius)
         {
-            Debug.Log($"{gameObject.name} a entendu le joueur !");
+            Debug.Log($"{gameObject.name} a entendu le joueur (bruit: {noise.currentNoiseRadius}m)");
             return true;
         }
 
-        // Détection visuelle (cône)
+        //  Détection visuelle (cône)
         if (dist <= visionRadius)
         {
             Vector3 dirToPlayer = (player.position - transform.position).normalized;
@@ -80,7 +80,7 @@ public class AnimalAI : MonoBehaviour
         return false;
     }
 
-    // ----------- FUITE -----------
+    
 
     void Flee()
     {
@@ -90,28 +90,29 @@ public class AnimalAI : MonoBehaviour
         agent.SetDestination(fleePos);
     }
 
-    // ----------- ATTAQUE -----------
 
+
+   
     void Attack()
     {
-        agent.speed = 0; // Stop déplacement pour attaquer
         float dist = Vector3.Distance(transform.position, player.position);
 
         if (dist <= attackRange && Time.time > lastAttackTime + attackCooldown)
         {
-           // Health hp = player.GetComponent<Health>();
-           // if (hp != null) hp.TakeDamage(attackDamage);
+            PlayerHealth hp = player.GetComponent<PlayerHealth>(); // ✅ correction
+            if (hp != null) hp.TakeDamage(attackDamage);
 
             Debug.Log($"{gameObject.name} attaque le joueur et inflige {attackDamage} dégâts !");
             lastAttackTime = Time.time;
         }
         else
         {
-            // Se rapproche du joueur
+            
             agent.speed = normalSpeed;
             agent.SetDestination(player.position);
         }
     }
+
 
     // ----------- DEBUG GIZMOS -----------
 
@@ -119,11 +120,7 @@ public class AnimalAI : MonoBehaviour
     {
         // Vision radius
         Gizmos.color = new Color(0, 1, 0, 0.25f);
-        Gizmos.DrawSphere(transform.position, visionRadius);
-
-        // Sound radius
-        Gizmos.color = new Color(0, 0, 1, 0.15f);
-        Gizmos.DrawSphere(transform.position, soundRadius);
+        Gizmos.DrawWireSphere(transform.position, visionRadius);
 
         // Vision angle
         Vector3 leftBoundary = Quaternion.Euler(0, -visionAngle / 2f, 0) * transform.forward;
