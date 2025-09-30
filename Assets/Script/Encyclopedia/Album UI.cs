@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
@@ -5,10 +6,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AlbumUI : MonoBehaviour
+public class AlbumUI : SerializedMonoBehaviour
 {
     public GameObject panelAlbum, panelPhoto;
     public TextMeshProUGUI picturesNumber;
+    public Dictionary<string, Sprite> tagVignettes; 
 
     public enum SortMethodes {Encyclopedia, Species, Date}
     public SortMethodes SortMethodeUsed;
@@ -18,6 +20,7 @@ public class AlbumUI : MonoBehaviour
     public GameObject PicturePrefab;
 
     private Dictionary<GameObject, PhotoInfos> albumDictionary = new Dictionary<GameObject, PhotoInfos>();
+    private List<GameObject> ListInEncyclopedia;
 
     private static void Initialize()
     {
@@ -204,7 +207,7 @@ public class AlbumUI : MonoBehaviour
             newPicture.GetComponent<Image>().sprite = photoSprite;
 
             // Update Photo UI
-            UpdatePhotoUI(newPicture);
+            UpdatePhotoUI(newPicture, infos.imageTag);
 
             // Update Dictionary
             albumDictionary.Add(newPicture, infos);
@@ -213,18 +216,36 @@ public class AlbumUI : MonoBehaviour
         picturesNumber.text = $"{index}/150"; // change later with {maxPictures}
     }
 
-    public void UpdatePhotoUI(GameObject photo)
+    public void UpdatePhotoUI(GameObject photo, string tag)
     {
         // photo index
         // photo on encyclopedia
         // photo species
+        Debug.Log(tag);
+        if(tagVignettes.ContainsKey(tag))
+        {
+            GameObject vignette = photo.transform.GetChild(1).gameObject;
+            vignette.SetActive(true);
+            vignette.GetComponent<Image>().sprite = tagVignettes[tag];
+        }
     }
     #endregion
 
-    public void OnPhotoClicked()
+    public void OnPhotoClicked(GameObject photoClicked)
     {
         // Change Panel
         panelPhoto.SetActive(true);
+        // vérifier si la photo est dans l'encyclopédie
+        if(ListInEncyclopedia.Contains(photoClicked))
+        {
+            // Ne pas activer le bouton supprimer
+            // Ne pas activer le bouton remplacer
+        }
+        else
+        {
+            // Activer le bouton supprimer
+            // Activer le bouton remplacer
+        }
 
         // Turn off album Panel
         panelAlbum.SetActive(false);
@@ -234,5 +255,20 @@ public class AlbumUI : MonoBehaviour
     {
         SaveSystem.DeletePicture(albumDictionary[photo]);
         Destroy(photo);
+    }
+
+    public void ChangeEncyclopediaPhoto(GameObject photo)
+    {
+        foreach (GameObject picture in ListInEncyclopedia)
+        {
+            if (albumDictionary[picture].imageTag == albumDictionary[photo].imageTag)
+            {
+                ListInEncyclopedia.Remove(picture);
+                // albumDictionary[picture].imageUsedInEncyclopedia = false;
+                break;
+            }
+        }
+        ListInEncyclopedia.Add(photo);
+        // albumDictionary[photo].imageUsedInEncyclopedia = true;
     }
 }

@@ -1,3 +1,4 @@
+using Sirenix.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ public class Camera_Shot : MonoBehaviour
     [SerializeField] private GameManager GameManager;
     public LayerMask animals_LayerMask;
     public static event Action PictureTaken;
-    
+    public static Album album = new Album();
+
     // private
     private Texture2D screenCapture;
     private GameObject target;
@@ -86,8 +88,6 @@ public class Camera_Shot : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         CapturePhoto();
-        AddPhotoInformations();
-        SaveToAlbum();
         Camera_UI.UpdateAlbumPicture(screenCapture);
     }
 
@@ -107,11 +107,22 @@ public class Camera_Shot : MonoBehaviour
 
         if (target != null)
         {
-            SaveSystem.SavePicture(screenCapture, target.tag); //i think it's the tag the problem
+            album = Album.Load();
+            if (!album.photoInfos.IsNullOrEmpty())
+            {
+                foreach (var info in album.photoInfos)
+                {
+                    if(info.imageTag == target.tag)
+                    {
+                        SaveSystem.SavePicture(screenCapture, target.tag, false);
+                    }
+                }
+            }
+            SaveSystem.SavePicture(screenCapture, target.tag, true);
         }
         else
         {
-            SaveSystem.SavePicture(screenCapture, null); //i think it's the tag the problem
+            SaveSystem.SavePicture(screenCapture, null, false);
         }
 
 
@@ -121,15 +132,4 @@ public class Camera_Shot : MonoBehaviour
         RenderTexture.active = null;
         Destroy(rt);
     }
-
-    private void AddPhotoInformations()
-    {
-
-    }
-
-    private void SaveToAlbum()
-    {
-        
-    }
-
 }

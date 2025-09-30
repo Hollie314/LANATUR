@@ -20,7 +20,7 @@ public static class SaveSystem
         album = Album.Load();
     }
 
-    public static void SavePicture(Texture2D image, string tag)
+    public static void SavePicture(Texture2D image, string tag, bool isInEncyclopedia)
     {
         byte[] png = image.EncodeToPNG();
         string now = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss-fff");
@@ -30,7 +30,8 @@ public static class SaveSystem
         PhotoInfos photoInfos = new PhotoInfos()
         {
             imagePath = filePath,
-            imageTag = tag
+            imageTag = tag,
+            imageUsedInEncyclopedia = isInEncyclopedia
         };
 
         album.photoInfos.Add(photoInfos);
