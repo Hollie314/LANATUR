@@ -5,6 +5,7 @@ public class Camera_UI : MonoBehaviour
 {
     [Header("UI")]
     // public
+    public GameObject canvasAlbum;
 
     // private
     [SerializeField] private Image photoDisplayArea;
@@ -26,5 +27,11 @@ public class Camera_UI : MonoBehaviour
     {
         Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0.0f, 0.0f, screenCapture.width, screenCapture.height), new Vector2(0.5f, 0.5f), 100.0f);
         photoDisplayArea.sprite = photoSprite;
+    }
+
+    public void On_AlbumClicked()
+    {
+        canvasAlbum.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 }

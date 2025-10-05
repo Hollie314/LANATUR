@@ -18,6 +18,7 @@ public static class SaveSystem
             Debug.Log("picturesFolder created");
         }
         album = Album.Load();
+        //DeleteAlbum(album);
     }
 
     public static void SavePicture(Texture2D image, string tag, bool isInEncyclopedia)
@@ -44,8 +45,18 @@ public static class SaveSystem
 
     public static void DeletePicture(PhotoInfos infos)
     {
-        File.Delete(infos.imagePath);
         album.photoInfos.Remove(infos);
+        File.Delete(infos.imagePath);
+        Album.Save(album);
+    }
+
+    public static void DeleteAlbum(Album album)
+    {
+        foreach (PhotoInfos info in album.photoInfos)
+        {
+            DeletePicture(info);
+        }
+        File.Delete($"{Application.persistentDataPath}/album.json");
     }
 
     public static void SavePosition()
