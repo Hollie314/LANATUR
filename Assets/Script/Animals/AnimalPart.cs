@@ -7,7 +7,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class AnimalPart : MonoBehaviour
 {
-    public GameManager GameManager;
     public static event Action ExitView;
     private bool isTarget = false;
 

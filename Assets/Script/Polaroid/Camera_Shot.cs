@@ -10,7 +10,6 @@ public class Camera_Shot : MonoBehaviour
     [Header("Photo Taker")]
     // public
     [SerializeField] private Camera_UI Camera_UI;
-    [SerializeField] private GameManager GameManager;
     public LayerMask animals_LayerMask;
     public static event Action PictureTaken;
     public static Album album = new Album();
@@ -50,7 +49,7 @@ public class Camera_Shot : MonoBehaviour
     private void Update()
     {
         CameraDetection();
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             StartCoroutine(TakePicture());
             PictureTaken?.Invoke();
@@ -110,19 +109,36 @@ public class Camera_Shot : MonoBehaviour
             album = Album.Load();
             if (!album.photoInfos.IsNullOrEmpty())
             {
+                bool isNewSpecies = true;
                 foreach (var info in album.photoInfos)
                 {
                     if(info.imageTag == target.tag)
                     {
-                        SaveSystem.SavePicture(screenCapture, target.tag, false);
+                        isNewSpecies = false;
+                        
                     }
                 }
+                if (isNewSpecies)
+                {
+                    SaveSystem.SavePicture(screenCapture, target.tag, true);
+                    Debug.Log("new species");
+                }
+                else
+                {
+                    SaveSystem.SavePicture(screenCapture, target.tag, false);
+                    Debug.Log("not a new species");
+                }
             }
-            SaveSystem.SavePicture(screenCapture, target.tag, true);
+            else
+            {
+                SaveSystem.SavePicture(screenCapture, target.tag, true);
+                Debug.Log("no photos in album");
+            }
         }
         else
         {
             SaveSystem.SavePicture(screenCapture, null, false);
+            Debug.Log("no target");
         }
 
 
