@@ -10,19 +10,32 @@ public class Encyclopedia_Manager : SerializedMonoBehaviour
     public Dictionary<GameObject, string> EncylopediaDictionary;
     public static Album album = new Album();
 
+    public void OnEnable()
+    {
+        ShowEncyclopedia();
+    }
+
     public void ShowEncyclopedia()
     {
+        Debug.Log("showing Encylopedia");
         album = Album.Load();
         if (!album.photoInfos.IsNullOrEmpty())
         {
+            Debug.Log("album not empty");
             foreach (PhotoInfos infos in album.photoInfos)
             {
+                Debug.Log("searching photoinfos");
                 if (infos.imageUsedInEncyclopedia)
                 {
+                    Debug.Log("info in encyclopedia");
                     foreach (GameObject encyclopediaPhoto in EncylopediaDictionary.Keys)
                     {
-                        if(encyclopediaPhoto.tag == infos.imageTag)
+                        Debug.Log("searching images");
+                        Debug.Log(infos.imageTag);
+                        Debug.Log(encyclopediaPhoto.tag);
+                        if (encyclopediaPhoto.tag == infos.imageTag)
                         {
+                            Debug.Log("adding photo in encyclopedia");
                             AddPhotoToEncyclopedia(infos, encyclopediaPhoto);
                         }
                     }

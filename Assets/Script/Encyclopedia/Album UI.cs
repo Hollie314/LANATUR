@@ -28,7 +28,10 @@ public class AlbumUI : SerializedMonoBehaviour
     public GameObject PicturePrefab;
 
     private Dictionary<GameObject, PhotoInfos> albumDictionary = new Dictionary<GameObject, PhotoInfos>();
-    private List<GameObject> ListInEncyclopedia;
+    private List<GameObject> ListInEncyclopedia = new List<GameObject>();
+    private List<GameObject> ListSelectedPhotos = new List<GameObject>();
+    private bool selectionMultipleOn;
+    public GameObject SelectionMultipleOptions;
 
     private static void Initialize()
     {
@@ -223,6 +226,9 @@ public class AlbumUI : SerializedMonoBehaviour
 
             // Update Dictionary
             albumDictionary.Add(newPicture, infos);
+
+            if (infos.imageUsedInEncyclopedia)
+                ListInEncyclopedia.Add(newPicture);
         }
         // Update picturesNumber
         picturesNumber.text = $"{index}/150"; // change later with {maxPictures}
@@ -269,35 +275,51 @@ public class AlbumUI : SerializedMonoBehaviour
 
     public void On_PhotoClicked(GameObject photoClicked)
     {
-        PhotoZoomedOn = photoClicked;
-
-        // Change Panel
-        panelPhoto.SetActive(true);
-        // vérifier si la photo est dans l'encyclopédie
-        if(ListInEncyclopedia !=  null)
+        if (selectionMultipleOn)
         {
-            if (ListInEncyclopedia.Contains(photoClicked))
+            if ((ListSelectedPhotos.IsNullOrEmpty() || !ListSelectedPhotos.Contains(photoClicked)) && !ListInEncyclopedia.Contains(photoClicked))
             {
-                // Ne pas activer le bouton supprimer
-                PanelPhoto_ButtonDelete.SetActive(false);
-
-                // Ne pas activer le bouton remplacer
-                PanelPhoto_ButtonReplace.SetActive(false);
+                ListSelectedPhotos.Add(photoClicked);
+                photoClicked.gameObject.transform.GetChild(2).gameObject.GetComponent<Toggle>().isOn = true;
             }
             else
             {
-                // Activer le bouton supprimer
-                PanelPhoto_ButtonDelete.SetActive(true);
-
-                // Activer le bouton remplacer
-                PanelPhoto_ButtonReplace.SetActive(true);
+                ListSelectedPhotos.Remove(photoClicked);
+                photoClicked.gameObject.transform.GetChild(2).gameObject.GetComponent<Toggle>().isOn = false;
             }
         }
+        else
+        {
+            ListSelectedPhotos.Clear();
+            ListSelectedPhotos.Add(photoClicked);
+            // Change Panel
+            panelPhoto.SetActive(true);
+            // vérifier si la photo est dans l'encyclopédie
+            if (ListInEncyclopedia != null)
+            {
+                if (ListInEncyclopedia.Contains(photoClicked))
+                {
+                    // Ne pas activer le bouton supprimer
+                    PanelPhoto_ButtonDelete.SetActive(false);
 
-        PanelPhoto_Photo.GetComponent<Image>().sprite = photoClicked.GetComponent<Image>().sprite;
+                    // Ne pas activer le bouton remplacer
+                    PanelPhoto_ButtonReplace.SetActive(false);
+                }
+                else
+                {
+                    // Activer le bouton supprimer
+                    PanelPhoto_ButtonDelete.SetActive(true);
 
-        // Turn off album Panel
-        panelAlbum.SetActive(false);
+                    // Activer le bouton remplacer
+                    PanelPhoto_ButtonReplace.SetActive(true);
+                }
+            }
+
+            PanelPhoto_Photo.GetComponent<Image>().sprite = photoClicked.GetComponent<Image>().sprite;
+
+            // Turn off album Panel
+            panelAlbum.SetActive(false);
+        }
     }
 
     public void On_BackToAlbumClicked()
@@ -309,7 +331,12 @@ public class AlbumUI : SerializedMonoBehaviour
 
     public void On_DeletePhotoClicked()
     {
-        SaveSystem.DeletePicture(albumDictionary[PhotoZoomedOn]);
+        foreach (var photo in ListSelectedPhotos)
+        {
+            SaveSystem.DeletePicture(albumDictionary[photo]);
+        }
+
+        ListSelectedPhotos.Clear ();
 
         DestroyImages();
 
@@ -343,5 +370,12 @@ public class AlbumUI : SerializedMonoBehaviour
         }
         ListInEncyclopedia.Add(photo);
         // albumDictionary[photo].imageUsedInEncyclopedia = true;
+    }
+
+    public void On_SelectionMultipleClicked()
+    {
+        ListSelectedPhotos.Clear();
+        selectionMultipleOn = !selectionMultipleOn;
+        SelectionMultipleOptions.SetActive(selectionMultipleOn);
     }
 }

@@ -10,7 +10,6 @@ public class Camera_Shot : MonoBehaviour
     [Header("Photo Taker")]
     // public
     [SerializeField] private Camera_UI Camera_UI;
-    [SerializeField] private GameManager GameManager;
     public LayerMask animals_LayerMask;
     public static event Action PictureTaken;
     public static Album album = new Album();
@@ -50,7 +49,7 @@ public class Camera_Shot : MonoBehaviour
     private void Update()
     {
         CameraDetection();
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             StartCoroutine(TakePicture());
             PictureTaken?.Invoke();

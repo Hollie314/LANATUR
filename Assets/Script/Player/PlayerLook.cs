@@ -11,6 +11,8 @@ public class PlayerLook : MonoBehaviour
 
     public void ProcessLook(Vector2 input)
     {
+        Cursor.lockState = CursorLockMode.Confined;
+
         float mouseX = input.x;
         float mouseY = input.y;
         //calculate camera rotation for looking up and down
