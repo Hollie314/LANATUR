@@ -31,11 +31,16 @@ public class PlayerClimbRope : MonoBehaviour
             if (climbing)
             {
                 motor.enabled = false; // désactive le mouvement classique
+                this.gameObject.GetComponent<InputManager>().canMove = false;
+                this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(true);
+                transform.rotation = Quaternion.Euler(0f, ropeTransform.rotation.eulerAngles.y, 0f);
                 AlignPlayerToRope();
             }
             else
             {
                 motor.enabled = true; // reprend le contrôle normal
+                this.gameObject.GetComponent<InputManager>().canMove = true;
+                this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(false);
             }
         }
 
@@ -48,16 +53,23 @@ public class PlayerClimbRope : MonoBehaviour
             {
                 climbing = false;
                 motor.enabled = true;
+                this.gameObject.GetComponent<InputManager>().canMove = true;
+                this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(false);
             }
         }
     }
 
     void Climb()
     {
+
+        Debug.Log("Climbing");
+
         Vector2 moveInput = input.OnFoot.Movement.ReadValue<Vector2>();
         float vertical = moveInput.y; // Z/S ou ↑/↓
+        Debug.Log($"vertical is {vertical * climbSpeed}");
 
         Vector3 climbDirection = new Vector3(0, vertical * climbSpeed, 0);
+
         controller.Move(climbDirection * Time.deltaTime);
 
         AlignPlayerToRope();
@@ -71,6 +83,7 @@ public class PlayerClimbRope : MonoBehaviour
             pos.x = ropeTransform.position.x;
             pos.z = ropeTransform.position.z;
             transform.position = pos;
+            this.gameObject.GetComponent<CharacterController>().transform.position = pos;
         }
     }
 
@@ -90,10 +103,13 @@ public class PlayerClimbRope : MonoBehaviour
             nearRope = false;
             ropeTransform = null;
 
+            Debug.Log("TriggerExit");
             if (climbing)
             {
                 climbing = false;
                 motor.enabled = true;
+                this.gameObject.GetComponent<InputManager>().canMove = true;
+                this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(false);
             }
         }
     }

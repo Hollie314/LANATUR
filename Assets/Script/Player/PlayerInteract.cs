@@ -30,6 +30,13 @@ public class PlayerInteract : MonoBehaviour
     public static event Action<PlayerInteract> OnCameraActive;
     private bool isCrouched = false;
 
+    private bool inTriggerZoneRocher = false;
+    private bool inTriggerZoneBaie = false;
+    private GameObject Rocher;
+    private GameObject Baie;
+    private bool holdingBaie;
+    public Transform BaieHolder;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -66,9 +73,9 @@ public class PlayerInteract : MonoBehaviour
 
     private void Inputs()
     {
-        if (action_Interact.action.WasPressedThisFrame())
+        if (action_Interact.action.WasPressedThisFrame() && !(UI_Camera.activeSelf || UI_Carnet.activeSelf))
         {
-
+            Interact();
         }
         if (action_Crouch.action.WasPressedThisFrame())
         {
@@ -77,13 +84,86 @@ public class PlayerInteract : MonoBehaviour
         if (action_UICamera.action.WasPressedThisFrame())
         {
             UI_ToCamera();
+            if (holdingBaie)
+            {
+                if (UI_Camera.activeSelf)
+                {
+                    Baie.transform.parent.gameObject.SetActive(false);
+                }
+                else { Baie.transform.parent.gameObject.SetActive(true); }
+            }
         }
         if (action_UICarnet.action.WasPressedThisFrame())
         {
             UI_ToCarnet();
+            if (holdingBaie)
+            {
+                if (UI_Carnet.activeSelf)
+                {
+                    Baie.transform.parent.gameObject.SetActive(false);
+                }
+                else { Baie.transform.parent.gameObject.SetActive(true); }
+            }
         }
     }
-        
+
+    private void Interact()
+    {
+        if (inTriggerZoneBaie)
+        {
+            holdingBaie = !holdingBaie;
+            if (holdingBaie)
+            {
+                Baie.transform.parent.transform.parent = BaieHolder;
+                Baie.transform.parent.transform.position = BaieHolder.transform.position;
+                Baie.transform.parent.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                Baie.transform.parent.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                Baie.transform.parent.transform.GetChild(1).gameObject.SetActive(false);
+            }
+            else
+            {
+                Baie.transform.parent.transform.parent = null;
+                Baie.transform.parent.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                Baie.transform.parent.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                Baie.transform.parent.transform.GetChild(1).gameObject.SetActive(true);
+                Baie.transform.parent.gameObject.GetComponent<Rigidbody>().AddForce(this.transform.GetChild(0).forward * 300, ForceMode.Force);
+
+            }
+        }
+        if (inTriggerZoneRocher)
+        {
+            Debug.Log("active un rocher");
+            Rocher.transform.GetChild(0).gameObject.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Rope rock"))
+        {
+            Debug.Log("sur un rocher");
+            inTriggerZoneRocher = true;
+            Rocher = other.gameObject;
+        }
+        if (other.CompareTag("BaieTest"))
+        {
+            inTriggerZoneBaie = true;
+            Baie = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Rope rock"))
+        {
+            inTriggerZoneRocher = false;
+        }
+        if (other.CompareTag("BaieTest"))
+        {
+            inTriggerZoneBaie = false;
+        }
+    }
+
     // UI To CAMERA
     private void UI_ToCamera()
     {

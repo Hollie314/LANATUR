@@ -12,6 +12,9 @@ public class InputManager : MonoBehaviour
 
     private PlayerMotor motor;
     private PlayerLook look;
+
+    public bool canMove = true;
+
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -29,7 +32,10 @@ public class InputManager : MonoBehaviour
     void FixedUpdate()
     {
         //tell the playmotor to move using the value from our movement action.
-        motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
+        if(canMove)
+        {
+            motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
+        }
     }
 
     private void LateUpdate()
