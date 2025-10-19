@@ -69,7 +69,9 @@ public class AlbumUI : SerializedMonoBehaviour
     #region Sort
     public void SortByType()
     {
+        Debug.Log("sorting Album started");
         album = Album.Load();
+        Debug.Log($"Album count = {album.photoInfos.Count}");
         if (!album.photoInfos.IsNullOrEmpty())
         {
             switch (SortMethodeUsed)
@@ -87,6 +89,7 @@ public class AlbumUI : SerializedMonoBehaviour
                     break;
             }
         }
+        Debug.Log("sorting Album ended");
     }
 
     public List<PhotoInfos> SortByEncyclopedia()
@@ -215,7 +218,9 @@ public class AlbumUI : SerializedMonoBehaviour
             index++;
 
             // Load image
+            Debug.Log("about to load bytes");
             byte[] bytes = System.IO.File.ReadAllBytes(infos.imagePath);
+            Debug.Log("Loaded bytes");
             Texture2D texture = new Texture2D(2, 2);
             texture.LoadImage(bytes);
             Sprite photoSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
