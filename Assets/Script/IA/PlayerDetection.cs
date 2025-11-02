@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.AI;
 
-public class AnimalAI : MonoBehaviour
+public class PlayerDetection : MonoBehaviour
 {
     [Header("Paramètres de Détection")]
     public float visionRadius = 10f;
@@ -9,53 +8,28 @@ public class AnimalAI : MonoBehaviour
     public LayerMask playerMask;
     public LayerMask obstacleMask;
 
-    [Header("Comportement")]
-    public float fleeDistance = 10f;
-    public float fleeSpeed = 6f;
-    public float normalSpeed = 3.5f;
-    public int attackDamage = 10;
-    public float attackRange = 2f;
-    public float attackCooldown = 1.5f;
+    [HideInInspector] public bool playerDetected = false;
+    [HideInInspector] public Transform player;
 
-    private NavMeshAgent agent;
-    private Transform player;
-    private float lastAttackTime = 0f;
-
-    private bool playerDetected = false;
-
-    void Start()
+    private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        agent.speed = normalSpeed;
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        if (p != null)
+            player = p.transform;
     }
 
-    void Update()
+    private void Update()
     {
         playerDetected = DetectPlayer();
-
-        if (playerDetected)
-        {
-            if (CompareTag("Herbivore"))
-            {
-                Flee();
-            }
-            else if (CompareTag("Carnivore"))
-            {
-                Attack();
-            }
-        }
     }
 
-    // ----------- DÉTECTION -----------
-
-    bool DetectPlayer()
+    private bool DetectPlayer()
     {
         if (player == null) return false;
 
         float dist = Vector3.Distance(transform.position, player.position);
 
-        //  Détection sonore avec bruit du joueur
+        // 🔊 Détection sonore
         PlayerNoise noise = player.GetComponent<PlayerNoise>();
         if (noise != null && dist <= noise.currentNoiseRadius)
         {
@@ -63,7 +37,7 @@ public class AnimalAI : MonoBehaviour
             return true;
         }
 
-        //  Détection visuelle (cône)
+        // 👁️ Détection visuelle (cône)
         if (dist <= visionRadius)
         {
             Vector3 dirToPlayer = (player.position - transform.position).normalized;
@@ -80,42 +54,7 @@ public class AnimalAI : MonoBehaviour
         return false;
     }
 
-    
-
-    void Flee()
-    {
-        agent.speed = fleeSpeed;
-        Vector3 dirAway = (transform.position - player.position).normalized;
-        Vector3 fleePos = transform.position + dirAway * fleeDistance;
-        agent.SetDestination(fleePos);
-    }
-
-
-
-   
-    void Attack()
-    {
-        float dist = Vector3.Distance(transform.position, player.position);
-
-        if (dist <= attackRange && Time.time > lastAttackTime + attackCooldown)
-        {
-            PlayerHealth hp = player.GetComponent<PlayerHealth>(); // ✅ correction
-            if (hp != null) hp.TakeDamage(attackDamage);
-
-            Debug.Log($"{gameObject.name} attaque le joueur et inflige {attackDamage} dégâts !");
-            lastAttackTime = Time.time;
-        }
-        else
-        {
-            
-            agent.speed = normalSpeed;
-            agent.SetDestination(player.position);
-        }
-    }
-
-
     // ----------- DEBUG GIZMOS -----------
-
     private void OnDrawGizmosSelected()
     {
         // Vision radius
