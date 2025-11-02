@@ -14,8 +14,10 @@ GameObject:
   - component: {fileID: 3429932983094538481}
   - component: {fileID: 9157363628450765752}
   - component: {fileID: 3104745778426151230}
-  - component: {fileID: 3703882815475151150}
   - component: {fileID: 391903497141166109}
+  - component: {fileID: 6498422375879726885}
+  - component: {fileID: 5785730490117102159}
+  - component: {fileID: 2886151350851344176}
   m_Layer: 0
   m_Name: Iguane
   m_TagString: Untagged
@@ -133,29 +135,29 @@ MonoBehaviour:
   - rid: 7611333127052722281
   - rid: 7611333127052722282
   - rid: 7611333248265224613
-  - rid: 3885544411659501908
-  - rid: 3885544411659501909
+  - rid: 3885544414698013194
+  - rid: 3885544414698013195
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
     RefIds:
-    - rid: 3885544411659501908
-      type: {class: 'BlackboardVariable`1[[AnimalBehavior, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+    - rid: 3885544414698013194
+      type: {class: 'BlackboardVariable`1[[RangeDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
-          m_Value0: 2000065697441909768
-          m_Value1: 15753897483621489580
-        Name: Animal Behavior
-        m_Value: {fileID: 3703882815475151150}
-    - rid: 3885544411659501909
-      type: {class: 'BlackboardVariable`1[[PlayerDetection, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 11176674699304320175
-          m_Value1: 11601689771278192319
-        Name: Player Detection
+          m_Value0: 2554947338740358058
+          m_Value1: 13207947126599960502
+        Name: Range Detector
         m_Value: {fileID: 391903497141166109}
+    - rid: 3885544414698013195
+      type: {class: 'BlackboardVariable`1[[ShoutAtTarget, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 13963484853878952982
+          m_Value1: 10615966972318085838
+        Name: Shout At Target
+        m_Value: {fileID: 2886151350851344176}
     - rid: 7611333127052722281
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -179,7 +181,7 @@ MonoBehaviour:
           m_Value0: 9797439722258035157
           m_Value1: 15742213887695913538
         Name: Player
-        m_Value: {fileID: 0}
+        m_Value: {fileID: 4418961909428152496, guid: 1198a3989024bf34782cc482f7be5b77, type: 3}
 --- !u!195 &3104745778426151230
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -202,25 +204,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!114 &3703882815475151150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2666892254660799140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06ab9df75cc49fe4696a889549fbc926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimalBehavior
-  behaviorType: 2
-  fleeDistance: 10
-  fleeSpeed: 6
-  normalSpeed: 3.5
-  attackDamage: 10
-  attackRange: 2
-  attackCooldown: 1.5
 --- !u!114 &391903497141166109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,16 +216,144 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5145b302735e28a40a8d52c6071cd187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDetection
-  visionRadius: 10
-  visionAngle: 120
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  obstacleMask:
+  detectionRadius: 10
+  detectionMask:
     serializedVersion: 2
     m_Bits: 0
-  playerDetected: 0
-  player: {fileID: 0}
+  detectedObjects: []
+--- !u!135 &6498422375879726885
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666892254660799140}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &5785730490117102159
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666892254660799140}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &2886151350851344176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666892254660799140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115519b895e2e30419ccd102e7b7249b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShoutAtTarget
+  shoutForce: 5
+  shoutCooldown: 3
+  shoutSound: {fileID: 0}
 --- !u!1 &3193055947500565342
 GameObject:
   m_ObjectHideFlags: 0
