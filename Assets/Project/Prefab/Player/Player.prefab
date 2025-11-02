@@ -524,6 +524,7 @@ GameObject:
   - component: {fileID: 6711768851149084165}
   - component: {fileID: 5892776531900979403}
   - component: {fileID: 5949559384788434095}
+  - component: {fileID: 1181996045864161696}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -539,16 +540,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4649177485693871362}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99701786, z: -0, w: 0.07717123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5000001, y: 1.5, z: 1.5000001}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4216289170208600626}
   - {fileID: 2200336363768253394}
   - {fileID: 7952826445022414606}
   m_Father: {fileID: 6406791004804012045}
-  m_LocalEulerAnglesHint: {x: 0, y: 171.148, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9170119316042910449
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -747,6 +748,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerClimbRope
   climbSpeed: 3
+--- !u!136 &1181996045864161696
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4649177485693871362}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.49999997
+  m_Height: 1.9999999
+  m_Direction: 1
+  m_Center: {x: 0.000030517578, y: 0.0000038146973, z: 0.000061035156}
 --- !u!1 &5493753897722369459
 GameObject:
   m_ObjectHideFlags: 0
