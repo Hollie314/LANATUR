@@ -1,17 +1,17 @@
 using System;
-using System.Collections.Generic;
 using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "Patrol time", story: "[Self] wait [time] second during [Patrol]", category: "Action", id: "6391095e99b870459358997795a012a4")]
-public partial class PatrolTimeAction : Action
+[NodeDescription(name: "Attack_Target", story: "[Self] [Attacks] [Target]", category: "Action", id: "8328cb84656396e46cc46b688c3f1bf5")]
+public partial class AttackTargetAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Self;
-    [SerializeReference] public BlackboardVariable<int> Time;
-    [SerializeReference] public BlackboardVariable<List<GameObject>> Patrol;
+    [SerializeReference] public BlackboardVariable<ShoutAtTarget> Attacks;
+    [SerializeReference] public BlackboardVariable<GameObject> Target;
+
     protected override Status OnStart()
     {
         return Status.Running;
