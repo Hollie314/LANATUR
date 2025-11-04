@@ -21,6 +21,7 @@ public class ShoutAtTarget : MonoBehaviour
 
     public bool TryShout()
     {
+        Debug.Log("shouting");
         if (filter == null || filter.currentTarget == null || !CanShout)
             return false;
 
