@@ -28,6 +28,7 @@ public class RangeDetector : MonoBehaviour
         {
             if (!detectedObjects.Contains(other.transform))
             {
+                Debug.Log("trigger entered");
                 detectedObjects.Add(other.transform);
                 OnObjectEnter?.Invoke(other.transform);
             }

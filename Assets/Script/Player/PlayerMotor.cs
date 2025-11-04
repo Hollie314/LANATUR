@@ -7,6 +7,7 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 playerVelocity;
     public float gravity = -9.81f;
     public float speed = 5.0f;
+    public float sprintmultiplier = 1.75f;
     private float baseSpeed;
     private bool lerpCrouch = false;
     private float crouchTimer = 0f;
@@ -50,7 +51,10 @@ public class PlayerMotor : MonoBehaviour
         moveDirection.x = input.x;
         moveDirection.z = input.y;
 
-        controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+        if(isGrounded)
+            controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+        else
+            controller.Move(transform.TransformDirection(moveDirection) * baseSpeed * Time.deltaTime);
 
         playerVelocity.y += gravity * Time.deltaTime;
         if (isGrounded && playerVelocity.y < 0)
@@ -78,7 +82,7 @@ public class PlayerMotor : MonoBehaviour
     {
         sprinting = !sprinting;
         if (sprinting)
-            speed = baseSpeed * 2.5f;
+            speed = baseSpeed * sprintmultiplier;
         else
             speed = baseSpeed;
     }
