@@ -7,7 +7,9 @@ Shader "Custom/Tutorial_Fullscreen_Volumetrics"
         _StepSize("Step size", Range(0.1, 20)) = 1
         _DensityMultiplier("Density multiplier", Range(0, 10)) = 1
         _NoiseOffset("NoiseOffset", Float) = 0.0
-        
+
+        _NoiseScale("NoiseScale", Float) = 0
+
         _FogNoise("FogNoise", 3D) = "white" { }
         _NoiseTiling("NoiseTiling", Float) = 1
         _DensityThreshold("DensityThreshold", Range(0, 1)) = 0.1
@@ -26,6 +28,7 @@ Shader "Custom/Tutorial_Fullscreen_Volumetrics"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl"
+            #include "Assets/Project/Material/Noisy-Nodes-master/NoiseShader/HLSL/ClassicNoise3D.hlsl"
 
             float4 _Color;
             float _MaxDistance;
@@ -35,13 +38,22 @@ Shader "Custom/Tutorial_Fullscreen_Volumetrics"
             TEXTURE3D(_FogNoise);
             float _DensityThreshold;
             float _NoiseTiling;
-
+            float _NoiseScale;
+            
             float get_density(float3 worldPos)
             {
-                float noise = _FogNoise.SampleLevel(sampler_TrilinearRepeat, worldPos * 0.01 * _NoiseTiling,0);
-                float density = dot(noise, noise);
-                density = saturate(density - _DensityThreshold) * _DensityMultiplier;
+                //float noise = _FogNoise.SampleLevel(sampler_TrilinearRepeat, worldPos * 0.01 * _NoiseTiling,0);
+                float noise = pnoise(worldPos, _NoiseScale);
+                noise = Remap(-1.15, 1.15, 0, 1, noise);
+                //float density = dot(noise, noise);
+                //density = saturate(density - _DensityThreshold) * _DensityMultiplier;
+                float density = noise * _DensityMultiplier;
                 return density;
+            }
+
+            float Remap_float(float In, float2 InMinMax, float2 OutMinMax)
+            {
+                return OutMinMax.x + (In - InMinMax.x) * (OutMinMax.y - OutMinMax.x) / (InMinMax.y - InMinMax.x);
             }
 
             half4 frag(Varyings IN) : SV_Target

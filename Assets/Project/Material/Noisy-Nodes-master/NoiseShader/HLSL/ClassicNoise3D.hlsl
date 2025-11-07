@@ -171,7 +171,7 @@ float pnoise(float3 P, float3 rep)
 // BEGIN JIMMY'S MODIFICATIONS
 
 void PerlinNoise3D_float(float3 input, out float Out)
-{
+ {
     Out = cnoise(input);
 }
 
