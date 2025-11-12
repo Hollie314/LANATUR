@@ -1,44 +1,30 @@
+using System;
+using Unity.Behavior;
 using UnityEngine;
+using Action = Unity.Behavior.Action;
+using Unity.Properties;
 
-[RequireComponent(typeof(AudioSource))]
-public class ShoutAtTarget : MonoBehaviour
+[Serializable, GeneratePropertyBag]
+[NodeDescription(name: "ShoutAtTarget", story: "[Agent] [Shout] at [Target]", category: "Action", id: "def0b52127d6399fe84961788eb1b640")]
+public partial class ShoutAtTargetAction : Action
 {
-    public float shoutForce = 5f;     // Force de recul appliquée au joueur
-    public float shoutCooldown = 3f;  // Temps entre deux cris
-    public AudioClip shoutSound;      // Optionnel, son du cri
+    [SerializeReference] public BlackboardVariable<GameObject> Agent;
+    [SerializeReference] public BlackboardVariable<ShoutAtTarget> Shout;
+    [SerializeReference] public BlackboardVariable<GameObject> Target;
 
-    private float lastShoutTime;
-    private AudioSource audioSource;
-    private TargetDetectionFilter filter;
-
-    private void Awake()
+    protected override Status OnStart()
     {
-        audioSource = GetComponent<AudioSource>();
-        filter = GetComponent<TargetDetectionFilter>();
+        Shout.Value.TryShout(Target);
+        return Status.Success;
     }
 
-    public bool CanShout => Time.time >= lastShoutTime + shoutCooldown;
-
-    public bool TryShout()
+    protected override Status OnUpdate()
     {
-        Debug.Log("shouting");
-        if (filter == null || filter.currentTarget == null || !CanShout)
-            return false;
+        return Status.Success;
+    }
 
-        // 💥 Cri visuel ou sonore
-        Debug.Log($"{name} crie sur {filter.currentTarget.name} !");
-        if (shoutSound != null)
-            audioSource.PlayOneShot(shoutSound);
-
-        // 🔁 Effet sur la cible (recul, stun, etc.)
-        Rigidbody rb = filter.currentTarget.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            Vector3 dir = (filter.currentTarget.position - transform.position).normalized;
-            rb.AddForce(dir * shoutForce, ForceMode.Impulse);
-        }
-
-        lastShoutTime = Time.time;
-        return true;
+    protected override void OnEnd()
+    {
     }
 }
+

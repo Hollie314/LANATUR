@@ -1,52 +1,34 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
-[RequireComponent(typeof(SphereCollider))]
 public class RangeDetector : MonoBehaviour
 {
-    [Header("Détection")]
-    public float detectionRadius = 10f;
-    public LayerMask detectionMask;
+    public List<GameObject> GameObjectsDetected;
 
-    [HideInInspector] public List<Transform> detectedObjects = new();
-
-    private SphereCollider sphereCollider;
-
-    public System.Action<Transform> OnObjectEnter;
-    public System.Action<Transform> OnObjectExit;
-
-    private void Awake()
+    public void ChangeObjectsDetected(GameObject newObj, bool add, bool crouchTrigger, bool charCrouched)
     {
-        sphereCollider = GetComponent<SphereCollider>();
-        sphereCollider.isTrigger = true;
-        sphereCollider.radius = detectionRadius;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (((1 << other.gameObject.layer) & detectionMask) != 0)
+        if (add)
         {
-            if (!detectedObjects.Contains(other.transform))
+            if (!GameObjectsDetected.Contains(newObj))
             {
-                Debug.Log("trigger entered");
-                detectedObjects.Add(other.transform);
-                OnObjectEnter?.Invoke(other.transform);
+                GameObjectsDetected.Add(newObj);
             }
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (detectedObjects.Contains(other.transform))
+        else
         {
-            detectedObjects.Remove(other.transform);
-            OnObjectExit?.Invoke(other.transform);
-        }
-    }
+            if(crouchTrigger)
+            {
+                if(charCrouched)
+                {
+                    GameObjectsDetected.Remove(newObj);
+                    return;
+                }
+                return;
+            }
+            GameObjectsDetected.Remove(newObj);
+            return;
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        }
     }
 }
