@@ -1,5 +1,87 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1522700929786625020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7007124286344160221}
+  - component: {fileID: 6409828921450942664}
+  - component: {fileID: 2604179986795392570}
+  - component: {fileID: 5024236427070772246}
+  m_Layer: 0
+  m_Name: Crouch detection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7007124286344160221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522700929786625020}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.679832, y: 2.679832, z: 2.679832}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3309931830969698514}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6409828921450942664
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522700929786625020}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!135 &2604179986795392570
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522700929786625020}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5024236427070772246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522700929786625020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447600718e672a7449de2d9b23646911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColliderDetector
+  RangeDetector: {fileID: 391903497141166109}
+  SearchedLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isCrouchDetection: 1
+  isBaseDetection: 0
+  isBaieDetection: 0
 --- !u!1 &2666892254660799140
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,9 +97,9 @@ GameObject:
   - component: {fileID: 9157363628450765752}
   - component: {fileID: 3104745778426151230}
   - component: {fileID: 391903497141166109}
+  - component: {fileID: 2886151350851344176}
   - component: {fileID: 6498422375879726885}
   - component: {fileID: 5785730490117102159}
-  - component: {fileID: 2886151350851344176}
   m_Layer: 0
   m_Name: Iguane
   m_TagString: Untagged
@@ -38,7 +120,9 @@ Transform:
   m_LocalScale: {x: 0.65, y: 0.5, z: 1.18}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7140995085062435229}
+  - {fileID: 2348635703365696514}
+  - {fileID: 3813919279664432931}
+  - {fileID: 7007124286344160221}
   m_Father: {fileID: 8191241579165853945}
   m_LocalEulerAnglesHint: {x: 0, y: -5.576, z: 0}
 --- !u!33 &1703497486589040810
@@ -130,34 +214,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: -3424971684761733843, guid: 0863b270bf48dbf47bd893a3ad9012be, type: 2}
+  m_Graph: {fileID: 7211151722167180481, guid: 1a54b462f1f26584695c5b59d98df820, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 7611333127052722281
-  - rid: 7611333127052722282
-  - rid: 7611333248265224613
-  - rid: 3885544414698013194
-  - rid: 3885544414698013195
+  - rid: 2144584584533901319
+  - rid: 2144584584533901318
+  - rid: 2144584584533901317
+  - rid: 2144584584533901316
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
     RefIds:
-    - rid: 3885544414698013194
-      type: {class: 'BlackboardVariable`1[[RangeDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+    - rid: 2144584584533901316
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
-          m_Value0: 2554947338740358058
-          m_Value1: 13207947126599960502
-        Name: Range Detector
-        m_Value: {fileID: 391903497141166109}
-    - rid: 3885544414698013195
+          m_Value0: 2873567530279813342
+          m_Value1: 5801643302458084851
+        Name: Baie
+        m_Value: {fileID: 3001610117867761408, guid: d6903e8cd6d70104993b869563b0a969, type: 3}
+    - rid: 2144584584533901317
       type: {class: 'BlackboardVariable`1[[ShoutAtTarget, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
-          m_Value0: 13963484853878952982
-          m_Value1: 10615966972318085838
-        Name: Shout At Target
+          m_Value0: 13911757939012055416
+          m_Value1: 5147912085605227407
+        Name: ShoutAtTarget
         m_Value: {fileID: 2886151350851344176}
+    - rid: 2144584584533901318
+      type: {class: 'BlackboardVariable`1[[UnityEngine.AudioSource, UnityEngine.AudioModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 13640517144737492306
+          m_Value1: 12413762409810755507
+        Name: New Audio Source
+        m_Value: {fileID: 5785730490117102159}
+    - rid: 2144584584533901319
+      type: {class: 'BlackboardVariable`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15224559979246320912
+          m_Value1: 1206273072230291060
+        Name: Shouting audio
+        m_Value: {fileID: 8300000, guid: 0876689f1778821469d07862bccf28b4, type: 3}
     - rid: 7611333127052722281
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -166,22 +266,6 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 2666892254660799140}
-    - rid: 7611333127052722282
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 3026136630063209588
-          m_Value1: 5964825978727499896
-        Name: Appat
-        m_Value: {fileID: 7584781346056934645, guid: 86855cdbb519daf44bbe148c155c7f18, type: 3}
-    - rid: 7611333248265224613
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 9797439722258035157
-          m_Value1: 15742213887695913538
-        Name: Player
-        m_Value: {fileID: 4418961909428152496, guid: 1198a3989024bf34782cc482f7be5b77, type: 3}
 --- !u!195 &3104745778426151230
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -216,11 +300,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5145b302735e28a40a8d52c6071cd187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDetection
-  detectionRadius: 10
-  detectionMask:
-    serializedVersion: 2
-    m_Bits: 0
-  detectedObjects: []
+  GameObjectsDetected: []
+--- !u!114 &2886151350851344176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666892254660799140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115519b895e2e30419ccd102e7b7249b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShoutAtTarget
+  shoutForce: 5
 --- !u!135 &6498422375879726885
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -339,22 +432,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2886151350851344176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2666892254660799140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 115519b895e2e30419ccd102e7b7249b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShoutAtTarget
-  shoutForce: 5
-  shoutCooldown: 3
-  shoutSound: {fileID: 0}
---- !u!1 &3193055947500565342
+--- !u!1 &3258114807919003252
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -362,29 +440,80 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7140995085062435229}
+  - component: {fileID: 2348635703365696514}
+  - component: {fileID: 1295757440380715179}
+  - component: {fileID: 4098643088220398211}
+  - component: {fileID: 6728674987351297350}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Baie detection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7140995085062435229
+--- !u!4 &2348635703365696514
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3193055947500565342}
+  m_GameObject: {fileID: 3258114807919003252}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8.957989, y: 8.957989, z: 8.957989}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3309931830969698514}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1295757440380715179
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258114807919003252}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!135 &4098643088220398211
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258114807919003252}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6728674987351297350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258114807919003252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447600718e672a7449de2d9b23646911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColliderDetector
+  RangeDetector: {fileID: 391903497141166109}
+  SearchedLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isCrouchDetection: 0
+  isBaseDetection: 0
+  isBaieDetection: 1
 --- !u!1 &6217229672669762608
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,3 +546,85 @@ Transform:
   - {fileID: 3309931830969698514}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6670964309891722511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3813919279664432931}
+  - component: {fileID: 5094881018684794182}
+  - component: {fileID: 2662160930612517071}
+  - component: {fileID: 2242832399723364275}
+  m_Layer: 0
+  m_Name: Base detection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3813919279664432931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670964309891722511}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 6.103814, y: 6.103814, z: 6.103814}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3309931830969698514}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5094881018684794182
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670964309891722511}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!135 &2662160930612517071
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670964309891722511}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2242832399723364275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670964309891722511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447600718e672a7449de2d9b23646911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColliderDetector
+  RangeDetector: {fileID: 391903497141166109}
+  SearchedLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isCrouchDetection: 0
+  isBaseDetection: 1
+  isBaieDetection: 0

@@ -1,52 +1,66 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
-[RequireComponent(typeof(SphereCollider))]
 public class RangeDetector : MonoBehaviour
 {
-    [Header("DÃ©tection")]
-    public float detectionRadius = 10f;
-    public LayerMask detectionMask;
+    public List<GameObject> GameObjectsDetected;
 
-    [HideInInspector] public List<Transform> detectedObjects = new();
-
-    private SphereCollider sphereCollider;
-
-    public System.Action<Transform> OnObjectEnter;
-    public System.Action<Transform> OnObjectExit;
-
-    private void Awake()
+    public void ChangePlayerDetected(GameObject newObj, bool add, bool crouchTrigger, bool charCrouched)
     {
-        sphereCollider = GetComponent<SphereCollider>();
-        sphereCollider.isTrigger = true;
-        sphereCollider.radius = detectionRadius;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (((1 << other.gameObject.layer) & detectionMask) != 0)
+        if (add)
         {
-            if (!detectedObjects.Contains(other.transform))
+            if (GameObjectsDetected.Contains(newObj)) // si le joueur est déjà détecté, sortir
             {
-                Debug.Log("trigger entered");
-                detectedObjects.Add(other.transform);
-                OnObjectEnter?.Invoke(other.transform);
+                Debug.Log("Joueur déjà détecté - return");
+                return;
+            }
+            else
+            {
+                if (!charCrouched) // si le joueur n'est pas crouch, l'ajouter
+                {
+                    Debug.Log("Joueur debout - ajouté");
+                    GameObjectsDetected.Add(newObj);
+                    return;
+                }
+                else
+                {
+                    if (crouchTrigger) // Si le Trigger est celui de crouch, l'ajouter
+                    {
+                        Debug.Log("Joueur dans crouch trigger - ajouté");
+                        GameObjectsDetected.Add(newObj);
+                        return;
+                    }
+                    else { return; } // Sinon sortir
+                }
             }
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (detectedObjects.Contains(other.transform))
+        else
         {
-            detectedObjects.Remove(other.transform);
-            OnObjectExit?.Invoke(other.transform);
+            if (!GameObjectsDetected.Contains(newObj)) // Si le joueur n'était déjà pas présent, sortir
+            {
+                Debug.Log("Joueur n'existe pas - return");
+                return;
+            }
+            else
+            {
+                if(charCrouched) // Si le joueur est crouch, le retirer
+                {
+                    Debug.Log("Joueur crouch - retiré");
+                    GameObjectsDetected.Remove(newObj);
+                    return;
+                }
+                else
+                {
+                    if (!crouchTrigger) // Si le trigger est celui de base, le retirer
+                    {
+                        Debug.Log("Joueur sorti de base trigger - retiré");
+                        GameObjectsDetected.Remove(newObj);
+                        return;
+                    }
+                    else { return ; } // Sinon sortir
+                }
+            }
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

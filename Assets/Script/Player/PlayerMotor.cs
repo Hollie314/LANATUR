@@ -1,7 +1,10 @@
 using UnityEngine;
+using System;
 
 public class PlayerMotor : MonoBehaviour
 {
+    public static event Action<PlayerMotor> Crouched;
+
     private CharacterController controller;
     public bool isGrounded;
     private Vector3 playerVelocity;
@@ -15,6 +18,7 @@ public class PlayerMotor : MonoBehaviour
     private bool sprinting = false;
 
     public float jumpHeight = 3f;
+
 
     void Start()
     {
@@ -75,6 +79,7 @@ public class PlayerMotor : MonoBehaviour
     {
         crouching = !crouching;
         crouchTimer = 0;
+        Crouched?.Invoke(this);
         lerpCrouch = true;
     }
 

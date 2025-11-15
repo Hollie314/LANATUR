@@ -119,6 +119,7 @@ public class PlayerInteract : MonoBehaviour
                 Baie.transform.parent.gameObject.GetComponent<Rigidbody>().useGravity = false;
                 Baie.transform.parent.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 Baie.transform.parent.transform.GetChild(1).gameObject.SetActive(false);
+                Debug.Log("tiens une baie");
             }
             else
             {
@@ -127,7 +128,7 @@ public class PlayerInteract : MonoBehaviour
                 Baie.transform.parent.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 Baie.transform.parent.transform.GetChild(1).gameObject.SetActive(true);
                 Baie.transform.parent.gameObject.GetComponent<Rigidbody>().AddForce(this.transform.GetChild(0).forward * 300, ForceMode.Force);
-
+                Debug.Log("Lache une baie");
             }
         }
         if (inTriggerZoneRocher)

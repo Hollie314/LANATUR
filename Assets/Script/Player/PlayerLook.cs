@@ -11,6 +11,12 @@ public class PlayerLook : MonoBehaviour
     public float xSensitivity = 30f;
     public float ySensitivity = 30f;
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     public void ProcessLook(Vector2 input)
     {
         Cursor.lockState = CursorLockMode.Confined;
