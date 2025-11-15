@@ -27,6 +27,7 @@ public partial class AgentDetectedTargetAction : Action
         foreach(GameObject detected in RangeDetector.Value.GameObjectsDetected)
         {
             Debug.Log($"Detected name : {detected.name} Detected tag : {detected.tag}");
+            Debug.Log($"Target name : {Target.Value.name} Detected tag : {Target.Value.tag}");
             if (!detected.gameObject.activeSelf)
             {
                 detectedToRemove.Add(detected);
