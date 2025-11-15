@@ -17,9 +17,6 @@ public class PlayerInteract : MonoBehaviour
     public GameObject UI_Carnet;
 
     [Header("---------- Camera ----------")]
-    public GameObject PlayerHead;
-    public Transform standingTransform;
-    public Transform crouchingTransform;
 
     private Camera cam;
     [SerializeField] private float distance = 3f;
@@ -76,10 +73,6 @@ public class PlayerInteract : MonoBehaviour
         if (action_Interact.action.WasPressedThisFrame() && !(UI_Camera.activeSelf || UI_Carnet.activeSelf))
         {
             Interact();
-        }
-        if (action_Crouch.action.WasPressedThisFrame())
-        {
-            Crouch();
         }
         if (action_UICamera.action.WasPressedThisFrame())
         {
@@ -179,20 +172,4 @@ public class PlayerInteract : MonoBehaviour
         UI_Carnet.SetActive(!UI_Carnet.activeSelf);
         UI_Camera.SetActive(false);
     }
-
-    // Crouch
-    private void Crouch()
-    {
-        return;
-        isCrouched = !isCrouched;
-        if (isCrouched)
-        {
-            PlayerHead.transform.position = crouchingTransform.position;
-        }
-        else
-        {
-            PlayerHead.transform.position = standingTransform.position;
-        }
-    }
-
 }
