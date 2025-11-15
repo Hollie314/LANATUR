@@ -3,6 +3,7 @@ using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 
 [Serializable, GeneratePropertyBag]
@@ -20,9 +21,25 @@ public partial class AgentDetectedTargetAction : Action
 
     protected override Status OnUpdate()
     {
-        Debug.Log("it's running");
-        if(RangeDetector.Value.GameObjectsDetected.Contains(Target))
-            return Status.Success;
+        Debug.Log("Detection status : running");
+        Debug.Log(RangeDetector.Value.GameObjectsDetected.Count);
+        List<GameObject> detectedToRemove = new List<GameObject>();
+        foreach(GameObject detected in RangeDetector.Value.GameObjectsDetected)
+        {
+            Debug.Log($"Detected name : {detected.name} Detected tag : {detected.tag}");
+            if (!detected.gameObject.activeSelf)
+            {
+                detectedToRemove.Add(detected);
+            }
+            else if(detected.tag == Target.Value.tag)
+            {
+                return Status.Success;
+            }
+        }
+        foreach(GameObject detected in detectedToRemove)
+        {
+            RangeDetector.Value.GameObjectsDetected.Remove(detected);
+        }
         return Status.Running;
     }
 

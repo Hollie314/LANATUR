@@ -6,29 +6,61 @@ public class RangeDetector : MonoBehaviour
 {
     public List<GameObject> GameObjectsDetected;
 
-    public void ChangeObjectsDetected(GameObject newObj, bool add, bool crouchTrigger, bool charCrouched)
+    public void ChangePlayerDetected(GameObject newObj, bool add, bool crouchTrigger, bool charCrouched)
     {
         if (add)
         {
-            if (!GameObjectsDetected.Contains(newObj))
+            if (GameObjectsDetected.Contains(newObj)) // si le joueur est déjà détecté, sortir
             {
-                GameObjectsDetected.Add(newObj);
+                Debug.Log("Joueur déjà détecté - return");
+                return;
+            }
+            else
+            {
+                if (!charCrouched) // si le joueur n'est pas crouch, l'ajouter
+                {
+                    Debug.Log("Joueur debout - ajouté");
+                    GameObjectsDetected.Add(newObj);
+                    return;
+                }
+                else
+                {
+                    if (crouchTrigger) // Si le Trigger est celui de crouch, l'ajouter
+                    {
+                        Debug.Log("Joueur dans crouch trigger - ajouté");
+                        GameObjectsDetected.Add(newObj);
+                        return;
+                    }
+                    else { return; } // Sinon sortir
+                }
             }
         }
         else
         {
-            if(crouchTrigger)
+            if (!GameObjectsDetected.Contains(newObj)) // Si le joueur n'était déjà pas présent, sortir
             {
-                if(charCrouched)
+                Debug.Log("Joueur n'existe pas - return");
+                return;
+            }
+            else
+            {
+                if(charCrouched) // Si le joueur est crouch, le retirer
                 {
+                    Debug.Log("Joueur crouch - retiré");
                     GameObjectsDetected.Remove(newObj);
                     return;
                 }
-                return;
+                else
+                {
+                    if (!crouchTrigger) // Si le trigger est celui de base, le retirer
+                    {
+                        Debug.Log("Joueur sorti de base trigger - retiré");
+                        GameObjectsDetected.Remove(newObj);
+                        return;
+                    }
+                    else { return ; } // Sinon sortir
+                }
             }
-            GameObjectsDetected.Remove(newObj);
-            return;
-
         }
     }
 }
