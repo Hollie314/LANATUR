@@ -70,8 +70,12 @@ public class PlayerInteract : MonoBehaviour
 
     private void Inputs()
     {
-        if (action_Interact.action.WasPressedThisFrame() && !(UI_Camera.activeSelf || UI_Carnet.activeSelf))
+        if (action_Interact.action.WasPressedThisFrame() && !UI_Carnet.activeSelf)
         {
+            if(UI_Camera.activeSelf)
+            {
+                UI_Camera.SetActive(false);
+            }
             Interact();
         }
         if (action_UICamera.action.WasPressedThisFrame())
