@@ -34,6 +34,11 @@ public class PlayerInteract : MonoBehaviour
     private bool holdingBaie;
     public Transform BaieHolder;
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -148,7 +153,19 @@ public class PlayerInteract : MonoBehaviour
     // UI To CAMERA
     private void UI_ToCamera()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
         UI_Camera.SetActive(!UI_Camera.activeSelf);
+        if (UI_Camera.activeSelf) 
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
+        }
         UI_Carnet.SetActive(false);
         OnCameraActive?.Invoke(this);
     }
@@ -156,6 +173,16 @@ public class PlayerInteract : MonoBehaviour
     // UI To CARNET
     private void UI_ToCarnet()
     {
+        if (UI_Camera.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
+        }
         UI_Carnet.SetActive(!UI_Carnet.activeSelf);
         UI_Camera.SetActive(false);
     }
