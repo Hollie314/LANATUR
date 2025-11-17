@@ -49,23 +49,6 @@ public class PlayerInteract : MonoBehaviour
         Inputs(); 
 
         playerUI.UpdateText(string.Empty);
-        //create a ray at the center of the camera, shooting outwards.
-        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * distance);
-        RaycastHit hitInfo; //variable to store our collision information.
-        
-        if (Physics.Raycast(ray, out hitInfo, distance, mask)) // changer par un cube raycast !!!!!!!!!!!!!!!!!
-        {
-            if (hitInfo.collider.GetComponent<Interactable>() != null)
-            {
-                Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
-                playerUI.UpdateText(interactable.promptMessage);
-                if (inputManager.OnFoot.Interact.triggered)
-                {
-                    interactable.BaseInteract();
-                }
-            }
-        }
     }
 
     private void Inputs()
