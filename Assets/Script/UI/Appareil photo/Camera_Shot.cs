@@ -121,6 +121,11 @@ public class Camera_Shot : MonoBehaviour
                 if (isNewSpecies)
                 {
                     SaveSystem.SavePicture(screenCapture, target.tag, true);
+                    if ( target.GetComponent<UpdateEntry>() != null)
+                    {
+                        target.GetComponent<UpdateEntry>().UpdateEntry_Func();
+                    }
+
                     Debug.Log("new species");
                 }
                 else
@@ -132,6 +137,11 @@ public class Camera_Shot : MonoBehaviour
             else
             {
                 SaveSystem.SavePicture(screenCapture, target.tag, true);
+                if (target.GetComponent<UpdateEntry>() != null)
+                {
+                    target.GetComponent<UpdateEntry>().UpdateEntry_Func();
+                }
+
                 Debug.Log("no photos in album");
             }
         }

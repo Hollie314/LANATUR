@@ -4,6 +4,8 @@ public class UpdateEntry : MonoBehaviour
 {
     [SerializeField] EncyclopedieEntry EncyclopedieEntry;
 
+    public EncyclopedieEntry.UpdateTypes UpdateType;
+
     public string NoteDeRen;
     public string Caracteristique;
     public string Anecdote;
@@ -14,11 +16,17 @@ public class UpdateEntry : MonoBehaviour
 
     public void UpdateEntry_Func()
     {
-        if(!(NoteDeRen == "")) { EncyclopedieEntry.NoteDeRen = NoteDeRen; }
-        if(!(Caracteristique == "")) { EncyclopedieEntry.Caracteristique = Caracteristique; }
-        if(!(Anecdote == "")) { EncyclopedieEntry.Anecdote = Anecdote; }
-        if(!(Photo == null)) { EncyclopedieEntry.Photo = Photo; }
-        if(!(Dessin == null)) { EncyclopedieEntry.Dessin = Dessin; }
-        if(!(DessinMignon == null)) { EncyclopedieEntry.DessinMignon = DessinMignon; }
+        if (EncyclopedieEntry == null) { return; }
+        if (EncyclopedieEntry.UpdatesDone.Contains(UpdateType)) { return; }
+        else
+        {
+            EncyclopedieEntry.UpdatesDone.Add(UpdateType);
+            if (!(NoteDeRen == "")) { EncyclopedieEntry.NoteDeRen = NoteDeRen; }
+            if (!(Caracteristique == "")) { EncyclopedieEntry.Caracteristique = Caracteristique; }
+            if (!(Anecdote == "")) { EncyclopedieEntry.Anecdote = Anecdote; }
+            if (!(Photo == null)) { EncyclopedieEntry.Photo = Photo; }
+            if (!(Dessin == null)) { EncyclopedieEntry.Dessin = Dessin; }
+            if (!(DessinMignon == null)) { EncyclopedieEntry.DessinMignon = DessinMignon; }
+        }
     }
 }
