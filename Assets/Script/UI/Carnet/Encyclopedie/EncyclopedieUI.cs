@@ -2,10 +2,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.Utilities;
 
 public class EncyclopedieUI : MonoBehaviour
 {
-    public List<EncyclopedieEntry> EncyclopedieEntries;
+    public Game_Manager Game_Manager;
     public int currentEntry;
 
     public Text NoteDeRen;
@@ -17,10 +18,16 @@ public class EncyclopedieUI : MonoBehaviour
     public Image DessinMignon;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnEnable()
     {
-        if (EncyclopedieEntries == null) { EncyclopedieEntries = new List<EncyclopedieEntry>(); }
+        Game_Manager = FindFirstObjectByType<Game_Manager>();
+        Debug.Log($"Manager name : {Game_Manager.name} - Encyclopedie Entries : {Game_Manager.EncyclopedieEntries} - Count : {Game_Manager.EncyclopedieEntries.Count}");
         currentEntry = 1;
+
+        if (!Game_Manager.EncyclopedieEntries.IsNullOrEmpty())
+        {
+            UpdateUI(Game_Manager.EncyclopedieEntries[0]);
+        }
     }
 
     // Update is called once per frame
@@ -31,14 +38,14 @@ public class EncyclopedieUI : MonoBehaviour
 
     public void GoToNext()
     {
-        if(EncyclopedieEntries.Count <= 1) { return; }
+        if(Game_Manager.EncyclopedieEntries.Count <= 1) { return; }
 
-        if(EncyclopedieEntries.Count == currentEntry + 1) 
+        if(Game_Manager.EncyclopedieEntries.Count == currentEntry + 1) 
         {
             currentEntry = 0;
         }
         else { currentEntry ++; }
-        UpdateUI(EncyclopedieEntries[currentEntry]);
+        UpdateUI(Game_Manager.EncyclopedieEntries[currentEntry]);
         return;
 
 
@@ -46,14 +53,14 @@ public class EncyclopedieUI : MonoBehaviour
 
     public void GoToPrevious()
     {
-        if (EncyclopedieEntries.Count <= 1) { return; }
+        if (Game_Manager.EncyclopedieEntries.Count <= 1) { return; }
 
         if (currentEntry == 0)
         {
-            currentEntry = EncyclopedieEntries.Count - 1;
+            currentEntry = Game_Manager.EncyclopedieEntries.Count - 1;
         }
         else { currentEntry --; }
-        UpdateUI(EncyclopedieEntries[currentEntry]);
+        UpdateUI(Game_Manager.EncyclopedieEntries[currentEntry]);
         return;
     }
 
@@ -66,13 +73,5 @@ public class EncyclopedieUI : MonoBehaviour
         Photo.sprite = entry.Photo;
         Dessin.sprite = entry.Dessin;
         DessinMignon.sprite = entry.DessinMignon;
-    }
-
-    public void LoadFirstEntry()
-    {
-        if(EncyclopedieEntries.Count != 0)
-        {
-            UpdateUI(EncyclopedieEntries[0]);
-        }
     }
 }

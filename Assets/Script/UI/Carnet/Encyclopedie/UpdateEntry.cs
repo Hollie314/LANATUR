@@ -1,32 +1,53 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class UpdateEntry : MonoBehaviour
 {
-    [SerializeField] EncyclopedieEntry EncyclopedieEntry;
+    [SerializeField] List<EncyclopedieEntry> EncyclopedieEntry;
 
     public EncyclopedieEntry.UpdateTypes UpdateType;
 
-    public string NoteDeRen;
-    public string Caracteristique;
-    public string Anecdote;
+    public List<string> NoteDeRen;
+    public List<string> Caracteristique;
+    public List<string> Anecdote;
 
-    public Sprite Photo;
-    public Sprite Dessin;
-    public Sprite DessinMignon;
+    public List<Sprite> Photo;
+    public List<Sprite> Dessin;
+    public List<Sprite> DessinMignon;
+
+    Game_Manager Game_Manager;
+
+    private void Awake()
+    {
+        Game_Manager = FindFirstObjectByType<Game_Manager>();
+    }
 
     public void UpdateEntry_Func()
     {
-        if (EncyclopedieEntry == null) { return; }
-        if (EncyclopedieEntry.UpdatesDone.Contains(UpdateType)) { return; }
+        for(int i = 0; i < EncyclopedieEntry.Count; i++)
+        {
+            SingleUpdate(i);
+        }
+    }
+
+    private void SingleUpdate(int i)
+    {
+        if (EncyclopedieEntry[i] == null) { return; }
+        if (EncyclopedieEntry[i].UpdatesDone.Contains(UpdateType)) { return; }
         else
         {
-            EncyclopedieEntry.UpdatesDone.Add(UpdateType);
-            if (!(NoteDeRen == "")) { EncyclopedieEntry.NoteDeRen = NoteDeRen; }
-            if (!(Caracteristique == "")) { EncyclopedieEntry.Caracteristique = Caracteristique; }
-            if (!(Anecdote == "")) { EncyclopedieEntry.Anecdote = Anecdote; }
-            if (!(Photo == null)) { EncyclopedieEntry.Photo = Photo; }
-            if (!(Dessin == null)) { EncyclopedieEntry.Dessin = Dessin; }
-            if (!(DessinMignon == null)) { EncyclopedieEntry.DessinMignon = DessinMignon; }
+            EncyclopedieEntry[i].UpdatesDone.Add(UpdateType);
+            if (!(NoteDeRen[i] == "")) { EncyclopedieEntry[i].NoteDeRen = NoteDeRen[i]; }
+            if (!(Caracteristique[i] == "")) { EncyclopedieEntry[i].Caracteristique = Caracteristique[i]; }
+            if (!(Anecdote[i] == "")) { EncyclopedieEntry[i].Anecdote = Anecdote[i]; }
+            if (!(Photo[i] == null)) { EncyclopedieEntry[i].Photo = Photo[i]; }
+            if (!(Dessin[i] == null)) { EncyclopedieEntry[i].Dessin = Dessin[i]; }
+            if (!(DessinMignon[i] == null)) { EncyclopedieEntry[i].DessinMignon = DessinMignon[i]; }
+
+            if (!Game_Manager.EncyclopedieEntries.Contains(EncyclopedieEntry[i]))
+            {
+                Game_Manager.EncyclopedieEntries.Add(EncyclopedieEntry[i]);
+            }
         }
     }
 }
