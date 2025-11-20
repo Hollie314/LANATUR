@@ -29,11 +29,18 @@ public class PlayerInteract : MonoBehaviour
 
     private bool inTriggerZoneRocher = false;
     private bool inTriggerZoneBaie = false;
+    private bool inTriggerZoneCarnet = false;
     private GameObject Rocher;
     private GameObject Baie;
+    private GameObject Carnet;
     private bool holdingBaie;
     public Transform BaieHolder;
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,23 +56,6 @@ public class PlayerInteract : MonoBehaviour
         Inputs(); 
 
         playerUI.UpdateText(string.Empty);
-        //create a ray at the center of the camera, shooting outwards.
-        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-        Debug.DrawRay(ray.origin, ray.direction * distance);
-        RaycastHit hitInfo; //variable to store our collision information.
-        
-        if (Physics.Raycast(ray, out hitInfo, distance, mask)) // changer par un cube raycast !!!!!!!!!!!!!!!!!
-        {
-            if (hitInfo.collider.GetComponent<Interactable>() != null)
-            {
-                Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
-                playerUI.UpdateText(interactable.promptMessage);
-                if (inputManager.OnFoot.Interact.triggered)
-                {
-                    interactable.BaseInteract();
-                }
-            }
-        }
     }
 
     private void Inputs()
@@ -127,11 +117,17 @@ public class PlayerInteract : MonoBehaviour
                 Baie.transform.parent.gameObject.GetComponent<Rigidbody>().AddForce(this.transform.GetChild(0).forward * 300, ForceMode.Force);
                 Debug.Log("Lache une baie");
             }
+            return;
         }
         if (inTriggerZoneRocher)
         {
             Debug.Log("active un rocher");
             Rocher.transform.GetChild(0).gameObject.SetActive(true);
+            return;
+        }
+        if (inTriggerZoneCarnet)
+        {
+            Carnet.GetComponentInParent<UpdateEntry>().UpdateEntry_Func();
         }
     }
 
@@ -142,11 +138,19 @@ public class PlayerInteract : MonoBehaviour
             Debug.Log("sur un rocher");
             inTriggerZoneRocher = true;
             Rocher = other.gameObject;
+            return;
         }
         if (other.CompareTag("BaieTest"))
         {
             inTriggerZoneBaie = true;
             Baie = other.gameObject;
+            return;
+        }
+        if (other.CompareTag("Carnet"))
+        {
+            inTriggerZoneCarnet = true;
+            Carnet = other.gameObject;
+            return;
         }
     }
 
@@ -155,17 +159,36 @@ public class PlayerInteract : MonoBehaviour
         if (other.CompareTag("Rope rock"))
         {
             inTriggerZoneRocher = false;
+            return;
         }
         if (other.CompareTag("BaieTest"))
         {
             inTriggerZoneBaie = false;
+            return;
+        }
+        if (other.CompareTag("Carnet"))
+        {
+            inTriggerZoneCarnet = false;
+            return;
         }
     }
 
     // UI To CAMERA
     private void UI_ToCamera()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
         UI_Camera.SetActive(!UI_Camera.activeSelf);
+        if (UI_Camera.activeSelf) 
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
+        }
         UI_Carnet.SetActive(false);
         OnCameraActive?.Invoke(this);
     }
@@ -173,6 +196,16 @@ public class PlayerInteract : MonoBehaviour
     // UI To CARNET
     private void UI_ToCarnet()
     {
+        if (UI_Camera.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
+        }
         UI_Carnet.SetActive(!UI_Carnet.activeSelf);
         UI_Camera.SetActive(false);
     }

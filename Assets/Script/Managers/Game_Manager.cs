@@ -1,9 +1,12 @@
 using UnityEngine;
+using System.Collections.Generic;
+using Sirenix.Utilities;
 
 public class Game_Manager : MonoBehaviour
 {
     public bool CameraIsActive = false;
     public bool ScanIsActive = false;
+    public List<EncyclopedieEntry> EncyclopedieEntries = new List<EncyclopedieEntry>();
 
     void OnEnable()
     {
