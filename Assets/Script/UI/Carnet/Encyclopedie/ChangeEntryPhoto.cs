@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Encyclopedia_Manager : SerializedMonoBehaviour
+public class ChangeEntryPhoto : SerializedMonoBehaviour
 {
     public Dictionary<GameObject, string> EncylopediaDictionary;
     public static Album album = new Album();
@@ -53,16 +53,4 @@ public class Encyclopedia_Manager : SerializedMonoBehaviour
         photo.GetComponent<Image>().sprite = photoSprite;
         return;
     }
-
-    public void ShowEncyclopediaDescription()
-    {
-
-    }
-
-    public void ChangePage(int pageIndex)
-    {
-
-    }
-
-
 }
