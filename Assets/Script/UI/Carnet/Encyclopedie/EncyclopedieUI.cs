@@ -17,8 +17,6 @@ public class EncyclopedieUI : MonoBehaviour
     public Image Dessin;
     public Image DessinMignon;
 
-    public static Album album = new Album();
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
@@ -29,7 +27,6 @@ public class EncyclopedieUI : MonoBehaviour
         if (!Game_Manager.EncyclopedieEntries.IsNullOrEmpty())
         {
             UpdateUI(Game_Manager.EncyclopedieEntries[0]);
-            ShowEncyclopedia();
         }
     }
 
@@ -76,44 +73,5 @@ public class EncyclopedieUI : MonoBehaviour
         Photo.sprite = entry.Photo;
         Dessin.sprite = entry.Dessin;
         DessinMignon.sprite = entry.DessinMignon;
-    }
-
-    public void ShowEncyclopedia()
-    {
-        Debug.Log("showing Encylopedia");
-        album = Album.Load();
-        if (!album.photoInfos.IsNullOrEmpty())
-        {
-            Debug.Log("album not empty");
-            foreach (PhotoInfos infos in album.photoInfos)
-            {
-                Debug.Log("searching photoinfos");
-                if (infos.imageUsedInEncyclopedia)
-                {
-                    Debug.Log("info in encyclopedia");
-                    foreach (EncyclopedieEntry entry in Game_Manager.EncyclopedieEntries)
-                    {
-                        Debug.Log("searching images");
-                        Debug.Log(infos.imageTag);
-                        Debug.Log(entry.specieTag);
-                        if (entry.specieTag == infos.imageTag)
-                        {
-                            Debug.Log("adding photo in encyclopedia");
-                            AddPhotoToEncyclopedia(infos, entry);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public void AddPhotoToEncyclopedia(PhotoInfos infos, GameObject photo)
-    {
-        byte[] bytes = System.IO.File.ReadAllBytes(infos.imagePath);
-        Texture2D texture = new Texture2D(2, 2);
-        texture.LoadImage(bytes);
-        Sprite photoSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-        photo.GetComponent<Image>().sprite = photoSprite;
-        return;
     }
 }

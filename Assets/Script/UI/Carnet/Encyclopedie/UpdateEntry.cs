@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class UpdateEntry : MonoBehaviour
 {
-    [SerializeField] List<EncyclopedieEntry> EncyclopedieEntry;
+    [SerializeField] public List<EncyclopedieEntry> EncyclopedieEntry;
 
     public EncyclopedieEntry.UpdateTypes UpdateType;
 
