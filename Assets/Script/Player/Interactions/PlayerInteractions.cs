@@ -65,9 +65,26 @@ public class PlayerInteractions : MonoBehaviour
 
     public void OnInteractInput(InputAction.CallbackContext context)
     {
+        // Debug
+        Debug.Log("Interact");
+
         if (interactable != null && interactable.CanInteract)
         {
             interactable.Interact(this);
         }
     }
+
+    public void OnJumpInput(InputAction.CallbackContext context)
+    {
+        // Debug
+        Debug.Log("Jump");
+    }
+    
+    public void OnCrouchInput(InputAction.CallbackContext context)
+    {
+        // Debug
+        Debug.Log("Crouch");
+    }
+
+    // C'est L'UI qui dois s'abonner a PlayerInteractions
 }

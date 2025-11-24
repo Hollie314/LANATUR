@@ -2,9 +2,19 @@ using UnityEngine;
 
 public class Berry : MonoBehaviour, IInteractable
 {
+    private Transform BaieHolder;
+
+    private HoldItem holdItem;
+    // event interacted
+
     public int Priority => 1;
 
     public bool CanInteract => true;
+
+    public void Awake()
+    {
+        holdItem = FindFirstObjectByType<HoldItem>();
+    }
 
     public void Interact(PlayerInteractions interactions)
     {
@@ -19,5 +29,6 @@ public class Berry : MonoBehaviour, IInteractable
     public void OnPlayerExit(PlayerInteractions interactions)
     {
         Debug.Log("Bait peut plus etre interargie avec");
+        holdItem.Hold(this.gameObject);
     }
 }

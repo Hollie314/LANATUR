@@ -96,6 +96,8 @@ public class PlayerInteract : MonoBehaviour
 
     private void Interact()
     {
+        return;
+
         if (inTriggerZoneBaie)
         {
             holdingBaie = !holdingBaie;
