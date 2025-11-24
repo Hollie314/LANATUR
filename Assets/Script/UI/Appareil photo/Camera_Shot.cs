@@ -61,7 +61,7 @@ public class Camera_Shot : MonoBehaviour
     private void CameraDetection()
     {
         RaycastHit hitInfo;
-        Debug.Log(Camera.main.farClipPlane);
+        //Debug.Log(Camera.main.farClipPlane);
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hitInfo, Camera.main.farClipPlane, animals_LayerMask))
         {
             {
@@ -69,7 +69,7 @@ public class Camera_Shot : MonoBehaviour
                 target.GetComponent<AnimalPart>().BecomeTarget();
             }
         }
-
+        /*
         // Debug
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward) * Camera.main.farClipPlane, Color.red);
         if (target != null)
@@ -77,6 +77,7 @@ public class Camera_Shot : MonoBehaviour
             Debug.Log("Targets " + target.name);
         }
         else { Debug.Log("No target"); }
+        */
         return;
     }
 

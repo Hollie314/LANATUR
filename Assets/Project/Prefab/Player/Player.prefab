@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 5949559384788434095}
   - component: {fileID: 1181996045864161696}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Body
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,6 +323,7 @@ Transform:
   - {fileID: 4216289170208600626}
   - {fileID: 7952826445022414606}
   - {fileID: 5232538768314312006}
+  - {fileID: 1006121472502876509}
   m_Father: {fileID: 6406791004804012045}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9170119316042910449
@@ -471,9 +472,6 @@ MonoBehaviour:
   action_UICarnet: {fileID: -7636850283985817412, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   UI_Camera: {fileID: 2851245216653578362, guid: fb993ee39d2835741a26723874ee7093, type: 3}
   UI_Carnet: {fileID: 1174356455868158452, guid: 84cece93e1cff2c4f9920dfffddd6e10, type: 3}
-  PlayerHead: {fileID: 4330810199618574468}
-  standingTransform: {fileID: 0}
-  crouchingTransform: {fileID: 0}
   distance: 6
   mask:
     serializedVersion: 2
@@ -612,6 +610,55 @@ Transform:
   - {fileID: 5084356600416347129}
   m_Father: {fileID: 7426232777835325697}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7961516349641122551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1006121472502876509}
+  - component: {fileID: 1982292756657557491}
+  m_Layer: 0
+  m_Name: Interactions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1006121472502876509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7961516349641122551}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7426232777835325697}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1982292756657557491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7961516349641122551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5580cc8e88951849bd5cb6694c43b95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractions
+  range: 4
+  radius: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 127
 --- !u!1 &8736185414472165216
 GameObject:
   m_ObjectHideFlags: 0
