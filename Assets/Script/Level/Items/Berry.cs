@@ -19,6 +19,7 @@ public class Berry : MonoBehaviour, IInteractable
     public void Interact(PlayerInteractions interactions)
     {
         Debug.Log("Interaction avec la baie");
+        holdItem.Hold(this.gameObject);
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)
@@ -29,6 +30,5 @@ public class Berry : MonoBehaviour, IInteractable
     public void OnPlayerExit(PlayerInteractions interactions)
     {
         Debug.Log("Bait peut plus etre interargie avec");
-        holdItem.Hold(this.gameObject);
     }
 }
