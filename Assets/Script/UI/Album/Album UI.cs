@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class AlbumUI : SerializedMonoBehaviour
 {
+    [SerializeField] ChangeEntryPhoto ChangeEntryPhoto;
+
     public GameObject canvasCamera;
     public GameObject panelAlbum, panelPhoto;
     public GameObject albumLayoutUp, albumLayoutDown;
@@ -41,6 +43,7 @@ public class AlbumUI : SerializedMonoBehaviour
     public void OnEnable()
     {
         SortByType();
+        ChangeEntryPhoto = FindFirstObjectByType<ChangeEntryPhoto>();
     }
 
     #region changeSortMethodes
@@ -374,6 +377,7 @@ public class AlbumUI : SerializedMonoBehaviour
             }
         }
         ListInEncyclopedia.Add(photo);
+        ChangeEntryPhoto.AddPhotoToEntries(albumDictionary[photo]);
         // albumDictionary[photo].imageUsedInEncyclopedia = true;
     }
 

@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
-    private PlayerInput playerInput;
-    private PlayerInput.OnFootActions onFoot;
+    public PlayerControls Controls { get; private set; }
+
+    private PlayerControls.OnFootActions onFoot;
     
-    public PlayerInput.OnFootActions OnFoot => onFoot;
+    public PlayerControls.OnFootActions OnFoot => onFoot;
 
 
     private PlayerMotor motor;
@@ -17,8 +18,8 @@ public class InputManager : MonoBehaviour
 
     void Awake()
     {
-        playerInput = new PlayerInput();
-        onFoot = playerInput.OnFoot;
+        Controls = new PlayerControls();
+        onFoot = Controls.OnFoot;
         
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();

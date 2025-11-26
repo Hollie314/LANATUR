@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "EncyclopedieEntry", menuName = "Scriptable Objects/EncyclopedieEntry")]
 public class EncyclopedieEntry : ScriptableObject
 {
+    public string specieTag;
     public enum UpdateTypes { RenPage, SpecieScanned, Anecdote}
 
     public List<UpdateTypes> UpdatesDone = new List<UpdateTypes>();

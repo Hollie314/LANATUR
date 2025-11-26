@@ -10,6 +10,7 @@ public class Camera_Shot : MonoBehaviour
     [Header("Photo Taker")]
     // public
     [SerializeField] private Camera_UI Camera_UI;
+    [SerializeField] ChangeEntryPhoto ChangeEntryPhoto;
     public LayerMask animals_LayerMask;
     public static event Action PictureTaken;
     public static Album album = new Album();
@@ -33,6 +34,7 @@ public class Camera_Shot : MonoBehaviour
     private void OnEnable() // new
     {
         AnimalPart.ExitView += OnTargetExitView;
+        ChangeEntryPhoto = FindFirstObjectByType<ChangeEntryPhoto>();
     }
 
     private void OnDisable() // new
@@ -59,7 +61,7 @@ public class Camera_Shot : MonoBehaviour
     private void CameraDetection()
     {
         RaycastHit hitInfo;
-        Debug.Log(Camera.main.farClipPlane);
+        //Debug.Log(Camera.main.farClipPlane);
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hitInfo, Camera.main.farClipPlane, animals_LayerMask))
         {
             {
@@ -67,7 +69,7 @@ public class Camera_Shot : MonoBehaviour
                 target.GetComponent<AnimalPart>().BecomeTarget();
             }
         }
-
+        /*
         // Debug
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward) * Camera.main.farClipPlane, Color.red);
         if (target != null)
@@ -75,6 +77,7 @@ public class Camera_Shot : MonoBehaviour
             Debug.Log("Targets " + target.name);
         }
         else { Debug.Log("No target"); }
+        */
         return;
     }
 
@@ -120,26 +123,28 @@ public class Camera_Shot : MonoBehaviour
                 }
                 if (isNewSpecies)
                 {
-                    SaveSystem.SavePicture(screenCapture, target.tag, true);
+                    PhotoInfos infos = SaveSystem.SavePicture(screenCapture, target.tag, true, target.GetComponent<UpdateEntry>().EncyclopedieEntry[0]);
                     if ( target.GetComponent<UpdateEntry>() != null)
                     {
                         target.GetComponent<UpdateEntry>().UpdateEntry_Func();
+                        ChangeEntryPhoto.AddPhotoToEntries(infos);
                     }
 
                     Debug.Log("new species");
                 }
                 else
                 {
-                    SaveSystem.SavePicture(screenCapture, target.tag, false);
+                    SaveSystem.SavePicture(screenCapture, target.tag, false, null);
                     Debug.Log("not a new species");
                 }
             }
             else
             {
-                SaveSystem.SavePicture(screenCapture, target.tag, true);
+                PhotoInfos infos = SaveSystem.SavePicture(screenCapture, target.tag, true, target.GetComponent<UpdateEntry>().EncyclopedieEntry[0]);
                 if (target.GetComponent<UpdateEntry>() != null)
                 {
                     target.GetComponent<UpdateEntry>().UpdateEntry_Func();
+                    ChangeEntryPhoto.AddPhotoToEntries(infos);
                 }
 
                 Debug.Log("no photos in album");
@@ -147,7 +152,7 @@ public class Camera_Shot : MonoBehaviour
         }
         else
         {
-            SaveSystem.SavePicture(screenCapture, null, false);
+            SaveSystem.SavePicture(screenCapture, null, false, null);
             Debug.Log("no target");
         }
 

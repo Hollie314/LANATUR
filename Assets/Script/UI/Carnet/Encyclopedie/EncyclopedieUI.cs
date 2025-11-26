@@ -30,12 +30,6 @@ public class EncyclopedieUI : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void GoToNext()
     {
         if(Game_Manager.EncyclopedieEntries.Count <= 1) { return; }
