@@ -1,36 +1,22 @@
 using UnityEngine;
 
-public class Berry : MonoBehaviour, IInteractable
+public class BerryTree : MonoBehaviour, IInteractable
 {
     private Transform BaieHolder;
-
     private HoldItem holdItem;
-
-    bool isHold { get; set; }
-
-    [SerializeField] private float LifeTime;
+    [SerializeField] private GameObject Baie;
+    [SerializeField] private Transform BaieSpawn;
     // event interacted
 
-    public int Priority => 2;
-
+    public int Priority => 1;
     public bool CanInteract => true;
 
-    public void Awake()
-    {
-        holdItem = FindFirstObjectByType<HoldItem>();
-    }
 
-    private void FixedUpdate()
-    {
-        // if()
-        LifeTime -= Time.deltaTime;
-
-    }
 
     public void Interact(PlayerInteractions interactions)
     {
         Debug.Log("Interaction avec la baie");
-        holdItem.Hold(this.gameObject);
+        Instantiate(Baie, BaieSpawn.position, Quaternion.identity);
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)

@@ -28,6 +28,9 @@ public class HoldItem : MonoBehaviour
             Baie.gameObject.GetComponent<Rigidbody>().useGravity = false;
             Baie.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             Baie.transform.GetChild(1).gameObject.SetActive(false);
+
+            // Baie.GetComponent<Berry>().IsHold = true;
+            // Baie.GetComponentInParent<IInteractable>().Priority = 1000000;
             Debug.Log("tiens une baie");
         }
         else
