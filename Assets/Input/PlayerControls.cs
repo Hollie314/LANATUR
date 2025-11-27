@@ -145,6 +145,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""747e5084-0a3a-47fb-a155-0f8e28960104"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenCarnet"",
+                    ""type"": ""Button"",
+                    ""id"": ""4ce269cb-cedd-4799-9ab1-2c6ede104fbe"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -376,6 +394,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c313b003-a11e-4ea2-83a5-f67666989ca2"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e14b2c7-3764-4775-934f-e42a94888f33"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenCarnet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -908,6 +948,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_OnFoot_Crouch = m_OnFoot.FindAction("Crouch", throwIfNotFound: true);
         m_OnFoot_Sprint = m_OnFoot.FindAction("Sprint", throwIfNotFound: true);
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
+        m_OnFoot_OpenCamera = m_OnFoot.FindAction("OpenCamera", throwIfNotFound: true);
+        m_OnFoot_OpenCarnet = m_OnFoot.FindAction("OpenCarnet", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1007,6 +1049,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Crouch;
     private readonly InputAction m_OnFoot_Sprint;
     private readonly InputAction m_OnFoot_Interact;
+    private readonly InputAction m_OnFoot_OpenCamera;
+    private readonly InputAction m_OnFoot_OpenCarnet;
     /// <summary>
     /// Provides access to input actions defined in input action map "OnFoot".
     /// </summary>
@@ -1042,6 +1086,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "OnFoot/Interact".
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_OnFoot_Interact;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/OpenCamera".
+        /// </summary>
+        public InputAction @OpenCamera => m_Wrapper.m_OnFoot_OpenCamera;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/OpenCarnet".
+        /// </summary>
+        public InputAction @OpenCarnet => m_Wrapper.m_OnFoot_OpenCarnet;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1086,6 +1138,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @OpenCamera.started += instance.OnOpenCamera;
+            @OpenCamera.performed += instance.OnOpenCamera;
+            @OpenCamera.canceled += instance.OnOpenCamera;
+            @OpenCarnet.started += instance.OnOpenCarnet;
+            @OpenCarnet.performed += instance.OnOpenCarnet;
+            @OpenCarnet.canceled += instance.OnOpenCarnet;
         }
 
         /// <summary>
@@ -1115,6 +1173,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @OpenCamera.started -= instance.OnOpenCamera;
+            @OpenCamera.performed -= instance.OnOpenCamera;
+            @OpenCamera.canceled -= instance.OnOpenCamera;
+            @OpenCarnet.started -= instance.OnOpenCarnet;
+            @OpenCarnet.performed -= instance.OnOpenCarnet;
+            @OpenCarnet.canceled -= instance.OnOpenCarnet;
         }
 
         /// <summary>
@@ -1392,6 +1456,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenCamera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenCamera(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenCarnet" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenCarnet(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

@@ -44,11 +44,11 @@ public class Berry : MonoBehaviour, IInteractable
 
     public void OnPlayerEnter(PlayerInteractions interactions)
     {
-        Debug.Log("Bait peut etre interargie avec");
+        Debug.Log("Baie peut etre interargie avec");
     }
 
     public void OnPlayerExit(PlayerInteractions interactions)
     {
-        Debug.Log("Bait peut plus etre interargie avec");
+        Debug.Log("Baie peut plus etre interargie avec");
     }
 }
