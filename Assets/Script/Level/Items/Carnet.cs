@@ -9,6 +9,7 @@ public class Carnet : MonoBehaviour, IInteractable
     public void Interact(PlayerInteractions interactions)
     {
         Debug.Log("Interaction avec le carnet");
+        this.GetComponent<UpdateEntry>().UpdateEntry_Func();
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)
