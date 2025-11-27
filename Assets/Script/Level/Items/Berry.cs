@@ -6,24 +6,33 @@ public class Berry : MonoBehaviour, IInteractable
 
     private HoldItem holdItem;
 
-    bool isHold { get; set; }
+    public bool IsHold { get; set; }
 
-    [SerializeField] private float LifeTime;
+    [field: SerializeField] public float LifeTime { get; private set; }
+
+    public float CurrentLife { get; set; }
     // event interacted
 
-    public int Priority => 2;
+    public int Priority { get; set; } = 2;
 
     public bool CanInteract => true;
 
     public void Awake()
     {
         holdItem = FindFirstObjectByType<HoldItem>();
+        CurrentLife = LifeTime;
     }
 
     private void FixedUpdate()
     {
-        // if()
-        LifeTime -= Time.deltaTime;
+        if (!IsHold)
+        {
+            CurrentLife -= Time.deltaTime;
+            if (CurrentLife <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
 
     }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Carnet : MonoBehaviour, IInteractable
 {
-    public int Priority => 1;
+    public int Priority { get; set; } = 1;
 
     public bool CanInteract => true;
 
