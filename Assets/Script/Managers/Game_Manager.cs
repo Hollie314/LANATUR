@@ -11,16 +11,16 @@ public class Game_Manager : MonoBehaviour
     void OnEnable()
     {
         Camera_Scan.OnScanActive += ChangeScanActive;
-        PlayerInteract.OnCameraActive += ChangeCameraActive;
+        // OpenUI.OnCameraActive += ChangeCameraActive;
     }
 
     private void OnDisable()
     {
         Camera_Scan.OnScanActive -= ChangeScanActive;
-        PlayerInteract.OnCameraActive -= ChangeCameraActive;
+        // PlayerInteract.OnCameraActive -= ChangeCameraActive;
     }
 
-    private void ChangeCameraActive(PlayerInteract PlayerInteract)
+    private void ChangeCameraActive() // Destroy
     {
         Debug.Log("Change Camera Active");
         CameraIsActive = !CameraIsActive;
