@@ -40,11 +40,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1627147652103889616}
-  - component: {fileID: 3073322196793575389}
   - component: {fileID: 4580169150271532686}
   - component: {fileID: 9031529882868275211}
   - component: {fileID: 8188514790094697781}
   - component: {fileID: 7727134598429161110}
+  - component: {fileID: 326911348781048409}
   m_Layer: 0
   m_Name: Baie
   m_TagString: BaieTest
@@ -69,18 +69,6 @@ Transform:
   - {fileID: 5818338755693785265}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3073322196793575389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001610117867761408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e56c657f590e534ea8ca252d9e5428f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Berry
 --- !u!33 &4580169150271532686
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -185,6 +173,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &326911348781048409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3001610117867761408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e56c657f590e534ea8ca252d9e5428f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Berry
+  <LifeTime>k__BackingField: 5
 --- !u!1 &5575453441384259614
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +204,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7105225634410462034
 Transform:
   m_ObjectHideFlags: 0

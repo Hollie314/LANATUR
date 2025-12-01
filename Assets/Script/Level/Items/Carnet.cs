@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class Carnet : MonoBehaviour, IInteractable
 {
-    public int Priority => 1;
+    public int Priority { get; set; } = 1;
 
     public bool CanInteract => true;
 
     public void Interact(PlayerInteractions interactions)
     {
         Debug.Log("Interaction avec le carnet");
+        this.GetComponent<UpdateEntry>().UpdateEntry_Func();
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)

@@ -8,7 +8,7 @@ public class BerryTree : MonoBehaviour, IInteractable
     [SerializeField] private Transform BaieSpawn;
     // event interacted
 
-    public int Priority => 1;
+    public int Priority { get; set; } = 1;
     public bool CanInteract => true;
 
 

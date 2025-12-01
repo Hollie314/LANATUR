@@ -29,8 +29,9 @@ public class HoldItem : MonoBehaviour
             Baie.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             Baie.transform.GetChild(1).gameObject.SetActive(false);
 
-            // Baie.GetComponent<Berry>().IsHold = true;
-            // Baie.GetComponentInParent<IInteractable>().Priority = 1000000;
+            Baie.GetComponent<Berry>().IsHold = true;
+            Baie.GetComponent<Berry>().CurrentLife = Baie.GetComponent<Berry>().LifeTime;
+            Baie.GetComponentInParent<IInteractable>().Priority = 1000000;
             Debug.Log("tiens une baie");
         }
         else
@@ -40,6 +41,9 @@ public class HoldItem : MonoBehaviour
             Baie.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             Baie.transform.GetChild(1).gameObject.SetActive(true);
             Baie.gameObject.GetComponent<Rigidbody>().AddForce(this.transform.forward * 300, ForceMode.Force);
+            
+            Baie.GetComponent<Berry>().IsHold = false;
+            Baie.GetComponentInParent<IInteractable>().Priority = 2;
             Debug.Log("Lache une baie");
         }
         return;

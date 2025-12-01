@@ -9,13 +9,13 @@ public class OnScanned : MonoBehaviour
     void OnEnable()
     {
         Camera_Scan.OnScanActive += CheckScan1;
-        PlayerInteract.OnCameraActive += CheckScan2;
+        // PlayerInteract.OnCameraActive += CheckScan2;
     }
 
     private void OnDisable()
     {
         Camera_Scan.OnScanActive -= CheckScan1;
-        PlayerInteract.OnCameraActive -= CheckScan2;
+        // PlayerInteract.OnCameraActive -= CheckScan2;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,7 +28,7 @@ public class OnScanned : MonoBehaviour
         StartCoroutine(CheckScanCoroutine());
     }
     
-    private void CheckScan2(PlayerInteract PlayerInteract)
+    private void CheckScan2() // Destroy
     {
         StartCoroutine(CheckScanCoroutine());
     }

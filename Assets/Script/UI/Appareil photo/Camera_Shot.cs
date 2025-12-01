@@ -66,6 +66,7 @@ public class Camera_Shot : MonoBehaviour
         {
             {
                 target = hitInfo.collider.gameObject;
+                Debug.Log($"{target.name} {Time.fixedTime}");
                 target.GetComponent<AnimalPart>().BecomeTarget();
             }
         }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    int Priority { get; }
+    public int Priority { get; set; }
     bool CanInteract {  get; }
 
     void OnPlayerEnter(PlayerInteractions interactions);

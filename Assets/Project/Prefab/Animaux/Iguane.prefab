@@ -97,7 +97,9 @@ GameObject:
   - component: {fileID: 2886151350851344176}
   - component: {fileID: 6498422375879726885}
   - component: {fileID: 5785730490117102159}
-  m_Layer: 0
+  - component: {fileID: 4366692523988818821}
+  - component: {fileID: 9066056419027238205}
+  m_Layer: 3
   m_Name: Iguane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +364,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 204
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -440,6 +442,42 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4366692523988818821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666892254660799140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
+  EncyclopedieEntry:
+  - {fileID: 11400000, guid: 3d41562678ea70840a81306cdaa55ebe, type: 2}
+  UpdateType: 1
+  NoteDeRen:
+  - 
+  Caracteristique:
+  - C'est la photo de l'iguane
+  Anecdote:
+  - 
+  Photo: []
+  Dessin: []
+  DessinMignon: []
+--- !u!114 &9066056419027238205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666892254660799140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
 --- !u!1 &3258114807919003252
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8191241579165853945}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Iguane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,6 +676,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3309931830969698514}
     m_Modifications:
+    - target: {fileID: -8779235406861735484, guid: 9595d52c39137f3499b5a17b4c639756, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9595d52c39137f3499b5a17b4c639756, type: 3}
       propertyPath: m_LocalScale.x
       value: 62.1371
@@ -690,9 +732,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9595d52c39137f3499b5a17b4c639756, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2971250867765660502, guid: 9595d52c39137f3499b5a17b4c639756, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -113803718032213819, guid: 9595d52c39137f3499b5a17b4c639756, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9595d52c39137f3499b5a17b4c639756, type: 3}
       propertyPath: m_Name
       value: retopo_iguane
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9595d52c39137f3499b5a17b4c639756, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997094634723743162, guid: 9595d52c39137f3499b5a17b4c639756, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773448819991581557, guid: 9595d52c39137f3499b5a17b4c639756, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

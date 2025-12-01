@@ -4,8 +4,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteractions : MonoBehaviour
 {
+    [Header("---------- Inputs ----------")]
     private static RaycastHit[] hits = new RaycastHit[16];
     public event Action<IInteractable> OnNewInteractable;
+    public static event Action<PlayerInteractions> OnOpenCamera;
+    public static event Action<PlayerInteractions> OnOpenCarnet;
 
     [SerializeField]
     private float range;
@@ -25,6 +28,10 @@ public class PlayerInteractions : MonoBehaviour
     private void Start()
     {
         inputManager.Controls.OnFoot.Interact.performed += OnInteractInput;
+        inputManager.Controls.OnFoot.Jump.performed += OnJumpInput;
+        inputManager.Controls.OnFoot.Crouch.performed += OnCrouchInput;
+        inputManager.Controls.OnFoot.OpenCamera.performed += OnOpenCameraInput;
+        inputManager.Controls.OnFoot.OpenCarnet.performed += OnOpenCarnetInput;
     }
 
     private void FixedUpdate()
@@ -85,6 +92,22 @@ public class PlayerInteractions : MonoBehaviour
         // Debug
         Debug.Log("Crouch");
     }
-
-    // C'est L'UI qui dois s'abonner a PlayerInteractions
+    
+    public void OnOpenCameraInput(InputAction.CallbackContext context)
+    {
+        // Debug
+        Debug.Log("Opening Camera");
+        
+        // event OpenCamera
+        OnOpenCamera?.Invoke(this);
+    }
+    
+    public void OnOpenCarnetInput(InputAction.CallbackContext context)
+    {
+        // Debug
+        Debug.Log("Opening Carnet");
+        
+        // event OpenCarnet
+        OnOpenCarnet?.Invoke(this);
+    }
 }
