@@ -14,7 +14,7 @@ public class Camera_InputManager : MonoBehaviour
 
     private void Awake()
     {
-        inputManager = GetComponent<InputManager>();
+        inputManager = FindFirstObjectByType<InputManager>();
     }
 
     private void Start()
