@@ -9,6 +9,7 @@ public class PlayerInteractions : MonoBehaviour
     public event Action<IInteractable> OnNewInteractable;
     public static event Action<PlayerInteractions> OnOpenCamera;
     public static event Action<PlayerInteractions> OnOpenCarnet;
+    public static event Action<PlayerInteractions> OnOpenAlbum;
 
     [SerializeField]
     private float range;
@@ -32,6 +33,7 @@ public class PlayerInteractions : MonoBehaviour
         inputManager.Controls.OnFoot.Crouch.performed += OnCrouchInput;
         inputManager.Controls.OnFoot.OpenCamera.performed += OnOpenCameraInput;
         inputManager.Controls.OnFoot.OpenCarnet.performed += OnOpenCarnetInput;
+        inputManager.Controls.OnFoot.OpenAlbum.performed += OnOpenAlbumInput;
     }
 
     private void FixedUpdate()
@@ -109,5 +111,14 @@ public class PlayerInteractions : MonoBehaviour
         
         // event OpenCarnet
         OnOpenCarnet?.Invoke(this);
+    }
+    
+    public void OnOpenAlbumInput(InputAction.CallbackContext context)
+    {
+        // Debug
+        Debug.Log("Opening Carnet");
+        
+        // event OpenCarnet
+        OnOpenAlbum?.Invoke(this);
     }
 }
