@@ -14,10 +14,14 @@ GameObject:
   - component: {fileID: 316860079139476279}
   - component: {fileID: 2267352137291094084}
   - component: {fileID: 3030271210530690049}
-  - component: {fileID: 4724945682166457886}
   - component: {fileID: 3403056507247016550}
+  - component: {fileID: 8147771959315962350}
+  - component: {fileID: 8468714674286312012}
+  - component: {fileID: 497834046572838012}
   - component: {fileID: 2087635074002555420}
   - component: {fileID: 323986281050925900}
+  - component: {fileID: 484673940058643132}
+  - component: {fileID: 6805418279893898784}
   m_Layer: 3
   m_Name: Tortue passerrelle
   m_TagString: Untagged
@@ -378,28 +382,6 @@ MonoBehaviour:
         m_Value:
         - {fileID: 0}
         - {fileID: 0}
---- !u!195 &4724945682166457886
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2173161496919619432}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 1.98
-  m_Speed: 4
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 0
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1.29
-  m_BaseOffset: 0.5
-  m_WalkableMask: 8
-  m_ObstacleAvoidanceType: 4
 --- !u!65 &3403056507247016550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -419,8 +401,71 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8, y: 0.9, z: 1.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.5991673, y: 1.2413344, z: 1.8936679}
+  m_Center: {x: 0.1624936, y: 0.17066717, z: 0.013990862}
+--- !u!65 &8147771959315962350
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2173161496919619432}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.0307417, y: 1.7472556, z: 0.36019847}
+  m_Center: {x: 0.042373784, y: 0.42362705, z: 1.1209251}
+--- !u!65 &8468714674286312012
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2173161496919619432}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.2595508, y: 1.7039766, z: 0.37448093}
+  m_Center: {x: 0.1374526, y: 0.4019849, z: -1.0875068}
+--- !u!65 &497834046572838012
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2173161496919619432}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3488948, y: 1.7275038, z: 2.5610082}
+  m_Center: {x: 1.6461258, y: 0.41375038, z: -0.021192359}
 --- !u!114 &2087635074002555420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +500,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
+--- !u!195 &484673940058643132
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2173161496919619432}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.90006125
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.9
+  m_BaseOffset: 0.45
+  m_WalkableMask: 8
+  m_ObstacleAvoidanceType: 4
+--- !u!65 &6805418279893898784
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2173161496919619432}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.31088445, y: 1.7606909, z: 2.250365}
+  m_Center: {x: -1.3550025, y: 0.43034473, z: 0.11504652}
 --- !u!1 &4645139282947911707
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,19 +617,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 66bcf2332c5e18c41865798171f28a62, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.68121207
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 66bcf2332c5e18c41865798171f28a62, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 66bcf2332c5e18c41865798171f28a62, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7320862
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 66bcf2332c5e18c41865798171f28a62, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 66bcf2332c5e18c41865798171f28a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -549,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 66bcf2332c5e18c41865798171f28a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -94.123
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 66bcf2332c5e18c41865798171f28a62, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
