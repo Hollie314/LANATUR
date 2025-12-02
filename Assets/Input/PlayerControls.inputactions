@@ -70,6 +70,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "OpenAlbum",
+                    "type": "Button",
+                    "id": "08e865d0-d605-4637-a027-9ffebbb4490a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "OpenCarnet",
                     "type": "Button",
                     "id": "4ce269cb-cedd-4799-9ab1-2c6ede104fbe",
@@ -325,11 +334,22 @@
                 {
                     "name": "",
                     "id": "0e14b2c7-3764-4775-934f-e42a94888f33",
-                    "path": "<Keyboard>/2",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "OpenCarnet",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc562e7a-937a-4683-8eb7-cd11d875d4a4",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenAlbum",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -425,6 +445,42 @@
                     "type": "PassThrough",
                     "id": "75b42a76-4e97-4b49-84e8-b16942f493e0",
                     "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Scan",
+                    "type": "Button",
+                    "id": "ef8218c4-5913-42a7-b9fb-31e36f79d63f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Flash",
+                    "type": "Button",
+                    "id": "c23b4038-8cba-49eb-a96f-de698bb2ca3a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "VisionNocturne",
+                    "type": "Button",
+                    "id": "0d751e6a-bfdf-4f9a-9ecc-4b257dca2361",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Button",
+                    "id": "059219da-8440-4b55-9b16-1f664a3f5d96",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -846,6 +902,50 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e83121a1-dc55-4459-9c27-5b883d2e6b29",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d99f69df-0300-4f67-a9dd-6a30700f8cd2",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scan",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c3e9d2d0-8cd2-4e31-968c-d02e1bc679a9",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VisionNocturne",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ba60952d-66ce-4d82-a25e-d1cc235b10e4",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

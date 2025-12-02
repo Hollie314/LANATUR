@@ -20,12 +20,14 @@ public class OpenUI : MonoBehaviour
     {
         PlayerInteractions.OnOpenCamera += OpenCamera;
         PlayerInteractions.OnOpenCarnet += OpenCarnet;
+        PlayerInteractions.OnOpenAlbum += OpenAlbum;
     }
 
     private void OnDisable()
     {
         PlayerInteractions.OnOpenCamera -= OpenCamera;
         PlayerInteractions.OnOpenCarnet -= OpenCarnet;
+        PlayerInteractions.OnOpenAlbum -= OpenAlbum;
     }
 
     // UI To CAMERA
@@ -56,8 +58,27 @@ public class OpenUI : MonoBehaviour
         
         if (UI_Carnet.activeSelf)
         {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
+        }
+    }
+    
+    // UI To ALBUM
+    public void OpenAlbum(PlayerInteractions playerInteractions)
+    {
+        UI_Album.SetActive(!UI_Album.activeSelf);
+        UI_Camera.SetActive(false);
+        UI_Carnet.SetActive(false);
+        
+        if (UI_Album.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         else
         {

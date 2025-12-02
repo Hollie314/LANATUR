@@ -156,6 +156,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""OpenAlbum"",
+                    ""type"": ""Button"",
+                    ""id"": ""08e865d0-d605-4637-a027-9ffebbb4490a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""OpenCarnet"",
                     ""type"": ""Button"",
                     ""id"": ""4ce269cb-cedd-4799-9ab1-2c6ede104fbe"",
@@ -411,11 +420,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0e14b2c7-3764-4775-934f-e42a94888f33"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""OpenCarnet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc562e7a-937a-4683-8eb7-cd11d875d4a4"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenAlbum"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -511,6 +531,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""type"": ""PassThrough"",
                     ""id"": ""75b42a76-4e97-4b49-84e8-b16942f493e0"",
                     ""expectedControlType"": ""Quaternion"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scan"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef8218c4-5913-42a7-b9fb-31e36f79d63f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Flash"",
+                    ""type"": ""Button"",
+                    ""id"": ""c23b4038-8cba-49eb-a96f-de698bb2ca3a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""VisionNocturne"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d751e6a-bfdf-4f9a-9ecc-4b257dca2361"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Button"",
+                    ""id"": ""059219da-8440-4b55-9b16-1f664a3f5d96"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -934,6 +990,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""TrackedDeviceOrientation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e83121a1-dc55-4459-9c27-5b883d2e6b29"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d99f69df-0300-4f67-a9dd-6a30700f8cd2"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3e9d2d0-8cd2-4e31-968c-d02e1bc679a9"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VisionNocturne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba60952d-66ce-4d82-a25e-d1cc235b10e4"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -949,6 +1049,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_OnFoot_Sprint = m_OnFoot.FindAction("Sprint", throwIfNotFound: true);
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
         m_OnFoot_OpenCamera = m_OnFoot.FindAction("OpenCamera", throwIfNotFound: true);
+        m_OnFoot_OpenAlbum = m_OnFoot.FindAction("OpenAlbum", throwIfNotFound: true);
         m_OnFoot_OpenCarnet = m_OnFoot.FindAction("OpenCarnet", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -962,6 +1063,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        m_UI_Scan = m_UI.FindAction("Scan", throwIfNotFound: true);
+        m_UI_Flash = m_UI.FindAction("Flash", throwIfNotFound: true);
+        m_UI_VisionNocturne = m_UI.FindAction("VisionNocturne", throwIfNotFound: true);
+        m_UI_Zoom = m_UI.FindAction("Zoom", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -1050,6 +1155,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Sprint;
     private readonly InputAction m_OnFoot_Interact;
     private readonly InputAction m_OnFoot_OpenCamera;
+    private readonly InputAction m_OnFoot_OpenAlbum;
     private readonly InputAction m_OnFoot_OpenCarnet;
     /// <summary>
     /// Provides access to input actions defined in input action map "OnFoot".
@@ -1090,6 +1196,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "OnFoot/OpenCamera".
         /// </summary>
         public InputAction @OpenCamera => m_Wrapper.m_OnFoot_OpenCamera;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/OpenAlbum".
+        /// </summary>
+        public InputAction @OpenAlbum => m_Wrapper.m_OnFoot_OpenAlbum;
         /// <summary>
         /// Provides access to the underlying input action "OnFoot/OpenCarnet".
         /// </summary>
@@ -1141,6 +1251,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenCamera.started += instance.OnOpenCamera;
             @OpenCamera.performed += instance.OnOpenCamera;
             @OpenCamera.canceled += instance.OnOpenCamera;
+            @OpenAlbum.started += instance.OnOpenAlbum;
+            @OpenAlbum.performed += instance.OnOpenAlbum;
+            @OpenAlbum.canceled += instance.OnOpenAlbum;
             @OpenCarnet.started += instance.OnOpenCarnet;
             @OpenCarnet.performed += instance.OnOpenCarnet;
             @OpenCarnet.canceled += instance.OnOpenCarnet;
@@ -1176,6 +1289,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenCamera.started -= instance.OnOpenCamera;
             @OpenCamera.performed -= instance.OnOpenCamera;
             @OpenCamera.canceled -= instance.OnOpenCamera;
+            @OpenAlbum.started -= instance.OnOpenAlbum;
+            @OpenAlbum.performed -= instance.OnOpenAlbum;
+            @OpenAlbum.canceled -= instance.OnOpenAlbum;
             @OpenCarnet.started -= instance.OnOpenCarnet;
             @OpenCarnet.performed -= instance.OnOpenCarnet;
             @OpenCarnet.canceled -= instance.OnOpenCarnet;
@@ -1226,6 +1342,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_RightClick;
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
+    private readonly InputAction m_UI_Scan;
+    private readonly InputAction m_UI_Flash;
+    private readonly InputAction m_UI_VisionNocturne;
+    private readonly InputAction m_UI_Zoom;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1277,6 +1397,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/TrackedDeviceOrientation".
         /// </summary>
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/Scan".
+        /// </summary>
+        public InputAction @Scan => m_Wrapper.m_UI_Scan;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/Flash".
+        /// </summary>
+        public InputAction @Flash => m_Wrapper.m_UI_Flash;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/VisionNocturne".
+        /// </summary>
+        public InputAction @VisionNocturne => m_Wrapper.m_UI_VisionNocturne;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/Zoom".
+        /// </summary>
+        public InputAction @Zoom => m_Wrapper.m_UI_Zoom;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1333,6 +1469,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+            @Scan.started += instance.OnScan;
+            @Scan.performed += instance.OnScan;
+            @Scan.canceled += instance.OnScan;
+            @Flash.started += instance.OnFlash;
+            @Flash.performed += instance.OnFlash;
+            @Flash.canceled += instance.OnFlash;
+            @VisionNocturne.started += instance.OnVisionNocturne;
+            @VisionNocturne.performed += instance.OnVisionNocturne;
+            @VisionNocturne.canceled += instance.OnVisionNocturne;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
         }
 
         /// <summary>
@@ -1374,6 +1522,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @TrackedDeviceOrientation.started -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.performed -= instance.OnTrackedDeviceOrientation;
             @TrackedDeviceOrientation.canceled -= instance.OnTrackedDeviceOrientation;
+            @Scan.started -= instance.OnScan;
+            @Scan.performed -= instance.OnScan;
+            @Scan.canceled -= instance.OnScan;
+            @Flash.started -= instance.OnFlash;
+            @Flash.performed -= instance.OnFlash;
+            @Flash.canceled -= instance.OnFlash;
+            @VisionNocturne.started -= instance.OnVisionNocturne;
+            @VisionNocturne.performed -= instance.OnVisionNocturne;
+            @VisionNocturne.canceled -= instance.OnVisionNocturne;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
         }
 
         /// <summary>
@@ -1464,6 +1624,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOpenCamera(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "OpenAlbum" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenAlbum(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "OpenCarnet" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1548,5 +1715,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Scan" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnScan(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Flash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFlash(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "VisionNocturne" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnVisionNocturne(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Zoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnZoom(InputAction.CallbackContext context);
     }
 }

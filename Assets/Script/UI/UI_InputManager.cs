@@ -6,7 +6,7 @@ public class UI_InputManager : MonoBehaviour
 {
     [SerializeField] private GameObject firstButton;
 
-    void Start()
+    void OnEnable()
     {
         EventSystem.current.SetSelectedGameObject(firstButton);
     }
