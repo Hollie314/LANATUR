@@ -7,8 +7,10 @@ public class InputManager : MonoBehaviour
     public PlayerControls Controls { get; private set; }
 
     private PlayerControls.OnFootActions onFoot;
+    private PlayerControls.UIActions uiActions;
     
     public PlayerControls.OnFootActions OnFoot => onFoot;
+    public PlayerControls.UIActions UI => uiActions;
 
 
     private PlayerMotor motor;
@@ -20,6 +22,7 @@ public class InputManager : MonoBehaviour
     {
         Controls = new PlayerControls();
         onFoot = Controls.OnFoot;
+        uiActions = Controls.UI;
         
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
@@ -46,10 +49,12 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         onFoot.Enable();
+        uiActions.Enable();
     }
 
     private void OnDisable()
     {
         onFoot.Disable();
+        uiActions.Disable();
     }
 }

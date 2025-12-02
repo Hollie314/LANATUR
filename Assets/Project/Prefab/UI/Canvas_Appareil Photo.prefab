@@ -257,7 +257,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6282328447060976385}
+        m_TargetAssemblyTypeName: SwitchToggle, Assembly-CSharp
+        m_MethodName: Toggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1373332467716098425
 GameObject:
@@ -1149,6 +1161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8429c86754dc754f810c939d81d9213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Camera_InputManager
+  ScanToggle: {fileID: 8117553672076722262}
+  FlashToggle: {fileID: 54142452219070796}
+  VisionNocturneToggle: {fileID: 6219920734565914516}
 --- !u!114 &5524503775627225949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,7 +1191,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 057792f3-c761-4202-bc45-0a74a71415e3
+  m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &3639857031768080277
