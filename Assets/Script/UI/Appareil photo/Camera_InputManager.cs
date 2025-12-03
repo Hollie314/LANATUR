@@ -9,6 +9,7 @@ public class Camera_InputManager : MonoBehaviour
     [SerializeField] private Toggle FlashToggle;
     [SerializeField] private Toggle VisionNocturneToggle;
     public static event Action<Camera_InputManager> OnZoom;
+    public static event Action<Camera_InputManager> OnDezoom;
     
     private InputManager inputManager;
 
@@ -24,13 +25,22 @@ public class Camera_InputManager : MonoBehaviour
         inputManager.Controls.UI.VisionNocturne.performed += OnVisionNocturneInput;
         inputManager.Controls.UI.Zoom.performed += OnZoomInput;
     }
-
+    
     public void OnZoomInput(InputAction.CallbackContext context)
     {
-        // Debug
-        Debug.Log("Zoom");
+        Vector2 scroll = context.ReadValue<Vector2>();
+
+        if (scroll.y > 0f)
+        {
+            Debug.Log("Zoom");
+            OnZoom?.Invoke(this);
+        }
         
-        OnZoom?.Invoke(this);
+        else if (scroll.y < 0f)
+        {
+            Debug.Log("Dezoom");
+            OnDezoom?.Invoke(this);
+        }
     }
 
     public void OnFlashInput(InputAction.CallbackContext context)

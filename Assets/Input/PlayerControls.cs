@@ -566,7 +566,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Zoom"",
                     ""type"": ""PassThrough"",
                     ""id"": ""059219da-8440-4b55-9b16-1f664a3f5d96"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -1027,7 +1027,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ba60952d-66ce-4d82-a25e-d1cc235b10e4"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

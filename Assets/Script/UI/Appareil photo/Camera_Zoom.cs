@@ -5,10 +5,11 @@ using Slider = UnityEngine.UI.Slider;
 
 public class Camera_Zoom : MonoBehaviour
 {
-    [SerializeField] private Camera camera;
+    [SerializeField] private CinemachineCamera cameraPhoto;
     [Range(1.5f,5f)] [SerializeField] private float MaxZoom;
     [SerializeField] private Slider ZoomSlider;
     [SerializeField] private GameObject Zoom;
+    [SerializeField] private float increment;
     private float baseFieldOfView;
     
     // hide zoom
@@ -22,25 +23,47 @@ public class Camera_Zoom : MonoBehaviour
     void Start()
     {
         ZoomSlider.minValue = 1; ZoomSlider.maxValue = MaxZoom;
-        baseFieldOfView = camera.fieldOfView;
+        baseFieldOfView = cameraPhoto.Lens.FieldOfView;
         // Camera =  GetComponent<CinemachineCamera>();
         
         ZoomSlider.onValueChanged.AddListener((v) =>
         {
             ShowZoom();
-            camera.fieldOfView = baseFieldOfView / v;
+            cameraPhoto.Lens.FieldOfView = baseFieldOfView / v;
         });
     }
 
     void OnEnable()
     {
         RestartZoom();
+        Camera_InputManager.OnZoom += ZoomUp;
+        Camera_InputManager.OnDezoom += Dezoom;
+    }
+
+    void OnDisable()
+    {
+        Camera_InputManager.OnZoom -= ZoomUp;
+        Camera_InputManager.OnDezoom -= Dezoom;
     }
 
     public void RestartZoom()
     {
         ZoomSlider.value = 1;
         ShowZoom();
+    }
+
+    private void ZoomUp(Camera_InputManager camera_input_manager)
+    {
+        ZoomSlider.value += increment;
+        Debug.Log(ZoomSlider.value);
+    }
+
+    private void Dezoom(Camera_InputManager camera_input_manager)
+    {
+        ZoomSlider.value -= increment;
+        Debug.Log(ZoomSlider.value);
+        ZoomSlider.value = Mathf.Clamp(ZoomSlider.value, 1, MaxZoom);
+        Debug.Log(ZoomSlider.value);
     }
 
     // Update is called once per frame
