@@ -605,6 +605,7 @@ GameObject:
   - component: {fileID: 8703741900194078658}
   - component: {fileID: 8571368440227015080}
   - component: {fileID: 6058144480313961448}
+  - component: {fileID: 1165847091422743167}
   m_Layer: 0
   m_Name: State-Driven Camera
   m_TagString: Untagged
@@ -704,6 +705,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1165847091422743167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164528278547686179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3887f80c917f840af5a24fa2f25703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwitchCameras
+  PlayerAnimator: {fileID: 6058144480313961448}
 --- !u!1 &5493753897722369459
 GameObject:
   m_ObjectHideFlags: 0
