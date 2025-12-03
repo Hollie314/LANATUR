@@ -114,7 +114,7 @@ namespace LKHGames
 
 //#if UNITY_EDITOR
             // Create folder if it doesn't exist
-            if (AssetDatabase.IsValidFolder("Assets/" + savingPath) == false)
+           // if (AssetDatabase.IsValidFolder("Assets/" + savingPath) == false)
             {
                 string[] folderNameArray = savingPath.Split('/');
                 string newfolderPath = "";
@@ -128,7 +128,7 @@ namespace LKHGames
                     }
                 }
 
-                AssetDatabase.CreateFolder("Assets" + newfolderPath, folderNameArray[folderNameArray.Length - 2]);
+               // AssetDatabase.CreateFolder("Assets" + newfolderPath, folderNameArray[folderNameArray.Length - 2]);
                 Debug.Log("<color=#FFFF00><b>Path saving location not found, New folder was created</b></color>");
             }
 //endif
