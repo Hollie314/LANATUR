@@ -9,6 +9,8 @@ public class OpenUI : MonoBehaviour
     [SerializeField] private GameObject UI_Album;
     [SerializeField] private GameObject UI_Carnet;
     
+    private bool isCameraOpen = false;
+    
     public static event Action<OpenUI> OnCameraWalk;
     public static event Action<OpenUI> OnCameraPhoto;
     
@@ -45,12 +47,14 @@ public class OpenUI : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             OnCameraPhoto?.Invoke(this);
+            isCameraOpen = true;
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
             OnCameraWalk?.Invoke(this);
+            isCameraOpen =  false;
         }
     }
 
@@ -63,8 +67,8 @@ public class OpenUI : MonoBehaviour
         
         if (UI_Carnet.activeSelf)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
             OnCameraWalk?.Invoke(this);
         }
         else
@@ -72,6 +76,9 @@ public class OpenUI : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
             OnCameraWalk?.Invoke(this);
+            
+            if(isCameraOpen)
+                OpenCamera(playerInteractions);
         }
     }
     
@@ -84,8 +91,8 @@ public class OpenUI : MonoBehaviour
         
         if (UI_Album.activeSelf)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
             OnCameraWalk?.Invoke(this);
         }
         else
@@ -93,6 +100,9 @@ public class OpenUI : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
             OnCameraWalk?.Invoke(this);
+            
+            if(isCameraOpen)
+                OpenCamera(playerInteractions);
         }
     }
     
