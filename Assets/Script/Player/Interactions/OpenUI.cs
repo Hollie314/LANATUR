@@ -9,6 +9,9 @@ public class OpenUI : MonoBehaviour
     [SerializeField] private GameObject UI_Album;
     [SerializeField] private GameObject UI_Carnet;
     
+    public static event Action<OpenUI> OnCameraWalk;
+    public static event Action<OpenUI> OnCameraPhoto;
+    
     // s'abonner à l'event 
     private void Awake()
     {
@@ -39,13 +42,15 @@ public class OpenUI : MonoBehaviour
         
         if (UI_Camera.activeSelf) 
         {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            OnCameraPhoto?.Invoke(this);
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
+            OnCameraWalk?.Invoke(this);
         }
     }
 
@@ -60,11 +65,13 @@ public class OpenUI : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            OnCameraWalk?.Invoke(this);
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
+            OnCameraWalk?.Invoke(this);
         }
     }
     
@@ -79,11 +86,13 @@ public class OpenUI : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            OnCameraWalk?.Invoke(this);
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
+            OnCameraWalk?.Invoke(this);
         }
     }
     
@@ -92,5 +101,6 @@ public class OpenUI : MonoBehaviour
         UI_Camera.SetActive(false);
         UI_Carnet.SetActive(false);
         UI_Album.SetActive(false);
+        OnCameraWalk?.Invoke(this);
     }
 }

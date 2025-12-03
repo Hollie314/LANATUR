@@ -1,9 +1,10 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 
 {
-    public Camera cam;
+    [SerializeField] private CinemachineStateDrivenCamera cam;
     private float xRotation = 0f;
     private float yRotation = 0f;
     private bool clampLeftRight = false;
