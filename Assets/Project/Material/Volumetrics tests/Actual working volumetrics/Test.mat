@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kayou Blender Test
-  m_Shader: {fileID: -6465566751694194690, guid: 3ac04e4f243186647b27a824bb64685e, type: 3}
+  m_Name: Test
+  m_Shader: {fileID: -6465566751694194690, guid: 0d9200826e7f942969c8d2bfb1e411cc, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -24,28 +24,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Base_Color:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Height_Map:
-        m_Texture: {fileID: 2800000, guid: 6566a63037c353648b1f2a6949efb556, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Normal_Map:
-        m_Texture: {fileID: 2800000, guid: dd7efc32a62810e408af8351202f2145, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Occlusion_Map:
-        m_Texture: {fileID: 2800000, guid: 9671a601b04b5994aa8b02134eb9e9d2, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Roughness:
-        m_Texture: {fileID: 2800000, guid: afb724ea771a6ee40b3cb5f6cb29bb8e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_98916b48a6d840f1aa624185cc8a21e1_Texture_1_Texture2D:
-        m_Texture: {fileID: 0}
+    - _volumeTex:
+        m_Texture: {fileID: 11700000, guid: b9ef0c6c5d9ef03408cb6e1bb0166415, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -62,28 +42,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Displacement_Intensity: 0
-    - _Height_Intensity: 0
-    - _Height_Max: 0
-    - _Height_Max_IN: 0.05
-    - _Height_Max_OUT: 0.05
-    - _Height_Min: 0
-    - _Height_Min_IN: 0.0461
-    - _Height_Min_OUT: 0
-    - _Invert_Roughness: 0
-    - _Normal_Strength: 0.4
-    - _Occlusion_Intensity: 0.26
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Roughness_Contrast: 1.07
-    - _Rougnless_Level: 1.44
-    - _TEST: 0
-    - _height_on: 0
+    - _darknessThreshold: -1.99
+    - _densityScale: 0.11
+    - _lightAbsorb: 4.14
+    - _lightStepSize: 0.3
+    - _numLightSteps: 16
+    - _numSteps: 12.31
+    - _stepSize: 0.03
+    - _transmittance: 0.52
     m_Colors:
-    - _Tint: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.9960785, g: 1, b: 1, a: 0}
+    - _ShadowColor: {r: 0.5294118, g: 0.6117647, b: 0.6901961, a: 0}
+    - _offset: {r: 0.5, g: 0.5, b: 0.5, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &4906722676937689898
+--- !u!114 &5319027307235377238
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
