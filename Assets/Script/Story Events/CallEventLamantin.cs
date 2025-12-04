@@ -9,15 +9,6 @@ public class CallEventLamantin : MonoBehaviour
     [SerializeField] private StoryEvent storyEvent;
     public static event Action<CallEventLamantin> OnEventCalled;
     
-    private float taime = 0f;
-
-    private void Update()
-    {
-        taime += Time.deltaTime;
-        if(taime > 10f)
-            CallEvent();
-    }
-    
     public void CallEvent()
     {
         storyEvent.isEventActive = true;
