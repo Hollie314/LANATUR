@@ -4,23 +4,23 @@ using Sirenix.Utilities;
 
 public class Game_Manager : MonoBehaviour
 {
-    public bool CameraIsActive = false;
-    public bool ScanIsActive = false;
+    public bool CameraIsActive { get; private set; } = false;
+    public bool ScanIsActive { get; private set; } = false;
     public List<EncyclopedieEntry> EncyclopedieEntries = new List<EncyclopedieEntry>();
 
     void OnEnable()
     {
         Camera_Scan.OnScanActive += ChangeScanActive;
-        // OpenUI.OnCameraActive += ChangeCameraActive;
+        OpenUI.OnCameraPhoto += ChangeCameraActive;
     }
 
     private void OnDisable()
     {
         Camera_Scan.OnScanActive -= ChangeScanActive;
-        // PlayerInteract.OnCameraActive -= ChangeCameraActive;
+        OpenUI.OnCameraPhoto -= ChangeCameraActive;
     }
 
-    private void ChangeCameraActive() // Destroy
+    private void ChangeCameraActive(OpenUI openUI) // Destroy
     {
         Debug.Log("Change Camera Active");
         CameraIsActive = !CameraIsActive;

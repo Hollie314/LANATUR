@@ -48,4 +48,10 @@ public class OnScanned : MonoBehaviour
             Scans.SetActive(false);
         }
     }
+
+    private void Update()
+    {
+        if(Scans.activeSelf)
+            Scans.transform.LookAt(Camera.main.transform);
+    }
 }
