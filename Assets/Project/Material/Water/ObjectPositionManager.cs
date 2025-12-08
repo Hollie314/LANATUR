@@ -7,11 +7,16 @@ using UnityEditor;
 
 public class ObjectPositionManager : MonoBehaviour
 {
-    public float a = 0;
     private static readonly int ObjectPos = Shader.PropertyToID("_ObjectPos");
     public Transform objectTransform;
     public Material waterSurfaceMat;
 
+    public float waterDepth;
+    public int stepAmount;
+    public float maxDensity;
+    public float densitySlope;
+    
+    public GameObject layerPrefab;
     private void Awake()
     {
         SetPos(objectTransform, waterSurfaceMat);
@@ -23,9 +28,9 @@ public class ObjectPositionManager : MonoBehaviour
         SetPos(objectTransform, waterSurfaceMat);
     }
 
-    public void SetPos(Transform transform, Material material)
+    public void SetPos(Transform transformm, Material material)
     {
-        material.SetVector(ObjectPos,transform.position);
+        material.SetVector(ObjectPos,transformm.position);
     }
     
 }
