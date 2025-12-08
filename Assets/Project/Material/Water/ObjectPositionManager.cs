@@ -16,6 +16,8 @@ public class ObjectPositionManager : MonoBehaviour
     public float maxDensity;
     public float densitySlope;
     
+    private GameObject[] _layersArray;
+    
     public GameObject layerPrefab;
     private void Awake()
     {
@@ -28,11 +30,35 @@ public class ObjectPositionManager : MonoBehaviour
         SetPos(objectTransform, waterSurfaceMat);
     }
 
-    public void SetPos(Transform transformm, Material material)
+    private void SetPos(Transform transformm, Material material)
     {
         material.SetVector(ObjectPos,transformm.position);
     }
-    
+
+    private void UpdateLayers(GameObject[] layersArray, GameObject prefab, float[] distances)
+    {
+        if (layersArray.Length == 0)
+        {
+            for (int i = 0; i < distances.Length; i++)
+            {
+                float d = distances[i];
+                //this.transform.position.y - d
+                //new Vector3(this.transform.position.x, this.transform.position.y - d, this.transform.position.z)
+
+                GameObject layer = Instantiate(prefab, this.transform);
+                layer.transform.position = new Vector3(this.transform.position.x, 
+                    this.transform.position.y - d,
+                    this.transform.position.z);
+                
+                
+
+            }
+        }
+        else
+        {
+            
+        }
+    }
 }
 
 [CustomEditor(typeof(ObjectPositionManager))]
