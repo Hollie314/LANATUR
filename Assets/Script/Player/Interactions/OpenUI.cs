@@ -47,6 +47,7 @@ public class OpenUI : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             OnCameraPhoto?.Invoke(this);
+            Debug.Log("Open Camera");
             isCameraOpen = true;
         }
         else
@@ -54,6 +55,7 @@ public class OpenUI : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
             OnCameraWalk?.Invoke(this);
+            Debug.Log("Close Camera");
             isCameraOpen =  false;
         }
     }
