@@ -39,7 +39,7 @@ public class UpdateEntry : MonoBehaviour
             EncyclopedieEntry[i].UpdatesDone.Add(UpdateType);
             if (!(NoteDeRen[i] == "")) { EncyclopedieEntry[i].NoteDeRen = NoteDeRen[i]; }
             if (!(Caracteristique[i] == "")) { EncyclopedieEntry[i].Caracteristique = Caracteristique[i]; }
-            if (!(Anecdote[i] == "")) { EncyclopedieEntry[i].Anecdote = Anecdote[i]; }
+            if (!((Anecdote[i] == "") || Anecdote[i] == null)) { EncyclopedieEntry[i].Anecdote = Anecdote[i]; }
             if (!(Photo[i] == null)) { EncyclopedieEntry[i].Photo = Photo[i]; }
             if (!(Dessin[i] == null)) { EncyclopedieEntry[i].Dessin = Dessin[i]; }
             if (!(DessinMignon[i] == null)) { EncyclopedieEntry[i].DessinMignon = DessinMignon[i]; }
