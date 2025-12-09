@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Camera_Shot : MonoBehaviour
 {
@@ -52,7 +53,7 @@ public class Camera_Shot : MonoBehaviour
     private void Update()
     {
         CameraDetection();
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0))
         {
             StartCoroutine(TakePicture());
             PictureTaken?.Invoke();
@@ -157,6 +158,10 @@ public class Camera_Shot : MonoBehaviour
             SaveSystem.SavePicture(screenCapture, null, false, null);
             Debug.Log("no target");
         }
+        
+        Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0.0f, 0.0f, screenCapture.width, screenCapture.height), new Vector2(0.5f, 0.5f), 100.0f);
+        ShotAnim.GetComponent<Image>().sprite = photoSprite;
+        ShotAnim.GetComponent<Animator>().Play("Photo_Flash");
 
 
 
