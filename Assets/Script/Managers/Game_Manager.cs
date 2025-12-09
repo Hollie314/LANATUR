@@ -6,6 +6,8 @@ public class Game_Manager : MonoBehaviour
 {
     public bool CameraIsActive { get; private set; } = false;
     public bool ScanIsActive { get; private set; } = false;
+    
+    public Vector3 LastPositionSaved { get; set; } = new Vector3();
     public List<EncyclopedieEntry> EncyclopedieEntries = new List<EncyclopedieEntry>();
 
     void OnEnable()
