@@ -9,13 +9,13 @@ public class OnScanned : MonoBehaviour
     void OnEnable()
     {
         Camera_Scan.OnScanActive += CheckScan;
-        Camera_Scan.OnScanInactive += StopScan;
+        // Camera_Scan.OnScanInactive += StopScan;
     }
 
     private void OnDisable()
     {
         Camera_Scan.OnScanActive -= CheckScan;
-        Camera_Scan.OnScanInactive -= StopScan;
+        // Camera_Scan.OnScanInactive -= StopScan;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,6 +40,8 @@ public class OnScanned : MonoBehaviour
         yield return 0;
 
         Debug.Log("CheckScan");
+        Scans.SetActive(!Scans.activeSelf);
+        /*
         if (gameManager.CameraIsActive && gameManager.ScanIsActive)
         {
             Scans.SetActive(true);
@@ -48,6 +50,7 @@ public class OnScanned : MonoBehaviour
         {
             Scans.SetActive(false);
         }
+        */
     }
 
     private void Update()
