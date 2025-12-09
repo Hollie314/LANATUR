@@ -8,29 +8,30 @@ public class OnScanned : MonoBehaviour
 
     void OnEnable()
     {
-        Camera_Scan.OnScanActive += CheckScan1;
-        // PlayerInteract.OnCameraActive += CheckScan2;
+        Camera_Scan.OnScanActive += CheckScan;
+        Camera_Scan.OnScanInactive += StopScan;
     }
 
     private void OnDisable()
     {
-        Camera_Scan.OnScanActive -= CheckScan1;
-        // PlayerInteract.OnCameraActive -= CheckScan2;
+        Camera_Scan.OnScanActive -= CheckScan;
+        Camera_Scan.OnScanInactive -= StopScan;
     }
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         gameManager = FindFirstObjectByType<Game_Manager>();
     }
 
-    private void CheckScan1(Camera_Scan Camera_Scan)
+    private void CheckScan(Camera_Scan Camera_Scan)
     {
         StartCoroutine(CheckScanCoroutine());
     }
     
-    private void CheckScan2() // Destroy
+    private void StopScan(Camera_Scan Camera_Scan)
     {
-        StartCoroutine(CheckScanCoroutine());
+        Scans.SetActive(false);
     }
 
     IEnumerator CheckScanCoroutine()

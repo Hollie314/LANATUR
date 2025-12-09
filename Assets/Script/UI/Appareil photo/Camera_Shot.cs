@@ -11,6 +11,7 @@ public class Camera_Shot : MonoBehaviour
     // public
     [SerializeField] private Camera_UI Camera_UI;
     [SerializeField] ChangeEntryPhoto ChangeEntryPhoto;
+    [SerializeField] private GameObject ShotAnim;
     public LayerMask animals_LayerMask;
     public static event Action PictureTaken;
     public static Album album = new Album();
