@@ -17,53 +17,65 @@ public class Camera_InputManager : MonoBehaviour
     {
         inputManager = FindFirstObjectByType<InputManager>();
     }
-
-    private void Start()
+    
+    private void OnEnable()
     {
         inputManager.Controls.UI.Scan.performed += OnScanInput;
         inputManager.Controls.UI.Flash.performed += OnFlashInput;
         inputManager.Controls.UI.VisionNocturne.performed += OnVisionNocturneInput;
         inputManager.Controls.UI.Zoom.performed += OnZoomInput;
     }
+
+    private void OnDisable()
+    {
+        inputManager.Controls.UI.Scan.performed -= OnScanInput;
+        inputManager.Controls.UI.Flash.performed -= OnFlashInput;
+        inputManager.Controls.UI.VisionNocturne.performed -= OnVisionNocturneInput;
+        inputManager.Controls.UI.Zoom.performed -= OnZoomInput;
+        
+        FlashToggle.isOn = false;
+        ScanToggle.isOn = false;
+        VisionNocturneToggle.isOn = false;
+    }
     
     public void OnZoomInput(InputAction.CallbackContext context)
     {
-        Vector2 scroll = context.ReadValue<Vector2>();
+            Vector2 scroll = context.ReadValue<Vector2>();
 
-        if (scroll.y > 0f)
-        {
-            Debug.Log("Zoom");
-            OnZoom?.Invoke(this);
-        }
+            if (scroll.y > 0f)
+            {
+                Debug.Log("Zoom");
+                OnZoom?.Invoke(this);
+            }
         
-        else if (scroll.y < 0f)
-        {
-            Debug.Log("Dezoom");
-            OnDezoom?.Invoke(this);
-        }
+            else if (scroll.y < 0f)
+            {
+                Debug.Log("Dezoom");
+                OnDezoom?.Invoke(this);
+            }
     }
 
     public void OnFlashInput(InputAction.CallbackContext context)
     {
-        // Debug
-        Debug.Log("Flash");
+            // Debug
+            Debug.Log("Flash");
         
-        FlashToggle.isOn = !FlashToggle.isOn;
+            FlashToggle.isOn = !FlashToggle.isOn;
     }
     
     public void OnScanInput(InputAction.CallbackContext context)
     {
-        // Debug
-        Debug.Log("Scan");
+            // Debug
+            Debug.Log("Scan");
         
-        ScanToggle.isOn = !ScanToggle.isOn;
+            ScanToggle.isOn = !ScanToggle.isOn;
     }
     
     public void OnVisionNocturneInput(InputAction.CallbackContext context)
     {
-        // Debug
-        Debug.Log("Vision nocturne");
+            // Debug
+            Debug.Log("Vision nocturne");
         
-        VisionNocturneToggle.isOn = !VisionNocturneToggle.isOn;
+            VisionNocturneToggle.isOn = !VisionNocturneToggle.isOn;
     }
 }
