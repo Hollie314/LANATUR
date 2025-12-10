@@ -30,7 +30,9 @@ public class Camera_Shot : MonoBehaviour
     [Header("VFX")]
     // public
     public GameObject placeholderVFX;
-
+    
+    [Header("Raycast")]
+    public List<AnimalPart> animalsOnScreen = new List<AnimalPart>();
     // private
 
     private void OnEnable() // new
@@ -58,6 +60,22 @@ public class Camera_Shot : MonoBehaviour
             StartCoroutine(TakePicture());
             PictureTaken?.Invoke();
         }
+
+        if (target == null)
+        {
+            Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            foreach (AnimalPart animalPart in animalsOnScreen)
+            {
+                // Convert object world position to screen space
+                Vector3 screenPos = Camera.main.WorldToScreenPoint(animalPart.transform.position);
+
+                // Make a 2D vector (ignore Z)
+                Vector2 screenPos2D = new Vector2(screenPos.x, screenPos.y);
+
+                // Calculate 2D distance from center
+                float distance = Vector2.Distance(screenCenter, screenPos2D);
+            }
+        }
     }
 
     private void CameraDetection()
@@ -70,6 +88,8 @@ public class Camera_Shot : MonoBehaviour
                 target = hitInfo.collider.gameObject;
                 Debug.Log($"{target.name} {Time.fixedTime}");
                 target.GetComponent<AnimalPart>().BecomeTarget();
+                
+                
             }
         }
         /*
