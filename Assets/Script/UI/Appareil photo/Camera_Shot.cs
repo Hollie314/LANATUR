@@ -33,17 +33,26 @@ public class Camera_Shot : MonoBehaviour
     
     [Header("Raycast")]
     public List<AnimalPart> animalsOnScreen = new List<AnimalPart>();
+
+    [SerializeField] private float maxZoomIn;
+    [SerializeField] private float maxZoomOut;
     // private
 
     private void OnEnable() // new
     {
         AnimalPart.ExitView += OnTargetExitView;
         ChangeEntryPhoto = FindFirstObjectByType<ChangeEntryPhoto>();
+        AnimalPart[]  animals = FindObjectsOfType<AnimalPart>();
+        foreach (AnimalPart animalPart in animals)
+        {
+            animalPart.CameraShot = this;
+        }
     }
 
     private void OnDisable() // new
     {
         AnimalPart.ExitView -= OnTargetExitView;
+        animalsOnScreen.Clear();
     }
 
     private void Start()
@@ -64,6 +73,7 @@ public class Camera_Shot : MonoBehaviour
         if (target == null)
         {
             Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            float maxDistance = 0;
             foreach (AnimalPart animalPart in animalsOnScreen)
             {
                 // Convert object world position to screen space
@@ -75,7 +85,14 @@ public class Camera_Shot : MonoBehaviour
                 // Calculate 2D distance from center
                 float distance = Vector2.Distance(screenCenter, screenPos2D);
             }
+            
+            ZoomCursor(maxZoomOut);
         }
+    }
+
+    private void ZoomCursor(float zoom)
+    {
+        transform.parent.transform.localScale = Vector3.one * zoom;
     }
 
     private void CameraDetection()
@@ -89,7 +106,7 @@ public class Camera_Shot : MonoBehaviour
                 Debug.Log($"{target.name} {Time.fixedTime}");
                 target.GetComponent<AnimalPart>().BecomeTarget();
                 
-                
+                ZoomCursor(maxZoomIn);
             }
         }
         /*

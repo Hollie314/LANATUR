@@ -9,12 +9,7 @@ public class AnimalPart : MonoBehaviour
 {
     public static event Action ExitView;
     private bool isTarget = false;
-    Camera_Shot CameraShot;
-
-    private void Start()
-    {
-        CameraShot = FindObjectOfType<Camera_Shot>();
-    }
+    public Camera_Shot CameraShot { get; set; }
 
     private void Update()
     {
@@ -28,7 +23,7 @@ public class AnimalPart : MonoBehaviour
             }
         }
 
-        if (!isTarget)
+        if (!isTarget && CameraShot != null)
         {
             if (CheckIfVisible())
             {
@@ -37,6 +32,10 @@ public class AnimalPart : MonoBehaviour
                     CameraShot.animalsOnScreen.Add(this);
                     Debug.Log("added");
                 }
+            }
+            else if (CameraShot.animalsOnScreen.Contains(this))
+            {
+                CameraShot.animalsOnScreen.Remove(this);
             }
         }
     }
