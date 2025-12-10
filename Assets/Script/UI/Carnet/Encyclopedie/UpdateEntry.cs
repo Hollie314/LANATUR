@@ -37,12 +37,18 @@ public class UpdateEntry : MonoBehaviour
         else
         {
             EncyclopedieEntry[i].UpdatesDone.Add(UpdateType);
-            if (!(NoteDeRen[i] == "")) { EncyclopedieEntry[i].NoteDeRen = NoteDeRen[i]; }
-            if (!(Caracteristique[i] == "")) { EncyclopedieEntry[i].Caracteristique = Caracteristique[i]; }
-            if (!(Anecdote[i] == "")) { EncyclopedieEntry[i].Anecdote = Anecdote[i]; }
-            if (!(Photo[i] == null)) { EncyclopedieEntry[i].Photo = Photo[i]; }
-            if (!(Dessin[i] == null)) { EncyclopedieEntry[i].Dessin = Dessin[i]; }
-            if (!(DessinMignon[i] == null)) { EncyclopedieEntry[i].DessinMignon = DessinMignon[i]; }
+            if (!(i >= NoteDeRen.Count -1 || NoteDeRen[i] == "")) 
+                EncyclopedieEntry[i].NoteDeRen = NoteDeRen[i];
+            if (!(i >= Caracteristique.Count -1 || Caracteristique[i] == "")) 
+                EncyclopedieEntry[i].Caracteristique = Caracteristique[i];
+            if (!(i >= Anecdote.Count -1 || Anecdote[i] == "")) 
+                EncyclopedieEntry[i].Anecdote = Anecdote[i];
+            if (!(i >= Photo.Count -1 || Photo[i] == null)) 
+                EncyclopedieEntry[i].Photo = Photo[i];
+            if (!(i >= Dessin.Count -1 || Dessin[i] == null)) 
+                EncyclopedieEntry[i].Dessin = Dessin[i];
+            if (!(i >= DessinMignon.Count -1 || DessinMignon[i] == null)) 
+                EncyclopedieEntry[i].DessinMignon = DessinMignon[i];
 
             if (!Game_Manager.EncyclopedieEntries.Contains(EncyclopedieEntry[i]))
             {
