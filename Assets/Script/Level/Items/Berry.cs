@@ -9,11 +9,12 @@ public class Berry : MonoBehaviour, IInteractable
     public bool IsHold { get; set; }
 
     [field: SerializeField] public float LifeTime { get; private set; }
+    [SerializeField] private GameObject interactionText;
 
     public float CurrentLife { get; set; }
     // event interacted
 
-    public int Priority { get; set; } = 2;
+    public int Priority { get; set; } = 3;
 
     public bool CanInteract => true;
 
@@ -40,15 +41,18 @@ public class Berry : MonoBehaviour, IInteractable
     {
         Debug.Log("Interaction avec la baie");
         holdItem.Hold(this.gameObject);
+        interactionText.SetActive(true);
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)
     {
         Debug.Log("Baie peut etre interargie avec");
+        interactionText.SetActive(false);
     }
 
     public void OnPlayerExit(PlayerInteractions interactions)
     {
         Debug.Log("Baie peut plus etre interargie avec");
+        interactionText.SetActive(true);
     }
 }
