@@ -84,8 +84,18 @@ public class Camera_Shot : MonoBehaviour
 
                 // Calculate 2D distance from center
                 float distance = Vector2.Distance(screenCenter, screenPos2D);
+                if (distance > maxDistance)
+                    maxDistance = distance;
             }
-            
+
+            if (maxDistance == 0)
+            {
+                ZoomCursor(maxZoomOut);
+                return;
+            }
+
+            float percentage = (Screen.width) / maxDistance;
+            float zoom = maxZoomOut + (maxZoomIn - maxZoomOut) * (percentage);
             ZoomCursor(maxZoomOut);
         }
     }
