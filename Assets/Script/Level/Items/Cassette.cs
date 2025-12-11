@@ -2,15 +2,27 @@ using UnityEngine;
 
 public class Cassette : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public int Priority { get; set; } = 1;
+    [SerializeField] private GameObject interactionText;
+
+    public bool CanInteract => true;
+
+    public void Interact(PlayerInteractions interactions)
     {
-        
+        Debug.Log("Interaction avec la cassette");
+        this.GetComponent<UpdateEntry>().UpdateEntry_Func();
+        Destroy(this.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPlayerEnter(PlayerInteractions interactions)
     {
-        
+        Debug.Log("cassette peut etre interargie avec");
+        interactionText.SetActive(true);
+    }
+
+    public void OnPlayerExit(PlayerInteractions interactions)
+    {
+        Debug.Log("cassette peut plus etre interargie avec");
+        interactionText.SetActive(false);
     }
 }

@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Carnet : MonoBehaviour, IInteractable
 {
-    public int Priority { get; set; } = 1;
+    public int Priority { get; set; } = 2;
+    [SerializeField] private GameObject interactionText;
 
     public bool CanInteract => true;
 
@@ -10,15 +11,18 @@ public class Carnet : MonoBehaviour, IInteractable
     {
         Debug.Log("Interaction avec le carnet");
         this.GetComponent<UpdateEntry>().UpdateEntry_Func();
+        Destroy(this.gameObject);
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)
     {
         Debug.Log("carnet peut etre interargie avec");
+        interactionText.SetActive(true);
     }
 
     public void OnPlayerExit(PlayerInteractions interactions)
     {
         Debug.Log("carnet peut plus etre interargie avec");
+        interactionText.SetActive(false);
     }
 }
