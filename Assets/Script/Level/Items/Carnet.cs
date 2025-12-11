@@ -11,7 +11,7 @@ public class Carnet : MonoBehaviour, IInteractable
     {
         Debug.Log("Interaction avec le carnet");
         this.GetComponent<UpdateEntry>().UpdateEntry_Func();
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)
