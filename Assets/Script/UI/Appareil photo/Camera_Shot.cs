@@ -94,7 +94,7 @@ public class Camera_Shot : MonoBehaviour
                 return;
             }
 
-            float percentage = (Screen.width / 2) / maxDistance;
+            float percentage = (Screen.width) / maxDistance;
             float zoom = maxZoomOut + (maxZoomIn - maxZoomOut) * (percentage);
             ZoomCursor(maxZoomOut);
         }
