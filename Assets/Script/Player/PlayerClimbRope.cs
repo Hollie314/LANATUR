@@ -13,6 +13,9 @@ public class PlayerClimbRope : MonoBehaviour
     private bool nearRope = false;  
     private bool climbing = false;  
     private Transform ropeTransform;
+    private Transform RopeBaseTransform;
+    private Transform RopeTopTransform;
+    private Transform RopeTopFinishTransform;
 
     void Start()
     {
@@ -69,7 +72,28 @@ public class PlayerClimbRope : MonoBehaviour
         Debug.Log($"vertical is {vertical * climbSpeed}");
 
         Vector3 climbDirection = new Vector3(0, vertical * climbSpeed, 0);
-
+        
+        if (transform.position.y <= RopeBaseTransform.position.y && vertical < 0f)
+        {
+            climbing = false;
+            motor.enabled = true;
+            this.gameObject.GetComponent<InputManager>().canMove = true;
+            this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(false);
+            return;
+        }
+        else if (transform.position.y >= RopeTopTransform.position.y && vertical > 0f)
+        {
+            controller.enabled = false;
+            controller.transform.position = RopeTopFinishTransform.position;
+            controller.enabled = true;
+            
+            climbing = false;
+            motor.enabled = true;
+            this.gameObject.GetComponent<InputManager>().canMove = true;
+            this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(false);
+            return;
+        }
+        
         controller.Move(climbDirection * Time.deltaTime);
 
         AlignPlayerToRope();
@@ -93,6 +117,9 @@ public class PlayerClimbRope : MonoBehaviour
         {
             nearRope = true;
             ropeTransform = other.transform;
+            RopeBaseTransform = other.transform.GetChild(0).transform;
+            RopeTopTransform = other.transform.GetChild(1).transform;
+            RopeTopFinishTransform = other.transform.GetChild(2).transform;
         }
     }
 
