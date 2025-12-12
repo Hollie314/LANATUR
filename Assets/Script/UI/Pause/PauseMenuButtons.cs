@@ -16,6 +16,7 @@ public class PauseMenuButtons : MonoBehaviour
     {
         Game_Manager game_Manager = FindObjectOfType<Game_Manager>();
         game_Manager.ResetEntries();
+        ButtonBack();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     

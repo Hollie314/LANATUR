@@ -13,6 +13,8 @@ public class Camera_Shot : MonoBehaviour
     [SerializeField] private Camera_UI Camera_UI;
     [SerializeField] ChangeEntryPhoto ChangeEntryPhoto;
     [SerializeField] private GameObject ShotAnim;
+    public LayerMask MaskCameraVisible;
+    public LayerMask MaskCameraOnShot;
     public LayerMask animals_LayerMask;
     public static event Action PictureTaken;
     public static Album album = new Album();
@@ -145,6 +147,8 @@ public class Camera_Shot : MonoBehaviour
 
     private void CapturePhoto()
     {
+        // Create Texture
+        Camera.main.cullingMask = MaskCameraOnShot;
         RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
         Camera.main.targetTexture = rt;
 
@@ -156,7 +160,10 @@ public class Camera_Shot : MonoBehaviour
 
         screenCapture.ReadPixels(regionToRead, 0, 0, false);
         screenCapture.Apply();
+        
+        Camera.main.cullingMask = MaskCameraVisible;
 
+        // Album
         if (target != null)
         {
             album = Album.Load();
