@@ -86,6 +86,7 @@ public class PlayerClimbRope : MonoBehaviour
             controller.enabled = false;
             controller.transform.position = RopeTopFinishTransform.position;
             controller.enabled = true;
+            nearRope = false;
             
             climbing = false;
             motor.enabled = true;
