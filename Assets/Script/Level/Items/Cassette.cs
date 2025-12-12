@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Cassette : MonoBehaviour
+public class Cassette : MonoBehaviour, IInteractable
 {
     public int Priority { get; set; } = 1;
     [SerializeField] private GameObject interactionText;
@@ -10,8 +10,11 @@ public class Cassette : MonoBehaviour
     public void Interact(PlayerInteractions interactions)
     {
         Debug.Log("Interaction avec la cassette");
-        this.GetComponent<UpdateEntry>().UpdateEntry_Func();
-        Destroy(this.gameObject);
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)
