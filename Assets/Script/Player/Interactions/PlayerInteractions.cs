@@ -10,6 +10,8 @@ public class PlayerInteractions : MonoBehaviour
     public static event Action<PlayerInteractions> OnOpenCamera;
     public static event Action<PlayerInteractions> OnOpenCarnet;
     public static event Action<PlayerInteractions> OnOpenAlbum;
+    public static event Action<PlayerInteractions> OnQuitUI;
+    public static event Action<PlayerInteractions> OnPause;
 
     [SerializeField]
     private float range;
@@ -34,6 +36,8 @@ public class PlayerInteractions : MonoBehaviour
         inputManager.Controls.OnFoot.OpenCamera.performed += OnOpenCameraInput;
         inputManager.Controls.OnFoot.OpenCarnet.performed += OnOpenCarnetInput;
         inputManager.Controls.OnFoot.OpenAlbum.performed += OnOpenAlbumInput;
+        inputManager.Controls.OnFoot.QuitUI.performed += OnQuitUIInput;
+        inputManager.Controls.OnFoot.Pause.performed += OnPauseInput;
     }
 
     private void FixedUpdate()
@@ -120,5 +124,23 @@ public class PlayerInteractions : MonoBehaviour
         
         // event OpenCarnet
         OnOpenAlbum?.Invoke(this);
+    }
+    
+    public void OnQuitUIInput(InputAction.CallbackContext context)
+    {
+        // Debug
+        Debug.Log("Quit UI");
+        
+        // event OpenCarnet
+        OnQuitUI?.Invoke(this);
+    }
+    
+    public void OnPauseInput(InputAction.CallbackContext context)
+    {
+        // Debug
+        Debug.Log("Pause");
+        
+        // event OpenCarnet
+        OnPause?.Invoke(this);
     }
 }
