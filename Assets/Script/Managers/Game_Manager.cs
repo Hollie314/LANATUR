@@ -20,6 +20,7 @@ public class Game_Manager : MonoBehaviour
     {
         Camera_Scan.OnScanActive -= ChangeScanActive;
         OpenUI.OnCameraPhoto -= ChangeCameraActive;
+        ResetEntries();
     }
 
     private void ChangeCameraActive(OpenUI openUI) // Destroy
@@ -32,5 +33,13 @@ public class Game_Manager : MonoBehaviour
     {
         Debug.Log("Change Scan Active");
         ScanIsActive = !ScanIsActive;
+    }
+
+    public void ResetEntries()
+    {
+        foreach (EncyclopedieEntry entry in EncyclopedieEntries)
+        {
+            entry.UpdatesDone.Clear();
+        }
     }
 }
