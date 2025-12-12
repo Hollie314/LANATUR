@@ -8,6 +8,7 @@ public class OpenUI : MonoBehaviour
     [SerializeField] private GameObject UI_Camera;
     [SerializeField] private GameObject UI_Album;
     [SerializeField] private GameObject UI_Carnet;
+    [SerializeField] private GameObject UI_Pause;
     
     private bool isCameraOpen = false;
     
@@ -26,6 +27,8 @@ public class OpenUI : MonoBehaviour
         PlayerInteractions.OnOpenCamera += OpenCamera;
         PlayerInteractions.OnOpenCarnet += OpenCarnet;
         PlayerInteractions.OnOpenAlbum += OpenAlbum;
+        PlayerInteractions.OnQuitUI += QuitUI;
+        PlayerInteractions.OnPause += Pause;
     }
 
     private void OnDisable()
@@ -33,6 +36,8 @@ public class OpenUI : MonoBehaviour
         PlayerInteractions.OnOpenCamera -= OpenCamera;
         PlayerInteractions.OnOpenCarnet -= OpenCarnet;
         PlayerInteractions.OnOpenAlbum -= OpenAlbum;
+        PlayerInteractions.OnQuitUI -= QuitUI;
+        PlayerInteractions.OnPause -= Pause;
     }
 
     // UI To CAMERA
@@ -46,6 +51,7 @@ public class OpenUI : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            PauseScene(false);
             OnCameraPhoto?.Invoke(this);
             Debug.Log("Open Camera");
             isCameraOpen = true;
@@ -71,12 +77,14 @@ public class OpenUI : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+            PauseScene(true);
             OnCameraWalk?.Invoke(this);
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
+            PauseScene(false);
             OnCameraWalk?.Invoke(this);
             
             if(isCameraOpen)
@@ -95,24 +103,99 @@ public class OpenUI : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+            PauseScene(true);
             OnCameraWalk?.Invoke(this);
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
+            PauseScene(false);
             OnCameraWalk?.Invoke(this);
             
             if(isCameraOpen)
                 OpenCamera(playerInteractions);
         }
     }
-    
-    public void CloseAllUI()
+
+    private void OpenPause()
     {
+        UI_Album.SetActive(false);
         UI_Camera.SetActive(false);
         UI_Carnet.SetActive(false);
-        UI_Album.SetActive(false);
-        OnCameraWalk?.Invoke(this);
+        UI_Pause.SetActive(!UI_Pause.activeSelf);
+        
+        if (UI_Pause.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            PauseScene(true);
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
+            PauseScene(false);
+        }
+    }
+
+    private void PauseScene(bool pause)
+    {
+        if (pause)
+        {
+            //Pause
+            Time.timeScale = 0;
+            Debug.Log("Scene Paused");
+        }
+        else
+        {
+            //Unpause
+            Time.timeScale = 1;
+            Debug.Log("Scene Unpaused");
+        }
+    }
+    
+    public void QuitUI(PlayerInteractions playerInteractions)
+    {
+        if (UI_Album.activeSelf)
+        {
+            UI_Album.SetActive(false);
+            if(isCameraOpen)
+                OpenCamera(playerInteractions);
+        }
+        else if (UI_Carnet.activeSelf)
+        {
+            UI_Carnet.SetActive(false);
+            if(isCameraOpen)
+                OpenCamera(playerInteractions);
+        }
+        else if (UI_Camera.activeSelf)
+        {
+            UI_Camera.SetActive(false);
+            OnCameraWalk?.Invoke(this);
+        }
+    }
+    
+    public void Pause(PlayerInteractions playerInteractions)
+    {
+        if (UI_Album.activeSelf)
+        {
+            UI_Album.SetActive(false);
+            if(isCameraOpen)
+                OpenCamera(playerInteractions);
+        }
+        else if (UI_Carnet.activeSelf)
+        {
+            UI_Carnet.SetActive(false);
+            if(isCameraOpen)
+                OpenCamera(playerInteractions);
+        }
+        else if (UI_Camera.activeSelf)
+        {
+            UI_Camera.SetActive(false);
+            OnCameraWalk?.Invoke(this);
+        }
+        else
+            OpenPause();
     }
 }
