@@ -39,6 +39,12 @@ public class Game_Manager : MonoBehaviour
     {
         foreach (EncyclopedieEntry entry in EncyclopedieEntries)
         {
+            entry.Anecdote = null;
+            entry.Caracteristique = null;
+            entry.Dessin = null;
+            entry.DessinMignon = null;
+            entry.NoteDeRen = null;
+            entry.Photo = null;
             entry.UpdatesDone.Clear();
         }
     }
