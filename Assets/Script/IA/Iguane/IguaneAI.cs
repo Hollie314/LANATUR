@@ -96,6 +96,7 @@ public class IguaneAI : MonoBehaviour
 
     private void ShoutAt(GameObject target)
     {
+        Debug.Log("shouting");
         isShouting = true;
         this.transform.LookAt(target.transform);
         // animator
