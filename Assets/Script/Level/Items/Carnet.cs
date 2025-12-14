@@ -12,6 +12,8 @@ public class Carnet : MonoBehaviour, IInteractable
         Debug.Log("Interaction avec le carnet");
         this.GetComponent<UpdateEntry>().UpdateEntry_Func();
         this.gameObject.SetActive(false);
+        OpenUI openUI = FindObjectOfType<OpenUI>();
+        openUI.OpenCarnet(interactions);
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)

@@ -7,8 +7,9 @@ public class Game_Manager : MonoBehaviour
     public bool CameraIsActive { get; private set; } = false;
     public bool ScanIsActive { get; private set; } = false;
     
-    // Quete rapide
+    // Quete factice
     public int encyclopedieNumber {get ; private set;} = 8;
+    [SerializeField] private GameObject WinCanvas;
     
     public Vector3 LastPositionSaved { get; set; } = new Vector3();
     public List<EncyclopedieEntry> EncyclopedieEntries = new List<EncyclopedieEntry>();
@@ -57,7 +58,7 @@ public class Game_Manager : MonoBehaviour
     {
         if (EncyclopedieEntries.Count > encyclopedieNumber - 1)
         {
-            
+            WinCanvas.SetActive(true);
         }
     }
 }
