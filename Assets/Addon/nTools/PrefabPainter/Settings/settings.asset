@@ -35,8 +35,8 @@ MonoBehaviour:
         randomizeOrientationZ: 0
         scaleTransformMode: 0
         scaleMode: 0
-        scaleUniformMin: 0
-        scaleUniformMax: 1
+        scaleUniformMin: 1
+        scaleUniformMax: 2
         scalePerAxisMin: {x: 1, y: 1, z: 1}
         scalePerAxisMax: {x: 1, y: 1, z: 1}
         pinFixedRotation: 0
@@ -353,12 +353,12 @@ MonoBehaviour:
         alongBrushStroke: 0
         rotation: {x: 0, y: 0, z: 0}
         randomizeOrientationX: 0
-        randomizeOrientationY: 0
-        randomizeOrientationZ: 0
+        randomizeOrientationY: 75.9
+        randomizeOrientationZ: 58
         scaleTransformMode: 0
         scaleMode: 0
-        scaleUniformMin: 0.3
-        scaleUniformMax: 1
+        scaleUniformMin: 1
+        scaleUniformMax: 4
         scalePerAxisMin: {x: 1, y: 1, z: 1}
         scalePerAxisMax: {x: 1, y: 1, z: 1}
         pinFixedRotation: 0
@@ -672,8 +672,8 @@ MonoBehaviour:
         randomizeOrientationZ: 0
         scaleTransformMode: 0
         scaleMode: 0
-        scaleUniformMin: 0.5
-        scaleUniformMax: 1
+        scaleUniformMin: 1
+        scaleUniformMax: 2
         scalePerAxisMin: {x: 1, y: 1, z: 1}
         scalePerAxisMax: {x: 1, y: 1, z: 1}
         pinFixedRotation: 0
@@ -1930,9 +1930,9 @@ MonoBehaviour:
       settings:
         brushRadius: 1
         brushSpacing: 0.5
-        brushOverlapCheckMode: 0
+        brushOverlapCheckMode: 1
         brushOverlapDistance: 0.5
-        brushOverlapCheckObjects: 1
+        brushOverlapCheckObjects: 2
         brushOverlapCheckLayers:
           serializedVersion: 2
           m_Bits: 0
@@ -1962,7 +1962,7 @@ MonoBehaviour:
         throwVelocity: 1
         throwRandomRotation: {x: 100, y: 100, z: 100}
         throwScaleMinMax: {x: 1, y: 1}
-        multibrushEnabled: 0
+        multibrushEnabled: 1
         multibrushSlots:
         - enabled: 1
           raiting: 1
@@ -2206,7 +2206,7 @@ MonoBehaviour:
         gridAngle: 0
       prefabSlots:
       - gameObject: {fileID: 8355578477587264402, guid: 0db5fc68a42960d45806cb3e17a305ea, type: 3}
-      - gameObject: {fileID: 0}
+      - gameObject: {fileID: 8355578477587264402, guid: 3ec76323e8d2aa44e86db2dfdca6247c, type: 3}
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
@@ -2238,7 +2238,7 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       selectedSlot: 0
-      selected: 0
+      selected: 1
       colorTag: 0
       customPreviewImage: {fileID: 0}
     - name: Rock_2
@@ -3183,7 +3183,7 @@ MonoBehaviour:
       - gameObject: {fileID: 0}
       - gameObject: {fileID: 0}
       selectedSlot: 0
-      selected: 1
+      selected: 0
       colorTag: 0
       customPreviewImage: {fileID: 0}
     - name: Stalac_3
@@ -3828,7 +3828,7 @@ MonoBehaviour:
     m_Bits: 257
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1790
   placeUnder: 2
   overwritePrefabLayer: 0
   prefabPlaceLayer: 5
