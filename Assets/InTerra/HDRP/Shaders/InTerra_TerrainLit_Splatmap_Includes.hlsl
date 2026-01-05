@@ -1,0 +1,88 @@
+#ifdef _LAYERS_TWO
+    #define _LAYER_COUNT 2
+#else
+    #if defined(_LAYERS_EIGHT) || defined(_LAYERS_SIXTEEN)
+        #if defined(_LAYERS_EIGHT)
+            #define _LAYER_COUNT 8          
+        #endif
+        #ifdef _LAYERS_SIXTEEN
+            #define _LAYER_COUNT 16
+        #endif
+    #else
+        #define _LAYER_COUNT 4
+    #endif
+#endif
+
+
+#ifndef _TERRAIN_BLEND_HEIGHT
+    #define _TERRAIN_BLEND_DENSITY // enable density blending by default and use DiffuseRemap.w to control whether the density blending is enabled for a layer
+#endif
+
+#define DECLARE_TERRAIN_LAYER_PROPS(n)  \
+    float4 _Splat##n##_ST;              \
+    float _Metallic##n;                 \
+    float _Smoothness##n;               \
+    float _NormalScale##n;              \
+    float4 _DiffuseRemapOffset##n;      \
+    float4 _DiffuseRemapScale##n;       \
+    float4 _MaskMapRemapOffset##n;      \
+    float4 _MaskMapRemapScale##n;       \
+    float _LayerHasMask##n;             \
+    float4 _Mask##n##_TexelSize;        \
+    float4 _Specular##n;
+
+#define DECLARE_TERRAIN_LAYER_PROPS_FIRST_4 \
+    DECLARE_TERRAIN_LAYER_PROPS(0)          \
+    DECLARE_TERRAIN_LAYER_PROPS(1)          \
+    DECLARE_TERRAIN_LAYER_PROPS(2)          \
+    DECLARE_TERRAIN_LAYER_PROPS(3)          \
+    float4 _Control0_TexelSize;             \
+
+#define DECLARE_TERRAIN_LAYER_PROPS_SECOND_4 \
+    DECLARE_TERRAIN_LAYER_PROPS(4)          \
+    DECLARE_TERRAIN_LAYER_PROPS(5)          \
+    DECLARE_TERRAIN_LAYER_PROPS(6)          \
+    DECLARE_TERRAIN_LAYER_PROPS(7)          \
+    float4 _Control1_TexelSize;             \
+
+#if defined(_LAYERS_EIGHT) || defined(_LAYERS_SIXTEEN)
+        #define UNITY_TERRAIN_CB_VARS \
+        DECLARE_TERRAIN_LAYER_PROPS_FIRST_4     \
+        DECLARE_TERRAIN_LAYER_PROPS_SECOND_4    \
+        DECLARE_TERRAIN_LAYER_PROPS(8)          \
+        DECLARE_TERRAIN_LAYER_PROPS(9)          \
+        DECLARE_TERRAIN_LAYER_PROPS(10)         \
+        DECLARE_TERRAIN_LAYER_PROPS(11)         \
+        float4 _Control2_TexelSize;             \
+        DECLARE_TERRAIN_LAYER_PROPS(12)         \
+        DECLARE_TERRAIN_LAYER_PROPS(13)         \
+        DECLARE_TERRAIN_LAYER_PROPS(14)         \
+        DECLARE_TERRAIN_LAYER_PROPS(15)         \
+        float4 _Control3_TexelSize;             \
+        float _HeightTransition;
+#else
+    #define UNITY_TERRAIN_CB_VARS \
+        DECLARE_TERRAIN_LAYER_PROPS_FIRST_4 \
+        float _HeightTransition;
+
+#endif
+
+#define UNITY_TERRAIN_CB_DEBUG_VARS \
+    float4 _Control0_MipInfo;       \
+    float4 _Splat0_TexelSize;       \
+    float4 _Splat0_MipInfo;         \
+    float4 _Splat1_TexelSize;       \
+    float4 _Splat1_MipInfo;         \
+    float4 _Splat2_TexelSize;       \
+    float4 _Splat2_MipInfo;         \
+    float4 _Splat3_TexelSize;       \
+    float4 _Splat3_MipInfo;         \
+    float4 _Splat4_TexelSize;       \
+    float4 _Splat4_MipInfo;         \
+    float4 _Splat5_TexelSize;       \
+    float4 _Splat5_MipInfo;         \
+    float4 _Splat6_TexelSize;       \
+    float4 _Splat6_MipInfo;         \
+    float4 _Splat7_TexelSize;       \
+    float4 _Splat7_MipInfo;         
+
