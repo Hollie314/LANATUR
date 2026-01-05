@@ -66,7 +66,6 @@ public class PlayerMotor : MonoBehaviour
                 speed = baseSpeed * sprintmultiplier;
             else
                 speed = baseSpeed;
-            
             playerVelocity.y = -1f;
         }
         else
