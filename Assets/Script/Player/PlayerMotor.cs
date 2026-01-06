@@ -19,8 +19,11 @@ public class PlayerMotor : MonoBehaviour
     private bool crouching = false;
     private bool sprinting = false;
     private bool crouchActive = false;
+    private float gravityMultiplierUsed;
+    private bool isJumping = false;
 
-    public float jumpHeight = 4f;
+    public float minJumpHeight = 4f;
+    public float maxJumpHeight = 6f;
 
 
     void Start()
@@ -32,8 +35,10 @@ public class PlayerMotor : MonoBehaviour
     void Update()
     {
         isGrounded = controller.isGrounded;
-        
         ApplyGravity();
+        if(isJumping)
+            PushJump();
+        
 
         if (lerpCrouch)
         {
@@ -67,14 +72,19 @@ public class PlayerMotor : MonoBehaviour
             else
                 speed = baseSpeed;
             playerVelocity.y = -1f;
+            gravityMultiplierUsed = gravityMultiplier;
         }
         else
         {
-            playerVelocity.y += gravity * gravityMultiplier * Time.deltaTime;
+            if (playerVelocity.y > 0f)
+                playerVelocity.y += gravity * Time.deltaTime;
+            else
+            {
+                gravityMultiplierUsed *= gravityMultiplierUsed;
+                playerVelocity.y += gravity * gravityMultiplier * Time.deltaTime;
+            }
             Debug.Log($"velocity y :{playerVelocity.y}");
         }
-        
-        controller.Move(playerVelocity * Time.deltaTime);
         
     }
 
@@ -89,21 +99,36 @@ public class PlayerMotor : MonoBehaviour
         else
             controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
 
-        /*
-        playerVelocity.y += gravity * Time.deltaTime;
-        if (isGrounded && playerVelocity.y < 0)
-            playerVelocity.y = -2f;
-        */
-
         controller.Move(playerVelocity * Time.deltaTime);
     }
-
-    public void Jump()
+    
+    public void JumpStart()
     {
+        Debug.Log("Jump");
+        if(crouchActive)
+            return;
         if (isGrounded)
         {
-            playerVelocity.y = jumpHeight;
+            playerVelocity.y = minJumpHeight;
+            isJumping = true;
         }
+    }
+
+    private void PushJump()
+    {
+        playerVelocity.y -= gravity * Time.deltaTime;
+        playerVelocity.y += minJumpHeight * Time.deltaTime;
+        if (playerVelocity.y > maxJumpHeight)
+        {
+            playerVelocity.y = maxJumpHeight;
+            isJumping = false;
+        }
+    }
+    
+    public void JumpCanceled()
+    {
+        Debug.Log("Jump canceled");
+        isJumping =  false;
     }
 
     public void Crouch()
