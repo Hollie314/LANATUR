@@ -15,6 +15,7 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private float speed = 5.0f;
     [SerializeField] private float crouchSpeed = 4.0f;
     [SerializeField] private float sprintmultiplier = 1.75f;
+    [SerializeField, Range(0f, 0.75f)] private float coyoteTime = 1.75f;
     
     private float baseSpeed;
     private bool lerpCrouch = false;
@@ -25,11 +26,9 @@ public class PlayerMotor : MonoBehaviour
     private float gravityMultiplierUsed;
     private bool isJumping = false;
     private bool canJump = true;
-
-    [SerializeField] private float minJumpHeight = 4f;
-    [SerializeField] private float maxJumpHeight = 6f;
-    [SerializeField] private float CrouchminJumpHeight = 3f;
-    [SerializeField] private float CrouchmaxJumpHeight = 4.5f;
+    
+    [SerializeField] private float JumpHeight = 6f;
+    [SerializeField] private float CrouchJumpHeight = 4.5f;
 
 
     void Start()
@@ -43,8 +42,6 @@ public class PlayerMotor : MonoBehaviour
         canJump = CheckIsGrounded(groundedRayLength);
         isGrounded = controller.isGrounded;
         ApplyGravity();
-        if(isJumping)
-            PushJump();
         
 
         if (lerpCrouch)
@@ -128,46 +125,21 @@ public class PlayerMotor : MonoBehaviour
             return;
         if(crouchActive)
         {
-            playerVelocity.y = CrouchminJumpHeight;
+            playerVelocity.y = CrouchJumpHeight;
             isJumping = true;
         }
         if (canJump)
         {
-            playerVelocity.y = minJumpHeight;
+            playerVelocity.y = JumpHeight;
             isJumping = true;
         }
-    }
-
-    private void PushJump()
-    {
-        if (crouchActive)
-        {
-            playerVelocity.y -= gravity * Time.deltaTime;
-            playerVelocity.y += CrouchminJumpHeight * Time.deltaTime;
-            if (playerVelocity.y > CrouchmaxJumpHeight)
-            {
-                playerVelocity.y = CrouchmaxJumpHeight;
-                isJumping = false;
-            }
-
-            return;
-        }
-        
-        playerVelocity.y -= gravity * Time.deltaTime;
-        playerVelocity.y += minJumpHeight * Time.deltaTime;
-        if (playerVelocity.y > maxJumpHeight)
-        {
-            playerVelocity.y = maxJumpHeight;
-            isJumping = false;
-        }
-
-        return;
     }
     
     public void JumpCanceled()
     {
         Debug.Log("Jump canceled");
         isJumping =  false;
+        playerVelocity *= 0.5f;
     }
 
     public void Crouch()
