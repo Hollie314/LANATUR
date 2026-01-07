@@ -2,15 +2,19 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Rock_06_HDRP
-  m_Shader: {fileID: -6465566751694194690, guid: 4409c2b295054124d85e96c916d40e42,
-    type: 3}
-  m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT _TERRAIN_DISTANCEBLEND
+  m_Shader: {fileID: -6465566751694194690, guid: 4409c2b295054124d85e96c916d40e42, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _DISABLE_SSR_TRANSPARENT
+  - _TERRAIN_DISTANCEBLEND
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -29,6 +33,7 @@ Material:
   - TransparentDepthPostpass
   - TransparentBackface
   - RayTracingPrepass
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -45,13 +50,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Control:
-        m_Texture: {fileID: 2849385265669907236, guid: 8cc8152c28c90ed48b44b7868d5e4269,
-          type: 2}
+        m_Texture: {fileID: 2849385265669907236, guid: 8cc8152c28c90ed48b44b7868d5e4269, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Control0:
-        m_Texture: {fileID: 4852784654507003428, guid: cc1f424282398ad4ba995011d63fac70,
-          type: 2}
+        m_Texture: {fileID: 4852784654507003428, guid: cc1f424282398ad4ba995011d63fac70, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Control1:
@@ -290,6 +293,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TerrainAddTessellationTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _TerrainColorTintTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -353,6 +360,8 @@ Material:
     - _Ao: 0
     - _AoRemapOffset: 0
     - _AoStrenght: 1
+    - _BaseTexturesTriplanar: 0
+    - _BaseTexturesTriplanarSharpness: 8
     - _BlendMode: 0
     - _BumpScale: 1
     - _ConservativeDepthOffsetEnable: 0
@@ -363,6 +372,7 @@ Material:
     - _Cutoff: 0.5
     - _DepthOffsetEnable: 0
     - _Detail: 1
+    - _DetailFoldout: 0
     - _DetailMap: 0
     - _DetailNormalMapScale: 1
     - _DetailNormalStrenght: 0.808
@@ -372,13 +382,14 @@ Material:
     - _DisableOffsetY: 0
     - _DisableTerrainParallax: 0
     - _DistanceBlend: 0
-    - _Distance_HeightTransition: 23.7
+    - _Distance_HeightTransition: 0
     - _Distance_Height_blending: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
     - _EmissionEnabled: 0
+    - _EmissionFoldout: 0
     - _EmissiveExposureWeight: 0
     - _EmissiveIntensity: 0
     - _EnableBlendModePreserveSpecularLighting: 1
@@ -394,8 +405,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _HT_cover: 0.884
-    - _HT_distance_scale: 0.264
+    - _HT_cover: 0
+    - _HT_distance_scale: 0
     - _HT_sharpness: 0
     - _HasDetailAlbedo: 1
     - _HasMask: 1
@@ -404,12 +415,13 @@ Material:
     - _HeightOffset: 0
     - _HeightRemapOffset: 0
     - _HeightRemapScale: 0.6821705
-    - _HeightTransition: 50.8
+    - _HeightTransition: 0
     - _Height_blending: 0
     - _Heightmap: 0
-    - _HeightmapBlending: 1
+    - _HeightmapBlending: 0
     - _IntersectionFallOff: 5.78
     - _IntersectionThreshold: 0.1
+    - _IsOnTerrain: 1
     - _LayerHasMask0: 1
     - _LayerHasMask1: 1
     - _LayerHasMask10: 0
@@ -475,18 +487,21 @@ Material:
     - _NormalScale7: 0
     - _NormalScale8: 0
     - _NormalScale9: 0
-    - _NumLayersCount: 0
+    - _NumLayersCount: 2
     - _Object_Parallax: 0
     - _OcclusionStrength: 1
     - _OpaqueCullMode: 2
     - _Parallax: 0.005
     - _ParallaxAffineSteps: 3
     - _ParallaxAffineStepsTerrain: 3
+    - _ParallaxFoldout: 0
     - _ParallaxHeight: 1
     - _ParallaxSteps: 3
-    - _ParallaxTrackAffineSteps: 3
-    - _ParallaxTrackSteps: 5
+    - _ParallaxTrackAffineSteps: 0
+    - _ParallaxTrackSteps: 0
     - _PassNumber: 0
+    - _PuddleHorizontalWeight: 0
+    - _PuddleWetnessHorizontalWeight: 0
     - _QueueControl: -1
     - _QueueOffset: 0
     - _RayTracing: 0
@@ -522,6 +537,7 @@ Material:
     - _SrcBlend: 1
     - _SteepDistortion: 2.48
     - _SteepIntersection: 1
+    - _SteepSlopesFoldout: 1
     - _Steepness: -0.227
     - _StencilRef: 0
     - _StencilRefDepth: 8
@@ -537,35 +553,42 @@ Material:
     - _SurfaceType: 0
     - _SwapTangentX: -1
     - _SwapTangentY: 0
-    - _TerrainColorTintStrenght: 0.555
+    - _TerrainAddTessTextureType: 0
+    - _TerrainAddTessellationHeight: 0
+    - _TerrainAddTessellationOffset: 0
+    - _TerrainColorTintMode: 0
+    - _TerrainColorTintStrenght: 0
     - _TerrainID: 38868
+    - _TerrainIntersectionFoldout: 1
+    - _TerrainLayersFoldout: 1
     - _TerrainNormalTintStrenght: 0
     - _TerrainTessOffset: 0.07
     - _Terrain_Parallax: 0
     - _TessellationBackFaceCullEpsilon: -0.25
     - _TessellationDisplacement: 0
     - _TessellationFactor: 4
-    - _TessellationFactorMaxDistance: 21.588081
-    - _TessellationFactorMinDistance: 1.588082
+    - _TessellationFactorMaxDistance: 0
+    - _TessellationFactorMinDistance: 0
     - _TessellationFactorTriangleSize: 100
-    - _TessellationMaxDisplacement: 0.21499999
+    - _TessellationFoldout: 1
+    - _TessellationMaxDisplacement: 0.07
     - _TessellationMode: 0
     - _TessellationObjMaxDisplacement: 0.07
     - _TessellationOffset: 0
-    - _TessellationShadowQuality: 1
+    - _TessellationShadowQuality: 0
     - _TessellationShapeFactor: 0.75
-    - _Tessellation_HeightTransition: 13.7
+    - _Tessellation_HeightTransition: 0
     - _Tessellation_Sharpness: 67.7
-    - _TrackAO: 0.8
-    - _TrackDetailNormalStrenght: 1
+    - _TrackAO: 0
+    - _TrackDetailNormalStrenght: 0
     - _TrackDetailStrenght: 0
-    - _TrackEdgeNormals: 2
-    - _TrackEdgeSharpness: 1
+    - _TrackEdgeNormals: 0
+    - _TrackEdgeSharpness: 0
     - _TrackHeightOffset: 0
-    - _TrackHeightTransition: 20
-    - _TrackNormalStrenght: 1
+    - _TrackHeightTransition: 0
+    - _TrackNormalStrenght: 0
     - _TrackTessallationHeightOffset: 0
-    - _TrackTessallationHeightTransition: 15
+    - _TrackTessallationHeightTransition: 0
     - _Tracks: 0
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -575,8 +598,9 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _Triplanar: 1
+    - _TriplanarFoldout: 0
     - _TriplanarOneToAllSteep: 0
-    - _TriplanarSharpness: 9
+    - _TriplanarSharpness: 0
     - _Triplanar_object: 10
     - _Triplanar_sharpness: 0
     - _UVSec: 0
@@ -590,8 +614,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
     - _Color: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 0}
-    - _DiffuseRemapOffset0: {r: -0.16, g: 0, b: -0.01, a: 15}
-    - _DiffuseRemapOffset1: {r: 0.08, g: 0, b: 0.02, a: 1.02}
+    - _DiffuseRemapOffset0: {r: -0.00016, g: 0, b: -0.0001, a: 15}
+    - _DiffuseRemapOffset1: {r: 0.00008, g: 0, b: 0.0002, a: 1.02}
     - _DiffuseRemapOffset10: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseRemapOffset11: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseRemapOffset12: {r: 1, g: 1, b: 1, a: 1}
@@ -625,7 +649,7 @@ Material:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 0}
-    - _HT_distance: {r: 2.386833, g: 9.386833, b: 0, a: 25}
+    - _HT_distance: {r: 0, g: 0, b: 0, a: 0}
     - _HeightmapScale: {r: 0.09765625, g: 20.000916, b: 0.09765625, a: 0}
     - _Intersection: {r: 4.076382, g: 18, b: -5, a: 18}
     - _Intersection2: {r: -1.2161678, g: 0.7956227, b: -1.5, a: 1.5}
@@ -665,7 +689,7 @@ Material:
     - _MaskMapRemapScale8: {r: 0, g: 0, b: 0, a: 0}
     - _MaskMapRemapScale9: {r: 0, g: 0, b: 0, a: 0}
     - _Metallic: {r: 0, g: 0, b: 0.68, a: 0}
-    - _MipMapFade: {r: 0.27094376, g: 19.661749, b: 0, a: 30}
+    - _MipMapFade: {r: 0, g: 0, b: 0, a: 0}
     - _NormIntersect: {r: 0.15920398, g: 0.7640153, b: 0, a: 1}
     - _NormalScale: {r: 1, g: 0.8, b: 1, a: 1}
     - _ObjectColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
@@ -702,18 +726,20 @@ Material:
     - _SplatUV7: {r: 1, g: 1, b: 0, a: 0}
     - _SplatUV8: {r: 1, g: 1, b: 0, a: 0}
     - _SplatUV9: {r: 1, g: 1, b: 0, a: 0}
+    - _TerrainColorTintDistance: {r: 0, g: 0, b: 0, a: 0}
     - _TerrainHeightmapScale: {r: 0.09765625, g: 20.000916, b: 0.09765625, a: 10}
     - _TerrainMetallic: {r: 0, g: 0, b: 0, a: 0}
     - _TerrainMetallic1: {r: 0, g: 0, b: 0, a: 0}
     - _TerrainNormalScale: {r: 1, g: 0.5, b: 1, a: 1}
     - _TerrainNormalScale1: {r: 1, g: 1, b: 1, a: 1}
-    - _TerrainNormalTintDistance: {r: 3, g: 10, b: 0, a: 25}
+    - _TerrainNormalTintDistance: {r: 0, g: 0, b: 0, a: 0}
     - _TerrainPosition: {r: 0, g: 0, b: 0, a: 0}
     - _TerrainSize: {r: 50, g: 10, b: 50, a: 0}
     - _TerrainSizeXZPosY: {r: 0, g: 0, b: 0, a: 1}
     - _TerrainSmoothness: {r: 0, g: 0, b: 0, a: 0}
     - _TerrainSmoothness1: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &1269832200443526679
 MonoBehaviour:
   m_ObjectHideFlags: 11

@@ -124,7 +124,7 @@ MonoBehaviour:
   - rid: 8938911044141842617
   - rid: 8938911044141842749
   - rid: 8938911044141842766
-  m_VersionTimestamp: 639010476428794946
+  m_VersionTimestamp: 639032911214924668
   m_SerializedVersion: 1
   m_DebugInfo: {fileID: 8299967033309744405}
   m_RuntimeGraph: {fileID: 2979874758861998458}
@@ -516,6 +516,89 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 5883699070551457792
+      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 11877115031288641916
+          m_Value1: 10191147675124571137
+        Graph:
+          rid: 8938911044141842510
+        m_Parent:
+          rid: -2
+        m_Child:
+          rid: 5883699070551457793
+        Repeat: 0
+        AllowMultipleRepeatsPerTick: 0
+    - rid: 5883699070551457793
+      type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 17036123117269904973
+          m_Value1: 642602548096581136
+        Graph:
+          rid: 8938911044141842510
+        m_Parent:
+          rid: 5883699070551457792
+        m_Children:
+        - rid: 5883699070551457794
+        - rid: 5883699070551457795
+    - rid: 5883699070551457794
+      type: {class: WaitForTriggerAction, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 13597369583187499036
+          m_Value1: 8508688148368679755
+        Graph:
+          rid: 8938911044141842510
+        m_Parent:
+          rid: 5883699070551457793
+        Agent:
+          rid: 8938911044141842790
+        MessageType:
+          rid: 5883699070551457796
+        Tag:
+          rid: 5883699070551457797
+        CollidedObject:
+          rid: 5883699070551457798
+    - rid: 5883699070551457795
+      type: {class: WriteTextMissionAction, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          m_Value0: 16846097792464599143
+          m_Value1: 13934826797946898704
+        Graph:
+          rid: 8938911044141842510
+        m_Parent:
+          rid: 5883699070551457793
+        Text:
+          rid: 8938911044141842792
+        UI:
+          rid: 8938911044141842791
+    - rid: 5883699070551457796
+      type: {class: 'BlackboardVariable`1[[Unity.Behavior.WaitForPhysicsMessageAction/EMessageType, Unity.Behavior]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: 0
+    - rid: 5883699070551457797
+      type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: 
+    - rid: 5883699070551457798
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
     - rid: 8938911044141842510
       type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -527,14 +610,14 @@ MonoBehaviour:
           rid: 8938911044141842511
         BlackboardGroupReferences: []
         Root:
-          rid: 8938911044141842845
+          rid: 5883699070551457792
         m_ActiveNodes: []
         m_NodesToTick: []
         m_NodesToEnd:
           rid: 8938911044141842513
         m_EndedNodes:
           rid: 8938911044141842514
-        m_VersionTimestamp: 639010476428794946
+        m_VersionTimestamp: 639032911214924668
     - rid: 8938911044141842511
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -578,89 +661,6 @@ MonoBehaviour:
           m_Value1: 9959502484416498923
         Name: Mission
         m_Value: 
-    - rid: 8938911044141842838
-      type: {class: 'BlackboardVariable`1[[Unity.Behavior.WaitForPhysicsMessageAction/EMessageType, Unity.Behavior]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 0
-    - rid: 8938911044141842839
-      type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: 
-    - rid: 8938911044141842840
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 0
-          m_Value1: 0
-        Name: 
-        m_Value: {fileID: 0}
-    - rid: 8938911044141842845
-      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 11877115031288641916
-          m_Value1: 10191147675124571137
-        Graph:
-          rid: 8938911044141842510
-        m_Parent:
-          rid: -2
-        m_Child:
-          rid: 8938911044141842846
-        Repeat: 0
-        AllowMultipleRepeatsPerTick: 0
-    - rid: 8938911044141842846
-      type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 17036123117269904973
-          m_Value1: 642602548096581136
-        Graph:
-          rid: 8938911044141842510
-        m_Parent:
-          rid: 8938911044141842845
-        m_Children:
-        - rid: 8938911044141842847
-        - rid: 8938911044141842848
-    - rid: 8938911044141842847
-      type: {class: WaitForTriggerAction, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 13597369583187499036
-          m_Value1: 8508688148368679755
-        Graph:
-          rid: 8938911044141842510
-        m_Parent:
-          rid: 8938911044141842846
-        Agent:
-          rid: 8938911044141842790
-        MessageType:
-          rid: 8938911044141842838
-        Tag:
-          rid: 8938911044141842839
-        CollidedObject:
-          rid: 8938911044141842840
-    - rid: 8938911044141842848
-      type: {class: WriteTextMissionAction, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          m_Value0: 16846097792464599143
-          m_Value1: 13934826797946898704
-        Graph:
-          rid: 8938911044141842510
-        m_Parent:
-          rid: 8938911044141842846
-        Text:
-          rid: 8938911044141842792
-        UI:
-          rid: 8938911044141842791
 --- !u!114 &8299967033309744405
 MonoBehaviour:
   m_ObjectHideFlags: 0

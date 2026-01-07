@@ -2,21 +2,29 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: InTerra_Terrain_HDRP_Demo
-  m_Shader: {fileID: 4800000, guid: 5f5284c1505db394ebc48970f34a35a5, type: 3}
-  m_ShaderKeywords: _TERRAIN_BLEND_HEIGHT _TERRAIN_DISTANCEBLEND _TERRAIN_NORMAL_IN_MASK
-    _TERRAIN_PARALLAX
+  m_Shader: {fileID: 4800000, guid: a2b69621dee19c74dbff02010f3b8808, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _LAYERS_TWO
+  - _TERRAIN_DISTANCEBLEND
+  m_InvalidKeywords:
+  - _TERRAIN_BLEND_HEIGHT
+  - _TERRAIN_NORMAL_IN_MASK
+  - _TERRAIN_PARALLAX
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2225
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -218,7 +226,7 @@ Material:
     - _StencilWriteMaskDepth: 8
     - _StencilWriteMaskGBuffer: 3
     - _SupportDecals: 1
-    - _TerrainColorTintStrenght: 0.555
+    - _TerrainColorTintStrenght: 0
     - _TerrainNormalTintStrenght: 0
     - _Terrain_Parallax: 0
     - _TessellationBackFaceCullEpsilon: -0.1
@@ -288,3 +296,4 @@ Material:
     - _TerrainSizeXZPosY: {r: 50, g: 50, b: 0, a: 0}
     - _TerrainSmoothness: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
