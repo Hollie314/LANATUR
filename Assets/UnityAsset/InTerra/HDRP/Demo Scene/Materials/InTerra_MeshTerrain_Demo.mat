@@ -2,19 +2,15 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: InTerra_MeshTerrain_Demo
-  m_Shader: {fileID: -6465566751694194690, guid: 29ed88605abdf904eae3c4e43ceab7c1, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _DISABLE_SSR_TRANSPARENT
-  - _TERRAIN_DISTANCEBLEND
+  m_Shader: {fileID: -6465566751694194690, guid: 29ed88605abdf904eae3c4e43ceab7c1,
+    type: 3}
+  m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT _TERRAIN_DISTANCEBLEND
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -26,7 +22,6 @@ Material:
   - TransparentBackface
   - RayTracingPrepass
   - MOTIONVECTORS
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -341,7 +336,6 @@ Material:
     - _DisplacementLockObjectScale: 1
     - _DisplacementLockTilingScale: 1
     - _DisplacementMode: 0
-    - _DistanceBlendingFoldout: 0
     - _Distance_HeightTransition: 25.9
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
@@ -375,7 +369,6 @@ Material:
     - _HeightmapBase: 1
     - _HeightmapBaseCustom: 0
     - _HeightmapBlending: 1
-    - _HeightmapBlendingFoldout: 0
     - _InvTilingScale: 1
     - _Ior: 1.5
     - _IridescenceMask: 1
@@ -441,7 +434,7 @@ Material:
     - _NormalScale8: 0
     - _NormalScale9: 0
     - _NormalsFromHeightmap: 1
-    - _NumLayersCount: 8
+    - _NumLayersCount: 0
     - _OpaqueCullMode: 2
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
@@ -455,8 +448,6 @@ Material:
     - _ParallaxTrackAffineSteps: 0
     - _ParallaxTrackSteps: 0
     - _PassNumber: 0
-    - _PuddleHorizontalWeight: 0.8
-    - _PuddleWetnessHorizontalWeight: 0.5
     - _RayTracing: 0
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
@@ -502,12 +493,10 @@ Material:
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
     - _SurfaceType: 0
-    - _TerrainColorTintMode: 0
     - _TerrainColorTintStrenght: 0
     - _TerrainNormalTintStrenght: 0
     - _TerrainTessOffset: 0
     - _Terrain_Parallax: 1
-    - _Terrain_ParallaxFoldout: 0
     - _TessellationBackFaceCullEpsilon: -0.299
     - _TessellationDisplacement: 0
     - _TessellationFactor: 35
@@ -538,7 +527,6 @@ Material:
     - _TrackTessallationHeightOffset: 0
     - _TrackTessallationHeightTransition: 3.6
     - _Tracks: 0
-    - _TracksFoldout: 0
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -547,7 +535,6 @@ Material:
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
-    - _TriplanarMappingFoldout: 0
     - _TriplanarOneToAllSteep: 0
     - _TriplanarSharpness: 9
     - _UVBase: 0
@@ -564,8 +551,8 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DiffuseRemapOffset0: {r: 0.00008, g: 0, b: 0.0002, a: 1.02}
-    - _DiffuseRemapOffset1: {r: -0.00016, g: 0, b: -0.0001, a: 15}
+    - _DiffuseRemapOffset0: {r: 0.08, g: 0, b: 0.02, a: 1.02}
+    - _DiffuseRemapOffset1: {r: -0.16, g: 0, b: -0.01, a: 15}
     - _DiffuseRemapOffset10: {r: 0, g: 0, b: 0, a: 0}
     - _DiffuseRemapOffset11: {r: 0, g: 0, b: 0, a: 0}
     - _DiffuseRemapOffset12: {r: 0, g: 0, b: 0, a: 0}
@@ -673,7 +660,6 @@ Material:
     - _SplatUV7: {r: 1, g: 1, b: 0, a: 0}
     - _SplatUV8: {r: 1, g: 1, b: 0, a: 0}
     - _SplatUV9: {r: 1, g: 1, b: 0, a: 0}
-    - _TerrainColorTintDistance: {r: 3, g: 10, b: 0, a: 50}
     - _TerrainHeightmapScale: {r: 0.39062494, g: 25, b: 0.390625, a: 12.499428}
     - _TerrainMetallic: {r: 0, g: 0, b: 0, a: 0}
     - _TerrainMetallic1: {r: 0, g: 0, b: 0, a: 0}
@@ -691,7 +677,6 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &9053784485551564884
 MonoBehaviour:
   m_ObjectHideFlags: 11

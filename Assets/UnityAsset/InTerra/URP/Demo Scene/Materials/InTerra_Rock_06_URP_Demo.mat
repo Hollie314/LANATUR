@@ -8,12 +8,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: InTerra_Rock_06_URP_Demo
-  m_Shader: {fileID: 4800000, guid: 9e1939bac86413c449c546afd6397453, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 8d15515b38fabfc4f8bfe1b2d8bbe173, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
+  m_ValidKeywords:
   - _TERRAIN_DISTANCEBLEND
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -21,6 +21,7 @@ Material:
   stringTagMap:
     LayerNumber1: 4264164dd82f6254ba8910703feeb965
     LayerNumber2: 67bfa3c5f1c85364aaf122764a6e0f77
+    RenderType: Opaque
     TerrainLayer: 4264164dd82f6254ba8910703feeb965
     TerrainLayer1: e6db588588143c84b8cecba8e1002557
     TerrainLayer2: e6472d90d2b5f604e800f39fd5b85ae1
@@ -82,10 +83,6 @@ Material:
         m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _HeightTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -356,7 +353,6 @@ Material:
     - _Distance_HeightTransition: 15.1
     - _Distance_Height_blending: 0
     - _DstBlend: 0
-    - _DstBlendAlpha: 0
     - _EmissionEnabled: 0
     - _EmissionFoldout: 0
     - _EmissionIntensity: 0
@@ -492,7 +488,6 @@ Material:
     - _SplatNumber0: 0
     - _SplatNumber1: 1
     - _SrcBlend: 1
-    - _SrcBlendAlpha: 1
     - _SteepDistortion: 2.48
     - _SteepIntersection: 1
     - _SteepSlopesFoldout: 1
@@ -506,16 +501,12 @@ Material:
     - _TerrainIntersectionFoldout: 1
     - _TerrainLayersFoldout: 1
     - _TerrainNormalTintStrenght: 0
-    - _TerrainTrackContrast: 1
-    - _TerrainTrackHeightmapOffset: 0
     - _Terrain_Parallax: 1
     - _TrackEdgeNormals: 2
     - _TrackEdgeSharpness: 1
-    - _TrackFadeTime: 30
     - _TrackHeightOffset: 0
     - _TrackHeightTransition: 20
     - _TrackNormalStrenght: 1
-    - _TrackTime: 0
     - _Tracks: 0
     - _Triplanar: 1
     - _TriplanarFoldout: 0
@@ -524,7 +515,6 @@ Material:
     - _Triplanar_object: 10
     - _Triplanar_sharpness: 0
     - _UVSec: 0
-    - _WheelTrackFading: 10
     - _WorkflowMode: 1
     - _WorldMapping: 0
     - _ZTest: 4
@@ -566,7 +556,6 @@ Material:
     - _DiffuseRemapScale7: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseRemapScale8: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseRemapScale9: {r: 1, g: 1, b: 1, a: 1}
-    - _EdgeFading: {r: -0.1, g: 0.6, b: -0.4, a: 0.8}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HT_distance: {r: 2.386833, g: 9.386833, b: 0, a: 25}
     - _HeightmapScale: {r: 0.09765625, g: 20.000916, b: 0.09765625, a: 0}
@@ -608,7 +597,7 @@ Material:
     - _MaskMapRemapScale8: {r: 0, g: 0, b: 0, a: 0}
     - _MaskMapRemapScale9: {r: 0, g: 0, b: 0, a: 0}
     - _Metallic: {r: 0, g: 0, b: 0.68, a: 0}
-    - _MipMapFade: {r: 3, g: 15, b: 0, a: 35}
+    - _MipMapFade: {r: 29.840004, g: 35, b: 0, a: 35}
     - _NormIntersect: {r: 0, g: 0.6048113, b: 0, a: 1}
     - _NormalScale: {r: 1, g: 0.8, b: 1, a: 1}
     - _ObjectColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
