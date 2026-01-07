@@ -8,11 +8,14 @@ public class PlayerMotor : MonoBehaviour
     private CharacterController controller;
     public bool isGrounded;
     private Vector3 playerVelocity;
-    public float gravity = -9.81f;
-    public float gravityMultiplier = 1f;
-    public float speed = 5.0f;
-    public float crouchSpeed = 4.0f;
-    public float sprintmultiplier = 1.75f;
+
+    [SerializeField] private float groundedRayLength;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float MaxFallGravity = -20f;
+    [SerializeField] private float speed = 5.0f;
+    [SerializeField] private float crouchSpeed = 4.0f;
+    [SerializeField] private float sprintmultiplier = 1.75f;
+    
     private float baseSpeed;
     private bool lerpCrouch = false;
     private float crouchTimer = 0f;
@@ -21,9 +24,12 @@ public class PlayerMotor : MonoBehaviour
     private bool crouchActive = false;
     private float gravityMultiplierUsed;
     private bool isJumping = false;
+    private bool canJump = true;
 
-    public float minJumpHeight = 4f;
-    public float maxJumpHeight = 6f;
+    [SerializeField] private float minJumpHeight = 4f;
+    [SerializeField] private float maxJumpHeight = 6f;
+    [SerializeField] private float CrouchminJumpHeight = 3f;
+    [SerializeField] private float CrouchmaxJumpHeight = 4.5f;
 
 
     void Start()
@@ -34,6 +40,7 @@ public class PlayerMotor : MonoBehaviour
 
     void Update()
     {
+        canJump = CheckIsGrounded(groundedRayLength);
         isGrounded = controller.isGrounded;
         ApplyGravity();
         if(isJumping)
@@ -59,6 +66,17 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    private bool CheckIsGrounded(float rayLength)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, rayLength))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private void ApplyGravity()
     {
         if (isGrounded && playerVelocity.y < 0f)
@@ -72,16 +90,17 @@ public class PlayerMotor : MonoBehaviour
             else
                 speed = baseSpeed;
             playerVelocity.y = -1f;
-            gravityMultiplierUsed = gravityMultiplier;
+            gravityMultiplierUsed = MaxFallGravity;
         }
         else
         {
-            if (playerVelocity.y > 0f)
+            if (playerVelocity.y > 1f)
                 playerVelocity.y += gravity * Time.deltaTime;
             else
             {
-                gravityMultiplierUsed *= gravityMultiplierUsed;
-                playerVelocity.y += gravity * gravityMultiplier * Time.deltaTime;
+                float easedGravity = Mathf.Pow(gravityMultiplierUsed, 2);
+                gravityMultiplierUsed = Mathf.Lerp(gravity, MaxFallGravity, easedGravity);
+                playerVelocity.y += MaxFallGravity * Time.deltaTime;
             }
             Debug.Log($"velocity y :{playerVelocity.y}");
         }
@@ -105,9 +124,14 @@ public class PlayerMotor : MonoBehaviour
     public void JumpStart()
     {
         Debug.Log("Jump");
-        if(crouchActive)
+        if(!canJump)
             return;
-        if (isGrounded)
+        if(crouchActive)
+        {
+            playerVelocity.y = CrouchminJumpHeight;
+            isJumping = true;
+        }
+        if (canJump)
         {
             playerVelocity.y = minJumpHeight;
             isJumping = true;
@@ -116,6 +140,19 @@ public class PlayerMotor : MonoBehaviour
 
     private void PushJump()
     {
+        if (crouchActive)
+        {
+            playerVelocity.y -= gravity * Time.deltaTime;
+            playerVelocity.y += CrouchminJumpHeight * Time.deltaTime;
+            if (playerVelocity.y > CrouchmaxJumpHeight)
+            {
+                playerVelocity.y = CrouchmaxJumpHeight;
+                isJumping = false;
+            }
+
+            return;
+        }
+        
         playerVelocity.y -= gravity * Time.deltaTime;
         playerVelocity.y += minJumpHeight * Time.deltaTime;
         if (playerVelocity.y > maxJumpHeight)
@@ -123,6 +160,8 @@ public class PlayerMotor : MonoBehaviour
             playerVelocity.y = maxJumpHeight;
             isJumping = false;
         }
+
+        return;
     }
     
     public void JumpCanceled()
