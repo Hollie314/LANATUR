@@ -21,15 +21,16 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Terrain Material
-  m_Shader: {fileID: 4800000, guid: 69c1f799e772cb6438f56c23efccb782, type: 3}
+  m_Shader: {fileID: 4800000, guid: 3e3de67027c68e34a96553bba38745c1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _TERRAIN_DISTANCEBLEND
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2225
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
@@ -46,6 +47,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Control:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Control1:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -133,7 +138,31 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TerrainColorTintTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _TerrainHolesTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TerrainNormalTintTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TrackDetailNormalTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TrackDetailTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TriplanarTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_MetallicAO:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -163,23 +192,37 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DistanceBlendingFoldout: 1
+    - _Distance_HeightTransition: 10
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnableHeightBlend: 0
     - _EnableInstancedPerPixelNormal: 1
     - _EnvironmentReflections: 1
+    - _Gamma: 0
+    - _GlobalWetness: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _HT_cover: 1
+    - _HT_distance_scale: 0.25
     - _HeightTransition: 0
+    - _HeightmapBlending: 1
+    - _HeightmapBlendingFoldout: 0
     - _Metallic: 0
     - _Metallic0: 0
     - _Metallic1: 0
     - _Metallic2: 0
     - _Metallic3: 0
+    - _MipMapLevel: 0
     - _NumLayersCount: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _ParallaxAffineStepsTerrain: 3
+    - _ParallaxTrackAffineSteps: 3
+    - _ParallaxTrackSteps: 5
+    - _PuddleHorizontalWeight: 0.8
+    - _PuddleWetnessHorizontalWeight: 0.5
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
@@ -192,13 +235,40 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _TerrainColorTintMTB: 0
+    - _TerrainColorTintMode: 0
+    - _TerrainColorTintStrenght: 0
+    - _TerrainNormalTintMTB: 0
+    - _TerrainNormalTintStrenght: 0
+    - _Terrain_Parallax: 0
+    - _Terrain_ParallaxFoldout: 0
+    - _TrackAO: 0.8
+    - _TrackDetailNormalStrenght: 1
+    - _TrackEdgeNormals: 2
+    - _TrackEdgeSharpness: 1
+    - _TrackHeightOffset: 0
+    - _TrackHeightTransition: 20
+    - _TrackMultiplyStrenght: 3
+    - _TrackNormalStrenght: 1
+    - _TrackTessallation: 0
+    - _Tracks: 0
+    - _TracksFoldout: 0
+    - _TriplanarMappingFoldout: 0
+    - _TriplanarOneToAllSteep: 0
+    - _TriplanarSharpness: 9
     - _WorkflowMode: 1
+    - _WorldMapping: 0
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HT_distance: {r: 3, g: 10, b: 0, a: 25}
+    - _MipMapFade: {r: 3, g: 15, b: 0, a: 35}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _TerrainColorTintDistance: {r: 3, g: 15, b: 0, a: 50}
+    - _TerrainNormalTintDistance: {r: 3, g: 10, b: 0, a: 50}
+    - _TerrainSizeXZPosY: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
