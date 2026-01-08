@@ -9,6 +9,13 @@ public class AI_Iguane : MonoBehaviour
     [SerializeField] private bool is_ShoutingIguane;
     [SerializeField] private bool is_AlphaIguane;
     
+    [Header("NoiseRadius")]
+    // NoiseRadius
+    [SerializeField] private float noiseRadius_Running;
+    [SerializeField] private float noiseRadius_Walking;
+    [SerializeField] private float noiseRadius_Crouching;
+    [SerializeField] private MakeNoise _makeNoise;
+    
     // States
     private bool isEating = false;
     private bool isCarryingFood = false;
@@ -57,13 +64,14 @@ public class AI_Iguane : MonoBehaviour
     #region EatingIguane
     private void Run()
     {
-        
+        Debug.Log("IguaneRun");
     }
     #endregion
 
     #region ShoutingIguane
     private void Shout()
     {
+        Debug.Log("IguaneShout");
         // SphereCast a une certaine distance
         // Si la cible a un rigidbody, repousser avec les méchaniques Rigidbody
         // Si la cible a un CharacterController, repousser avec les méchaniques CharacterController
