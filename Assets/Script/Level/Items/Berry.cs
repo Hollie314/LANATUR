@@ -16,7 +16,7 @@ public class Berry : MonoBehaviour, IInteractable
 
     public int Priority { get; set; } = 3;
 
-    public bool CanInteract => true;
+    public bool CanInteract { get; set; } = true;
 
     public void Awake()
     {

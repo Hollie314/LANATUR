@@ -121,6 +121,8 @@ public class PlayerMotor : MonoBehaviour
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
+        
+        controller.Move(playerVelocity * Time.deltaTime);
 
         if (moveDirection != Vector3.zero)
         {
@@ -149,8 +151,6 @@ public class PlayerMotor : MonoBehaviour
                 }
             }
         }
-
-        controller.Move(playerVelocity * Time.deltaTime);
     }
     
     public void JumpStart()

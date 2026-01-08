@@ -6,7 +6,7 @@ public class RockForRope : MonoBehaviour, IInteractable
     [SerializeField] private GameObject Corde;
     [SerializeField] private GameObject interactionText;
 
-    public bool CanInteract => true;
+    public bool CanInteract { get; set; } = true;
 
     public void Interact(PlayerInteractions interactions)
     {

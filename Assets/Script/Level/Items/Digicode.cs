@@ -6,7 +6,7 @@ public class Digicode : MonoBehaviour, IInteractable
     public int Priority { get; set; } = 1;
     [SerializeField] private GameObject interactionText;
 
-    public bool CanInteract => true;
+    public bool CanInteract { get; set; } = true;
     
     [SerializeField] private string code;
     [SerializeField] private TextMeshProUGUI codeTMP;
@@ -16,18 +16,35 @@ public class Digicode : MonoBehaviour, IInteractable
     public void Interact(PlayerInteractions interactions)
     {
         Debug.Log("Interaction avec le digicode");
-        transform.GetChild(0).gameObject.SetActive(!transform.GetChild(0).gameObject.activeSelf);
         interactionText.SetActive(!interactionText.activeSelf);
+        
+        transform.GetChild(0).gameObject.SetActive(!transform.GetChild(0).gameObject.activeSelf);
+        if (transform.GetChild(0).gameObject.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
+            Time.timeScale = 1;
+        }
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)
     {
+        if (!CanInteract)
+            return;
         Debug.Log("cassette peut etre interargie avec");
         interactionText.SetActive(true);
     }
 
     public void OnPlayerExit(PlayerInteractions interactions)
     {
+        if (!CanInteract)
+            return;
         Debug.Log("cassette peut plus etre interargie avec");
         interactionText.SetActive(false);
     }
@@ -53,6 +70,14 @@ public class Digicode : MonoBehaviour, IInteractable
     {
         writtenCode = "";
         codeTMP.text = writtenCode;
+        
+        transform.GetChild(0).gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = false;
+        Time.timeScale = 1;
+        
+        CanInteract = false;
+        interactionText.SetActive(false);
     }
 
     private void Lose()

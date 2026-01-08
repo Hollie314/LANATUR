@@ -5,7 +5,7 @@ public class Cassette : MonoBehaviour, IInteractable
     public int Priority { get; set; } = 1;
     [SerializeField] private GameObject interactionText;
 
-    public bool CanInteract => true;
+    public bool CanInteract { get; set; } = true;
 
     public void Interact(PlayerInteractions interactions)
     {
