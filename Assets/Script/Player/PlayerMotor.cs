@@ -5,17 +5,33 @@ public class PlayerMotor : MonoBehaviour
 {
     public static event Action<PlayerMotor> Crouched;
 
+    public bool isGrounded { get; private set; }
     private CharacterController controller;
-    public bool isGrounded;
     private Vector3 playerVelocity;
 
+    [Header("NoiseRadius")]
+    // NoiseRadius
+    [SerializeField] private float noiseRadius_Running;
+    [SerializeField] private float noiseRadius_Walking;
+    [SerializeField] private float noiseRadius_Crouching;
+    [SerializeField] MakeNoise _makeNoise;
+    
+    [Header("Movements")]
+    // Movements
     [SerializeField] private float groundedRayLength;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float MaxFallGravity = -20f;
     [SerializeField] private float speed = 5.0f;
     [SerializeField] private float crouchSpeed = 4.0f;
     [SerializeField] private float sprintmultiplier = 1.75f;
+    [SerializeField, Range(0f, 0.75f)] private float coyoteTime = 1.75f;
     
+    [Header("Jump")]
+    // Movements
+    [SerializeField] private float JumpHeight = 6f;
+    [SerializeField] private float CrouchJumpHeight = 4.5f;
+    
+    // private var
     private float baseSpeed;
     private bool lerpCrouch = false;
     private float crouchTimer = 0f;
@@ -25,11 +41,7 @@ public class PlayerMotor : MonoBehaviour
     private float gravityMultiplierUsed;
     private bool isJumping = false;
     private bool canJump = true;
-
-    [SerializeField] private float minJumpHeight = 4f;
-    [SerializeField] private float maxJumpHeight = 6f;
-    [SerializeField] private float CrouchminJumpHeight = 3f;
-    [SerializeField] private float CrouchmaxJumpHeight = 4.5f;
+    
 
 
     void Start()
@@ -43,8 +55,6 @@ public class PlayerMotor : MonoBehaviour
         canJump = CheckIsGrounded(groundedRayLength);
         isGrounded = controller.isGrounded;
         ApplyGravity();
-        if(isJumping)
-            PushJump();
         
 
         if (lerpCrouch)
@@ -102,7 +112,6 @@ public class PlayerMotor : MonoBehaviour
                 gravityMultiplierUsed = Mathf.Lerp(gravity, MaxFallGravity, easedGravity);
                 playerVelocity.y += MaxFallGravity * Time.deltaTime;
             }
-            Debug.Log($"velocity y :{playerVelocity.y}");
         }
         
     }
@@ -112,13 +121,36 @@ public class PlayerMotor : MonoBehaviour
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
-
-        if(crouchActive)
-            controller.Move(transform.TransformDirection(moveDirection) * crouchSpeed * Time.deltaTime);
-        else
-            controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
-
+        
         controller.Move(playerVelocity * Time.deltaTime);
+
+        if (moveDirection != Vector3.zero)
+        {
+            if (crouchActive)
+            {
+                controller.Move(transform.TransformDirection(moveDirection) * crouchSpeed * Time.deltaTime);
+                Vector3 p1 = transform.position + controller.center;
+                _makeNoise.Noise(this.gameObject, p1, noiseRadius_Crouching);
+                Debug.Log("NOISE crouch");
+            }
+            else
+            {
+                controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+                if (sprinting)
+                {
+                    Vector3 p1 = transform.position + controller.center;
+                    _makeNoise.Noise(this.gameObject, p1, noiseRadius_Walking);
+                    Debug.Log("NOISE sprint");
+                }
+                else
+                {
+                    Vector3 p1 = transform.position + controller.center;
+                    _makeNoise.Noise(this.gameObject, p1, noiseRadius_Running);
+                    Debug.Log("NOISE walk");
+                    
+                }
+            }
+        }
     }
     
     public void JumpStart()
@@ -128,46 +160,21 @@ public class PlayerMotor : MonoBehaviour
             return;
         if(crouchActive)
         {
-            playerVelocity.y = CrouchminJumpHeight;
+            playerVelocity.y = CrouchJumpHeight;
             isJumping = true;
         }
         if (canJump)
         {
-            playerVelocity.y = minJumpHeight;
+            playerVelocity.y = JumpHeight;
             isJumping = true;
         }
-    }
-
-    private void PushJump()
-    {
-        if (crouchActive)
-        {
-            playerVelocity.y -= gravity * Time.deltaTime;
-            playerVelocity.y += CrouchminJumpHeight * Time.deltaTime;
-            if (playerVelocity.y > CrouchmaxJumpHeight)
-            {
-                playerVelocity.y = CrouchmaxJumpHeight;
-                isJumping = false;
-            }
-
-            return;
-        }
-        
-        playerVelocity.y -= gravity * Time.deltaTime;
-        playerVelocity.y += minJumpHeight * Time.deltaTime;
-        if (playerVelocity.y > maxJumpHeight)
-        {
-            playerVelocity.y = maxJumpHeight;
-            isJumping = false;
-        }
-
-        return;
     }
     
     public void JumpCanceled()
     {
         Debug.Log("Jump canceled");
         isJumping =  false;
+        playerVelocity *= 0.5f;
     }
 
     public void Crouch()

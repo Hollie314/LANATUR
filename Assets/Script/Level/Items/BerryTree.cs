@@ -10,7 +10,7 @@ public class BerryTree : MonoBehaviour, IInteractable
     // event interacted
 
     public int Priority { get; set; } = 1;
-    public bool CanInteract => true;
+    public bool CanInteract { get; set; } = true;
 
 
 
