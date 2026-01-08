@@ -1,5 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.AI;
+using System.Collections.Generic;
 
 public class AI_Iguane : MonoBehaviour
 {
@@ -16,6 +18,18 @@ public class AI_Iguane : MonoBehaviour
     [SerializeField] private float noiseRadius_Crouching;
     [SerializeField] private MakeNoise _makeNoise;
     
+    
+    // Eating Iguane variables
+    [ShowIf("is_eatingIguane")]
+    
+    // Shouting Iguane variables
+    [ShowIf("is_ShoutingIguane")] [SerializeField] private GameObject IguaneToProtect;
+    [ShowIf("is_ShoutingIguane")] [SerializeField] private List<Vector3> Waypoints = new List<Vector3>();
+    private int currentWaypoint;
+    
+    // Alpha Iguane variables
+    [ShowIf("is_AlphaIguane")]
+    
     // States
     private bool isEating = false;
     private bool isCarryingFood = false;
@@ -23,26 +37,24 @@ public class AI_Iguane : MonoBehaviour
     private bool isReleasingFood = false;
     private bool isShouting = false;
     
-    // Eating Iguane variables
-    [ShowIf("is_eatingIguane")]
+    // Others
+    private Animator animator;
+    private AudioSource audioSource;
+    private NavMeshAgent agent;
     
-    // Shouting Iguane variables
-    [ShowIf("is_ShoutingIguane")]
-    [SerializeField] private GameObject IguaneToProtect;
-    
-    // Alpha Iguane variables
-    [ShowIf("is_AlphaIguane")]
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        GoToWaypoint();
     }
 
     public void DetectNoise(GameObject detectedObject)
@@ -67,6 +79,18 @@ public class AI_Iguane : MonoBehaviour
         Debug.Log("IguaneRun");
     }
     #endregion
+
+    private void GoToWaypoint()
+    {
+        float distanceToWaypoint = Vector3.Distance(agent.destination, transform.position);
+
+        if (distanceToWaypoint <= 3f)
+        {
+            currentWaypoint = (currentWaypoint + 1) % Waypoints.Count;
+        }
+        
+        agent.SetDestination(Waypoints[currentWaypoint]);
+    }
 
     #region ShoutingIguane
     private void Shout()
