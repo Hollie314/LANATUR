@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
-    public PlayerControls Controls { get; private set; }
+    [SerializeField] public PlayerControls Controls { get; private set; }
 
     private PlayerControls.OnFootActions onFoot;
     private PlayerControls.UIActions uiActions;
