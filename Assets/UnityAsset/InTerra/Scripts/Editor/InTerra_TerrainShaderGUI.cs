@@ -352,7 +352,6 @@ namespace InTerra
 				EditorStyles.label.fontStyle = FontStyle.Bold;
 				InTerra_GUI.FoldoutToggle("Distance Blending (Hide Tiling)", "Cover distant area with scaled textures and/or stochastic texturing in the given distance from the camera.", ref distanceBlending, ref dbFoldout);
 
-				//distanceBlending = EditorGUILayout.ToggleLeft(LabelAndTooltip("Distance Blending (Hide Tiling)", "Cover distant area with scaled textures and/or stochastic texturing in the given distance from the camera."), distanceBlending);
 				EditorStyles.label.fontStyle = FontStyle.Normal;
 
 				if (EditorGUI.EndChangeCheck())
@@ -1064,7 +1063,6 @@ namespace InTerra
 
 			EditorGUILayout.Space();
 			//========================= TERRAIN LAYERS ===========================
-			//GUI.backgroundColor = new Color(0.8f, 0.8f, 0.3f);
 			using (new GUILayout.HorizontalScope(EditorStyles.helpBox, GUILayout.Height(27)))
 			{
 				string[] layersNumberLabels;

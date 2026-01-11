@@ -379,11 +379,11 @@ float3 ObjectTriplanarNormal(float3 normal, float3 tangent, float3 bitangent, fl
 
 
     #if defined(_NORMALMAPS) && !defined(_TERRAIN_NORMAL_IN_MASK) 
-        #if defined(_LAYERS_SIXTEEN) && (defined(INTERRA_OBJECT) || defined(INTERRA_MESH_TERRAIN))
+        #if defined(_LAYERS_SIXTEEN)           
             #define SampleNormals(i, uv) (UnpackNormals(SAMPLE_TEXTURE2D_ARRAY(_NormalArray16, sampler_Splat0, uv, i), _NormalScale##i).xyz)
             #define SampleNormalsGrad(i, uv, ddx, ddy) (UnpackNormals(SAMPLE_TEXTURE2D_ARRAY_GRAD(_NormalArray16, sampler_Splat0, uv, i, ddx, ddy), _NormalScale##i).xyz)
         #else
-            #define SampleNormals(i, uv) (UnpackNormals(SAMPLE_TEXTURE2D(_Normal##i, sampler_Normal0, uv), _NormalScale##i).xyz)
+            #define SampleNormals(i, uv) (UnpackNormals(SAMPLE_TEXTURE2D(_Normal##i, sampler_Splat0, uv), _NormalScale##i).xyz)
             #define SampleNormalsGrad(i, uv, ddx, ddy) (UnpackNormals(SAMPLE_TEXTURE2D_GRAD(_Normal##i, sampler_Splat0, uv, ddx, ddy), _NormalScale##i).xyz)
         #endif
         
@@ -451,8 +451,14 @@ float3 ObjectTriplanarNormal(float3 normal, float3 tangent, float3 bitangent, fl
     }
 
     #ifdef TERRAIN_MASK
-        #define Mask(i, uv) SAMPLE_TEXTURE2D(_Mask##i, sampler_Splat0, uv)
-        #define MaskGrad(i, uv, ddx, ddy) SAMPLE_TEXTURE2D_GRAD(_Mask##i, sampler_Splat0, uv, ddx, ddy)
+
+        #if defined(INTERRA_OBJECT)
+            #define Mask(i, uv) SAMPLE_TEXTURE2D(_Mask##i, sampler_Splat0, uv)
+            #define MaskGrad(i, uv, ddx, ddy) SAMPLE_TEXTURE2D_GRAD(_Mask##i, sampler_Splat0, uv, ddx, ddy)
+        #else
+                #define Mask(i, uv) SAMPLE_TEXTURE2D(_Mask##i, sampler_Mask0, uv)
+            #define MaskGrad(i, uv, ddx, ddy) SAMPLE_TEXTURE2D_GRAD(_Mask##i, sampler_Mask0, uv, ddx, ddy)
+        #endif
 
         #ifdef _TERRAIN_NORMAL_IN_MASK
             #define RemapMask(i, mask) (mask * float4(_MaskMapRemapScale##i.g, 1, _MaskMapRemapScale##i.b, 1)  \

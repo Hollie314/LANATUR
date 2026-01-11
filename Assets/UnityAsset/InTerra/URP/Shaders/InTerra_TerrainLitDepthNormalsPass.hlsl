@@ -229,6 +229,11 @@ void NormalMapMix(float4 uvMainAndLM, float2 uvSplat[_LAYER_COUNT], float3 posit
     #endif
 
     normalWS = NormalizeNormalPerPixel(normalWS);
+
+    //This is just workaround for Unity to force it to include sampler_Splat0 in all cases
+    normalWS.z = normalWS.z + SAMPLE_TEXTURE2D_LOD(_Splat0, sampler_Splat0, float2(0, 0), 10).x * 1e-5f;
+    normalWS.z = normalWS.z + SAMPLE_TEXTURE2D_LOD(_Normal0, sampler_Splat0, float2(0, 0), 10).x * 1e-5f;
+    //==========================================================================
     
     #if !defined(UNITY_2021_2_TO_2022_1)
         outNormalWS = half4(normalWS, 0.0);
