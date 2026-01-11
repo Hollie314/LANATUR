@@ -161,7 +161,7 @@ Shader "InTerra/HDRP Tessellation/Terrain (Lit with Features) 2023.1 or Heigher"
 
     SubShader
     {
-        PackageRequirements { "com.unity.render-pipelines.high-definition":"[15.0.0,18.0.0]" }
+        PackageRequirements { "com.unity.render-pipelines.high-definition":"[15.0.0,19.0.0]" }
 
         // This tags allow to use the shader replacement features
         Tags
@@ -457,9 +457,15 @@ Shader "InTerra/HDRP Tessellation/Terrain (Lit with Features) 2023.1 or Heigher"
             #undef TESSELLATION_ON
 
             #pragma multi_compile _ LIGHTMAP_ON
+            #pragma multi_compile _ LIGHTMAP_BICUBIC_SAMPLING
             #pragma multi_compile _ DYNAMICLIGHTMAP_ON
             #pragma multi_compile _ PROBE_VOLUMES_L1 PROBE_VOLUMES_L2
             #pragma multi_compile _ DIRLIGHTMAP_COMBINED
+            #pragma multi_compile DECALS_OFF DECALS_3RT DECALS_4RT
+            #pragma multi_compile _ DECAL_SURFACE_GRADIENT
+
+            #define PATH_TRACING_CLUSTERED_DECALS
+
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
@@ -484,9 +490,16 @@ Shader "InTerra/HDRP Tessellation/Terrain (Lit with Features) 2023.1 or Heigher"
 
             #pragma multi_compile _ DEBUG_DISPLAY
             #pragma multi_compile _ LIGHTMAP_ON
+            #pragma multi_compile _ LIGHTMAP_BICUBIC_SAMPLING
             #pragma multi_compile _ DYNAMICLIGHTMAP_ON
             #pragma multi_compile _ PROBE_VOLUMES_L1 PROBE_VOLUMES_L2
             #pragma multi_compile _ DIRLIGHTMAP_COMBINED
+
+            #pragma multi_compile DECALS_OFF DECALS_3RT DECALS_4RT
+            #pragma multi_compile _ DECAL_SURFACE_GRADIENT
+
+            #define PATH_TRACING_CLUSTERED_DECALS
+
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
@@ -509,9 +522,15 @@ Shader "InTerra/HDRP Tessellation/Terrain (Lit with Features) 2023.1 or Heigher"
             #undef TESSELLATION_ON
 
             #pragma multi_compile _ LIGHTMAP_ON
+            #pragma multi_compile _ LIGHTMAP_BICUBIC_SAMPLING
             #pragma multi_compile _ DYNAMICLIGHTMAP_ON
             #pragma multi_compile _ PROBE_VOLUMES_L1 PROBE_VOLUMES_L2
             #pragma multi_compile _ DIRLIGHTMAP_COMBINED
+            #pragma multi_compile DECALS_OFF DECALS_3RT DECALS_4RT
+            #pragma multi_compile _ DECAL_SURFACE_GRADIENT
+
+            #define PATH_TRACING_CLUSTERED_DECALS
+
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"

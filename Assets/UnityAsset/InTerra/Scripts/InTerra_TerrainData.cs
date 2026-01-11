@@ -34,6 +34,10 @@ namespace InTerra
                     if (!InTerra_Setting.DisableAllAutoUpdates) InTerra_Data.UpdateTerrainData(InTerra_Setting.DictionaryUpdate);
                 }
             }
+
+            #if UNITY_EDITOR && (USING_URP || USING_HDRP)												
+                TerrainCallbacks.textureChanged += TextureChange;
+            #endif
         }
 
         void Update()
@@ -43,7 +47,7 @@ namespace InTerra
                 Material terrMat = terrain.materialTemplate;
 
                 if(InTerra_Data.CheckTerrainShader(terrMat) && terrain.terrainData)
-                {
+                {                  
                     InTerra_UpdateAndCheck sceneData = InTerra_Data.GetSceneData();
                     sceneData.TracksUpdate = terrMat.GetFloat("_Tracks") == 1;
 
@@ -103,5 +107,19 @@ namespace InTerra
                 gameObject.TryGetComponent<Terrain>(out terrain);
             }
         }
+
+        #if UNITY_EDITOR && (USING_URP || USING_HDRP)
+            void TextureChange(Terrain terrain, string textureName, RectInt texelRegion, bool synched)
+            {
+                Material terrainMatrial = terrain.materialTemplate;
+                if (synched && terrainMatrial && terrainMatrial.IsKeywordEnabled("_LAYERS_SIXTEEN"))
+                {
+                    splatTextureArray16 = InTerra_Data.DiffuseTextureArrays16(terrain.terrainData.terrainLayers);
+				    normalTextureArray16 = InTerra_Data.NormalTextureArrays16(terrain.terrainData.terrainLayers);
+                    InTerra_Data.TerrainMaterialPropertyBlockUpdate(terrain, true);
+                }		                   
+            }
+        #endif
+
     }
 }

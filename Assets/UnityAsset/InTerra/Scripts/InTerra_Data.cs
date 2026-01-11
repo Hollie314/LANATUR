@@ -1,7 +1,7 @@
 ﻿//==========================================================
 //-------------|          INTERRA          |---------------
 //==========================================================
-//-------------|           4.6.1           |--------------- 
+//-------------|           4.6.2           |--------------- 
 //==========================================================
 //-------------|   © INEFFABILIS ARCANUM   |---------------
 //==========================================================
@@ -27,7 +27,7 @@ namespace InTerra
 {
 	public static class InTerra_Data
 	{
-		public const string InTerraVersion = "4.6.1";
+		public const string InTerraVersion = "4.6.2";
 
 		public const string ObjectShaderName = "InTerra/Built-in/Object into Terrain Integration";
 		public const string DiffuseObjectShaderName = "InTerra/Built-in/Diffuse/Object into Terrain Integration (Diffuse)";
@@ -111,6 +111,7 @@ namespace InTerra
 		static public bool initUpdate;
 
 		static Camera TrackCamera;
+		static public string TrackCameraTag = "MainCamera";
 		static Vector3 TrackCameraForwardVec;
 		static Vector3 TrackCameraPositon;
 		static float TracksUpdateTimeCount;
@@ -261,7 +262,7 @@ namespace InTerra
 			foreach (Material mat in materialTerrain.Keys)
 			{
 				Terrain terrain = materialTerrain[mat];
-				if (terrain != null && terrain.materialTemplate != null && CheckObjectShader(mat))
+				if (terrain != null && terrain.materialTemplate != null && CheckTerrainShader(terrain.materialTemplate) && CheckObjectShader(mat))
 				{
 					#if (USING_URP || USING_HDRP)
 					if (!(mat.IsKeywordEnabled("_LAYERS_ONE") || mat.IsKeywordEnabled("_LAYERS_TWO")))
@@ -854,7 +855,7 @@ namespace InTerra
 							else if (EditorWindow.focusedWindow != null && EditorWindow.focusedWindow.ToString() == " (UnityEditor.GameView)" )
 							{
                                 Camera[] cameras = Camera.allCameras;
-                                activeCamera = cameras.FirstOrDefault(c => c.enabled && c.CompareTag("MainCamera")) 
+                                activeCamera = cameras.FirstOrDefault(c => c.enabled && c.CompareTag(TrackCameraTag)) 
                                             ?? cameras.FirstOrDefault(c => c.enabled);
 							}
 
@@ -869,7 +870,7 @@ namespace InTerra
                                 TrackCameraPositon = TrackCameraPositon != Vector3.zero ? TrackCameraPositon : Vector3.zero;
                             }
 						#else
-							Camera activeCamera = Camera.allCameras.FirstOrDefault(c => c.enabled && c.CompareTag("MainCamera")) 
+							Camera activeCamera = Camera.allCameras.FirstOrDefault(c => c.enabled && c.CompareTag(TrackCameraTag)) 
                                                ?? Camera.allCameras.FirstOrDefault(c => c.enabled);
                             if (activeCamera != null)
                             {

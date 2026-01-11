@@ -2,28 +2,20 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: InTerra_Terrain_URP_Demo
   m_Shader: {fileID: 4800000, guid: 3e3de67027c68e34a96553bba38745c1, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _TERRAIN_DISTANCEBLEND
-  - _TERRAIN_TRIPLANAR
-  m_InvalidKeywords:
-  - _TERRAIN_BLEND_HEIGHT
-  - _TERRAIN_TRIPLANAR_ALL
+  m_ShaderKeywords: _TERRAIN_DISTANCEBLEND
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2225
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -170,7 +162,6 @@ Material:
     - _DisableDistanceBlending: 0
     - _DisableOffsetY: 0
     - _DistanceBlend: 0
-    - _DistanceBlendingFoldout: 1
     - _Distance_HeightTransition: 15.1
     - _DstBlend: 0
     - _EnableHeightBlend: 1
@@ -187,7 +178,6 @@ Material:
     - _HeightBlend: 0
     - _HeightTransition: 54.98
     - _HeightmapBlending: 1
-    - _HeightmapBlendingFoldout: 1
     - _LayerIndex1: 0
     - _LayerIndex2: 1
     - _Metallic: 0
@@ -204,8 +194,6 @@ Material:
     - _ParallaxTrackAffineSteps: 3
     - _ParallaxTrackSteps: 5
     - _PassNumber: 0
-    - _PuddleHorizontalWeight: 0.8
-    - _PuddleWetnessHorizontalWeight: 0.5
     - _Sharpness: 80
     - _Smoothness0: 0.5
     - _Smoothness1: 0.5
@@ -216,13 +204,9 @@ Material:
     - _SrcBlend: 1
     - _SteepDistortion: 0
     - _Steepness: 0.1
-    - _TerrainColorTintMTB: 0
-    - _TerrainColorTintMode: 0
-    - _TerrainColorTintStrenght: 0
-    - _TerrainNormalTintMTB: 0
+    - _TerrainColorTintStrenght: 0.1
     - _TerrainNormalTintStrenght: 0
     - _Terrain_Parallax: 1
-    - _Terrain_ParallaxFoldout: 1
     - _TrackAO: 0.8
     - _TrackDetailNormalStrenght: 1
     - _TrackEdgeNormals: 2
@@ -233,9 +217,7 @@ Material:
     - _TrackNormalStrenght: 1
     - _TrackTessallation: 0
     - _Tracks: 0
-    - _TracksFoldout: 0
     - _Triplanar: 0
-    - _TriplanarMappingFoldout: 1
     - _TriplanarOneToAllSteep: 0
     - _TriplanarSharpness: 9
     - _UVSec: 0
@@ -263,13 +245,12 @@ Material:
     - _MaskMapRemapScale1: {r: 0, g: 0, b: 0, a: 0}
     - _MaskMapRemapScale2: {r: 0, g: 0, b: 0, a: 0}
     - _MaskMapRemapScale3: {r: 0, g: 0, b: 0, a: 0}
-    - _MipMapFade: {r: 29.840004, g: 35, b: 0, a: 35}
+    - _MipMapFade: {r: 3, g: 15, b: 0, a: 35}
     - _NormIntersect: {r: 0, g: 0.5, b: 0, a: 1}
     - _SplatUV0: {r: 1, g: 1, b: 0, a: 0}
     - _SplatUV1: {r: 1, g: 1, b: 0, a: 0}
     - _SplatUV2: {r: 1, g: 1, b: 0, a: 0}
     - _SplatUV3: {r: 1, g: 1, b: 0, a: 0}
-    - _TerrainColorTintDistance: {r: 3, g: 15, b: 0, a: 50}
     - _TerrainHeightmapScale: {r: 0, g: 0, b: 0, a: 1}
     - _TerrainMetallic: {r: 0, g: 0, b: 0, a: 0}
     - _TerrainNormalScale: {r: 1, g: 1, b: 1, a: 1}
@@ -279,4 +260,3 @@ Material:
     - _TerrainSizeXZPosY: {r: 50, g: 50, b: 0, a: 0}
     - _TerrainSmoothness: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
