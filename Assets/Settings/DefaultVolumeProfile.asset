@@ -465,6 +465,7 @@ MonoBehaviour:
   - {fileID: -6288072647309666549}
   - {fileID: 7518938298396184218}
   - {fileID: -1410297666881709256}
+  - {fileID: 6664879096048422752}
 --- !u!114 &853819529557874667
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -853,6 +854,60 @@ MonoBehaviour:
   intensity:
     m_OverrideState: 1
     m_Value: 0
+--- !u!114 &6664879096048422752
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f6b36520e62e54798b497b3077424a, type: 3}
+  m_Name: VolumeMeshBlending
+  m_EditorClassIdentifier: Assembly-CSharp::Kimede.VolumeMeshBlending
+  active: 1
+  enabled:
+    m_OverrideState: 1
+    m_Value: 0
+  selectedLayers:
+    m_OverrideState: 1
+    m_Value:
+      serializedVersion: 2
+      m_Bits: 4294967295
+  processingIterations:
+    m_OverrideState: 1
+    m_Value: 3
+  blendingRadius:
+    m_OverrideState: 1
+    m_Value: 0.1
+  scalingFactor:
+    m_OverrideState: 1
+    m_Value: 50
+  distanceFade:
+    m_OverrideState: 1
+    m_Value: 2
+  minimumRange:
+    m_OverrideState: 1
+    m_Value: 0.5
+  maximumRange:
+    m_OverrideState: 1
+    m_Value: 100
+  rangeFalloff:
+    m_OverrideState: 1
+    m_Value: 2
+  surfaceThreshold:
+    m_OverrideState: 1
+    m_Value: 0.5
+  ColorIntensity:
+    m_OverrideState: 1
+    m_Value: 1
+  OpacityLevel:
+    m_OverrideState: 1
+    m_Value: 1
+  EntityTolerance:
+    m_OverrideState: 1
+    m_Value: 0.2
 --- !u!114 &6940869943325143175
 MonoBehaviour:
   m_ObjectHideFlags: 3
