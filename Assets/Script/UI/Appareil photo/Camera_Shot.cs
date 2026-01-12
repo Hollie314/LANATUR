@@ -141,6 +141,7 @@ public class Camera_Shot : MonoBehaviour
     IEnumerator TakePicture()
     {
         yield return new WaitForEndOfFrame();
+        placeholderSFX.Play();
         CapturePhoto();
         Camera_UI.UpdateAlbumPicture(screenCapture);
     }

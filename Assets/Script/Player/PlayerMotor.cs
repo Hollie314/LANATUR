@@ -31,6 +31,16 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private float JumpHeight = 6f;
     [SerializeField] private float CrouchJumpHeight = 4.5f;
     
+    [Header("SFX")]
+    // Movements
+    [SerializeField] private AudioSource playerMoveAudioSource;
+    [SerializeField] private AudioSource playerJumpAudioSource;
+    [SerializeField] private AudioClip jumpSFX;
+    [SerializeField] private AudioClip fallSFX;
+    [SerializeField] private AudioClip CrouchSFX;
+    [SerializeField] private AudioClip WalkSFX;
+    [SerializeField] private AudioClip SprintSFX;
+    
     // private var
     private float baseSpeed;
     private bool lerpCrouch = false;
@@ -53,6 +63,7 @@ public class PlayerMotor : MonoBehaviour
     void Update()
     {
         canJump = CheckIsGrounded(groundedRayLength);
+        
         isGrounded = controller.isGrounded;
         ApplyGravity();
         
@@ -81,6 +92,12 @@ public class PlayerMotor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, rayLength))
         {
+            //SFX
+            if(!canJump)
+            {
+                playerJumpAudioSource.clip = fallSFX;
+                playerJumpAudioSource.Play();
+            }
             return true;
         }
 
@@ -132,6 +149,13 @@ public class PlayerMotor : MonoBehaviour
                 Vector3 p1 = transform.position + controller.center;
                 _makeNoise.Noise(this.gameObject, p1, noiseRadius_Crouching);
                 Debug.Log("NOISE crouch");
+                
+                //SFX
+                if (!playerMoveAudioSource.isPlaying || !playerMoveAudioSource.clip == CrouchSFX)
+                {
+                    playerMoveAudioSource.clip = CrouchSFX;
+                    playerMoveAudioSource.Play();
+                }
             }
             else
             {
@@ -141,6 +165,13 @@ public class PlayerMotor : MonoBehaviour
                     Vector3 p1 = transform.position + controller.center;
                     _makeNoise.Noise(this.gameObject, p1, noiseRadius_Walking);
                     Debug.Log("NOISE sprint");
+                    
+                    //SFX
+                    if (!playerMoveAudioSource.isPlaying || !playerMoveAudioSource.clip == SprintSFX)
+                    {
+                        playerMoveAudioSource.clip = SprintSFX;
+                        playerMoveAudioSource.Play();
+                    }
                 }
                 else
                 {
@@ -148,9 +179,18 @@ public class PlayerMotor : MonoBehaviour
                     _makeNoise.Noise(this.gameObject, p1, noiseRadius_Running);
                     Debug.Log("NOISE walk");
                     
+                    //SFX
+                    if (!playerMoveAudioSource.isPlaying || !playerMoveAudioSource.clip == WalkSFX)
+                    {
+                        playerMoveAudioSource.clip = WalkSFX;
+                        playerMoveAudioSource.Play();
+                    }
                 }
             }
         }
+        //SFX
+        else
+            playerMoveAudioSource.Stop();
     }
     
     public void JumpStart()
@@ -158,6 +198,11 @@ public class PlayerMotor : MonoBehaviour
         Debug.Log("Jump");
         if(!canJump)
             return;
+        
+        //SFX
+        playerJumpAudioSource.clip = jumpSFX;
+        playerJumpAudioSource.Play();
+        
         if(crouchActive)
         {
             playerVelocity.y = CrouchJumpHeight;
