@@ -682,6 +682,7 @@ GameObject:
   - component: {fileID: 4084829452966059620}
   - component: {fileID: 4267424797519250833}
   - component: {fileID: 7632930691797776612}
+  - component: {fileID: 2786311286005915286}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -833,7 +834,7 @@ MonoBehaviour:
   noiseRadius_Running: 0
   noiseRadius_Walking: 0
   noiseRadius_Crouching: 0
-  _makeNoise: {fileID: 7744405046249080062}
+  _makeNoise: {fileID: 2786311286005915286}
   groundedRayLength: 1.6
   gravity: -9.81
   MaxFallGravity: -25
@@ -1112,6 +1113,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2786311286005915286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7517145291137018566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c16eec9b8714248b5b646337120f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MakeNoise
 --- !u!1 &7784458337332954185
 GameObject:
   m_ObjectHideFlags: 0
