@@ -61,7 +61,7 @@ public class AI_Iguane : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = transform.GetChild(0).GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         Waypoints = WaypointsBase;
@@ -96,11 +96,24 @@ public class AI_Iguane : MonoBehaviour
                 {
                     isShouting = false;
                     timeShouting = 0;
-                    animator.SetBool("isShouting", false);
+                    animator.SetBool("IsShouting", false);
                 }
             }
             else
+            {
+                agent.isStopped = false;
                 FollowIguane(IguaneToProtect);
+            }
+
+            if (isRunning)
+            {
+                float distanceToIguane = Vector3.Distance(IguaneToProtect.transform.position, transform.position);
+                if (distanceToIguane <= MaxDistanceFromIguane + 5)
+                {
+                    isRunning = false;
+                    agent.speed = baseSpeed;
+                }
+            }
         }
     }
 
@@ -125,23 +138,26 @@ public class AI_Iguane : MonoBehaviour
     {
         float distanceToWaypoint = Vector3.Distance(agent.destination, transform.position);
 
-        if (distanceToWaypoint <= 0.5f && !isEating)
+        if (distanceToWaypoint <= 1f && !isEating)
         {
             isEating = true;
         }
         
         agent.SetDestination(Waypoints[currentWaypoint].position);
+        Debug.Log($"current waypoint {currentWaypoint}");
     }
 
     private void Eat()
     {
         timeEating += Time.deltaTime;
+        Debug.Log("iguane eating");
         if (timeEating >= TimeToEat)
         {
             isEating = false;
             timeEating = 0;
             currentWaypoint = (currentWaypoint + 1) % Waypoints.Count;
-            Debug.Log($"current waypoint {currentWaypoint}");
+            agent.SetDestination(Waypoints[currentWaypoint].position);
+            Debug.Log("changed waypoint");
         }
     }
     
@@ -160,14 +176,19 @@ public class AI_Iguane : MonoBehaviour
         if (isShouting)
             return;
         float distanceToIguane = Vector3.Distance(IguaneToProtect.transform.position, transform.position);
-        if (distanceToIguane > MaxDistanceFromIguane)
+        if (distanceToIguane > MaxDistanceFromIguane + 5)
+        {
+            Run();
             return;
+        }
         
         Debug.Log("IguaneShout");
         isShouting = true;
-        animator.SetBool("isShouting", true);
+        animator.SetBool("IsShouting", true);
         audioSource.clip = ShoutAudio;
         audioSource.Play();
+        agent.isStopped = true;
+        
         // SphereCast a une certaine distance
         // Si la cible a un rigidbody, repousser avec les méchaniques Rigidbody
         // Si la cible a un CharacterController, repousser avec les méchaniques CharacterController
@@ -176,7 +197,7 @@ public class AI_Iguane : MonoBehaviour
 
     private void FollowIguane(GameObject iguane)
     {
-        agent.SetDestination(new Vector3(IguaneToProtect.transform.position.x + 2, iguane.transform.position.y, iguane.transform.position.z));
+        agent.SetDestination(new Vector3(IguaneToProtect.transform.position.x, iguane.transform.position.y + 5, iguane.transform.position.z));
     }
     #endregion
 }
