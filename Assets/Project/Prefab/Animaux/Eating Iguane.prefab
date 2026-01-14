@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ddd54c0a663dff4894b8b30f95e269a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AI_Iguane
-  is_EatingIguane: 0
+  is_EatingIguane: 1
   is_ShoutingIguane: 0
   is_AlphaIguane: 0
   noiseRadius_Shouting: 10
@@ -170,10 +170,14 @@ MonoBehaviour:
   runSpeed: 5
   ReactAtNoise_Tags:
   - Player
-  WaypointsBase: []
-  WaypointsOnEvent: []
-  TimeToEat: 0
-  TimeToRun: 0
+  WaypointsBase:
+  - {fileID: 0}
+  - {fileID: 0}
+  WaypointsOnEvent:
+  - {fileID: 0}
+  - {fileID: 0}
+  TimeToEat: 5
+  TimeToRun: 5
   IguaneToProtect: {fileID: 0}
   ShoutAudio: {fileID: 0}
   TimeToShout: 0
@@ -410,7 +414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8191241579165853945}
   m_Layer: 9
-  m_Name: Iguane
+  m_Name: Eating Iguane
   m_TagString: Iguane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

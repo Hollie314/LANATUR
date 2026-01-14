@@ -4,8 +4,14 @@ public class MakeNoise : MonoBehaviour
 {
     [SerializeField] private LayerMask layerHearing;
     
-    public void Noise(GameObject thisObject, Vector3 position,float noiseRadius,AudioSource audioSource = null, AudioClip audioClip = null)
+    public void Noise(GameObject thisObject, Vector3 position,float noiseRadius, AudioSource audioSource = null, AudioClip audioClip = null)
     {
+        if (audioSource && audioClip)
+        {
+            audioSource.clip = audioClip;
+            audioSource.Play();
+        }
+        
         RaycastHit[] allHit;
         allHit = Physics.SphereCastAll(position, noiseRadius, thisObject.transform.forward, noiseRadius, layerHearing);
         Debug.DrawRay(position, transform.forward * noiseRadius, Color.red);

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 
@@ -7,6 +8,8 @@ public class Digicode : MonoBehaviour, IInteractable
     [SerializeField] private GameObject interactionText;
 
     public bool CanInteract { get; set; } = true;
+    
+    public static event Action<Digicode> OnCodeEntered;
     
     [SerializeField] private string code;
     [SerializeField] private TextMeshProUGUI codeTMP;
@@ -78,6 +81,8 @@ public class Digicode : MonoBehaviour, IInteractable
         
         CanInteract = false;
         interactionText.SetActive(false);
+        
+        OnCodeEntered?.Invoke(this);
     }
 
     private void Lose()

@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AI_Iguane
   is_EatingIguane: 0
-  is_ShoutingIguane: 0
+  is_ShoutingIguane: 1
   is_AlphaIguane: 0
   noiseRadius_Shouting: 10
   noiseRadius_Running: 0
@@ -175,9 +175,9 @@ MonoBehaviour:
   TimeToEat: 0
   TimeToRun: 0
   IguaneToProtect: {fileID: 0}
-  ShoutAudio: {fileID: 0}
-  TimeToShout: 0
-  MaxDistanceFromIguane: 0
+  ShoutAudio: {fileID: 8300000, guid: 5abb6046bcd534f4488a293f68c06299, type: 3}
+  TimeToShout: 2.5
+  MaxDistanceFromIguane: 7
 --- !u!114 &2886151350851344176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8191241579165853945}
   m_Layer: 9
-  m_Name: Iguane
+  m_Name: Shouting Iguane
   m_TagString: Iguane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
