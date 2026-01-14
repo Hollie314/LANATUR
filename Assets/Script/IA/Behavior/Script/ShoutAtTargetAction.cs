@@ -14,7 +14,7 @@ public partial class ShoutAtTargetAction : Action
 
     protected override Status OnStart()
     {
-        Shout.Value.TryShout(Target);
+        //Shout.Value.TryShout(Target);
         return Status.Success;
     }
 

@@ -13,13 +13,15 @@ GameObject:
   - component: {fileID: 1709565948228661393}
   - component: {fileID: 3429932983094538481}
   - component: {fileID: 3104745778426151230}
-  - component: {fileID: 3205272799573136449}
+  - component: {fileID: 4894382883135996077}
   - component: {fileID: 2886151350851344176}
   - component: {fileID: 6498422375879726885}
   - component: {fileID: 5785730490117102159}
   - component: {fileID: 4366692523988818821}
   - component: {fileID: 9066056419027238205}
   - component: {fileID: 6721517442877691147}
+  - component: {fileID: 3298293076567440407}
+  - component: {fileID: 319137886795229192}
   m_Layer: 9
   m_Name: Iguane
   m_TagString: Iguane
@@ -40,7 +42,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 9140351095119270865}
+  - {fileID: 6555045337543494411}
   - {fileID: 1164944745878720720}
   m_Father: {fileID: 8191241579165853945}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -131,9 +133,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 2666892254660799140}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.89
-  m_Speed: 1.5
-  m_Acceleration: 3
+  m_Radius: 0.5
+  m_Speed: 7
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -144,7 +146,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!114 &3205272799573136449
+--- !u!114 &4894382883135996077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,22 +159,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AI_Iguane
   is_EatingIguane: 0
-  is_ShoutingIguane: 0
+  is_ShoutingIguane: 1
   is_AlphaIguane: 0
+  noiseRadius_Shouting: 10
   noiseRadius_Running: 0
   noiseRadius_Walking: 0
   noiseRadius_Crouching: 0
-  _makeNoise: {fileID: 0}
+  _makeNoise: {fileID: 3298293076567440407}
   baseSpeed: 1.5
   runSpeed: 5
+  ReactAtNoise_Tags:
+  - Player
   WaypointsBase: []
   WaypointsOnEvent: []
   TimeToEat: 0
   TimeToRun: 0
   IguaneToProtect: {fileID: 0}
-  ShoutAudio: {fileID: 0}
-  TimeToShout: 0
-  MaxDistanceFromIguane: 0
+  ShoutAudio: {fileID: 8300000, guid: 5abb6046bcd534f4488a293f68c06299, type: 3}
+  TimeToShout: 2.5
+  MaxDistanceFromIguane: 7
 --- !u!114 &2886151350851344176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115519b895e2e30419ccd102e7b7249b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShoutAtTarget
-  shoutForce: 5
+  ShoutSphere: {fileID: 8776513140138690467, guid: e0f29b7681235ae46b1eb096f0da6d47, type: 3}
+  shoutFinalRadius: 8
 --- !u!135 &6498422375879726885
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -352,6 +358,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OnScanned
   Scans: {fileID: 7439003848826003765}
+--- !u!114 &3298293076567440407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666892254660799140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c16eec9b8714248b5b646337120f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MakeNoise
+  layerHearing:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!54 &319137886795229192
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666892254660799140}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6217229672669762608
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8191241579165853945}
   m_Layer: 9
-  m_Name: Iguane
+  m_Name: Shouting Iguane
   m_TagString: Iguane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -683,7 +731,7 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!1001 &8742530973818860602
+--- !u!1001 &6733596659669871840
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -691,73 +739,87 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3309931830969698514}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.444
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
+    - target: {fileID: -8679921383154817045, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
+    - target: {fileID: 919132149155446097, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
       propertyPath: m_Name
-      value: iguane_crie_V2
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866666021909216657, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 0e0f4bfb88ba7a349b469393109463b7, type: 2}
-    - target: {fileID: 5866666021909216657, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
-      propertyPath: m_UpdateMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866666021909216657, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
-      propertyPath: m_CullingMode
-      value: 0
+      value: iguane uv v1.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
---- !u!4 &9140351095119270865 stripped
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6139618968774932847}
+  m_SourcePrefab: {fileID: 100100000, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
+--- !u!1 &5887299472293892529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
+  m_PrefabInstance: {fileID: 6733596659669871840}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6139618968774932847
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5887299472293892529}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
+  m_Controller: {fileID: 9100000, guid: 0e0f4bfb88ba7a349b469393109463b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &6555045337543494411 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1858491a5839f0d48b18982a5cd8f726, type: 3}
-  m_PrefabInstance: {fileID: 8742530973818860602}
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 81afe943183090c4b80a1e0529784e6c, type: 3}
+  m_PrefabInstance: {fileID: 6733596659669871840}
   m_PrefabAsset: {fileID: 0}
