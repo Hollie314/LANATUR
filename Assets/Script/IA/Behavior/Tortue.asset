@@ -32,14 +32,14 @@ MonoBehaviour:
           rid: 2144584587673338049
         BlackboardGroupReferences: []
         Root:
-          rid: 5883699070551457937
+          rid: 5883699364800495743
         m_ActiveNodes: []
         m_NodesToTick: []
         m_NodesToEnd:
           rid: 2144584587673338051
         m_EndedNodes:
           rid: 2144584587673338052
-        m_VersionTimestamp: 639038311617143700
+        m_VersionTimestamp: 639044252800971984
     - rid: 2144584587673338049
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -62,7 +62,7 @@ MonoBehaviour:
         - rid: 8049576403196445599
         - rid: 8049576403196445600
         - rid: 8049576403196445601
-    - rid: 5883699070551457937
+    - rid: 5883699364800495743
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -73,10 +73,10 @@ MonoBehaviour:
         m_Parent:
           rid: -2
         m_Child:
-          rid: 5883699070551457938
+          rid: 5883699364800495744
         Repeat: 0
         AllowMultipleRepeatsPerTick: 0
-    - rid: 5883699070551457938
+    - rid: 5883699364800495744
       type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -85,11 +85,11 @@ MonoBehaviour:
         Graph:
           rid: 2144584587673338048
         m_Parent:
-          rid: 5883699070551457937
+          rid: 5883699364800495743
         m_Children:
-        - rid: 5883699070551457939
-        - rid: 5883699070551457940
-    - rid: 5883699070551457939
+        - rid: 5883699364800495745
+        - rid: 5883699364800495746
+    - rid: 5883699364800495745
       type: {class: SetWaypointsWithPatheeAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -98,12 +98,12 @@ MonoBehaviour:
         Graph:
           rid: 2144584587673338048
         m_Parent:
-          rid: 5883699070551457938
+          rid: 5883699364800495744
         Waypoints:
           rid: 8049576403196445597
         Pathee:
           rid: 8049576403196445598
-    - rid: 5883699070551457940
+    - rid: 5883699364800495746
       type: {class: ParallelAllComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -112,24 +112,10 @@ MonoBehaviour:
         Graph:
           rid: 2144584587673338048
         m_Parent:
-          rid: 5883699070551457938
+          rid: 5883699364800495744
         m_Children:
-        - rid: 5883699070551457941
-        - rid: 5883699070551457942
-    - rid: 5883699070551457941
-      type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 482752556318208594
-          m_Value1: 5492368078914993392
-        Graph:
-          rid: 2144584587673338048
-        m_Parent:
-          rid: 5883699070551457940
-        m_Children:
-        - rid: 5883699070551457943
-        - rid: 5883699070551457944
-    - rid: 5883699070551457942
+        - rid: 5883699364800495747
+    - rid: 5883699364800495747
       type: {class: RepeaterModifier, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -138,37 +124,11 @@ MonoBehaviour:
         Graph:
           rid: 2144584587673338048
         m_Parent:
-          rid: 5883699070551457940
+          rid: 5883699364800495746
         m_Child:
-          rid: 5883699070551457945
+          rid: 5883699364800495748
         m_AllowMultipleRepeatsPerTick: 0
-    - rid: 5883699070551457943
-      type: {class: SubscribeToEventAction, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          m_Value0: 12894446252521885405
-          m_Value1: 2985962457491688365
-        Graph:
-          rid: 2144584587673338048
-        m_Parent:
-          rid: 5883699070551457941
-        Event:
-          rid: 8049576403196445601
-    - rid: 5883699070551457944
-      type: {class: SetWaypointsWithPatheeAction, ns: , asm: Assembly-CSharp}
-      data:
-        ID:
-          m_Value0: 10951243735365913782
-          m_Value1: 2633595635847622665
-        Graph:
-          rid: 2144584587673338048
-        m_Parent:
-          rid: 5883699070551457941
-        Waypoints:
-          rid: 8049576403196445597
-        Pathee:
-          rid: 8049576403196445599
-    - rid: 5883699070551457945
+    - rid: 5883699364800495748
       type: {class: PatrolAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -177,22 +137,22 @@ MonoBehaviour:
         Graph:
           rid: 2144584587673338048
         m_Parent:
-          rid: 5883699070551457942
+          rid: 5883699364800495747
         Agent:
           rid: 8049576403196445596
         Waypoints:
           rid: 8049576403196445597
         Speed:
-          rid: 5883699070551457946
+          rid: 5883699364800495749
         WaypointWaitTime:
-          rid: 5883699070551457947
+          rid: 5883699364800495750
         DistanceThreshold:
-          rid: 5883699070551457948
+          rid: 5883699364800495751
         AnimatorSpeedParam:
-          rid: 5883699070551457949
+          rid: 5883699364800495752
         PreserveLatestPatrolPoint:
-          rid: 5883699070551457950
-    - rid: 5883699070551457946
+          rid: 5883699364800495753
+    - rid: 5883699364800495749
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -200,7 +160,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: 3
-    - rid: 5883699070551457947
+    - rid: 5883699364800495750
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -208,7 +168,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: 1
-    - rid: 5883699070551457948
+    - rid: 5883699364800495751
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -216,7 +176,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: 0.2
-    - rid: 5883699070551457949
+    - rid: 5883699364800495752
       type: {class: 'BlackboardVariable`1[[System.String, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -224,7 +184,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: SpeedMagnitude
-    - rid: 5883699070551457950
+    - rid: 5883699364800495753
       type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -303,7 +263,7 @@ MonoBehaviour:
   - rid: 8049576403196445136
   - rid: 8049576403196445427
   - rid: 8049576407399399575
-  m_VersionTimestamp: 639038311617143700
+  m_VersionTimestamp: 639044252800971984
   m_SerializedVersion: 1
   m_DebugInfo: {fileID: 9089349459379564596}
   m_RuntimeGraph: {fileID: -3424971684761733843}
@@ -705,7 +665,6 @@ MonoBehaviour:
           rid: 8049576403196445106
         m_Connections:
         - rid: 8049576403196445137
-        - rid: 8049576407399399576
     - rid: 8049576403196445136
       type: {class: RepeatNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -838,8 +797,7 @@ MonoBehaviour:
         m_IsFloating: 0
         m_NodeModel:
           rid: 8049576407399399575
-        m_Connections:
-        - rid: 8049576403196445108
+        m_Connections: []
     - rid: 8049576407399399577
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
