@@ -93,6 +93,7 @@ public class AI_Iguane : MonoBehaviour
         if (is_EatingIguane)
         {
             GoToWaypoint();
+            Debug.Log($"isEating: {isEating}");
             if (isEating)
                 Eat();
             if (isRunning)
@@ -159,7 +160,8 @@ public class AI_Iguane : MonoBehaviour
     #region EatingIguane
     private void GoToWaypoint()
     {
-        float distanceToWaypoint = Vector3.Distance(agent.destination, transform.position);
+        float distanceToWaypoint = Vector3.Distance(Waypoints[currentWaypoint].position, transform.position);
+        Debug.Log($"distanceToWaypoint: {distanceToWaypoint}");
 
         if (distanceToWaypoint <= 1f && !isEating)
         {
