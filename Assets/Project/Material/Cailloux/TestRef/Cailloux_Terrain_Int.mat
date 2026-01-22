@@ -21,18 +21,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cailloux_Terrain_Int
-  m_Shader: {fileID: -6465566751694194690, guid: 8d15515b38fabfc4f8bfe1b2d8bbe173, type: 3}
+  m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - DR_ENABLE_LIGHTMAP_DIR
-  - DR_RIM_ON
+  m_ValidKeywords:
+  - DR_CEL_EXTRA_ON
+  - DR_SPECULAR_ON
   - _CELPRIMARYMODE_SINGLE
   - _DETAILMAPBLENDINGMODE_MULTIPLY
   - _GRADIENTSPACE_WORLD
   - _OUTLINESPACE_SCREEN
   - _TEXTUREBLENDINGMODE_MULTIPLY
+  m_InvalidKeywords:
   - _UNITYSHADOWMODE_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 5b69d160bbef2ad4596d1cad2ffa994d, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CelCurveTexture:
@@ -309,7 +309,7 @@ Material:
     - _BumpScale: 1
     - _CameraDistanceImpact: 0
     - _CastShadows: 1
-    - _CelExtraEnabled: 0
+    - _CelExtraEnabled: 1
     - _CelNumSteps: 5
     - _CelPrimaryMode: 1
     - _ClearCoatMask: 0
@@ -336,11 +336,11 @@ Material:
     - _EmissionFoldout: 0
     - _EmissionIntensity: 0
     - _EnvironmentReflections: 1
-    - _FlatRimEdgeSmoothness: 0.5
-    - _FlatRimLightAlign: 0.552
-    - _FlatRimSize: 0.5
+    - _FlatRimEdgeSmoothness: 0.817
+    - _FlatRimLightAlign: 0.587
+    - _FlatRimSize: 1
     - _FlatSpecularEdgeSmoothness: 0
-    - _FlatSpecularSize: 0.1
+    - _FlatSpecularSize: 1
     - _Flatness: 1
     - _FlatnessExtra: 1
     - _GlobalWetnessDisabled: 0
@@ -379,9 +379,9 @@ Material:
     - _LayerIndex1: 0
     - _LayerIndex2: 0
     - _LayerNumber: 0
-    - _LightContribution: 0
-    - _LightFalloffSize: 0
-    - _LightmapDirectionPitch: 0
+    - _LightContribution: 0.399
+    - _LightFalloffSize: 0.652
+    - _LightmapDirectionPitch: 121
     - _LightmapDirectionYaw: 0
     - _MeshTerrain: 0
     - _Metallic: 0
@@ -442,7 +442,7 @@ Material:
     - _QueueControl: -1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimEnabled: 1
+    - _RimEnabled: 0
     - _SelfShadingSize: 1
     - _SelfShadingSizeExtra: 0.6
     - _ShadowEdgeSize: 0.126
@@ -466,7 +466,7 @@ Material:
     - _Smoothness8: 0
     - _Smoothness9: 0
     - _SmoothnessTextureChannel: 0
-    - _SpecularEnabled: 0
+    - _SpecularEnabled: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
@@ -509,7 +509,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorDim: {r: 0.2603773, g: 0.2603773, b: 0.2603773, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
-    - _ColorDimExtra: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _ColorDimExtra: {r: 0.6528301, g: 0.6528301, b: 0.6528301, a: 1}
     - _ColorDimSteps: {r: 0.4943396, g: 0.4943396, b: 0.4943396, a: 1}
     - _ColorGradient: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
@@ -547,12 +547,12 @@ Material:
     - _DiffuseRemapScale9: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlatRimColor: {r: 0.535849, g: 0.535849, b: 0.535849, a: 1}
-    - _FlatSpecularColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _FlatSpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _HT_distance: {r: 3, g: 10, b: 0, a: 25}
     - _Intersection: {r: -0.5800867, g: 1.335815, b: -2, a: 3}
     - _Intersection2: {r: -0.4085604, g: 0.21595335, b: -1, a: 1.5}
     - _LayerHasMask: {r: 0, g: 0, b: 0, a: 0}
-    - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
+    - _LightmapDirection: {r: 0, g: -0.515038, b: 0.8571673, a: 0}
     - _MaskMapRemapOffset: {r: 0, g: 0.9600001, b: 0.01599996, a: 0}
     - _MaskMapRemapOffset0: {r: 0, g: 0, b: 0, a: 0}
     - _MaskMapRemapOffset1: {r: 0, g: 0, b: 0, a: 0}
