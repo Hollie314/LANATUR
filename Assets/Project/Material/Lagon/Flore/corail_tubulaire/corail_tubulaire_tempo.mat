@@ -21,11 +21,20 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: corail_tubulaire_tempo
-  m_Shader: {fileID: -6465566751694194690, guid: 8d15515b38fabfc4f8bfe1b2d8bbe173, type: 3}
+  m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ValidKeywords:
+  - DR_CEL_EXTRA_ON
+  - DR_RIM_ON
+  - DR_SPECULAR_ON
+  - _CELPRIMARYMODE_SINGLE
+  - _DETAILMAPBLENDINGMODE_MULTIPLY
+  - _GRADIENTSPACE_WORLD
+  - _OUTLINESPACE_SCREEN
+  - _TEXTUREBLENDINGMODE_MULTIPLY
+  m_InvalidKeywords:
+  - _UNITYSHADOWMODE_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -42,6 +51,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CelCurveTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CelStepTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -62,6 +79,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -279,12 +300,17 @@ Material:
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Ao: 1
+    - _BaseMapPremultiply: 0
     - _BaseTexturesTriplanar: 0
     - _BaseTexturesTriplanarSharpness: 8
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
+    - _CameraDistanceImpact: 0
     - _CastShadows: 1
+    - _CelExtraEnabled: 1
+    - _CelNumSteps: 3
+    - _CelPrimaryMode: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ControlNumber: 1
@@ -294,6 +320,8 @@ Material:
     - _Detail: 0
     - _DetailAlbedoMapScale: 1
     - _DetailFoldout: 0
+    - _DetailMapBlendingMode: 0
+    - _DetailMapImpact: 0
     - _DetailNormalMapScale: 1
     - _DetailNormalStrenght: 0
     - _DetailStrenght: 0.5
@@ -303,14 +331,27 @@ Material:
     - _Distance_HeightTransition: 10
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _EmissionEnabled: 1
-    - _EmissionFoldout: 1
+    - _EmissionEnabled: 0
+    - _EmissionFoldout: 0
     - _EmissionIntensity: 0
     - _EnvironmentReflections: 1
+    - _FlatRimEdgeSmoothness: 0
+    - _FlatRimLightAlign: 0.197
+    - _FlatRimSize: 0.368
+    - _FlatSpecularEdgeSmoothness: 0
+    - _FlatSpecularSize: 0.409
+    - _Flatness: 1
+    - _FlatnessExtra: 1
     - _GlobalWetnessDisabled: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _GradientAngle: 0
+    - _GradientCenterX: 0
+    - _GradientCenterY: 0
+    - _GradientEnabled: 0
+    - _GradientSize: 10
+    - _GradientSpace: 0
     - _HT_cover: 1
     - _HT_distance_scale: 0.25
     - _HasDetailAlbedo: 0
@@ -337,6 +378,10 @@ Material:
     - _LayerIndex1: 0
     - _LayerIndex2: 0
     - _LayerNumber: 0
+    - _LightContribution: 0.218
+    - _LightFalloffSize: 0.673
+    - _LightmapDirectionPitch: 0
+    - _LightmapDirectionYaw: 0
     - _MeshTerrain: 0
     - _Metallic: 0
     - _Metallic0: 0
@@ -376,6 +421,12 @@ Material:
     - _NumLayersCount: 3
     - _Object_Parallax: 0
     - _OcclusionStrength: 1
+    - _OutlineDepthOffset: 0
+    - _OutlineEnabled: 0
+    - _OutlineScale: 1
+    - _OutlineSpace: 0
+    - _OutlineWidth: 1
+    - _OverrideLightmapDir: 0
     - _Parallax: 0.005
     - _ParallaxAffineSteps: 3
     - _ParallaxAffineStepsTerrain: 3
@@ -390,6 +441,11 @@ Material:
     - _QueueControl: -1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RimEnabled: 1
+    - _SelfShadingSize: 0.528
+    - _SelfShadingSizeExtra: 0.036
+    - _ShadowEdgeSize: 0
+    - _ShadowEdgeSizeExtra: 0.05
     - _Sharpness: 80
     - _Smoothness: 0.5
     - _Smoothness0: 0
@@ -400,7 +456,7 @@ Material:
     - _Smoothness13: 0
     - _Smoothness14: 0
     - _Smoothness15: 0
-    - _Smoothness2: 1
+    - _Smoothness2: 0.298
     - _Smoothness3: 0
     - _Smoothness4: 0
     - _Smoothness5: 0
@@ -409,6 +465,7 @@ Material:
     - _Smoothness8: 0
     - _Smoothness9: 0
     - _SmoothnessTextureChannel: 0
+    - _SpecularEnabled: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
@@ -423,6 +480,8 @@ Material:
     - _TerrainLayersFoldout: 1
     - _TerrainNormalTintStrenght: 0
     - _Terrain_Parallax: 1
+    - _TextureBlendingMode: 0
+    - _TextureImpact: 1
     - _TrackEdgeNormals: 2
     - _TrackEdgeSharpness: 1
     - _TrackHeightOffset: 0
@@ -432,6 +491,12 @@ Material:
     - _TriplanarFoldout: 0
     - _TriplanarOneToAllSteep: 0
     - _TriplanarSharpness: 8.94
+    - _UnityShadowMode: 0
+    - _UnityShadowOcclusion: 0
+    - _UnityShadowPower: 0.2
+    - _UnityShadowSharpness: 1
+    - _VertexColorsEnabled: 0
+    - _VertexExtrusionSmoothNormals: 0
     - _WorkflowMode: 1
     - _WorldMapping: 0
     - _XRMotionVectorsPass: 1
@@ -439,8 +504,14 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.6073619, g: 0, b: 0.6226415, a: 1}
     - _Color: {r: 0.64779866, g: 0.5773414, b: 0.3320477, a: 1}
+    - _ColorDim: {r: 0, g: 0.4339623, b: 0.03914172, a: 1}
+    - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _ColorDimExtra: {r: 0, g: 0.2603773, b: 0.024034794, a: 1}
+    - _ColorDimSteps: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _ColorGradient: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseRemapOffset0: {r: 0, g: 0, b: 0, a: 0}
     - _DiffuseRemapOffset1: {r: 0, g: 0, b: 0, a: 0}
     - _DiffuseRemapOffset10: {r: 1, g: 1, b: 1, a: 1}
@@ -474,10 +545,13 @@ Material:
     - _DiffuseRemapScale8: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseRemapScale9: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0.5687476, g: 0, b: 0.62513214, a: 1}
+    - _FlatRimColor: {r: 1.1486983, g: 1.1486983, b: 1.1486983, a: 1}
+    - _FlatSpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _HT_distance: {r: 3, g: 10, b: 0, a: 25}
     - _Intersection: {r: -0.5, g: 0.8, b: -2, a: 3}
     - _Intersection2: {r: -0.2, g: 0.6, b: -1, a: 1.5}
     - _LayerHasMask: {r: 0, g: 0, b: 0, a: 0}
+    - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
     - _MaskMapRemapOffset: {r: 0, g: 0, b: 0, a: 0}
     - _MaskMapRemapOffset0: {r: 0, g: 0, b: 0, a: 0}
     - _MaskMapRemapOffset1: {r: 0, g: 0, b: 0, a: 0}
@@ -515,6 +589,7 @@ Material:
     - _MipMapFade: {r: 3, g: 15, b: 0, a: 35}
     - _NormIntersect: {r: 0, g: 0.6, b: -0.2, a: 1.5}
     - _NormalScale: {r: 0, g: 0, b: 0, a: 0}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _Specular0: {r: 0, g: 0, b: 0, a: 0}
     - _Specular1: {r: 0, g: 0, b: 0, a: 0}
@@ -553,5 +628,6 @@ Material:
     - _TerrainNormalTintDistance: {r: 3, g: 10, b: 0, a: 50}
     - _TerrainPosition: {r: 0, g: 0, b: 510, a: 0}
     - _TerrainSize: {r: 500, g: 600, b: 500, a: 0}
+    - _UnityShadowColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
