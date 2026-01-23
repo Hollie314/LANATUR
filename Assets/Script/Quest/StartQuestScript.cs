@@ -8,13 +8,14 @@ namespace Quests
 
         public void StartQuest()
         {
-            UpdateQuestUI.StartQuestUI();
+            UpdateQuestUI _updateQuestUI = FindFirstObjectByType<UpdateQuestUI>();
+            _updateQuestUI.StartQuestUI(_quest);
             QuestManager _questManager = FindFirstObjectByType<QuestManager>();
             _questManager.activeQuests.Add(_quest);
             
             if (_quest.validateIfAlreadyCompleted)
             {
-                
+                _questManager.CheckCompletion(_quest);
             }
         }
     }   

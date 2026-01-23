@@ -2,6 +2,7 @@ using Sirenix.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class Camera_Shot : MonoBehaviour
     public LayerMask MaskCameraOnShot;
     public LayerMask animals_LayerMask;
     public static event Action PictureTaken;
+    public static event Action<string> SpecieTakenInPhoto;
     public static Album album = new Album();
 
     // private
@@ -121,15 +123,6 @@ public class Camera_Shot : MonoBehaviour
                 ZoomCursor(maxZoomIn);
             }
         }
-        /*
-        // Debug
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward) * Camera.main.farClipPlane, Color.red);
-        if (target != null)
-        {
-            Debug.Log("Targets " + target.name);
-        }
-        else { Debug.Log("No target"); }
-        */
         return;
     }
 
@@ -187,7 +180,8 @@ public class Camera_Shot : MonoBehaviour
                         target.GetComponent<UpdateEntry>().UpdateEntry_Func();
                         ChangeEntryPhoto.AddPhotoToEntries(infos);
                     }
-
+                    
+                    SpecieTakenInPhoto?.Invoke(target.tag);
                     Debug.Log("new species");
                 }
                 else
@@ -204,7 +198,8 @@ public class Camera_Shot : MonoBehaviour
                     target.GetComponent<UpdateEntry>().UpdateEntry_Func();
                     ChangeEntryPhoto.AddPhotoToEntries(infos);
                 }
-
+                
+                SpecieTakenInPhoto?.Invoke(target.tag);
                 Debug.Log("no photos in album");
             }
         }
