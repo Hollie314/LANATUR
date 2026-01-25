@@ -4,7 +4,6 @@ using Quests;
 
 public class QuestManager : MonoBehaviour
 {
-    [SerializeField] private UpdateQuest _updateQuest;
     public List<GameObject> gameObjectsThatSentEvents = new List<GameObject>();
     public List<string> eventsStringReceived = new List<string>();
     public List<string> speciesInPhoto = new List<string>();
@@ -30,16 +29,24 @@ public class QuestManager : MonoBehaviour
 
     private void SpeciesEvent(string specie)
     {
-        speciesInPhoto.Add(specie);
+        if(!speciesInPhoto.Contains(specie))
+            speciesInPhoto.Add(specie);
         Debug.Log("quest: recieved specie: " + specie);
-        UpdateQuests();
+        
+        // Update uniquement cet event
+        if(activeQuests != null)
+            UpdateQuests();
     }
     
     private void GoToEvent(string objectiveUpdated)
     {
-        eventsReceived.Add(objectiveUpdated);
-        Debug.Log("quest: recieved specie: " + objectiveUpdated);
-        UpdateQuests();
+        if(!eventsReceived.Contains(objectiveUpdated))
+            eventsReceived.Add(objectiveUpdated);
+        Debug.Log("quest: recieved event: " + objectiveUpdated);
+        
+        // Update uniquement cet event
+        if(activeQuests != null)
+            UpdateQuests();
     }
 
     #endregion
@@ -147,12 +154,25 @@ public class QuestManager : MonoBehaviour
 
     private void UpdateProgressionGoToPoint(QuestScriptable quest, string objectiveCompleted)
     {
+        Debug.Log("l'update a eu lieu");
         quest.CompletedObjectivesStr.Add(objectiveCompleted);
+        Debug.Log($"completed objectives: {quest.CompletedObjectivesStr.Count}");
+        Debug.Log($"All objectives: {quest.GoToPoints.Count}");
         bool questEnded = false;
-        if (quest.CompletedObjectivesStr.Count == quest.GoToPoints.Count)
+        if (quest.CompletedObjectivesStr.Count >= quest.GoToPoints.Count)
         {
             questEnded = true;
+            quest.CompletedObjectivesStr.Clear();
+            activeQuests.Remove(quest);
         }
+        
+        UpdateQuestUI _updateQuestUI = FindFirstObjectByType<UpdateQuestUI>();
+        if (questEnded)
+        {
+            _updateQuestUI.EndQuestUI(quest);
+            return;
+        }
+        _updateQuestUI.UpdateUI(quest);
     }
     
     private void UpdateProgressionPuzzle(QuestScriptable quest, GameObject objectiveCompleted)
@@ -164,28 +184,11 @@ public class QuestManager : MonoBehaviour
     {
         quest.CompletedObjectivesGO.Add(objectiveCompleted);
         bool questEnded = false;
-        switch (quest.questType)
+        if (quest.CompletedObjectivesGO.Count >= quest.SpeciesToPhotograph.Count)
         {
-            case QuestScriptable.QuestType.CompletePuzzle:
-                if (quest.CompletedObjectivesGO.Count == quest.PuzzlesToComplete.Count)
-                {
-                    questEnded = true;
-                }
-                break;
-
-            case QuestScriptable.QuestType.GoToPoint:
-                if (quest.CompletedObjectivesGO.Count == quest.GoToPoints.Count)
-                {
-                    questEnded = true;
-                }
-                break;
-
-            case QuestScriptable.QuestType.PhotographSpecie:
-                if (quest.CompletedObjectivesGO.Count == quest.SpeciesToPhotograph.Count)
-                {
-                    questEnded = true;
-                }
-                break;
+            quest.CompletedObjectivesGO.Clear();
+            activeQuests.Remove(quest);
+            questEnded = true;
         }
 
         UpdateQuestUI _updateQuestUI = FindFirstObjectByType<UpdateQuestUI>();
