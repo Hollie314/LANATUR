@@ -1,25 +1,24 @@
+using Sirenix.Utilities;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Quests
 {
     public class UpdateQuest : MonoBehaviour
     {
-        public void CheckCompletion(QuestScriptable quest)
+        [SerializeField] private QuestScriptable _quest;
+        [SerializeField] private string ObjectiveString;
+        
+        public static event Action<string> objectiveUpdated;
+
+        public void UpdateQuestProgress()
         {
-            // Access somewhere where events are stocked
-            // Check if completion was already done
-            switch (quest.questType)
-            {
-                case QuestScriptable.QuestType.CompletePuzzle :
-                    // vérifier si l'objet précis currentprogression a envoyé un event
-                    break;
-                case QuestScriptable.QuestType.GoToPoint :
-                        
-                    break;
-                case QuestScriptable.QuestType.PhotographSpecie :
-                        
-                    break;
-            }
+            objectiveUpdated?.Invoke(ObjectiveString);
         }
     }
 }
