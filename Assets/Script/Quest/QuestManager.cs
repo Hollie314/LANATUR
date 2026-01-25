@@ -162,8 +162,10 @@ public class QuestManager : MonoBehaviour
         if (quest.CompletedObjectivesStr.Count >= quest.GoToPoints.Count)
         {
             questEnded = true;
+            /*
             quest.CompletedObjectivesStr.Clear();
             activeQuests.Remove(quest);
+            */
         }
         
         UpdateQuestUI _updateQuestUI = FindFirstObjectByType<UpdateQuestUI>();
@@ -186,8 +188,10 @@ public class QuestManager : MonoBehaviour
         bool questEnded = false;
         if (quest.CompletedObjectivesGO.Count >= quest.SpeciesToPhotograph.Count)
         {
+            /*
             quest.CompletedObjectivesGO.Clear();
             activeQuests.Remove(quest);
+            */
             questEnded = true;
         }
 

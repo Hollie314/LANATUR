@@ -22,8 +22,10 @@ public class QuestScriptable : ScriptableObject
     [ShowIf("questType", QuestType.CompletePuzzle)] public List<GameObject> PuzzlesToComplete;
     [ShowIf("questType", QuestType.PhotographSpecie)] public List<GameObject> SpeciesToPhotograph;
     [HideInInspector] public GameObject currentProgressionGO {get; set;}
+
     [HideInInspector] public string currentProgressionStr {get; set;}
-    [HideInInspector] public List<GameObject> CompletedObjectivesGO {get; set;} = new List<GameObject>();
-    [HideInInspector] public List<string> CompletedObjectivesStr {get; set;} = new List<string>();
+    
+    public List<GameObject> CompletedObjectivesGO = new List<GameObject>();
+    public List<string> CompletedObjectivesStr = new List<string>();
     public bool validateIfAlreadyCompleted {get; private set;}
 }
