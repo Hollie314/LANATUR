@@ -25,15 +25,14 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - DR_CEL_EXTRA_ON
-  - DR_SPECULAR_ON
-  - _CELPRIMARYMODE_SINGLE
+  - _CELPRIMARYMODE_STEPS
   - _DETAILMAPBLENDINGMODE_MULTIPLY
+  - _EMISSION
   - _GRADIENTSPACE_WORLD
   - _OUTLINESPACE_SCREEN
   - _TEXTUREBLENDINGMODE_MULTIPLY
-  m_InvalidKeywords:
-  - _UNITYSHADOWMODE_NONE
+  - _UNITYSHADOWMODE_MULTIPLY
+  m_InvalidKeywords: []
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -60,7 +59,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CelStepTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7db4df63f5b07e842bf3f58ca82e66b0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Control:
@@ -313,9 +312,9 @@ Material:
     - _BumpScale: 1
     - _CameraDistanceImpact: 0
     - _CastShadows: 1
-    - _CelExtraEnabled: 1
-    - _CelNumSteps: 5
-    - _CelPrimaryMode: 1
+    - _CelExtraEnabled: 0
+    - _CelNumSteps: 3
+    - _CelPrimaryMode: 2
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ControlNumber: 0
@@ -385,9 +384,9 @@ Material:
     - _LayerIndex1: 0
     - _LayerIndex2: 0
     - _LayerNumber: 0
-    - _LightContribution: 0.399
-    - _LightFalloffSize: 0.652
-    - _LightmapDirectionPitch: 121
+    - _LightContribution: 0
+    - _LightFalloffSize: 0.013
+    - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
     - _MeshTerrain: 0
     - _Metallic: 0
@@ -472,7 +471,7 @@ Material:
     - _Smoothness8: 0
     - _Smoothness9: 0
     - _SmoothnessTextureChannel: 0
-    - _SpecularEnabled: 1
+    - _SpecularEnabled: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
@@ -498,10 +497,10 @@ Material:
     - _TriplanarFoldout: 0
     - _TriplanarOneToAllSteep: 0
     - _TriplanarSharpness: 8.94
-    - _UnityShadowMode: 0
+    - _UnityShadowMode: 1
     - _UnityShadowOcclusion: 0
-    - _UnityShadowPower: 0.2
-    - _UnityShadowSharpness: 1
+    - _UnityShadowPower: 0.633
+    - _UnityShadowSharpness: 4.19
     - _VertexColorsEnabled: 0
     - _VertexExtrusionSmoothNormals: 0
     - _WorkflowMode: 1
@@ -558,7 +557,7 @@ Material:
     - _Intersection: {r: -1.5344737, g: 2.1298246, b: -2, a: 3}
     - _Intersection2: {r: -0.72451353, g: -0.5771931, b: -1, a: 1.5}
     - _LayerHasMask: {r: 0, g: 0, b: 0, a: 0}
-    - _LightmapDirection: {r: 0, g: -0.515038, b: 0.8571673, a: 0}
+    - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
     - _MaskMapRemapOffset: {r: 0, g: 0.9600001, b: 0.01599996, a: 0}
     - _MaskMapRemapOffset0: {r: 0, g: 0, b: 0, a: 0}
     - _MaskMapRemapOffset1: {r: 0, g: 0, b: 0, a: 0}
