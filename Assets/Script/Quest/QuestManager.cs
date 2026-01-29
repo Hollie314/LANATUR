@@ -10,6 +10,7 @@ public class QuestManager : MonoBehaviour
     public List<string> speciesInPhoto = new List<string>();
     public List<string> eventsReceived = new List<string>();
     public List<QuestScriptable> activeQuests = new List<QuestScriptable>();
+    public List<QuestScriptable> toClearQuests = new List<QuestScriptable>();
 
     private void OnEnable()
     {
@@ -54,17 +55,50 @@ public class QuestManager : MonoBehaviour
 
     private void UpdateQuests(string objectiveUpdated = null)
     {
-        foreach (QuestScriptable quest in activeQuests)
+        bool stillUpdating = true;
+        int i = 0;
+        while(stillUpdating)
         {
-            if (quest.completeInOrder)
-                CheckCompletionInOrder(quest, objectiveUpdated);
-            else
-                CheckCompletionAllOrder(quest, objectiveUpdated);
+            Debug.Log("yup, quest fucks there");
             if (activeQuests.IsNullOrEmpty())
             {
+                stillUpdating = false;
+            }
+            
+            if (i > activeQuests.Count -1)
+                stillUpdating = false;
+            else
+            {
+                if (activeQuests[i].completeInOrder)
+                    CheckCompletionInOrder(activeQuests[i], objectiveUpdated);
+                else
+                    CheckCompletionAllOrder(activeQuests[i], objectiveUpdated);
+            }
+            
+            Debug.Log($"i: {i}");
+            i++;
+            
+            if (i > 10)
+            {
+                Debug.Log("quest return iteration");
+                stillUpdating = false;
+            }
+
+            if (Time.deltaTime > 20f)
+            {
+                Debug.Log("quest return time");
+                Debug.Log($"quest i: {i}");
                 return;
             }
+
+            
         }
+
+        Debug.Log("ouais hein, quest fucks there");
+        
+        foreach (QuestScriptable quest in toClearQuests)
+            ClearQuest(quest);
+        toClearQuests.Clear();
     }
 
     public void CheckCompletionInOrder(QuestScriptable quest, string objectiveEventStr = null, GameObject objectiveEventGO = null)
@@ -72,10 +106,10 @@ public class QuestManager : MonoBehaviour
         // vérifier si l'objet précis currentprogression a envoyé un event
         if (quest.validateIfAlreadyCompleted)
         {
-            if (speciesInPhoto.Contains(quest.currentProgressionGO.tag) || eventsReceived.Contains(quest.currentProgressionStr))
+            if ((quest.questType == QuestScriptable.QuestType.PhotographSpecie && speciesInPhoto.Contains(quest.currentProgressionGO.tag)) || eventsReceived.Contains(quest.currentProgressionStr))
             {
                 UpdateProgressionInOrder(quest);
-                if(activeQuests.Contains(quest))
+                if(!toClearQuests.Contains(quest))
                     CheckCompletionInOrder(quest, objectiveEventStr, objectiveEventGO);
             }
         }
@@ -281,17 +315,24 @@ public class QuestManager : MonoBehaviour
         UpdateQuestUI _updateQuestUI = FindFirstObjectByType<UpdateQuestUI>();
         _updateQuestUI.EndQuestUI(quest);
         Debug.Log("Frr ???");
-        
+
+        toClearQuests.Add(quest);
+
+        if (!quest.QuestToGiveNext.IsNullOrEmpty())
+        {
+            foreach (QuestScriptable nextQuest in quest.QuestToGiveNext)
+            {
+                Debug.Log("giving next quest");
+                StartQuestScript.GiveQuest(nextQuest);
+                Debug.Log("gave next quest");
+            }
+        }
+    }
+
+    private void ClearQuest(QuestScriptable quest)
+    {
         quest.CompletedObjectivesStr.Clear();
         quest.CompletedObjectivesGO.Clear();
         activeQuests.Remove(quest);
-        
-        if (quest.QuestToGiveNext.IsNullOrEmpty())
-            return;
-        foreach (QuestScriptable nextQuest in quest.QuestToGiveNext)
-        {
-            StartQuestScript.GiveQuest(nextQuest);
-        }
-        
     }
 }

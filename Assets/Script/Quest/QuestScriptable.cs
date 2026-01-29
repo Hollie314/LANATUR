@@ -25,8 +25,8 @@ public class QuestScriptable : ScriptableObject
     [ShowIf("questType", QuestType.GoToPoint)] [ShowIf("questType", QuestType.CompletePuzzle)] 
     public List<string> GoToPoints;
     [ShowIf("questType", QuestType.PhotographSpecie)] public List<GameObject> SpeciesToPhotograph;
-    [HideInInspector] public GameObject currentProgressionGO {get; set;}
 
+    [HideInInspector] public GameObject currentProgressionGO {get; set;}
     [HideInInspector] public string currentProgressionStr {get; set;}
     
     public List<GameObject> CompletedObjectivesGO = new List<GameObject>();  //Hide in inspector

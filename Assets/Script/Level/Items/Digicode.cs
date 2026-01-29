@@ -13,6 +13,9 @@ public class Digicode : MonoBehaviour, IInteractable
     
     [SerializeField] private string code;
     [SerializeField] private TextMeshProUGUI codeTMP;
+    
+    [SerializeField] private bool startsQuest;
+    [SerializeField] private bool updateQuest;
 
     private string writtenCode;
 
@@ -83,6 +86,12 @@ public class Digicode : MonoBehaviour, IInteractable
         interactionText.SetActive(false);
         
         OnCodeEntered?.Invoke(this);
+        
+        if (startsQuest)
+            this.gameObject.GetComponent<Quests.StartQuestScript>().StartQuest();
+            
+        if (updateQuest)
+            this.gameObject.GetComponent<Quests.UpdateQuest>().UpdateQuestProgress();
     }
 
     private void Lose()

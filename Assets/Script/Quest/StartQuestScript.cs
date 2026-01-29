@@ -9,7 +9,7 @@ namespace Quests
     public class StartQuestScript : MonoBehaviour
     {
         [SerializeField] private List<QuestScriptable> listQuests = new List<QuestScriptable>();
-        private bool questAlreadyGiven = false;
+        private static bool questAlreadyGiven = false;
 
         public void StartQuest()
         {
@@ -29,15 +29,8 @@ namespace Quests
             _updateQuestUI.StartQuestUI(_quest);
             QuestManager _questManager = FindFirstObjectByType<QuestManager>();
             _questManager.activeQuests.Add(_quest);
+            Debug.Log("Give Quest 1");
             
-            if (_quest.validateIfAlreadyCompleted)
-            {
-                if(_quest.completeInOrder)
-                    _questManager.CheckCompletionInOrder(_quest);
-                else
-                    _questManager.CheckCompletionAllOrder(_quest);
-            }
-
             switch (_quest.questType)
             {
                 case QuestScriptable.QuestType.CompletePuzzle:
@@ -50,6 +43,20 @@ namespace Quests
                     _quest.currentProgressionGO = _quest.SpeciesToPhotograph[0];
                     break;
             }
+            
+            Debug.Log("Give Quest 2");
+            
+            if (_quest.validateIfAlreadyCompleted)
+            {
+                Debug.Log("Give Quest 3");
+                if(_quest.completeInOrder)
+                    _questManager.CheckCompletionInOrder(_quest);
+                else
+                    _questManager.CheckCompletionAllOrder(_quest);
+            }
+            Debug.Log("Give Quest 4");
+            
+            questAlreadyGiven = true;
         }
     }   
 }

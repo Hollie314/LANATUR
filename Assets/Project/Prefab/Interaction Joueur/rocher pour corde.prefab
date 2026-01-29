@@ -124,6 +124,8 @@ GameObject:
   - component: {fileID: 6370649960280798716}
   - component: {fileID: 8655696735544926015}
   - component: {fileID: 3499425103151067704}
+  - component: {fileID: -632230565746271494}
+  - component: {fileID: 4842154563641776016}
   m_Layer: 0
   m_Name: rocher pour corde
   m_TagString: Untagged
@@ -184,6 +186,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RockForRope
   Corde: {fileID: 776028952539189187}
   interactionText: {fileID: 5543060019890622778}
+  startsQuest: 0
+  updateQuest: 0
+--- !u!114 &-632230565746271494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8292543775223792658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e58f85035ab20049a299263d96720b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Quests.StartQuestScript
+  listQuests: []
+--- !u!114 &4842154563641776016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8292543775223792658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6e10ae08a1eff438454e6be3f4b9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Quests.UpdateQuest
+  _quest: {fileID: 0}
+  ObjectiveString: 
 --- !u!1001 &2491543841394872810
 PrefabInstance:
   m_ObjectHideFlags: 0
