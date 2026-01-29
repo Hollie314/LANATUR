@@ -2,7 +2,7 @@ using System;
 using Quests;
 using UnityEngine;
 
-public class GoToPoint : MonoBehaviour
+public class QuestPoint : MonoBehaviour
 {
     [SerializeField] private bool startsQuest;
     [SerializeField] private bool updateQuest;
