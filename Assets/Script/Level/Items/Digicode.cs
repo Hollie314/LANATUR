@@ -1,21 +1,28 @@
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class Digicode : MonoBehaviour, IInteractable
 {
     public int Priority { get; set; } = 1;
+
     [SerializeField] private GameObject interactionText;
 
     public bool CanInteract { get; set; } = true;
     
     public static event Action<Digicode> OnCodeEntered;
-    
+
+    [Header("Code")]
     [SerializeField] private string code;
     [SerializeField] private TextMeshProUGUI codeTMP;
-    
+
+    [Header("Quêtes")]
     [SerializeField] private bool startsQuest;
     [SerializeField] private bool updateQuest;
+
+    [Header("Events")]
+    [SerializeField] private UnityEvent onCorrectCode;
 
     private string writtenCode;
 
@@ -23,7 +30,7 @@ public class Digicode : MonoBehaviour, IInteractable
     {
         Debug.Log("Interaction avec le digicode");
         interactionText.SetActive(!interactionText.activeSelf);
-        
+
         transform.GetChild(0).gameObject.SetActive(!transform.GetChild(0).gameObject.activeSelf);
         if (transform.GetChild(0).gameObject.activeSelf)
         {
@@ -43,6 +50,7 @@ public class Digicode : MonoBehaviour, IInteractable
     {
         if (!CanInteract)
             return;
+
         Debug.Log("cassette peut etre interargie avec");
         interactionText.SetActive(true);
     }
@@ -51,16 +59,17 @@ public class Digicode : MonoBehaviour, IInteractable
     {
         if (!CanInteract)
             return;
+
         Debug.Log("cassette peut plus etre interargie avec");
         interactionText.SetActive(false);
     }
-    
+
     public void CompleteCode(string str)
     {
         writtenCode += str;
         codeTMP.text = writtenCode;
     }
-    
+
     public void Validate()
     {
         if (writtenCode == code)
@@ -68,7 +77,7 @@ public class Digicode : MonoBehaviour, IInteractable
             Win();
             return;
         }
-        
+
         Lose();
     }
 
@@ -76,22 +85,25 @@ public class Digicode : MonoBehaviour, IInteractable
     {
         writtenCode = "";
         codeTMP.text = writtenCode;
-        
+
         transform.GetChild(0).gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = false;
         Time.timeScale = 1;
-        
+
         CanInteract = false;
         interactionText.SetActive(false);
+
         
-        OnCodeEntered?.Invoke(this);
-        
+        OnCodeEntered?.Invoke(this);   
+        onCorrectCode?.Invoke();       
+
+      
         if (startsQuest)
-            this.gameObject.GetComponent<Quests.StartQuestScript>().StartQuest();
-            
+            GetComponent<Quests.StartQuestScript>()?.StartQuest();
+
         if (updateQuest)
-            this.gameObject.GetComponent<Quests.UpdateQuest>().UpdateQuestProgress();
+            GetComponent<Quests.UpdateQuest>()?.UpdateQuestProgress();
     }
 
     private void Lose()
