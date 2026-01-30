@@ -26,7 +26,7 @@ namespace Quests
         public static void GiveQuest(QuestScriptable _quest)
         {
             UpdateQuestUI _updateQuestUI = FindFirstObjectByType<UpdateQuestUI>();
-            _updateQuestUI.StartQuestUI(_quest);
+            _updateQuestUI.StartQuestUI(_quest, 0, false);
             QuestManager _questManager = FindFirstObjectByType<QuestManager>();
             _questManager.activeQuests.Add(_quest);
             Debug.Log("Give Quest 1");

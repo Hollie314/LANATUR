@@ -274,7 +274,7 @@ public class QuestManager : MonoBehaviour
                     return;
                 }
 
-                _updateQuestUI.UpdateUI(quest);
+                _updateQuestUI.UpdateUI(quest, quest.CompletedObjectivesStr.Count, false);
                 return;
             
             case QuestScriptable.QuestType.PhotographSpecie:
@@ -289,7 +289,7 @@ public class QuestManager : MonoBehaviour
                     return;
                 }
 
-                _updateQuestUI.UpdateUI(quest);
+                _updateQuestUI.UpdateUI(quest, quest.CompletedObjectivesStr.Count, false);
                 return;
             
             case QuestScriptable.QuestType.GoToPoint:
@@ -304,7 +304,7 @@ public class QuestManager : MonoBehaviour
                     return;
                 }
 
-                _updateQuestUI.UpdateUI(quest);
+                _updateQuestUI.UpdateUI(quest, quest.CompletedObjectivesStr.Count, false);
                 return;
         }
     }
@@ -313,7 +313,8 @@ public class QuestManager : MonoBehaviour
     {
         Debug.Log("End quest");
         UpdateQuestUI _updateQuestUI = FindFirstObjectByType<UpdateQuestUI>();
-        _updateQuestUI.EndQuestUI(quest);
+        int progression = Mathf.Max(quest.GoToPoints.Count, quest.SpeciesToPhotograph.Count);
+        _updateQuestUI.EndQuestUI(quest, progression, true);
         Debug.Log("Frr ???");
 
         toClearQuests.Add(quest);
