@@ -5,6 +5,9 @@ public class RockForRope : MonoBehaviour, IInteractable
     public int Priority { get; set; } = 1;
     [SerializeField] private GameObject Corde;
     [SerializeField] private GameObject interactionText;
+    
+    [SerializeField] private bool startsQuest;
+    [SerializeField] private bool updateQuest;
 
     public bool CanInteract { get; set; } = true;
 
@@ -13,6 +16,12 @@ public class RockForRope : MonoBehaviour, IInteractable
         Debug.Log("Interaction avec le rocher");
         Corde.SetActive(true);
         interactionText.SetActive(false);
+        
+        if (startsQuest)
+            this.gameObject.GetComponent<Quests.StartQuestScript>().StartQuest();
+            
+        if (updateQuest)
+            this.gameObject.GetComponent<Quests.UpdateQuest>().UpdateQuestProgress();
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)

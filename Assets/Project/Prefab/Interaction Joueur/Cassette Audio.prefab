@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5908386910663383174}
   - component: {fileID: 4666400193093740342}
   - component: {fileID: 3455195090783776795}
+  - component: {fileID: 4509018891383750796}
+  - component: {fileID: -8491037433370435306}
   - component: {fileID: 4334164696098441981}
   m_Layer: 0
   m_Name: Cassette Audio
@@ -92,6 +94,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4666400193093740342
 BoxCollider:
@@ -127,6 +130,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cassette
   interactionText: {fileID: 7394550774048923433}
+  startsQuest: 0
+  updateQuest: 0
+--- !u!114 &4509018891383750796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116405278803983451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e58f85035ab20049a299263d96720b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Quests.StartQuestScript
+  listQuests: []
+--- !u!114 &-8491037433370435306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116405278803983451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6e10ae08a1eff438454e6be3f4b9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Quests.UpdateQuest
+  _quest: {fileID: 0}
+  ObjectiveString: 
 --- !u!82 &4334164696098441981
 AudioSource:
   m_ObjectHideFlags: 0

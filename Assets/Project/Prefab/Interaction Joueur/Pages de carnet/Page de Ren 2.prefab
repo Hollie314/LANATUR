@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 8621446454395384746}
   - component: {fileID: 6536975544031863084}
   - component: {fileID: 1248873916895258431}
+  - component: {fileID: -1437108483310469530}
+  - component: {fileID: -7905930471583137663}
   m_Layer: 0
   m_Name: Page de Ren 2
   m_TagString: Untagged
@@ -93,6 +95,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &8621446454395384746
 BoxCollider:
@@ -156,6 +159,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Carnet
   interactionText: {fileID: 2050086300107534558}
+  startsQuest: 0
+  updateQuest: 0
+--- !u!114 &-1437108483310469530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3063528809016515291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e58f85035ab20049a299263d96720b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Quests.StartQuestScript
+  listQuests: []
+--- !u!114 &-7905930471583137663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3063528809016515291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6e10ae08a1eff438454e6be3f4b9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Quests.UpdateQuest
+  _quest: {fileID: 0}
+  ObjectiveString: 
 --- !u!1 &3183916713884428717
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,6 +277,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &5529630148765232718
 SphereCollider:

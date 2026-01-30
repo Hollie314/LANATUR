@@ -6,6 +6,9 @@ public class Carnet : MonoBehaviour, IInteractable
     [SerializeField] private GameObject interactionText;
 
     public bool CanInteract { get; set; } = true;
+    
+    [SerializeField] private bool startsQuest;
+    [SerializeField] private bool updateQuest;
 
     public void Interact(PlayerInteractions interactions)
     {
@@ -14,6 +17,12 @@ public class Carnet : MonoBehaviour, IInteractable
         this.gameObject.SetActive(false);
         OpenUI openUI = FindObjectOfType<OpenUI>();
         openUI.OpenCarnet(interactions);
+        
+        if (startsQuest)
+            this.gameObject.GetComponent<Quests.StartQuestScript>().StartQuest();
+            
+        if (updateQuest)
+            this.gameObject.GetComponent<Quests.UpdateQuest>().UpdateQuestProgress();
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)

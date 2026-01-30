@@ -12,20 +12,23 @@ public class QuestScriptable : ScriptableObject
         CompletePuzzle,
         PhotographSpecie
     }
-
+    
+    public List<QuestScriptable> QuestToGiveNext = new List<QuestScriptable>();
     public QuestType questType;
+    
+    public bool validateIfAlreadyCompleted;
     public bool completeInOrder;
+    
     [SerializeField] private string questName;
     [SerializeField] private string questDesciption;
         
-    [ShowIf("questType", QuestType.GoToPoint)] public List<string> GoToPoints;
-    [ShowIf("questType", QuestType.CompletePuzzle)] public List<GameObject> PuzzlesToComplete;
+    [ShowIf("questType", QuestType.GoToPoint)] [ShowIf("questType", QuestType.CompletePuzzle)] 
+    public List<string> GoToPoints;
     [ShowIf("questType", QuestType.PhotographSpecie)] public List<GameObject> SpeciesToPhotograph;
-    [HideInInspector] public GameObject currentProgressionGO {get; set;}
 
+    [HideInInspector] public GameObject currentProgressionGO {get; set;}
     [HideInInspector] public string currentProgressionStr {get; set;}
     
-    public List<GameObject> CompletedObjectivesGO = new List<GameObject>();
-    public List<string> CompletedObjectivesStr = new List<string>();
-    public bool validateIfAlreadyCompleted {get; private set;}
+    public List<GameObject> CompletedObjectivesGO = new List<GameObject>();  //Hide in inspector
+    public List<string> CompletedObjectivesStr = new List<string>();  //Hide in inspector
 }

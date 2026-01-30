@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbdde2cd9cc5f2b499cb77109d6d9091, type: 3}
-  m_Name: QuestTest
+  m_Name: QuestPhotoTest
   m_EditorClassIdentifier: Assembly-CSharp::QuestScriptable
-  questType: 0
-  completeInOrder: 0
-  questName: Test
-  questDesciption: "C'est une qu\xEAte test."
-  GoToPoints:
-  - a
-  - b
-  - c
-  PuzzlesToComplete: []
+  QuestToGiveNext:
+  - {fileID: 11400000, guid: ff5f8371cdebec94f81135c665f612b9, type: 2}
+  questType: 2
+  validateIfAlreadyCompleted: 0
+  completeInOrder: 1
+  questName: Test Photo
+  questDesciption: 
+  GoToPoints: []
   SpeciesToPhotograph:
-  - {fileID: 6217229672669762608, guid: f3edfd15ee8af4f4eb82ef4b16979262, type: 3}
+  - {fileID: 6217229672669762608, guid: 6c79905f369a418469a3c16c4fb275dc, type: 3}
+  CompletedObjectivesGO: []
+  CompletedObjectivesStr: []
