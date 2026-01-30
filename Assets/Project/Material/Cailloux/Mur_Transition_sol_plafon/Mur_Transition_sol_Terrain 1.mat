@@ -25,15 +25,16 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - DR_RIM_ON
-  - _CELPRIMARYMODE_SINGLE
+  - DR_ENABLE_LIGHTMAP_DIR
+  - _CELPRIMARYMODE_STEPS
   - _DETAILMAPBLENDINGMODE_MULTIPLY
+  - _EMISSION
   - _GRADIENTSPACE_WORLD
   - _OUTLINESPACE_SCREEN
   - _TEXTUREBLENDINGMODE_MULTIPLY
-  m_InvalidKeywords:
-  - _UNITYSHADOWMODE_NONE
-  m_LightmapFlags: 4
+  - _UNITYSHADOWMODE_MULTIPLY
+  m_InvalidKeywords: []
+  m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -63,7 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CelStepTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7db4df63f5b07e842bf3f58ca82e66b0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Control:
@@ -325,8 +326,8 @@ Material:
     - _CameraDistanceImpact: 0
     - _CastShadows: 1
     - _CelExtraEnabled: 0
-    - _CelNumSteps: 5
-    - _CelPrimaryMode: 1
+    - _CelNumSteps: 3
+    - _CelPrimaryMode: 2
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ControlNumber: 0
@@ -353,11 +354,11 @@ Material:
     - _EmissiveExposureWeight: 0
     - _EmissiveIntensity: 0
     - _EnvironmentReflections: 1
-    - _FlatRimEdgeSmoothness: 0.5
-    - _FlatRimLightAlign: 0.552
-    - _FlatRimSize: 0.5
+    - _FlatRimEdgeSmoothness: 0.817
+    - _FlatRimLightAlign: 0.587
+    - _FlatRimSize: 1
     - _FlatSpecularEdgeSmoothness: 0
-    - _FlatSpecularSize: 0.1
+    - _FlatSpecularSize: 1
     - _Flatness: 1
     - _FlatnessExtra: 1
     - _Gamma: 0
@@ -398,7 +399,7 @@ Material:
     - _LayerIndex2: 0
     - _LayerNumber: 0
     - _LightContribution: 0
-    - _LightFalloffSize: 0
+    - _LightFalloffSize: 0.013
     - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
     - _MeshTerrain: 0
@@ -461,12 +462,12 @@ Material:
     - _QueueControl: -1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimEnabled: 1
+    - _RimEnabled: 0
     - _SelfShadingSize: 1
     - _SelfShadingSizeExtra: 0.6
     - _ShadowEdgeSize: 0.126
     - _ShadowEdgeSizeExtra: 0.05
-    - _Sharpness: 30
+    - _Sharpness: 46.8
     - _Smoothness: 0.5
     - _Smoothness0: 0
     - _Smoothness1: 0
@@ -476,7 +477,7 @@ Material:
     - _Smoothness13: 0
     - _Smoothness14: 0
     - _Smoothness15: 0
-    - _Smoothness2: 1
+    - _Smoothness2: 0.298
     - _Smoothness3: 0
     - _Smoothness4: 0
     - _Smoothness5: 0
@@ -492,7 +493,7 @@ Material:
     - _SteepDistortion: 0
     - _SteepIntersection: 0
     - _SteepSlopesFoldout: 1
-    - _Steepness: -0.22
+    - _Steepness: -0.663
     - _Surface: 0
     - _TerrainColorTintMode: 0
     - _TerrainColorTintStrenght: 0
@@ -516,10 +517,10 @@ Material:
     - _TriplanarFoldout: 0
     - _TriplanarOneToAllSteep: 0
     - _TriplanarSharpness: 8.94
-    - _UnityShadowMode: 0
+    - _UnityShadowMode: 1
     - _UnityShadowOcclusion: 0
-    - _UnityShadowPower: 0.2
-    - _UnityShadowSharpness: 1
+    - _UnityShadowPower: 0.633
+    - _UnityShadowSharpness: 4.19
     - _VertexColorsEnabled: 0
     - _VertexExtrusionSmoothNormals: 0
     - _WorkflowMode: 1
@@ -529,11 +530,11 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _BaseColor: {r: 0.3433962, g: 0.3433962, b: 0.3433962, a: 1}
+    - _BaseColor: {r: 0.7660377, g: 0.7660377, b: 0.7660377, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorDim: {r: 0.2603773, g: 0.2603773, b: 0.2603773, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
-    - _ColorDimExtra: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _ColorDimExtra: {r: 0.6528301, g: 0.6528301, b: 0.6528301, a: 1}
     - _ColorDimSteps: {r: 0.4943396, g: 0.4943396, b: 0.4943396, a: 1}
     - _ColorGradient: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
@@ -572,10 +573,10 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 0}
     - _FlatRimColor: {r: 0.535849, g: 0.535849, b: 0.535849, a: 1}
-    - _FlatSpecularColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _FlatSpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _HT_distance: {r: 3, g: 10, b: 0, a: 25}
-    - _Intersection: {r: -0.5800867, g: 1.335815, b: -2, a: 3}
-    - _Intersection2: {r: -0.4085604, g: 0.21595335, b: -1, a: 1.5}
+    - _Intersection: {r: -1.5344737, g: 2.1298246, b: -2, a: 3}
+    - _Intersection2: {r: -0.72451353, g: -0.5771931, b: -1, a: 1.5}
     - _LayerHasMask: {r: 0, g: 0, b: 0, a: 0}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
     - _MaskMapRemapOffset: {r: 0, g: 0.9600001, b: 0.01599996, a: 0}
@@ -613,7 +614,7 @@ Material:
     - _MaskMapRemapScale8: {r: 0, g: 0, b: 0, a: 0}
     - _MaskMapRemapScale9: {r: 0, g: 0, b: 0, a: 0}
     - _MipMapFade: {r: 3, g: 15, b: 0, a: 35}
-    - _NormIntersect: {r: 0.41188723, g: 1.1100075, b: -0.2, a: 1.5}
+    - _NormIntersect: {r: 0.41535324, g: 1.223228, b: -0.2, a: 1.5}
     - _NormalScale: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
