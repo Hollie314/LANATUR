@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Sirenix.Utilities;
 
 public class UpdateEntry : MonoBehaviour
 {
@@ -49,8 +50,8 @@ public class UpdateEntry : MonoBehaviour
                 EncyclopedieEntry[i].Dessin = Dessin[i];
             if (!(i >= DessinMignon.Count  || DessinMignon[i] == null)) 
                 EncyclopedieEntry[i].DessinMignon = DessinMignon[i];
-
-            if (!Game_Manager.EncyclopedieEntries.Contains(EncyclopedieEntry[i]))
+            
+            if (Game_Manager.EncyclopedieEntries.IsNullOrEmpty() || !Game_Manager.EncyclopedieEntries.Contains(EncyclopedieEntry[i]))
             {
                 Game_Manager.EncyclopedieEntries.Add(EncyclopedieEntry[i]);
             }
