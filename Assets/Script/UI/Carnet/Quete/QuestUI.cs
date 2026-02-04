@@ -8,67 +8,87 @@ namespace UI.Quest
 {
     public class QuestUI : MonoBehaviour
     {
-        private Game_Manager Game_Manager;
-        [SerializeField] private int currentEntry;
-
-        [SerializeField] private Text NoteDeRen;
-        [SerializeField] private Text Caracteristique;
-        [SerializeField] private Text Anecdote;
-
-        [SerializeField] private Image Photo;
-        [SerializeField] private Image Dessin;
-        [SerializeField] private Image DessinMignon;
+        [SerializeField] private GameObject QuestPrefab;
+        [SerializeField] private GameObject QuestLayoutLeft, QuestLayoutRight;
+        
+        private QuestManager Quest_Manager;
+        [SerializeField] private int currentPage;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void OnEnable()
         {
-            Game_Manager = FindFirstObjectByType<Game_Manager>();
-            Debug.Log($"Manager name : {Game_Manager.name} - Encyclopedie Entries : {Game_Manager.EncyclopedieEntries} - Count : {Game_Manager.EncyclopedieEntries.Count}");
-            currentEntry = 1;
+            Quest_Manager = FindFirstObjectByType<QuestManager>();
+            Debug.Log($"Manager name : {Quest_Manager.name} - Quests : {Quest_Manager.activeQuests} - Count : {Quest_Manager.activeQuests.Count}");
+            currentPage = 1;
 
-            if (!Game_Manager.EncyclopedieEntries.IsNullOrEmpty()) // Change
+            if (!Quest_Manager.activeQuests.IsNullOrEmpty()) // Change
             {
-                UpdateUI(Game_Manager.EncyclopedieEntries[0]);
+                UpdateUI(currentPage);
             }
         }
 
         public void GoToNext()
         {
-            if(Game_Manager.EncyclopedieEntries.Count <= 1) { return; } // Change
-
-            if(Game_Manager.EncyclopedieEntries.Count == currentEntry + 1) 
+            if (Quest_Manager.activeQuests.Count < currentPage * 6 + 1)
             {
-                currentEntry = 0;
+                currentPage = 1;
+                UpdateUI(currentPage);
+                return;
             }
-            else { currentEntry ++; }
-            UpdateUI(Game_Manager.EncyclopedieEntries[currentEntry]);
-            return;
-
-
-        }
-
-        public void GoToPrevious()
-        {
-            if (Game_Manager.EncyclopedieEntries.Count <= 1) { return; } // Change
-
-            if (currentEntry == 0)
-            {
-                currentEntry = Game_Manager.EncyclopedieEntries.Count - 1;
-            }
-            else { currentEntry --; }
-            UpdateUI(Game_Manager.EncyclopedieEntries[currentEntry]);
+            currentPage++;
             return;
         }
 
-        private void UpdateUI(EncyclopedieEntry entry)
+        public void GoToPrevious() // Bug
         {
-            NoteDeRen.text = entry.NoteDeRen;
-            Caracteristique.text = entry.Caracteristique;
-            Anecdote.text = entry.Anecdote;
+            if (currentPage <= 1)
+            {
+                currentPage = Mathf.CeilToInt(Quest_Manager.activeQuests.Count / 6) +1;
+                Debug.Log($"Current page : {currentPage}");
+                UpdateUI(currentPage);
+                return;
+            }
+            currentPage--;
+            return;
+        }
 
-            Photo.sprite = entry.Photo;
-            Dessin.sprite = entry.Dessin;
-            DessinMignon.sprite = entry.DessinMignon;
+        private void DestroyPage()
+        {
+            for (int i = 0; i < QuestLayoutLeft.transform.childCount; i++)
+            {
+                Destroy(QuestLayoutLeft.transform.GetChild(i).gameObject);
+            }
+            for (int i = 0; i < QuestLayoutRight.transform.childCount; i++)
+            {
+                Destroy(QuestLayoutRight.transform.GetChild(i).gameObject);
+            }
+        }
+
+        private void UpdateUI(int page)
+        {
+            DestroyPage();
+            int index = (page -1)*6 +1;
+            
+            Debug.Log("index: " + index);
+            for (int i = 0; i < 6; i++)
+            {
+                if(Quest_Manager.activeQuests.Count < index +1) {return;}
+
+                if (i < 3)
+                {
+                    GameObject quest = Instantiate(QuestPrefab, QuestLayoutLeft.transform);
+                    quest.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index].questName;
+                    quest.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index].questDesciption;
+                }
+                else
+                {
+                    GameObject quest = Instantiate(QuestPrefab, QuestLayoutRight.transform);
+                    quest.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index].questName;
+                    quest.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index].questDesciption;
+                }
+
+                index++;
+            }
         }
     }
 }

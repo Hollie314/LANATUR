@@ -140,18 +140,22 @@ public class AI_Iguane : MonoBehaviour
 
     public void DetectNoise(GameObject detectedObject)
     {
+        Debug.Log("Iguane heard noise");
         //vérifier que detectedObject est un type sur lequel l'iguane cris
         if (!ReactAtNoise_Tags.Contains(detectedObject.tag))
             return;
         
+        Debug.Log("Iguane recognize noise");
         if (is_ShoutingIguane)
         {
+            Debug.Log("Iguane will shout");
             Shout(detectedObject);
             return;
         }
 
         if (is_EatingIguane)
         {
+            Debug.Log("Iguane will run");
             Run();
             return;
         }
@@ -200,8 +204,10 @@ public class AI_Iguane : MonoBehaviour
     #region ShoutingIguane
     private void Shout(GameObject detectedObject)
     {
+        Debug.Log("Iguane Shout 1");
         if (isShouting)
             return;
+        Debug.Log("Iguane Shout 2");
         float distanceToIguane = Vector3.Distance(IguaneToProtect.transform.position, transform.position);
         if (distanceToIguane > MaxDistanceFromIguane + 5)
         {
@@ -227,6 +233,7 @@ public class AI_Iguane : MonoBehaviour
 
     private void FollowIguane(GameObject iguane)
     {
+        Debug.Log("Iguane Follows");
         agent.SetDestination(new Vector3(IguaneToProtect.transform.position.x, iguane.transform.position.y + 5, iguane.transform.position.z));
     }
     #endregion
