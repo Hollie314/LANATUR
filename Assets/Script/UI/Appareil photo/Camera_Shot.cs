@@ -188,6 +188,7 @@ public class Camera_Shot : MonoBehaviour
                 {
                     SaveSystem.SavePicture(screenCapture, target.tag, false, null);
                     Debug.Log("not a new species");
+                    SpecieTakenInPhoto?.Invoke(target.tag);
                 }
             }
             else

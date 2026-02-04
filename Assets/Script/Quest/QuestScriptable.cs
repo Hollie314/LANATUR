@@ -19,8 +19,8 @@ public class QuestScriptable : ScriptableObject
     public bool validateIfAlreadyCompleted;
     public bool completeInOrder;
     
-    [SerializeField] private string questName;
-    [SerializeField] private string questDesciption;
+    public string questName;
+    public string questDesciption;
         
     [ShowIf("questType", QuestType.GoToPoint)] [ShowIf("questType", QuestType.CompletePuzzle)] 
     public List<string> GoToPoints;
