@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6811311771332646807}
+  - component: {fileID: 1017476017068293889}
   m_Layer: 0
   m_Name: Petit_caillou
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6811311771332646807
 Transform:
@@ -32,6 +33,33 @@ Transform:
   - {fileID: 3711970073247628695}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &1017476017068293889
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720743679936622577}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.1999849
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6746219821413261565}
+  - screenRelativeHeight: 0.06834251
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6746219821413261565}
+  - screenRelativeHeight: 0.005138094
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6746219821413261565}
+  m_Enabled: 1
 --- !u!1 &4091592494133700397
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,7 +74,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3711970073247628695
 Transform:
@@ -80,7 +108,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &9197204512307317510
 Transform:
@@ -130,7 +158,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7791486788655378091, guid: be4e0a7b4361fd644b421a0bfc7b91dd, type: 3}
+  - {fileID: 2100000, guid: 092dd6c5f816c474baae437b28bb1db0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,7 +166,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 0.1
-  m_ReceiveGI: 1
+  m_ReceiveGI: 2
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
