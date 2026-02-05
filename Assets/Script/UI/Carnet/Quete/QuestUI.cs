@@ -79,12 +79,14 @@ namespace UI.Quest
                     GameObject quest = Instantiate(QuestPrefab, QuestLayoutLeft.transform);
                     quest.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index -1].questName;
                     quest.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index -1].questDesciption;
+                    quest.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"{Quest_Manager.activeQuests[index -1].progression} / {Quest_Manager.activeQuests[index -1].MaxProgress}";
                 }
                 else
                 {
                     GameObject quest = Instantiate(QuestPrefab, QuestLayoutRight.transform);
                     quest.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index -1].questName;
                     quest.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index -1].questDesciption;
+                    quest.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = $"{Quest_Manager.activeQuests[index -1].progression} / {Quest_Manager.activeQuests[index -1].MaxProgress}";
                 }
 
                 index++;

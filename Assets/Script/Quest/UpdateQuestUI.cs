@@ -69,15 +69,21 @@ namespace Quests
             if (_quest.questType == QuestScriptable.QuestType.PhotographSpecie)
             {
                 NextMessages.Last().transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = $"{progression} / {_quest.SpeciesToPhotograph.Count}";
+                _quest.progression = progression;
+                _quest.MaxProgress = _quest.SpeciesToPhotograph.Count;
             }
             else
             {
                 NextMessages.Last().transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = $"{progression} / {_quest.GoToPoints.Count}";
+                _quest.progression = progression;
+                _quest.MaxProgress = _quest.GoToPoints.Count;
             }
             
             if (completed)
             {
+                NextMessages.Last().transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = $"{progression} / {_quest.MaxProgress}";
                 NextMessages.Last().transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = "Completed";
+                _quest.progression = progression;
             }
         }
 
