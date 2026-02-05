@@ -31,7 +31,9 @@ public class AI_Iguane : MonoBehaviour
     [Header("EatingIguane variables")]
     // Eating Iguane variables
     [ShowIf("is_EatingIguane")] [SerializeField] private List<Transform> WaypointsBase = new List<Transform>();
+    [ShowIf("is_EatingIguane")] [SerializeField] private List<int> WaypointsBaseWithFood = new List<int>();
     [ShowIf("is_EatingIguane")] [SerializeField] private List<Transform> WaypointsOnEvent = new List<Transform>();
+    [ShowIf("is_EatingIguane")] [SerializeField] private List<int> WaypointsOnEventWithFood = new List<int>();
     [ShowIf("is_EatingIguane")] [SerializeField] private float TimeToEat;
     [ShowIf("is_EatingIguane")] [SerializeField] private float TimeToRun;
     private float timeEating = 0;
@@ -170,7 +172,22 @@ public class AI_Iguane : MonoBehaviour
         if (distanceToWaypoint <= 1f && !isEating)
         {
             isEating = true;
-            animator.SetBool("IsEating", true);
+            if (Waypoints == WaypointsBase)
+            {
+                if (WaypointsBaseWithFood.Contains(currentWaypoint))
+                    animator.SetBool("IsEating", true);
+                else
+                    animator.SetBool("IsIdle", true);
+                Debug.Log("animator true BaseWP");
+            }
+            else
+            {
+                if (WaypointsOnEventWithFood.Contains(currentWaypoint))
+                    animator.SetBool("IsEating", true);
+                else
+                    animator.SetBool("IsIdle", true);
+                Debug.Log("animator true OnEventWP");
+            }
         }
         
         agent.SetDestination(Waypoints[currentWaypoint].position);
@@ -188,6 +205,8 @@ public class AI_Iguane : MonoBehaviour
             currentWaypoint = (currentWaypoint + 1) % Waypoints.Count;
             agent.SetDestination(Waypoints[currentWaypoint].position);
             animator.SetBool("IsEating", false);
+            animator.SetBool("IsIdle", false);
+            Debug.Log("animator faux");
             Debug.Log("changed waypoint");
         }
     }
