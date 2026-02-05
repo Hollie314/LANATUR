@@ -72,19 +72,19 @@ namespace UI.Quest
             Debug.Log("index: " + index);
             for (int i = 0; i < 6; i++)
             {
-                if(Quest_Manager.activeQuests.Count < index +1) {return;}
+                if(Quest_Manager.activeQuests.Count < index) {return;}
 
                 if (i < 3)
                 {
                     GameObject quest = Instantiate(QuestPrefab, QuestLayoutLeft.transform);
-                    quest.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index].questName;
-                    quest.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index].questDesciption;
+                    quest.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index -1].questName;
+                    quest.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index -1].questDesciption;
                 }
                 else
                 {
                     GameObject quest = Instantiate(QuestPrefab, QuestLayoutRight.transform);
-                    quest.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index].questName;
-                    quest.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index].questDesciption;
+                    quest.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index -1].questName;
+                    quest.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = Quest_Manager.activeQuests[index -1].questDesciption;
                 }
 
                 index++;
