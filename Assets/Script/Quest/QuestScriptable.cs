@@ -31,4 +31,7 @@ public class QuestScriptable : ScriptableObject
     
     public List<GameObject> CompletedObjectivesGO = new List<GameObject>();  //Hide in inspector
     public List<string> CompletedObjectivesStr = new List<string>();  //Hide in inspector
+
+    [HideInInspector] public int progression;
+    [HideInInspector] public int MaxProgress = 1;
 }
