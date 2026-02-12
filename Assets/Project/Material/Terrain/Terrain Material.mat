@@ -25,12 +25,12 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - DR_ENABLE_LIGHTMAP_DIR
+  - DR_CEL_EXTRA_ON
   - _CELPRIMARYMODE_SINGLE
   m_InvalidKeywords:
   - _UNITYSHADOWMODE_NONE
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -317,7 +317,7 @@ Material:
     - _CameraDistanceFadeFar: 10
     - _CameraDistanceImpact: 0
     - _CastShadows: 1
-    - _CelExtraEnabled: 0
+    - _CelExtraEnabled: 1
     - _CelNumSteps: 3
     - _CelPrimaryMode: 1
     - _ClearCoatMask: 0
@@ -348,11 +348,11 @@ Material:
     - _EnableHeightBlend: 0
     - _EnableInstancedPerPixelNormal: 1
     - _EnvironmentReflections: 1
-    - _FlatRimEdgeSmoothness: 0.5
-    - _FlatRimLightAlign: 0
-    - _FlatRimSize: 0.5
-    - _FlatSpecularEdgeSmoothness: 0
-    - _FlatSpecularSize: 0.1
+    - _FlatRimEdgeSmoothness: 0.53
+    - _FlatRimLightAlign: 1
+    - _FlatRimSize: 0.13
+    - _FlatSpecularEdgeSmoothness: 1
+    - _FlatSpecularSize: 0.83
     - _Flatness: 1
     - _FlatnessExtra: 1
     - _Gamma: 0
@@ -394,7 +394,7 @@ Material:
     - _LayerIndex1: 0
     - _LayerIndex2: 0
     - _LayerNumber: 0
-    - _LightContribution: 0.67
+    - _LightContribution: 0.85
     - _LightFalloffSize: 1
     - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
@@ -458,10 +458,10 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimEnabled: 0
-    - _SelfShadingSize: 0.54
-    - _SelfShadingSizeExtra: 0.6
-    - _ShadowEdgeSize: 0.191
-    - _ShadowEdgeSizeExtra: 0.05
+    - _SelfShadingSize: 0.62
+    - _SelfShadingSizeExtra: 0.21
+    - _ShadowEdgeSize: 0.14
+    - _ShadowEdgeSizeExtra: 0.5
     - _Sharpness: 80
     - _Smoothness: 0.5
     - _Smoothness0: 0.5
@@ -519,7 +519,7 @@ Material:
     - _UnityShadowMode: 0
     - _UnityShadowOcclusion: 0
     - _UnityShadowPower: 0.2
-    - _UnityShadowSharpness: 1
+    - _UnityShadowSharpness: 6.9
     - _UvFadeX: 0.1
     - _UvFadeY: 0.1
     - _VertexColorsEnabled: 0
@@ -533,9 +533,9 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorDim: {r: 1, g: 0.48867923, b: 0.48867923, a: 1}
+    - _ColorDim: {r: 0, g: 0.13334505, b: 0.2981131, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
-    - _ColorDimExtra: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _ColorDimExtra: {r: 1, g: 0.8821154, b: 0, a: 1}
     - _ColorDimSteps: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _ColorGradient: {r: 0, g: 0, b: 0, a: 1}
     - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
@@ -572,8 +572,8 @@ Material:
     - _DiffuseRemapScale8: {r: 1, g: 1, b: 1, a: 1}
     - _DiffuseRemapScale9: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FlatRimColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
-    - _FlatSpecularColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _FlatRimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FlatSpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _HT_distance: {r: 3, g: 10, b: 0, a: 25}
     - _Intersection: {r: -0.5, g: 0.8, b: -2, a: 3}
     - _Intersection2: {r: -0.2, g: 0.6, b: -1, a: 1.5}
@@ -656,6 +656,6 @@ Material:
     - _TerrainPosition: {r: 0, g: 0, b: 0, a: 0}
     - _TerrainSize: {r: 1000, g: 600, b: 1000, a: 0}
     - _TerrainSizeXZPosY: {r: 0, g: 0, b: 0, a: 1}
-    - _UnityShadowColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _UnityShadowColor: {r: 0.5622641, g: 0.5622641, b: 0.5622641, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
