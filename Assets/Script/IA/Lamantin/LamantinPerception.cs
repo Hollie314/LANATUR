@@ -12,6 +12,7 @@ public class LamantinPerception : MonoBehaviour, IStimulusListener
 
     void OnEnable()
     {
+        Debug.Log($"Instance exist {WorldStimulusManager.Instance != null}");
         if(WorldStimulusManager.Instance != null)
             WorldStimulusManager.Instance.RegisterListener(this);
     }
@@ -23,6 +24,7 @@ public class LamantinPerception : MonoBehaviour, IStimulusListener
     }
     public void OnSoundReceived(Vector3 position, float intensity, float radius, GameObject source)
     {
+        Debug.Log("OnSoundReceived");
         // IGNORE SON PROPRE BRUIT
         if(source == gameObject)
             return;
