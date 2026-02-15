@@ -147,7 +147,14 @@ public class PlayerMotor : MonoBehaviour
             {
                 controller.Move(transform.TransformDirection(moveDirection) * crouchSpeed * Time.deltaTime);
                 Vector3 p1 = transform.position + controller.center;
-                _makeNoise.Noise(this.gameObject, p1, noiseRadius_Crouching);
+                _makeNoise.Noise(
+                    p1,
+                    noiseRadius_Crouching,
+                    3f,
+                    this.gameObject,
+                    playerMoveAudioSource,
+                    CrouchSFX
+                );
                 Debug.Log("NOISE crouch");
                 
                 //SFX
@@ -163,7 +170,14 @@ public class PlayerMotor : MonoBehaviour
                 if (sprinting)
                 {
                     Vector3 p1 = transform.position + controller.center;
-                    _makeNoise.Noise(this.gameObject, p1, noiseRadius_Walking);
+                    _makeNoise.Noise(
+                        p1,
+                        noiseRadius_Walking,
+                        15f,
+                        this.gameObject,
+                        playerMoveAudioSource,
+                        SprintSFX
+                    );
                     Debug.Log("NOISE sprint");
                     
                     //SFX
@@ -176,7 +190,14 @@ public class PlayerMotor : MonoBehaviour
                 else
                 {
                     Vector3 p1 = transform.position + controller.center;
-                    _makeNoise.Noise(this.gameObject, p1, noiseRadius_Running);
+                    _makeNoise.Noise(
+                        p1,
+                        noiseRadius_Running,
+                        8f,
+                        this.gameObject,
+                        playerMoveAudioSource,
+                        WalkSFX
+                    );
                     Debug.Log("NOISE walk");
                     
                     //SFX

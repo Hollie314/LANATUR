@@ -10,14 +10,14 @@ using Unity.Properties;
 public partial class SetWaypointsWithPatheeAction : Action
 {
     [SerializeReference] public BlackboardVariable<List<GameObject>> Waypoints;
-    [SerializeReference] public BlackboardVariable<Pathee> Pathee;
+    //[SerializeReference] public BlackboardVariable<Pathee> Pathee;
 
     protected override Status OnStart()
     {
         List<GameObject> NewWaypoints = new List<GameObject>();
-        foreach (Transform transform in Pathee.Value.waypoints)
+        //foreach (Transform transform in Pathee.Value.waypoints)
         {
-            NewWaypoints.Add(transform.gameObject);
+          //  NewWaypoints.Add(transform.gameObject);
         }
 
         Waypoints.Value = NewWaypoints;
