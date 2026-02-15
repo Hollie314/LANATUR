@@ -237,7 +237,14 @@ public class AI_Iguane : MonoBehaviour
         Debug.Log("IguaneShout");
         isShouting = true;
         animator.SetBool("IsShouting", true);
-        _makeNoise.Noise(this.gameObject, this.transform.position, noiseRadius_Shouting, audioSource, ShoutAudio);
+        _makeNoise.Noise(
+            this.transform.position,
+            noiseRadius_Shouting,
+            25f, // intensité forte car cri
+            this.gameObject,
+            audioSource,
+            ShoutAudio
+        );
         agent.isStopped = true;
         
         this.transform.LookAt(detectedObject.transform);
