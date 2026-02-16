@@ -325,10 +325,13 @@ GameObject:
   - component: {fileID: 7516916948499719941}
   - component: {fileID: 3459015407037463520}
   - component: {fileID: 4792308897344105623}
-  - component: {fileID: 2284754516572696845}
   - component: {fileID: 6960914323395345698}
   - component: {fileID: 7118915214642455142}
+  - component: {fileID: 8008468807901886457}
+  - component: {fileID: 1401992042006366866}
   - component: {fileID: 4313619661129934094}
+  - component: {fileID: 6002142557005568781}
+  - component: {fileID: 3449814996812597989}
   - component: {fileID: 1478650946147244503}
   - component: {fileID: 6096110069060290119}
   - component: {fileID: 1690167717944747469}
@@ -416,48 +419,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2284754516572696845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6363655695414583813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ddd54c0a663dff4894b8b30f95e269a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AI_Iguane
-  is_EatingIguane: 1
-  is_ShoutingIguane: 0
-  is_AlphaIguane: 0
-  noiseRadius_Shouting: 0
-  noiseRadius_Running: 0
-  noiseRadius_Walking: 0
-  noiseRadius_Crouching: 0
-  _makeNoise: {fileID: 6954511483464550056}
-  baseSpeed: 5
-  runSpeed: 10
-  ReactAtNoise_Tags:
-  - Player
-  - Lamantin
-  WaypointsBase:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  WaypointsBaseWithFood: 
-  WaypointsOnEvent:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  WaypointsOnEventWithFood: 0200000004000000
-  TimeToEat: 0
-  TimeToRun: 0
-  IguaneToProtect: {fileID: 0}
-  ShoutAudio: {fileID: 8300000, guid: 5abb6046bcd534f4488a293f68c06299, type: 3}
-  TimeToShout: 2.5
-  MaxDistanceFromIguane: 5
 --- !u!65 &6960914323395345698
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -501,6 +462,50 @@ NavMeshAgent:
   m_BaseOffset: 0.51
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8008468807901886457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363655695414583813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566edc64a5f7edf41ba3c5177fb110d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AI_Iguane
+  agent: {fileID: 7118915214642455142}
+  animator: {fileID: 7210283592262671250}
+  audioSource: {fileID: 6096110069060290119}
+  makeNoise: {fileID: 6954511483464550056}
+  memory: {fileID: 6002142557005568781}
+  baseSpeed: 3
+  runSpeed: 6
+  shoutRadius: 15
+  shoutIntensity: 25
+  attractionRadius: 15
+  foodWaypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  nest: {fileID: 0}
+  eatingDuration: 5
+  restDuration: 10
+  currentState: 0
+--- !u!114 &1401992042006366866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363655695414583813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab30069ea46b76f4699939d13e26225d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IguanePerception
+  iguane: {fileID: 8008468807901886457}
 --- !u!114 &4313619661129934094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +520,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShoutAtTarget
   ShoutSphere: {fileID: 8776513140138690467, guid: e0f29b7681235ae46b1eb096f0da6d47, type: 3}
   shoutFinalRadius: 8
+--- !u!114 &6002142557005568781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363655695414583813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b738c6e0398cb4fa6a14f61dd51294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AIBrainMemory
+  territoryZones: []
+  foodZones: []
+  patrolZones: []
+  safeZones: []
+  lightZones: []
+--- !u!114 &3449814996812597989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363655695414583813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ab2a6412feb8949a638eca870de475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AIZoneDetector
+  memory: {fileID: 6002142557005568781}
 --- !u!135 &1478650946147244503
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4090,6 +4125,11 @@ Transform:
 --- !u!4 &7152190639589692318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3009767471243954787, guid: 715363a53bee2ed4ebebead3bdf8da15, type: 3}
+  m_PrefabInstance: {fileID: 3853540935256532483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7210283592262671250 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 715363a53bee2ed4ebebead3bdf8da15, type: 3}
   m_PrefabInstance: {fileID: 3853540935256532483}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7365757302332229753 stripped
