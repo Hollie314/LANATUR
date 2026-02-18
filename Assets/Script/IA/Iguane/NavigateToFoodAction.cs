@@ -8,17 +8,19 @@ using Random = UnityEngine.Random;
 
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "NavigateToFood", story: "Take random [GameObject] inside [list]", category: "Action", id: "5ab1fa8c30711ceeb696f2bf7b95e30c")]
+[NodeDescription(name: "NavigateToFood", story: "Take random [Target] inside [FoodList]", category: "Action", id: "5ab1fa8c30711ceeb696f2bf7b95e30c")]
 public partial class NavigateToFoodAction : Action
 {
-    [SerializeReference] public BlackboardVariable<GameObject> GameObject;
-    [SerializeReference] public BlackboardVariable<List<GameObject>> List;
+    [SerializeReference] public BlackboardVariable<GameObject> Target;
+    [SerializeReference] public BlackboardVariable<List<GameObject>> FoodList;
 
     protected override Status OnStart()
     {
-        GameObject.Value = List.Value[Random.Range(0, List.Value.Count)];
+        if (FoodList.Value == null || FoodList.Value.Count == 0)
+            return Status.Failure;
+
+        Target.ObjectValue = FoodList.Value[Random.Range(0, FoodList.Value.Count)];
         return Status.Success;
     }
-    
 }
 

@@ -33,12 +33,6 @@ MonoBehaviour:
         BlackboardGroupReferences: []
         Root:
           rid: 7020973607112671351
-        m_ActiveNodes: []
-        m_NodesToTick: []
-        m_NodesToEnd:
-          rid: 2144584587673338051
-        m_EndedNodes:
-          rid: 2144584587673338052
         m_VersionTimestamp: 639066798779780026
     - rid: 2144584587673338049
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
@@ -46,12 +40,6 @@ MonoBehaviour:
         m_Blackboard:
           rid: 2144584587673338053
         m_Source: {fileID: 2211533193647979843}
-    - rid: 2144584587673338051
-      type: {class: 'Stack`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: mscorlib}
-      data: 
-    - rid: 2144584587673338052
-      type: {class: 'HashSet`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: System.Core}
-      data: 
     - rid: 2144584587673338053
       type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -89,6 +77,7 @@ MonoBehaviour:
         m_Children:
         - rid: -2
         - rid: 7020973607112671354
+        m_RegisteredObservers: []
     - rid: 7020973607112671354
       type: {class: ParallelAllComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -101,6 +90,7 @@ MonoBehaviour:
           rid: 7020973607112671352
         m_Children:
         - rid: 7020973607112671355
+        m_RegisteredObservers: []
     - rid: 7020973607112671355
       type: {class: RepeaterModifier, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -266,8 +256,8 @@ MonoBehaviour:
   - rid: 8049576403196445136
   - rid: 8049576403196445427
   - rid: 8049576407399399575
-  m_VersionTimestamp: 639070263783284818
-  m_SerializedVersion: 1
+  m_VersionTimestamp: 639070362818461415
+  m_SerializedVersion: 2
   m_DebugInfo: {fileID: 9089349459379564596}
   m_RuntimeGraph: {fileID: -3424971684761733843}
   AssetID:
@@ -626,6 +616,8 @@ MonoBehaviour:
         <RequiresAllConditionsTrue>k__BackingField: 0
         <ShouldTruncateNodeUI>k__BackingField: 0
         m_RepeatMode: 0
+        <ObserverType>k__BackingField: 0
+        <ReturnFailureOnConditionFail>k__BackingField: 0
     - rid: 8049576403196445137
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
