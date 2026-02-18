@@ -1,266 +1,182 @@
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections.Generic;
 
 public class AI_Iguane : MonoBehaviour
 {
-    [Header("Types")]
-    // Types
-    [SerializeField] private bool is_EatingIguane;
-    [SerializeField] private bool is_ShoutingIguane;
-    [SerializeField] private bool is_AlphaIguane;
-    
-    [Header("NoiseRadius")]
-    // NoiseRadius
-    [SerializeField] private float noiseRadius_Shouting;
-    [SerializeField] private float noiseRadius_Running;
-    [SerializeField] private float noiseRadius_Walking;
-    [SerializeField] private float noiseRadius_Crouching;
-    [SerializeField] private MakeNoise _makeNoise;
-    
-    [Header("Movements")]
-    // Movements
-    [SerializeField] private float baseSpeed;
-    [SerializeField] private float runSpeed;
-    
-    [Header("Detection")]
-    // Movements
-    [SerializeField] List<string> ReactAtNoise_Tags = new List<string>();
-    
-    [Header("EatingIguane variables")]
-    // Eating Iguane variables
-    [ShowIf("is_EatingIguane")] [SerializeField] private List<Transform> WaypointsBase = new List<Transform>();
-    [ShowIf("is_EatingIguane")] [SerializeField] private List<int> WaypointsBaseWithFood = new List<int>();
-    [ShowIf("is_EatingIguane")] [SerializeField] private List<Transform> WaypointsOnEvent = new List<Transform>();
-    [ShowIf("is_EatingIguane")] [SerializeField] private List<int> WaypointsOnEventWithFood = new List<int>();
-    [ShowIf("is_EatingIguane")] [SerializeField] private float TimeToEat;
-    [ShowIf("is_EatingIguane")] [SerializeField] private float TimeToRun;
-    private float timeEating = 0;
-    private float timeRunning = 0;
-    private List<Transform> Waypoints;
-    private int currentWaypoint = 0;
-    
-    [Header("ShoutingIguane variables")]
-    // Shouting Iguane variables
-    [ShowIf("is_ShoutingIguane")] [SerializeField] private GameObject IguaneToProtect;
-    [ShowIf("is_ShoutingIguane")] [SerializeField] private AudioClip ShoutAudio;
-    [ShowIf("is_ShoutingIguane")] [SerializeField] private float TimeToShout;
-    [ShowIf("is_ShoutingIguane")] [SerializeField] private float MaxDistanceFromIguane;
-    private float timeShouting = 0;
-    
-    // Alpha Iguane variables
-    [ShowIf("is_AlphaIguane")]
-    
-    // States
-    private bool isEating = false;
-    private bool isCarryingFood = false;
-    private bool isRunning = false;
-    private bool isReleasingFood = false;
-    private bool isShouting = false;
-    
-    // Others
-    private Animator animator;
-    private AudioSource audioSource;
+    public enum State
+    {
+        Roaming,
+        GoingToFood,
+        CarryingFood,
+        Fleeing,
+        HidingInNest,
+        Resting
+    }
+
+    [Header("References")]
     private NavMeshAgent agent;
-    
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private AIBrainMemory memory;
+
+    [Header("State")]
+    public State currentState;
+
+    [Header("Movement Speeds")]
+    public float walkSpeed = 2f;
+    public float runSpeed = 5f;
+
+    [Header("Noise thresholds")]
+    public float fleeThreshold = 5f;
+    public float hideThreshold = 15f;
+
+    [Header("Timers")]
+    public float restDuration = 5f;
+    private float stateTimer;
+
+    [Header("Waypoints & Nest")]
+    public Transform nest;
+    private Transform targetFood;
+
+    private Vector3 homePosition;
+
+    void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        memory = GetComponent<AIBrainMemory>();
+        homePosition = transform.position;
+
+        // Autorise navigation dans l'eau si nécessaire
+        agent.areaMask |= 1 << NavMesh.GetAreaFromName("Water"); 
+    }
+
     void Start()
     {
-        animator = transform.GetChild(0).GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
-        agent = GetComponent<NavMeshAgent>();
-        Waypoints = WaypointsBase;
-    }
-    
-    void OnEnable()
-    {
-        Digicode.OnCodeEntered += ChangeBehaviour;
+        SetState(State.Roaming);
+        PickRandomFood();
     }
 
-    void OnDisable()
-    {
-        Digicode.OnCodeEntered -= ChangeBehaviour;
-    }
-
-    private void ChangeBehaviour(Digicode digicode)
-    {
-        Waypoints = WaypointsOnEvent;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (is_EatingIguane)
-        {
-            GoToWaypoint();
-            Debug.Log($"isEating: {isEating}");
-            if (isEating)
-                Eat();
-            if (isRunning)
-            {
-                timeRunning += Time.deltaTime;
-                if (timeRunning >= TimeToRun)
-                {
-                    timeRunning = 0;
-                    isRunning = false;
-                    agent.speed = baseSpeed;
-                }
-            }
-        }
+        HandleState();
+    }
 
-        if (is_ShoutingIguane)
+    // ==========================
+    // STATE MACHINE
+    // ==========================
+    void HandleState()
+    {
+        switch (currentState)
         {
-            if (isShouting)
-            {
-                timeShouting += Time.deltaTime;
-                if (timeShouting >= TimeToShout)
+            case State.Roaming:
+                if (!agent.pathPending && agent.remainingDistance < 1f)
+                    PickRandomFood();
+                break;
+
+            case State.GoingToFood:
+                if (!agent.pathPending && agent.remainingDistance < 1f)
+                    SetState(State.CarryingFood);
+                break;
+
+            case State.CarryingFood:
+                if (!agent.pathPending && agent.remainingDistance < 1f)
+                    SetState(State.Resting);
+                break;
+
+            case State.Fleeing:
+            case State.HidingInNest:
+            case State.Resting:
+                stateTimer -= Time.deltaTime;
+                if (stateTimer <= 0f)
                 {
-                    isShouting = false;
-                    timeShouting = 0;
-                    animator.SetBool("IsShouting", false);
+                    SetState(State.Roaming);
+                    PickRandomFood();
                 }
-            }
-            else
-            {
+                break;
+        }
+    }
+
+    void SetState(State newState)
+    {
+        currentState = newState;
+
+        switch (newState)
+        {
+            case State.Roaming:
                 agent.isStopped = false;
-                FollowIguane(IguaneToProtect);
-            }
+                agent.speed = walkSpeed;
+                break;
 
-            if (isRunning)
-            {
-                float distanceToIguane = Vector3.Distance(IguaneToProtect.transform.position, transform.position);
-                if (distanceToIguane <= MaxDistanceFromIguane + 5)
-                {
-                    isRunning = false;
-                    agent.speed = baseSpeed;
-                }
-            }
+            case State.GoingToFood:
+                agent.isStopped = false;
+                agent.speed = walkSpeed;
+                if (targetFood != null)
+                    agent.SetDestination(targetFood.position);
+                break;
+
+            case State.CarryingFood:
+                agent.isStopped = false;
+                agent.speed = runSpeed;
+                if (nest != null)
+                    agent.SetDestination(nest.position);
+                break;
+
+            case State.Fleeing:
+                agent.isStopped = false;
+                agent.speed = runSpeed;
+                FleeRandomDirection();
+                stateTimer = 3f; // temps à fuir avant retourner
+                break;
+
+            case State.HidingInNest:
+                agent.isStopped = false;
+                agent.speed = runSpeed;
+                if (nest != null)
+                    agent.SetDestination(nest.position);
+                stateTimer = 5f;
+                break;
+
+            case State.Resting:
+                agent.isStopped = true;
+                stateTimer = restDuration;
+                break;
         }
     }
 
-    public void DetectNoise(GameObject detectedObject)
+    // ==========================
+    // HELPERS
+    // ==========================
+    void PickRandomFood()
     {
-        Debug.Log("Iguane heard noise");
-        //vérifier que detectedObject est un type sur lequel l'iguane cris
-        if (!ReactAtNoise_Tags.Contains(detectedObject.tag))
+        if (memory.foodZones.Count == 0)
             return;
-        
-        Debug.Log("Iguane recognize noise");
-        if (is_ShoutingIguane)
-        {
-            Debug.Log("Iguane will shout");
-            Shout(detectedObject);
-            return;
-        }
 
-        if (is_EatingIguane)
+        AIZone zone = memory.GetClosestZone(memory.foodZones);
+        if (zone != null)
         {
-            Debug.Log("Iguane will run");
-            Run();
-            return;
+            targetFood = zone.transform;
+            SetState(State.GoingToFood);
         }
     }
 
-    #region EatingIguane
-    private void GoToWaypoint()
+    void FleeRandomDirection()
     {
-        float distanceToWaypoint = Vector3.Distance(Waypoints[currentWaypoint].position, transform.position);
-        Debug.Log($"distanceToWaypoint: {distanceToWaypoint}");
-
-        if (distanceToWaypoint <= 1f && !isEating)
-        {
-            isEating = true;
-            if (Waypoints == WaypointsBase)
-            {
-                if (WaypointsBaseWithFood.Contains(currentWaypoint))
-                    animator.SetBool("IsEating", true);
-                else
-                    animator.SetBool("IsIdle", true);
-                Debug.Log("animator true BaseWP");
-            }
-            else
-            {
-                if (WaypointsOnEventWithFood.Contains(currentWaypoint))
-                    animator.SetBool("IsEating", true);
-                else
-                    animator.SetBool("IsIdle", true);
-                Debug.Log("animator true OnEventWP");
-            }
-        }
-        
-        agent.SetDestination(Waypoints[currentWaypoint].position);
-        Debug.Log($"current waypoint {currentWaypoint}");
+        Vector3 randomDir = Random.insideUnitSphere * 10f;
+        randomDir += transform.position;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomDir, out hit, 10f, NavMesh.AllAreas))
+            agent.SetDestination(hit.position);
     }
 
-    private void Eat()
+    // ==========================
+    // CALLED BY PERCEPTION
+    // ==========================
+    public void OnNoise(Vector3 sourcePosition, float intensity)
     {
-        timeEating += Time.deltaTime;
-        Debug.Log("iguane eating");
-        if (timeEating >= TimeToEat)
-        {
-            isEating = false;
-            timeEating = 0;
-            currentWaypoint = (currentWaypoint + 1) % Waypoints.Count;
-            agent.SetDestination(Waypoints[currentWaypoint].position);
-            animator.SetBool("IsEating", false);
-            animator.SetBool("IsIdle", false);
-            Debug.Log("animator faux");
-            Debug.Log("changed waypoint");
-        }
-    }
-    
-    private void Run()
-    {
-        Debug.Log("IguaneRun");
-        agent.speed = runSpeed;
-        isRunning = true;
-    }
-    #endregion
+        float distance = Vector3.Distance(transform.position, sourcePosition);
+        if (distance > intensity) return;
 
-
-    #region ShoutingIguane
-    private void Shout(GameObject detectedObject)
-    {
-        Debug.Log("Iguane Shout 1");
-        if (isShouting)
-            return;
-        Debug.Log("Iguane Shout 2");
-        float distanceToIguane = Vector3.Distance(IguaneToProtect.transform.position, transform.position);
-        if (distanceToIguane > MaxDistanceFromIguane + 5)
-        {
-            Run();
-            return;
-        }
-        
-        Debug.Log("IguaneShout");
-        isShouting = true;
-        animator.SetBool("IsShouting", true);
-        _makeNoise.Noise(
-            this.transform.position,
-            noiseRadius_Shouting,
-            25f, // intensité forte car cri
-            this.gameObject,
-            audioSource,
-            ShoutAudio
-        );
-        agent.isStopped = true;
-        
-        this.transform.LookAt(detectedObject.transform);
-
-        this.GetComponent<ShoutAtTarget>().TryShout(TimeToShout, this.gameObject);
-        
-        // SphereCast a une certaine distance
-        // Si la cible a un rigidbody, repousser avec les méchaniques Rigidbody
-        // Si la cible a un CharacterController, repousser avec les méchaniques CharacterController
-        // Sinon ne rien faire
+        if (intensity >= hideThreshold)
+            SetState(State.HidingInNest);
+        else if (intensity >= fleeThreshold)
+            SetState(State.Fleeing);
     }
-
-    private void FollowIguane(GameObject iguane)
-    {
-        Debug.Log("Iguane Follows");
-        agent.SetDestination(new Vector3(IguaneToProtect.transform.position.x, iguane.transform.position.y + 5, iguane.transform.position.z));
-    }
-    #endregion
 }

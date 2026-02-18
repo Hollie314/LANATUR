@@ -604,10 +604,8 @@ GameObject:
   - component: {fileID: 2967403922743102577}
   - component: {fileID: 1771677366388442078}
   - component: {fileID: 5470238024703801864}
-  - component: {fileID: 1254350797148145831}
   - component: {fileID: 7875134251874853627}
   - component: {fileID: 7706775851220431172}
-  - component: {fileID: 5962195594885307675}
   - component: {fileID: 518284597854865387}
   - component: {fileID: 4501613091190461136}
   - component: {fileID: 978383161007094091}
@@ -695,44 +693,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1254350797148145831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6977491950172250962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ddd54c0a663dff4894b8b30f95e269a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AI_Iguane
-  is_EatingIguane: 0
-  is_ShoutingIguane: 1
-  is_AlphaIguane: 0
-  noiseRadius_Shouting: 20
-  noiseRadius_Running: 0
-  noiseRadius_Walking: 0
-  noiseRadius_Crouching: 0
-  _makeNoise: {fileID: 7652601897733044281}
-  baseSpeed: 5
-  runSpeed: 10
-  ReactAtNoise_Tags:
-  - Player
-  WaypointsBase:
-  - {fileID: 0}
-  - {fileID: 0}
-  WaypointsBaseWithFood: 
-  WaypointsOnEvent:
-  - {fileID: 0}
-  - {fileID: 0}
-  WaypointsOnEventWithFood: 
-  TimeToEat: 0
-  TimeToRun: 0
-  IguaneToProtect: {fileID: 0}
-  ShoutAudio: {fileID: 8300000, guid: 5abb6046bcd534f4488a293f68c06299, type: 3}
-  TimeToShout: 2.5
-  MaxDistanceFromIguane: 4
 --- !u!65 &7875134251874853627
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -776,20 +736,6 @@ NavMeshAgent:
   m_BaseOffset: 0.51
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!114 &5962195594885307675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6977491950172250962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 115519b895e2e30419ccd102e7b7249b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShoutAtTarget
-  ShoutSphere: {fileID: 8776513140138690467, guid: e0f29b7681235ae46b1eb096f0da6d47, type: 3}
-  shoutFinalRadius: 8
 --- !u!135 &518284597854865387
 SphereCollider:
   m_ObjectHideFlags: 0

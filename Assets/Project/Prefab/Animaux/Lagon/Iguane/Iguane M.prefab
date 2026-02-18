@@ -325,16 +325,16 @@ GameObject:
   - component: {fileID: 7516916948499719941}
   - component: {fileID: 3459015407037463520}
   - component: {fileID: 4792308897344105623}
-  - component: {fileID: 2284754516572696845}
+  - component: {fileID: 384589808620780047}
   - component: {fileID: 6960914323395345698}
   - component: {fileID: 7118915214642455142}
-  - component: {fileID: 4313619661129934094}
   - component: {fileID: 1478650946147244503}
   - component: {fileID: 6096110069060290119}
   - component: {fileID: 1690167717944747469}
   - component: {fileID: 4554112412378479555}
   - component: {fileID: 988041696996255046}
   - component: {fileID: 6954511483464550056}
+  - component: {fileID: 5526032865976009256}
   m_Layer: 9
   m_Name: Iguane M
   m_TagString: Iguane
@@ -357,6 +357,7 @@ Transform:
   m_Children:
   - {fileID: 3670502335049171432}
   - {fileID: 1572886538354912958}
+  - {fileID: 5961212299392607563}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 136.906, z: 0}
 --- !u!33 &3459015407037463520
@@ -416,7 +417,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2284754516572696845
+--- !u!114 &384589808620780047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -425,39 +426,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 6363655695414583813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ddd54c0a663dff4894b8b30f95e269a, type: 3}
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AI_Iguane
-  is_EatingIguane: 1
-  is_ShoutingIguane: 0
-  is_AlphaIguane: 0
-  noiseRadius_Shouting: 0
-  noiseRadius_Running: 0
-  noiseRadius_Walking: 0
-  noiseRadius_Crouching: 0
-  _makeNoise: {fileID: 6954511483464550056}
-  baseSpeed: 5
-  runSpeed: 10
-  ReactAtNoise_Tags:
-  - Player
-  - Lamantin
-  WaypointsBase:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  WaypointsBaseWithFood: 
-  WaypointsOnEvent:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  WaypointsOnEventWithFood: 0200000004000000
-  TimeToEat: 0
-  TimeToRun: 0
-  IguaneToProtect: {fileID: 0}
-  ShoutAudio: {fileID: 8300000, guid: 5abb6046bcd534f4488a293f68c06299, type: 3}
-  TimeToShout: 2.5
-  MaxDistanceFromIguane: 5
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: 7211151722167180481, guid: 79f89cb0ee534dd40813f2ae0c0e60ac, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 7020973698821653018
+  - rid: 7020973698821653161
+  m_OriginalGraph: {fileID: 0}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 7020973698821653018
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 6363655695414583813}
+    - rid: 7020973698821653161
+      type: {class: 'BlackboardVariable`1[[PerceptionRange, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 7917553530747453864
+          m_Value1: 5411262030655055874
+        Name: Perception Range
+        m_Value: {fileID: 5526032865976009256}
 --- !u!65 &6960914323395345698
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -501,20 +498,6 @@ NavMeshAgent:
   m_BaseOffset: 0.51
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!114 &4313619661129934094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6363655695414583813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 115519b895e2e30419ccd102e7b7249b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShoutAtTarget
-  ShoutSphere: {fileID: 8776513140138690467, guid: e0f29b7681235ae46b1eb096f0da6d47, type: 3}
-  shoutFinalRadius: 8
 --- !u!135 &1478650946147244503
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -693,6 +676,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c16eec9b8714248b5b646337120f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MakeNoise
+--- !u!114 &5526032865976009256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363655695414583813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6b5457d78e5134fa9ce6046175e198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PerceptionRange
+  Detected: 0
+  radius: 7.62
+  intensity: 5
+  showDebugVisuals: 1
 --- !u!1 &6631339994469502519
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,6 +832,37 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
+--- !u!1 &7492325282497495862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5961212299392607563}
+  m_Layer: 9
+  m_Name: Point de fuite
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5961212299392607563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492325282497495862}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -18.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7516916948499719941}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9192030818623520532
 GameObject:
   m_ObjectHideFlags: 0
