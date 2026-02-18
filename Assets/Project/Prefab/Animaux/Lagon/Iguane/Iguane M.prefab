@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 3459015407037463520}
   - component: {fileID: 4792308897344105623}
   - component: {fileID: 384589808620780047}
+  - component: {fileID: 5526032865976009256}
   - component: {fileID: 6960914323395345698}
   - component: {fileID: 7118915214642455142}
   - component: {fileID: 1478650946147244503}
@@ -334,7 +335,6 @@ GameObject:
   - component: {fileID: 4554112412378479555}
   - component: {fileID: 988041696996255046}
   - component: {fileID: 6954511483464550056}
-  - component: {fileID: 5526032865976009256}
   m_Layer: 9
   m_Name: Iguane M
   m_TagString: Iguane
@@ -429,10 +429,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 7211151722167180481, guid: 79f89cb0ee534dd40813f2ae0c0e60ac, type: 2}
+  m_Graph: {fileID: -5994210123920740353, guid: 0073c5cc2ee66334992aac9e81df9600, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 7020973698821653018
-  - rid: 7020973698821653161
+  - rid: 7020973704558149715
+  - rid: 7020973704558149716
   m_OriginalGraph: {fileID: 0}
   m_IsInitialised: 0
   m_IsStarted: 0
@@ -447,14 +448,38 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 6363655695414583813}
-    - rid: 7020973698821653161
+    - rid: 7020973704558149715
       type: {class: 'BlackboardVariable`1[[PerceptionRange, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
-          m_Value0: 7917553530747453864
-          m_Value1: 5411262030655055874
+          m_Value0: 1385570327368217231
+          m_Value1: 9892568393230028053
         Name: Perception Range
         m_Value: {fileID: 5526032865976009256}
+    - rid: 7020973704558149716
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 5375560754507476099
+          m_Value1: 15841232872109082979
+        Name: Animator
+        m_Value: {fileID: 7210283592262671250}
+--- !u!114 &5526032865976009256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363655695414583813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6b5457d78e5134fa9ce6046175e198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PerceptionRange
+  Detected: 0
+  radius: 7.62
+  intensity: 5
+  showDebugVisuals: 1
 --- !u!65 &6960914323395345698
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -676,22 +701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c16eec9b8714248b5b646337120f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MakeNoise
---- !u!114 &5526032865976009256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6363655695414583813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af6b5457d78e5134fa9ce6046175e198, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PerceptionRange
-  Detected: 0
-  radius: 7.62
-  intensity: 5
-  showDebugVisuals: 1
 --- !u!1 &6631339994469502519
 GameObject:
   m_ObjectHideFlags: 0
@@ -4120,6 +4129,11 @@ Transform:
 --- !u!4 &7152190639589692318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3009767471243954787, guid: 715363a53bee2ed4ebebead3bdf8da15, type: 3}
+  m_PrefabInstance: {fileID: 3853540935256532483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7210283592262671250 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 715363a53bee2ed4ebebead3bdf8da15, type: 3}
   m_PrefabInstance: {fileID: 3853540935256532483}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7365757302332229753 stripped

@@ -125,7 +125,7 @@ MonoBehaviour:
   - rid: 8938911044141842749
   - rid: 8938911044141842766
   m_VersionTimestamp: 639070196567083009
-  m_SerializedVersion: 1
+  m_SerializedVersion: 2
   m_DebugInfo: {fileID: 8299967033309744405}
   m_RuntimeGraph: {fileID: 2979874758861998458}
   AssetID:
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraph
   Graphs:
   - rid: 8938911044141842510
-  m_DebugInfo: {fileID: 0}
+  m_DebugInfo: {fileID: 8299967033309744405}
   m_WasCompileWithPlaceholderNode: 1
   references:
     version: 2
@@ -542,6 +542,7 @@ MonoBehaviour:
           rid: 7020973698821653200
         m_Children:
         - rid: 7020973698821653202
+        m_RegisteredObservers: []
     - rid: 7020973698821653202
       type: {class: WaitForTriggerAction, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -590,18 +591,12 @@ MonoBehaviour:
         AuthoringAssetID:
           m_Value0: 9555324045679987003
           m_Value1: 3749015806567205626
-        m_DebugInfo: {fileID: 0}
+        m_DebugInfo: {fileID: 8299967033309744405}
         BlackboardReference:
           rid: 8938911044141842511
         BlackboardGroupReferences: []
         Root:
           rid: 7020973698821653200
-        m_ActiveNodes: []
-        m_NodesToTick: []
-        m_NodesToEnd:
-          rid: 8938911044141842513
-        m_EndedNodes:
-          rid: 8938911044141842514
         m_VersionTimestamp: 639070196567083009
     - rid: 8938911044141842511
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
@@ -609,12 +604,6 @@ MonoBehaviour:
         m_Blackboard:
           rid: 8938911044141842515
         m_Source: {fileID: -1983073954262626404}
-    - rid: 8938911044141842513
-      type: {class: 'Stack`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: mscorlib}
-      data: 
-    - rid: 8938911044141842514
-      type: {class: 'HashSet`1[[Unity.Behavior.Node, Unity.Behavior]]', ns: System.Collections.Generic, asm: System.Core}
-      data: 
     - rid: 8938911044141842515
       type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
