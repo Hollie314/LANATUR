@@ -3,9 +3,11 @@ using UnityEngine;
 public class PerceptionRange : MonoBehaviour, IStimulusListener
 {
     public bool Detected = false;
-    public float radius = 5f;
-    public float intensity = 5f;
-    [SerializeField] private bool showDebugVisuals = true;
+    public float soundRadius = 5f;
+    public float lightRadius = 5f;
+    public float soundIntensity = 5f;
+    public float lightIntensity = 5f;
+    public bool showDebugVisuals = true;
     
     void OnEnable()
     {
@@ -26,9 +28,13 @@ public class PerceptionRange : MonoBehaviour, IStimulusListener
         if(source == gameObject)
             return;
         
-        float distance = Vector3.Distance(transform.position, position);
-
-        if(distance > radius) return;
+        float distance = Vector3.Distance(transform.position, position) - radius - soundRadius;
+        
+        if (intensity < soundIntensity)
+            return;
+        
+        if(distance > 0) 
+            return;
         
         Detected = true;
     }
@@ -40,8 +46,12 @@ public class PerceptionRange : MonoBehaviour, IStimulusListener
             return;
         
         float distance = Vector3.Distance(transform.position, position);
+        
+        if (intensity > lightIntensity)
+            return;
 
-        if(distance > radius) return;
+        if(distance > lightRadius) 
+            return;
         
         Detected = true;
         
@@ -49,7 +59,8 @@ public class PerceptionRange : MonoBehaviour, IStimulusListener
     private void OnDrawGizmos()
     {
         if (!showDebugVisuals || this.enabled == false) return;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, soundRadius);
+        Gizmos.DrawWireSphere(transform.position, lightRadius);
 
     }
 

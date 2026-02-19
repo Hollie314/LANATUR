@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8188514790094697781}
   - component: {fileID: 7727134598429161110}
   - component: {fileID: 326911348781048409}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Baie
   m_TagString: BaieTest
   m_Icon: {fileID: 0}
@@ -125,6 +125,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &8188514790094697781
 BoxCollider:
@@ -200,7 +201,7 @@ GameObject:
   - component: {fileID: 8507092556752219540}
   - component: {fileID: 2923840330841341281}
   - component: {fileID: 2872645759089967163}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
   m_TagString: BaieTest
   m_Icon: {fileID: 0}
@@ -277,6 +278,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &2872645759089967163
 SphereCollider:
@@ -310,6 +312,10 @@ PrefabInstance:
     - target: {fileID: 3268180496438814722, guid: 6ce9b66048550d443a886b1023e7a7be, type: 3}
       propertyPath: m_Name
       value: Interact text
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268180496438814722, guid: 6ce9b66048550d443a886b1023e7a7be, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3268180496438814722, guid: 6ce9b66048550d443a886b1023e7a7be, type: 3}
       propertyPath: m_IsActive
@@ -398,6 +404,10 @@ PrefabInstance:
     - target: {fileID: 4322963299049428843, guid: 6ce9b66048550d443a886b1023e7a7be, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6175148005853236360, guid: 6ce9b66048550d443a886b1023e7a7be, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

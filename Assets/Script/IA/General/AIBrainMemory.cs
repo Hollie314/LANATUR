@@ -5,6 +5,7 @@ public class AIBrainMemory : MonoBehaviour
 {
     public List<AIZone> territoryZones = new();
     public List<AIZone> foodZones = new();
+    public List<AIZone> nestZones = new();
     public List<AIZone> patrolZones = new();
     public List<AIZone> safeZones = new();
     public List<AIZone> lightZones = new();

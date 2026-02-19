@@ -9,11 +9,14 @@ public class PlayerMotor : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
 
-    [Header("NoiseRadius")]
-    // NoiseRadius
-    [SerializeField] private float noiseRadius_Running;
+    [Header("Noise")]
+    // NoiseRadius[SerializeField] private float noiseRadius_Running;
+    [SerializeField] private float noiseInsity_Walking;
+    [SerializeField] private float noiseInsity_Crouching;
+    [SerializeField] private float noiseInsity_Running;
     [SerializeField] private float noiseRadius_Walking;
     [SerializeField] private float noiseRadius_Crouching;
+    [SerializeField] private float noiseRadius_Running;
     [SerializeField] MakeNoise _makeNoise;
     
     [Header("Movements")]
@@ -149,8 +152,7 @@ public class PlayerMotor : MonoBehaviour
                 Vector3 p1 = transform.position + controller.center;
                 _makeNoise.Noise(
                     p1,
-                    noiseRadius_Crouching,
-                    3f,
+                    noiseRadius_Crouching,noiseInsity_Crouching,
                     this.gameObject,
                     playerMoveAudioSource,
                     CrouchSFX
@@ -172,8 +174,8 @@ public class PlayerMotor : MonoBehaviour
                     Vector3 p1 = transform.position + controller.center;
                     _makeNoise.Noise(
                         p1,
-                        noiseRadius_Walking,
-                        15f,
+                        noiseRadius_Running,
+                        noiseInsity_Running,
                         this.gameObject,
                         playerMoveAudioSource,
                         SprintSFX
@@ -192,8 +194,8 @@ public class PlayerMotor : MonoBehaviour
                     Vector3 p1 = transform.position + controller.center;
                     _makeNoise.Noise(
                         p1,
-                        noiseRadius_Running,
-                        8f,
+                        noiseRadius_Walking,
+                        noiseInsity_Walking,
                         this.gameObject,
                         playerMoveAudioSource,
                         WalkSFX

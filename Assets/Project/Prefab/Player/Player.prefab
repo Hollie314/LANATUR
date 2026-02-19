@@ -960,9 +960,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f97e6fd367385748b2df08b9bf807af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noiseRadius_Running: 10
+  noiseInsity_Walking: 4
+  noiseInsity_Crouching: 1
+  noiseInsity_Running: 10
   noiseRadius_Walking: 4
   noiseRadius_Crouching: 2
+  noiseRadius_Running: 10
   _makeNoise: {fileID: 2786311286005915286}
   groundedRayLength: 1.6
   gravity: -9.81
@@ -971,7 +974,7 @@ MonoBehaviour:
   crouchSpeed: 3
   sprintmultiplier: 2.5
   coyoteTime: 0
-  JumpHeight: 6
+  JumpHeight: 7
   CrouchJumpHeight: 4.5
   playerMoveAudioSource: {fileID: 4267424797519250833}
   playerJumpAudioSource: {fileID: 4267424797519250833}
@@ -1157,9 +1160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c16eec9b8714248b5b646337120f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MakeNoise
-  layerHearing:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1 &7784458337332954185
 GameObject:
   m_ObjectHideFlags: 0

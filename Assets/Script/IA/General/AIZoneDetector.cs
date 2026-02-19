@@ -27,6 +27,10 @@ public class AIZoneDetector : MonoBehaviour
             case AIZone.ZoneType.Safe:
                 memory.safeZones.Add(zone);
                 break;
+            
+            case AIZone.ZoneType.Nest:
+                memory.safeZones.Add(zone);
+                break;
         }
     }
 }

@@ -16,34 +16,33 @@ MonoBehaviour:
     m_Value0: 11857160987620897283
     m_Value1: 16152335200223746921
   m_Variables:
-  - rid: 7020973703304577329
   - rid: 7020973703304577331
+  - rid: 7020973726420435257
+  - rid: 7020973724886368392
+  - rid: 7020973724886368393
+  - rid: 7020973730612117980
+  - rid: 7020973726895440587
+  - rid: 7020973726420435409
+  - rid: 7020973730865873233
   - rid: 7020973703304577332
+  - rid: 7020973724886368395
   - rid: 7020973703304577335
-  m_VersionTimestamp: 639070308835846967
+  - rid: 7020973727218926410
+  - rid: 7020973728582074549
+  m_VersionTimestamp: 639071356525069586
   m_CommandBuffer:
     m_Commands: []
   m_RuntimeBlackboardAsset: {fileID: 7177693561300523278}
   references:
     version: 2
     RefIds:
-    - rid: 7020973703304577329
-      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 5206408348642282316
-          m_Value1: 13868343753934936325
-        Name: Self
-        IsExposed: 1
-        m_IsShared: 0
-        m_Value: {fileID: 0}
     - rid: 7020973703304577331
       type: {class: 'TypedVariableModel`1[[PerceptionRange, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
         ID:
           m_Value0: 6782946338450754768
           m_Value1: 3386925023410799037
-        Name: New Perception Range
+        Name: Perception Range
         IsExposed: 1
         m_IsShared: 0
         m_Value: {fileID: 0}
@@ -67,6 +66,106 @@ MonoBehaviour:
         IsExposed: 1
         m_IsShared: 0
         m_Value: {fileID: 0}
+    - rid: 7020973724886368392
+      type: {class: 'TypedVariableModel`1[[RangeDetection, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 8192970977043768029
+          m_Value1: 13672257671279076884
+        Name: Range Detection
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 7020973724886368393
+      type: {class: 'TypedVariableModel`1[[LineOfSightDetector, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 11208320498615238280
+          m_Value1: 13714995075349203938
+        Name: Line Of Sight Detector
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 7020973724886368395
+      type: {class: 'TypedVariableModel`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 13410925644078062417
+          m_Value1: 15029045073169300362
+        Name: TargetDetected
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
+    - rid: 7020973726420435257
+      type: {class: 'TypedVariableModel`1[[WaypointManager, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 2220390125918479636
+          m_Value1: 3344375677986199745
+        Name: Waypoint Manager
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 7020973726420435409
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 13607025868360752068
+          m_Value1: 1859531949782487604
+        Name: Spot
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 7020973726895440587
+      type: {class: 'TypedVariableModel`1[[MakeNoise, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 12527949515028292134
+          m_Value1: 10510280952303905956
+        Name: Make Noise
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 7020973727218926410
+      type: {class: 'TypedVariableModel`1[[UnityEngine.AudioSource, UnityEngine.AudioModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 10002522701614773130
+          m_Value1: 354324604648438219
+        Name: Audio Source
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 7020973728582074549
+      type: {class: 'TypedVariableModel`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 8067268586685714631
+          m_Value1: 9102448581133211804
+        Name: Audio Clip
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 7020973730612117980
+      type: {class: 'TypedVariableModel`1[[AIZone, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 16880365502159439857
+          m_Value1: 6757401096815351069
+        Name: AIZone
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 7020973730865873233
+      type: {class: 'TypedVariableModel`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 2123184172873994908
+          m_Value1: 2447177934807638109
+        Name: ZoneDetected
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: 0
 --- !u!114 &7177693561300523278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,35 +178,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
   m_Name: BB_Animal
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.RuntimeBlackboardAsset
-  VersionTimestamp: 639070308835846967
+  VersionTimestamp: 639071356525069586
   AssetID:
     m_Value0: 11857160987620897283
     m_Value1: 16152335200223746921
   m_Blackboard:
     m_Variables:
-    - rid: 7020973703304577330
     - rid: 7020973703304577333
+    - rid: 7020973726420435258
+    - rid: 7020973724886368394
+    - rid: 7020973724886368396
+    - rid: 7020973730612117981
+    - rid: 7020973726895440588
+    - rid: 7020973726420435410
+    - rid: 7020973730865873234
     - rid: 7020973703304577334
+    - rid: 7020973724886368397
     - rid: 7020973703304577336
+    - rid: 7020973727218926411
+    - rid: 7020973728582074550
   m_SharedBlackboardVariableGuids: []
   references:
     version: 2
     RefIds:
-    - rid: 7020973703304577330
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 5206408348642282316
-          m_Value1: 13868343753934936325
-        Name: Self
-        m_Value: {fileID: 0}
     - rid: 7020973703304577333
       type: {class: 'BlackboardVariable`1[[PerceptionRange, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
           m_Value0: 6782946338450754768
           m_Value1: 3386925023410799037
-        Name: New Perception Range
+        Name: Perception Range
         m_Value: {fileID: 0}
     - rid: 7020973703304577334
       type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
@@ -125,3 +225,83 @@ MonoBehaviour:
           m_Value1: 11242239507536831951
         Name: Animator
         m_Value: {fileID: 0}
+    - rid: 7020973724886368394
+      type: {class: 'BlackboardVariable`1[[RangeDetection, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 8192970977043768029
+          m_Value1: 13672257671279076884
+        Name: Range Detection
+        m_Value: {fileID: 0}
+    - rid: 7020973724886368396
+      type: {class: 'BlackboardVariable`1[[LineOfSightDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 11208320498615238280
+          m_Value1: 13714995075349203938
+        Name: Line Of Sight Detector
+        m_Value: {fileID: 0}
+    - rid: 7020973724886368397
+      type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 13410925644078062417
+          m_Value1: 15029045073169300362
+        Name: TargetDetected
+        m_Value: 0
+    - rid: 7020973726420435258
+      type: {class: 'BlackboardVariable`1[[WaypointManager, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 2220390125918479636
+          m_Value1: 3344375677986199745
+        Name: Waypoint Manager
+        m_Value: {fileID: 0}
+    - rid: 7020973726420435410
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 13607025868360752068
+          m_Value1: 1859531949782487604
+        Name: Spot
+        m_Value: {fileID: 0}
+    - rid: 7020973726895440588
+      type: {class: 'BlackboardVariable`1[[MakeNoise, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12527949515028292134
+          m_Value1: 10510280952303905956
+        Name: Make Noise
+        m_Value: {fileID: 0}
+    - rid: 7020973727218926411
+      type: {class: 'BlackboardVariable`1[[UnityEngine.AudioSource, UnityEngine.AudioModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10002522701614773130
+          m_Value1: 354324604648438219
+        Name: Audio Source
+        m_Value: {fileID: 0}
+    - rid: 7020973728582074550
+      type: {class: 'BlackboardVariable`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 8067268586685714631
+          m_Value1: 9102448581133211804
+        Name: Audio Clip
+        m_Value: {fileID: 0}
+    - rid: 7020973730612117981
+      type: {class: 'BlackboardVariable`1[[AIZone, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 16880365502159439857
+          m_Value1: 6757401096815351069
+        Name: AIZone
+        m_Value: {fileID: 0}
+    - rid: 7020973730865873234
+      type: {class: 'BlackboardVariable`1[[System.Boolean, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 2123184172873994908
+          m_Value1: 2447177934807638109
+        Name: ZoneDetected
+        m_Value: 0
