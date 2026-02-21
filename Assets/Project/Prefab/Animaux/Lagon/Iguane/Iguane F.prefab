@@ -604,14 +604,18 @@ GameObject:
   - component: {fileID: 2967403922743102577}
   - component: {fileID: 1771677366388442078}
   - component: {fileID: 5470238024703801864}
+  - component: {fileID: 5895886645097685874}
+  - component: {fileID: 8564539199447615938}
+  - component: {fileID: 2286199110457000891}
+  - component: {fileID: 648988060577465968}
+  - component: {fileID: 7681182124627225939}
+  - component: {fileID: 7652601897733044281}
   - component: {fileID: 7875134251874853627}
   - component: {fileID: 7706775851220431172}
-  - component: {fileID: 518284597854865387}
   - component: {fileID: 4501613091190461136}
   - component: {fileID: 978383161007094091}
   - component: {fileID: 7423675128087137872}
   - component: {fileID: 5465688445322705407}
-  - component: {fileID: 7652601897733044281}
   m_Layer: 9
   m_Name: Iguane F
   m_TagString: Iguane
@@ -693,6 +697,240 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5895886645097685874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977491950172250962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: -5994210123920740353, guid: eac3c8bdbe9eab5448c6715d40fdb5a0, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 7020973727551586684
+  - rid: 7020973727551586685
+  - rid: 7020973727551586686
+  - rid: 7020973727551586687
+  - rid: 7020973727551586688
+  - rid: 7020973727551586689
+  - rid: 7020973727551586690
+  - rid: 7020973727551586691
+  - rid: 7020973727551586692
+  - rid: 7020973727551586797
+  - rid: 7020973727551586798
+  - rid: 7020973727551586799
+  - rid: 7020973727551586800
+  - rid: 7020973728774225920
+  - rid: 7020973730990915705
+  m_OriginalGraph: {fileID: 0}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 7020973727551586684
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 6977491950172250962}
+    - rid: 7020973727551586685
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1544033137187226038
+          m_Value1: 11242239507536831951
+        Name: Animator
+        m_Value: {fileID: 3813511448344636051}
+    - rid: 7020973727551586686
+      type: {class: 'BlackboardVariable`1[[UnityEngine.AudioSource, UnityEngine.AudioModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10002522701614773130
+          m_Value1: 354324604648438219
+        Name: Audio Source
+        m_Value: {fileID: 4501613091190461136}
+    - rid: 7020973727551586687
+      type: {class: 'BlackboardVariable`1[[PerceptionRange, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6782946338450754768
+          m_Value1: 3386925023410799037
+        Name: Perception Range
+        m_Value: {fileID: 2286199110457000891}
+    - rid: 7020973727551586688
+      type: {class: 'BlackboardVariable`1[[RangeDetection, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 8192970977043768029
+          m_Value1: 13672257671279076884
+        Name: Range Detection
+        m_Value: {fileID: 648988060577465968}
+    - rid: 7020973727551586689
+      type: {class: 'BlackboardVariable`1[[LineOfSightDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 11208320498615238280
+          m_Value1: 13714995075349203938
+        Name: Line Of Sight Detector
+        m_Value: {fileID: 7681182124627225939}
+    - rid: 7020973727551586690
+      type: {class: 'BlackboardVariable`1[[MakeNoise, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12527949515028292134
+          m_Value1: 10510280952303905956
+        Name: Make Noise
+        m_Value: {fileID: 7652601897733044281}
+    - rid: 7020973727551586691
+      type: {class: 'BlackboardVariable`1[[ShoutAtTarget, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6430662261939984600
+          m_Value1: 5437600211225286659
+        Name: Shout At Target
+        m_Value: {fileID: 8564539199447615938}
+    - rid: 7020973727551586692
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 5374426556090694409
+          m_Value1: 14219168446976446004
+        Name: Appat
+        m_Value: {fileID: 3001610117867761408, guid: d6903e8cd6d70104993b869563b0a969, type: 3}
+    - rid: 7020973727551586797
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 7110457796431961813
+          m_Value1: 11432985280337850244
+        Name: IguaneProtected
+        m_Value: {fileID: 0}
+    - rid: 7020973727551586798
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6228677879182206610
+          m_Value1: 7292497301993154445
+        Name: Nid
+        m_Value: {fileID: 0}
+    - rid: 7020973727551586799
+      type: {class: 'BlackboardVariable`1[[WaypointManager, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 2220390125918479636
+          m_Value1: 3344375677986199745
+        Name: Waypoint Manager
+        m_Value: {fileID: 0}
+    - rid: 7020973727551586800
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 13607025868360752068
+          m_Value1: 1859531949782487604
+        Name: Spot
+        m_Value: {fileID: 0}
+    - rid: 7020973728774225920
+      type: {class: 'BlackboardVariable`1[[UnityEngine.AudioClip, UnityEngine.AudioModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 8067268586685714631
+          m_Value1: 9102448581133211804
+        Name: Audio Clip
+        m_Value: {fileID: 8300000, guid: 5abb6046bcd534f4488a293f68c06299, type: 3}
+    - rid: 7020973730990915705
+      type: {class: 'BlackboardVariable`1[[AIZone, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 16880365502159439857
+          m_Value1: 6757401096815351069
+        Name: AIZone
+        m_Value: {fileID: 0}
+--- !u!114 &8564539199447615938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977491950172250962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6321feb42feed5248a9a66b8cef738dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShoutAtTarget
+  ShoutSphere: {fileID: 8776513140138690467, guid: e0f29b7681235ae46b1eb096f0da6d47, type: 3}
+  shoutFinalRadius: 8
+--- !u!114 &2286199110457000891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977491950172250962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6b5457d78e5134fa9ce6046175e198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PerceptionRange
+  Detected: 0
+  soundRadius: 10
+  lightRadius: 5
+  soundIntensity: 4
+  lightIntensity: 5
+  showDebugVisuals: 1
+--- !u!114 &648988060577465968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977491950172250962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad41be17180891488fa2384d7333eca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RangeDetection
+  detectionRadius: 10
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  showDebugVisuals: 1
+--- !u!114 &7681182124627225939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977491950172250962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7864e111e13c247bab03bb914cf63c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LineOfSightDetector
+  m_playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_detectionRange: 10
+  m_detectionHeight: 3
+  showDebugVisuals: 1
+--- !u!114 &7652601897733044281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977491950172250962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c16eec9b8714248b5b646337120f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MakeNoise
 --- !u!65 &7875134251874853627
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -736,27 +974,6 @@ NavMeshAgent:
   m_BaseOffset: 0.51
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!135 &518284597854865387
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6977491950172250962}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &4501613091190461136
 AudioSource:
   m_ObjectHideFlags: 0
@@ -770,7 +987,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -814,7 +1031,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -902,18 +1119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OnScanned
   Scans: {fileID: 3509522263289249008}
---- !u!114 &7652601897733044281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6977491950172250962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97c16eec9b8714248b5b646337120f1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MakeNoise
 --- !u!1001 &7315752197197076226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3602,6 +3807,11 @@ Transform:
 --- !u!4 &3728397417596150431 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3009767471243954787, guid: 715363a53bee2ed4ebebead3bdf8da15, type: 3}
+  m_PrefabInstance: {fileID: 7315752197197076226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3813511448344636051 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 715363a53bee2ed4ebebead3bdf8da15, type: 3}
   m_PrefabInstance: {fileID: 7315752197197076226}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &3946331886096480632 stripped

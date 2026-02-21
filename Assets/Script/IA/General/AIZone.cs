@@ -12,7 +12,7 @@ public class AIZone : MonoBehaviour
         Noise,
         Safe
     }
-
+    [SerializeField] private bool showDebugVisuals = true;
     public ZoneType zoneType;
 
     [Header("Importance")]
@@ -29,6 +29,12 @@ public class AIZone : MonoBehaviour
             return centerPoint.position;
 
         return transform.position;
-       
+    }
+    private void OnDrawGizmos()
+    {
+        if (!showDebugVisuals || this.enabled == false) return;
+        
+        Gizmos.DrawWireSphere(transform.position, radius);
+
     }
 }

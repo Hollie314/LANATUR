@@ -327,9 +327,10 @@ GameObject:
   - component: {fileID: 4792308897344105623}
   - component: {fileID: 384589808620780047}
   - component: {fileID: 5526032865976009256}
+  - component: {fileID: 2310208273500112454}
+  - component: {fileID: 1035803051660015211}
   - component: {fileID: 6960914323395345698}
   - component: {fileID: 7118915214642455142}
-  - component: {fileID: 1478650946147244503}
   - component: {fileID: 6096110069060290119}
   - component: {fileID: 1690167717944747469}
   - component: {fileID: 4554112412378479555}
@@ -434,6 +435,12 @@ MonoBehaviour:
   - rid: 7020973698821653018
   - rid: 7020973704558149715
   - rid: 7020973704558149716
+  - rid: 7020973704558149717
+  - rid: 7020973704558149718
+  - rid: 7020973704558149719
+  - rid: 7020973722286948470
+  - rid: 7020973722286948471
+  - rid: 7020973722286948472
   m_OriginalGraph: {fileID: 0}
   m_IsInitialised: 0
   m_IsStarted: 0
@@ -464,6 +471,56 @@ MonoBehaviour:
           m_Value1: 15841232872109082979
         Name: Animator
         m_Value: {fileID: 7210283592262671250}
+    - rid: 7020973704558149717
+      type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 13646327754694131321
+          m_Value1: 9756345442113073678
+        Name: FoodPoint
+        m_Value:
+        - {fileID: 0}
+        - {fileID: 0}
+    - rid: 7020973704558149718
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6228677879182206610
+          m_Value1: 7292497301993154445
+        Name: Nid
+        m_Value: {fileID: 0}
+    - rid: 7020973704558149719
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 4932367516448275013
+          m_Value1: 11530149140920180693
+        Name: Food
+        m_Value: {fileID: 0}
+    - rid: 7020973722286948470
+      type: {class: 'BlackboardVariable`1[[LineOfSightDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 8001474572282290387
+          m_Value1: 8035012790721531045
+        Name: New Line Of Sight Detector
+        m_Value: {fileID: 1035803051660015211}
+    - rid: 7020973722286948471
+      type: {class: 'BlackboardVariable`1[[RangeDetection, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12433649789805516867
+          m_Value1: 3086890747229102513
+        Name: New Range Detection
+        m_Value: {fileID: 2310208273500112454}
+    - rid: 7020973722286948472
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 5374426556090694409
+          m_Value1: 14219168446976446004
+        Name: Appat
+        m_Value: {fileID: 3001610117867761408, guid: d6903e8cd6d70104993b869563b0a969, type: 3}
 --- !u!114 &5526032865976009256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,8 +534,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerceptionRange
   Detected: 0
-  radius: 7.62
-  intensity: 5
+  soundRadius: 7
+  lightRadius: 5
+  soundIntensity: 5
+  lightIntensity: 5
+  showDebugVisuals: 1
+--- !u!114 &2310208273500112454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363655695414583813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad41be17180891488fa2384d7333eca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RangeDetection
+  detectionRadius: 10
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  showDebugVisuals: 1
+--- !u!114 &1035803051660015211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363655695414583813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7864e111e13c247bab03bb914cf63c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LineOfSightDetector
+  m_playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_detectionRange: 10
+  m_detectionHeight: 3
   showDebugVisuals: 1
 --- !u!65 &6960914323395345698
 BoxCollider:
@@ -523,27 +617,6 @@ NavMeshAgent:
   m_BaseOffset: 0.51
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!135 &1478650946147244503
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6363655695414583813}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &6096110069060290119
 AudioSource:
   m_ObjectHideFlags: 0
