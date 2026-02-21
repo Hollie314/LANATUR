@@ -17,10 +17,9 @@ public class AlarmNoiseEmitter : MonoBehaviour
     public float emitInterval = 0.5f;
 
     [Header("Audio")]
-    public AudioClip alarmClip;
 
     private MakeNoise makeNoise;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     private float timer;
 
@@ -30,7 +29,6 @@ public class AlarmNoiseEmitter : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         audioSource.loop = true;
-        audioSource.clip = alarmClip;
         audioSource.playOnAwake = false;
     }
 
@@ -55,8 +53,7 @@ public class AlarmNoiseEmitter : MonoBehaviour
             radius,
             intensity,
             gameObject,
-            audioSource,
-            alarmClip
+            audioSource
         );
 
         if (!audioSource.isPlaying)
