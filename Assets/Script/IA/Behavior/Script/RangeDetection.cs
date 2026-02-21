@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RangeDetection : MonoBehaviour
 {
     [Header("Detection Settings")]
     [SerializeField] private float detectionRadius = 10f;
-    [SerializeField] private LayerMask detectionMask;
+    [SerializeField] public List<LayerMask> detectionMask;
     [SerializeField] private bool showDebugVisuals = true;
 
     public GameObject DetectedTarget
@@ -13,10 +14,10 @@ public class RangeDetection : MonoBehaviour
         set;
     }
 
-    public GameObject UpdateDetector()
+    public GameObject UpdateDetector(int layer)
     {
         // Perform sphere check
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, detectionMask);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, detectionMask[layer]);
 
         if (colliders.Length > 0)
         {
