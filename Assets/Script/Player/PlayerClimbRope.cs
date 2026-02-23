@@ -11,7 +11,10 @@ public class PlayerClimbRope : MonoBehaviour
 
     [Header("Paramètres Escalade")]
     [SerializeField] private float climbSpeed = 3f;
+    [SerializeField] private float enterDuration = 1f;
     [SerializeField] private float leaveDuration = 3f;
+    [SerializeField] private Camera cameraWalk;
+    [SerializeField] private float strengthFactor = 1.0f, duration = 0.5f, frequency = 10;
 
     private bool nearRope = false;  
     private bool climbing = false;  
@@ -33,16 +36,16 @@ public class PlayerClimbRope : MonoBehaviour
         // Si le joueur est proche d'une corde et appuie sur Climb
         if (nearRope && input.OnFoot.Interact.triggered)
         {
-            climbing = !climbing;
+            Vector3 pos = controller.transform.position;
+            pos.x = ropeTransform.position.x;
+            pos.z = ropeTransform.position.z;
 
-            if (climbing)
+            if (!climbing)
             {
-                motor.enabled = false; // désactive le mouvement classique
-                input.canMove = false;
-                leavingRope = false;
+                Tween.Position(cameraWalk.transform, pos, enterDuration, Ease.InOutSine);
+                Tween.Position(controller.transform, pos, enterDuration, Ease.InOutSine)
+                    .OnComplete(() => EnterRope());
                 this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(true);
-                transform.rotation = Quaternion.Euler(0f, ropeTransform.rotation.eulerAngles.y, 0f);
-                AlignPlayerToRope();
             }
             else
             {
@@ -60,6 +63,17 @@ public class PlayerClimbRope : MonoBehaviour
                 LeaveRope();
             }
         }
+    }
+
+    void EnterRope()
+    {
+        climbing = !climbing;
+        Debug.Log("climbed");
+        motor.enabled = false; // désactive le mouvement classique
+        input.canMove = false;
+        leavingRope = false;
+        transform.rotation = Quaternion.Euler(0f, ropeTransform.rotation.eulerAngles.y, 0f);
+        AlignPlayerToRope();
     }
 
     void Climb()
@@ -84,6 +98,7 @@ public class PlayerClimbRope : MonoBehaviour
         else if (transform.position.y >= RopeTopTransform.position.y && vertical > 0f)
         {
             controller.enabled = false;
+            Tween.Position(cameraWalk.transform, RopeTopFinishTransform.position, leaveDuration, Ease.InOutSine);
             Tween.Position(controller.transform, RopeTopFinishTransform.position, leaveDuration, Ease.InOutSine)
                 .OnComplete(() => LeaveRope());
             leavingRope = true;
@@ -91,6 +106,11 @@ public class PlayerClimbRope : MonoBehaviour
 
         if (!leavingRope)
         {
+            if (climbDirection.y < -0.01f || climbDirection.y > 0.01f)
+            {
+                Debug.Log("shakes");
+                //Tween.ShakeCamera(Camera.current, strengthFactor: 1.0f);
+            }
             controller.Move(climbDirection * Time.deltaTime);
             AlignPlayerToRope();
         }
