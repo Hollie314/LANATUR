@@ -45,32 +45,40 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private AudioClip SprintSFX;
     
     // private var
-    private float baseSpeed;
     private bool lerpCrouch = false;
     private float crouchTimer = 0f;
     private bool crouching = false;
     private bool sprinting = false;
     private bool crouchActive = false;
-    private float gravityMultiplierUsed;
     private bool isJumping = false;
     private bool canJump = true;
     
+    private Vector3 groundNormal;
+    private Vector3 playerInput;
 
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        baseSpeed = speed;
+    }
+
+    private void FixedUpdate()
+    {
+        isGrounded = CheckIsGrounded(groundedRayLength, out RaycastHit hit);
+        if (isGrounded)
+            groundNormal = hit.normal;
+        else
+            groundNormal = Vector3.up;
+        
+        canJump = isGrounded;
+        ApplyGravity();
+        
+        CollisionFlags collisions = controller.Move(playerVelocity * Time.deltaTime);
     }
 
     void Update()
     {
-        canJump = CheckIsGrounded(groundedRayLength);
-        
-        isGrounded = controller.isGrounded;
-        ApplyGravity();
-        
-
+        HandleNoise();
         if (lerpCrouch)
         {
             crouchTimer += Time.deltaTime;
@@ -90,10 +98,9 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
-    private bool CheckIsGrounded(float rayLength)
+    private bool CheckIsGrounded(float rayLength, out RaycastHit groundHit)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, rayLength))
+        if (Physics.Raycast(transform.position, Vector3.down, out groundHit, rayLength))
         {
             //SFX
             if(!canJump)
@@ -109,46 +116,65 @@ public class PlayerMotor : MonoBehaviour
 
     private void ApplyGravity()
     {
-        if (isGrounded && playerVelocity.y < 0f)
+        Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, groundNormal);
+        Vector3 verticalVelocity = playerVelocity - groundVelocity;
+        
+        if (isGrounded && verticalVelocity.y <= 0f)
         {
             if (crouching && !crouchActive)
                 crouchActive = true;
             else if (!crouching && crouchActive)
                 crouchActive = false;
-            if(sprinting)
-                speed = baseSpeed * sprintmultiplier;
-            else
-                speed = baseSpeed;
-            playerVelocity.y = -1f;
-            gravityMultiplierUsed = MaxFallGravity;
+
+            verticalVelocity = Vector3.zero;
+            playerVelocity = groundVelocity + verticalVelocity;
         }
         else
         {
-            if (playerVelocity.y > 1f)
-                playerVelocity.y += gravity * Time.deltaTime;
+            playerVelocity.y += gravity * Time.deltaTime;
+            if (playerVelocity.y <= MaxFallGravity)
+                playerVelocity.y = MaxFallGravity;
+            
+            /*
+            if (playerVelocity.y > 0.2f)
             else
             {
                 float easedGravity = Mathf.Pow(gravityMultiplierUsed, 2);
                 gravityMultiplierUsed = Mathf.Lerp(gravity, MaxFallGravity, easedGravity);
                 playerVelocity.y += MaxFallGravity * Time.deltaTime;
             }
+            */
         }
-        
     }
 
     public void ProcessMove(Vector2 input)
     {
-        Vector3 moveDirection = Vector3.zero;
-        moveDirection.x = input.x;
-        moveDirection.z = input.y;
-        
-        controller.Move(playerVelocity * Time.deltaTime);
+        Vector3 moveDirection = new()
+        {
+            x = input.x,
+            z = input.y
+        };
 
-        if (moveDirection != Vector3.zero)
+        Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, groundNormal);
+        Vector3 verticalVelocity = playerVelocity - groundVelocity;
+        float targetSpeed = crouchActive ? crouchSpeed : speed;
+        if (sprinting)
+            targetSpeed *= sprintmultiplier;
+
+        Vector3 groundInput = Vector3.ProjectOnPlane(transform.TransformDirection(moveDirection), groundNormal).normalized;
+        groundVelocity = groundInput * targetSpeed;
+        
+        playerInput = groundInput;
+        playerVelocity = groundVelocity + verticalVelocity;
+        
+    }
+
+    private void HandleNoise()
+    {
+        if (playerInput.sqrMagnitude >= 0.01f)
         {
             if (crouchActive)
             {
-                controller.Move(transform.TransformDirection(moveDirection) * crouchSpeed * Time.deltaTime);
                 Vector3 p1 = transform.position + controller.center;
                 _makeNoise.Noise(
                     p1,
@@ -168,7 +194,6 @@ public class PlayerMotor : MonoBehaviour
             }
             else
             {
-                controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
                 if (sprinting)
                 {
                     Vector3 p1 = transform.position + controller.center;
@@ -215,34 +240,26 @@ public class PlayerMotor : MonoBehaviour
         else
             playerMoveAudioSource.Stop();
     }
-    
+
     public void JumpStart()
     {
         Debug.Log("Jump");
-        if(!canJump)
+        if (!canJump)
             return;
-        
+
         //SFX
         playerJumpAudioSource.clip = jumpSFX;
         playerJumpAudioSource.Play();
-        
-        if(crouchActive)
-        {
-            playerVelocity.y = CrouchJumpHeight;
-            isJumping = true;
-        }
-        if (canJump)
-        {
-            playerVelocity.y = JumpHeight;
-            isJumping = true;
-        }
+
+        playerVelocity.y = crouchActive ? CrouchJumpHeight : JumpHeight;
+        isJumping = true;
     }
-    
+
     public void JumpCanceled()
     {
         Debug.Log("Jump canceled");
         isJumping =  false;
-        playerVelocity *= 0.5f;
+        playerVelocity.y *= 0.5f;
     }
 
     public void Crouch()

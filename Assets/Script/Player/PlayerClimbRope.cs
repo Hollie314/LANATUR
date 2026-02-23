@@ -1,3 +1,5 @@
+using PrimeTween;
+using RTGStandard;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -8,10 +10,12 @@ public class PlayerClimbRope : MonoBehaviour
     private InputManager input;
 
     [Header("Paramètres Escalade")]
-    public float climbSpeed = 3f;
+    [SerializeField] private float climbSpeed = 3f;
+    [SerializeField] private float leaveDuration = 3f;
 
     private bool nearRope = false;  
     private bool climbing = false;  
+    private bool leavingRope = false;  
     private Transform ropeTransform;
     private Transform RopeBaseTransform;
     private Transform RopeTopTransform;
@@ -34,16 +38,15 @@ public class PlayerClimbRope : MonoBehaviour
             if (climbing)
             {
                 motor.enabled = false; // désactive le mouvement classique
-                this.gameObject.GetComponent<InputManager>().canMove = false;
+                input.canMove = false;
+                leavingRope = false;
                 this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(true);
                 transform.rotation = Quaternion.Euler(0f, ropeTransform.rotation.eulerAngles.y, 0f);
                 AlignPlayerToRope();
             }
             else
             {
-                motor.enabled = true; // reprend le contrôle normal
-                this.gameObject.GetComponent<InputManager>().canMove = true;
-                this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(false);
+                LeaveRope();
             }
         }
 
@@ -54,10 +57,7 @@ public class PlayerClimbRope : MonoBehaviour
             // quitter la corde si saut
             if (input.OnFoot.Jump.triggered)
             {
-                climbing = false;
-                motor.enabled = true;
-                this.gameObject.GetComponent<InputManager>().canMove = true;
-                this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(false);
+                LeaveRope();
             }
         }
     }
@@ -73,31 +73,37 @@ public class PlayerClimbRope : MonoBehaviour
 
         Vector3 climbDirection = new Vector3(0, vertical * climbSpeed, 0);
         
+        // Sortir en bas
         if (transform.position.y <= RopeBaseTransform.position.y && vertical < 0f)
         {
-            climbing = false;
-            motor.enabled = true;
-            this.gameObject.GetComponent<InputManager>().canMove = true;
-            this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(false);
-            return;
-        }
-        else if (transform.position.y >= RopeTopTransform.position.y && vertical > 0f)
-        {
-            controller.enabled = false;
-            controller.transform.position = RopeTopFinishTransform.position;
-            controller.enabled = true;
-            nearRope = false;
-            
-            climbing = false;
-            motor.enabled = true;
-            this.gameObject.GetComponent<InputManager>().canMove = true;
-            this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(false);
+            LeaveRope();
             return;
         }
         
-        controller.Move(climbDirection * Time.deltaTime);
+        // Sortir en haut
+        else if (transform.position.y >= RopeTopTransform.position.y && vertical > 0f)
+        {
+            controller.enabled = false;
+            Tween.Position(controller.transform, RopeTopFinishTransform.position, leaveDuration, Ease.InOutSine)
+                .OnComplete(() => LeaveRope());
+            leavingRope = true;
+        }
 
-        AlignPlayerToRope();
+        if (!leavingRope)
+        {
+            controller.Move(climbDirection * Time.deltaTime);
+            AlignPlayerToRope();
+        }
+    }
+    
+    private void LeaveRope()
+    {
+        controller.enabled = true;
+        climbing = false;
+        motor.enabled = true;
+        input.canMove = true;
+        this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(false);
+        return;
     }
 
     void AlignPlayerToRope()
@@ -108,7 +114,7 @@ public class PlayerClimbRope : MonoBehaviour
             pos.x = ropeTransform.position.x;
             pos.z = ropeTransform.position.z;
             transform.position = pos;
-            this.gameObject.GetComponent<CharacterController>().transform.position = pos;
+            controller.transform.position = pos;
         }
     }
 
@@ -136,7 +142,7 @@ public class PlayerClimbRope : MonoBehaviour
             {
                 climbing = false;
                 motor.enabled = true;
-                this.gameObject.GetComponent<InputManager>().canMove = true;
+                input.canMove = true;
                 this.gameObject.GetComponent<PlayerLook>().ClampLeftRightRotation(false);
             }
         }
