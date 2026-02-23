@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LDVS Baking Set
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolumeBakingSet
   singleSceneMode: 0
-  dialogNoProbeVolumeInSetShown: 0
+  dialogNoProbeVolumeInSetShown: 1
   settings:
     m_Version: 1
     dilationSettings:
@@ -35,6 +35,7 @@ MonoBehaviour:
   - 4e7e627084a9399429c8060eb149df8f
   - ab139fd0ed7442c4384737657a57e0de
   - e1a91f586d1273a4d974c26b1ace8a37
+  - 28c48ec5b3c63264fb2b5417eefa1c41
   obsoleteScenesToNotBake: []
   m_LightingScenarios:
   - Default
@@ -43,11 +44,11 @@ MonoBehaviour:
     m_Values:
     - position: {x: -1, y: 0, z: 0}
       index: 0
-      probeCount: 32832
+      probeCount: 62080
       minSubdiv: 0
       indexChunkCount: 207
-      shChunkCount: 5
-      bricksCount: 513
+      shChunkCount: 8
+      bricksCount: 970
       indirectionEntryInfo:
       - positionInBricks: {x: -81, y: 0, z: 0}
         minSubdiv: 4
@@ -213,11 +214,11 @@ MonoBehaviour:
         hasOnlyBiggerBricks: 1
     - position: {x: -1, y: 0, z: 1}
       index: 6
-      probeCount: 78592
+      probeCount: 101696
       minSubdiv: 0
       indexChunkCount: 207
-      shChunkCount: 10
-      bricksCount: 1228
+      shChunkCount: 13
+      bricksCount: 1589
       indirectionEntryInfo:
       - positionInBricks: {x: -81, y: 0, z: 81}
         minSubdiv: 4
@@ -384,6 +385,7 @@ MonoBehaviour:
     - position: {x: 0, y: 0, z: 0}
       index: 1
 <<<<<<< DEV
+<<<<<<< DEV
       probeCount: 790976
       minSubdiv: 0
       indexChunkCount: 567
@@ -396,6 +398,13 @@ MonoBehaviour:
       shChunkCount: 97
       bricksCount: 12375
 >>>>>>> le ld prend une forme que j'aime bien
+=======
+      probeCount: 807232
+      minSubdiv: 0
+      indexChunkCount: 567
+      shChunkCount: 99
+      bricksCount: 12613
+>>>>>>> je prend des balles perdu
       indirectionEntryInfo:
       - positionInBricks: {x: 0, y: 0, z: 0}
         minSubdiv: 4
@@ -562,6 +571,7 @@ MonoBehaviour:
     - position: {x: 0, y: 0, z: 1}
       index: 7
 <<<<<<< DEV
+<<<<<<< DEV
       probeCount: 1224576
       minSubdiv: 0
       indexChunkCount: 567
@@ -574,6 +584,13 @@ MonoBehaviour:
       shChunkCount: 150
       bricksCount: 19157
 >>>>>>> le ld prend une forme que j'aime bien
+=======
+      probeCount: 1206848
+      minSubdiv: 0
+      indexChunkCount: 567
+      shChunkCount: 148
+      bricksCount: 18857
+>>>>>>> je prend des balles perdu
       indirectionEntryInfo:
       - positionInBricks: {x: 0, y: 0, z: 81}
         minSubdiv: 0
@@ -748,23 +765,27 @@ MonoBehaviour:
       m_Keys: 00000000060000000100000007000000
       m_Values:
       - offset: 0
-        elementCount: 5
-      - offset: 40960
-        elementCount: 10
-      - offset: 122880
-        elementCount: 97
-      - offset: 917504
-        elementCount: 150
+        elementCount: 8
+      - offset: 65536
+        elementCount: 13
+      - offset: 172032
+        elementCount: 99
+      - offset: 983040
+        elementCount: 148
     m_Asset: {fileID: 4900000, guid: 5c748e3dfff02a64a966c02c45ed6808, type: 3}
   scenarios:
     m_Keys:
     - Default
     m_Values:
 <<<<<<< DEV
+<<<<<<< DEV
     - sceneHash: -1825538422
 =======
     - sceneHash: 1830651864
 >>>>>>> le ld prend une forme que j'aime bien
+=======
+    - sceneHash: 1953220296
+>>>>>>> je prend des balles perdu
       cellDataAsset:
         m_AssetGUID: 40e9d7d139b7604458ac7b67519cd8b0
         m_StreamableAssetPath: APVStreamingAssets\ffbe978979d730f469b6adddf73ab2cf\40e9d7d139b7604458ac7b67519cd8b0.bytes
@@ -773,13 +794,13 @@ MonoBehaviour:
           m_Keys: 00000000060000000100000007000000
           m_Values:
           - offset: 0
-            elementCount: 5
-          - offset: 655360
-            elementCount: 10
-          - offset: 1966080
-            elementCount: 97
-          - offset: 14680064
-            elementCount: 150
+            elementCount: 8
+          - offset: 1048576
+            elementCount: 13
+          - offset: 2752512
+            elementCount: 99
+          - offset: 15728640
+            elementCount: 148
         m_Asset: {fileID: 4900000, guid: 40e9d7d139b7604458ac7b67519cd8b0, type: 3}
       cellOptionalDataAsset:
         m_AssetGUID: 593b89ea9e5f0c1459da2f0839f1f56f
@@ -789,13 +810,13 @@ MonoBehaviour:
           m_Keys: 00000000060000000100000007000000
           m_Values:
           - offset: 0
-            elementCount: 5
-          - offset: 655360
-            elementCount: 10
-          - offset: 1966080
-            elementCount: 97
-          - offset: 14680064
-            elementCount: 150
+            elementCount: 8
+          - offset: 1048576
+            elementCount: 13
+          - offset: 2752512
+            elementCount: 99
+          - offset: 15728640
+            elementCount: 148
         m_Asset: {fileID: 4900000, guid: 593b89ea9e5f0c1459da2f0839f1f56f, type: 3}
       cellProbeOcclusionDataAsset:
         m_AssetGUID: 8e9ae0b8adb1804419170f12df847970
@@ -805,13 +826,13 @@ MonoBehaviour:
           m_Keys: 00000000060000000100000007000000
           m_Values:
           - offset: 0
-            elementCount: 5
-          - offset: 163840
-            elementCount: 10
-          - offset: 491520
-            elementCount: 97
-          - offset: 3670016
-            elementCount: 150
+            elementCount: 8
+          - offset: 262144
+            elementCount: 13
+          - offset: 688128
+            elementCount: 99
+          - offset: 3932160
+            elementCount: 148
         m_Asset: {fileID: 4900000, guid: 8e9ae0b8adb1804419170f12df847970, type: 3}
   cellBricksDataAsset:
     m_AssetGUID: 62af3341eee645b40859a171a5913a71
@@ -821,6 +842,7 @@ MonoBehaviour:
       m_Keys: 00000000060000000100000007000000
       m_Values:
       - offset: 0
+<<<<<<< DEV
         elementCount: 513
       - offset: 8208
 <<<<<<< DEV
@@ -836,6 +858,15 @@ MonoBehaviour:
       - offset: 225856
         elementCount: 19157
 >>>>>>> le ld prend une forme que j'aime bien
+=======
+        elementCount: 970
+      - offset: 15520
+        elementCount: 1589
+      - offset: 40944
+        elementCount: 12613
+      - offset: 242752
+        elementCount: 18857
+>>>>>>> je prend des balles perdu
     m_Asset: {fileID: 4900000, guid: 62af3341eee645b40859a171a5913a71, type: 3}
   cellSupportDataAsset:
     m_AssetGUID: f6f3a4ce46e78ba40836d037fd31c993
@@ -845,13 +876,13 @@ MonoBehaviour:
       m_Keys: 00000000060000000100000007000000
       m_Values:
       - offset: 0
-        elementCount: 5
-      - offset: 1310720
-        elementCount: 10
-      - offset: 3932160
-        elementCount: 97
-      - offset: 29360128
-        elementCount: 150
+        elementCount: 8
+      - offset: 2097152
+        elementCount: 13
+      - offset: 5505024
+        elementCount: 99
+      - offset: 31457280
+        elementCount: 148
     m_Asset: {fileID: 4900000, guid: f6f3a4ce46e78ba40836d037fd31c993, type: 3}
   chunkSizeInBricks: 128
   maxCellPosition: {x: 1, y: 1, z: 2}
@@ -871,7 +902,7 @@ MonoBehaviour:
     y: 0
     z: 0
     w: 0
-  maxSHChunkCount: 150
+  maxSHChunkCount: 148
   L0ChunkSize: 65536
   L1ChunkSize: 32768
   L2TextureChunkSize: 32768
@@ -909,12 +940,18 @@ MonoBehaviour:
     - 4e7e627084a9399429c8060eb149df8f
     - ab139fd0ed7442c4384737657a57e0de
     - e1a91f586d1273a4d974c26b1ace8a37
+    - 28c48ec5b3c63264fb2b5417eefa1c41
     m_Values:
     - hasProbeVolume: 1
       bakeScene: 1
       bounds:
         m_Center: {x: 0, y: 364.5, z: 729}
         m_Extent: {x: 729, y: 364.5, z: 729}
+    - hasProbeVolume: 0
+      bakeScene: 1
+      bounds:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 0, y: 0, z: 0}
     - hasProbeVolume: 0
       bakeScene: 1
       bounds:
