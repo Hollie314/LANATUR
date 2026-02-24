@@ -60,6 +60,7 @@ public class PlayerMotor : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        isGrounded = false;
     }
 
     private void FixedUpdate()
@@ -119,8 +120,9 @@ public class PlayerMotor : MonoBehaviour
         Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, groundNormal);
         Vector3 verticalVelocity = playerVelocity - groundVelocity;
         
-        if (isGrounded && verticalVelocity.y <= 0f)
+        if (controller.isGrounded && verticalVelocity.y <= 0f)
         {
+            Debug.Log("Gravity Ground");
             if (crouching && !crouchActive)
                 crouchActive = true;
             else if (!crouching && crouchActive)
@@ -131,6 +133,7 @@ public class PlayerMotor : MonoBehaviour
         }
         else
         {
+            Debug.Log("Gravity Air");
             playerVelocity.y += gravity * Time.deltaTime;
             if (playerVelocity.y <= MaxFallGravity)
                 playerVelocity.y = MaxFallGravity;
