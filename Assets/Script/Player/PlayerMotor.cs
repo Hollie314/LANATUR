@@ -21,6 +21,8 @@ public class PlayerMotor : MonoBehaviour
     
     [Header("Movements")]
     // Movements
+    [SerializeField] private LayerMask layerGround;
+    [SerializeField] private float groundSnapForce = -5f;
     [SerializeField] private float groundedRayLength;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float MaxFallGravity = -20f;
@@ -101,7 +103,7 @@ public class PlayerMotor : MonoBehaviour
 
     private bool CheckIsGrounded(float rayLength, out RaycastHit groundHit)
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out groundHit, rayLength))
+        if (Physics.SphereCast(transform.position, rayLength, Vector3.down, out groundHit, rayLength, layerGround))
         {
             //SFX
             if(!canJump)
@@ -120,17 +122,19 @@ public class PlayerMotor : MonoBehaviour
         Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, groundNormal);
         Vector3 verticalVelocity = playerVelocity - groundVelocity;
         
-        if (controller.isGrounded && verticalVelocity.y <= 0f)
+        if (controller.isGrounded)
         {
             Debug.Log("Gravity Ground");
+
+            if (playerVelocity.y < 0f)
+                playerVelocity.y = groundSnapForce;   // <-- THIS is the fix
+
             if (crouching && !crouchActive)
                 crouchActive = true;
             else if (!crouching && crouchActive)
                 crouchActive = false;
-
-            verticalVelocity = Vector3.zero;
-            playerVelocity = groundVelocity + verticalVelocity;
         }
+        
         else
         {
             Debug.Log("Gravity Air");
