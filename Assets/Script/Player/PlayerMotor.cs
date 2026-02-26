@@ -22,6 +22,8 @@ public class PlayerMotor : MonoBehaviour
     [Header("Movements")]
     // Movements
     [SerializeField] private LayerMask layerGround;
+    [SerializeField] private Vector3 raycastOrigin;
+    [SerializeField] private float raycastRadius;
     [SerializeField] private float groundSnapForce = -5f;
     [SerializeField] private float groundedRayLength;
     [SerializeField] private float gravity = -9.81f;
@@ -103,7 +105,10 @@ public class PlayerMotor : MonoBehaviour
 
     private bool CheckIsGrounded(float rayLength, out RaycastHit groundHit)
     {
-        if (Physics.SphereCast(transform.position, rayLength, Vector3.down, out groundHit, rayLength, layerGround))
+        Vector3 origin = transform.position + raycastOrigin;
+
+        // if (Physics.SphereCast(transform.position, rayLength, Vector3.down, out groundHit, rayLength, layerGround))
+        if(Physics.SphereCast(origin, raycastRadius, Vector3.down, out groundHit, raycastRadius, layerGround))
         {
             //SFX
             if(!canJump)
@@ -122,7 +127,7 @@ public class PlayerMotor : MonoBehaviour
         Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, groundNormal);
         Vector3 verticalVelocity = playerVelocity - groundVelocity;
         
-        if (controller.isGrounded)
+        if (controller.isGrounded && verticalVelocity.y <= 0f)
         {
             Debug.Log("Gravity Ground");
 
@@ -253,7 +258,8 @@ public class PlayerMotor : MonoBehaviour
         Debug.Log("Jump");
         if (!canJump)
             return;
-
+        
+        Debug.Log("actually jumping");
         //SFX
         playerJumpAudioSource.clip = jumpSFX;
         playerJumpAudioSource.Play();
@@ -280,6 +286,13 @@ public class PlayerMotor : MonoBehaviour
     public void Sprint()
     {
         sprinting = !sprinting;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 origin = transform.position + raycastOrigin;
+        
+        Gizmos.DrawWireSphere(origin, raycastRadius);
     }
 
     // --------- Nouveaux getters publics ----------
