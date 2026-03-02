@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Screenshots : MonoBehaviour
 {
-    void TakeScreenshot()
+    public void TakeScreenshot()
     {
         ScreenCapture.CaptureScreenshot("portfolio.png");
     }
