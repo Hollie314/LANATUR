@@ -109,7 +109,7 @@ public class PlayerClimbRope : MonoBehaviour
             if (climbDirection.y < -0.01f || climbDirection.y > 0.01f)
             {
                 Debug.Log("shakes");
-                //Tween.ShakeCamera(Camera.current, strengthFactor: 1.0f);
+                Tween.ShakeCamera(Camera.current, strengthFactor: 1.0f); //////////////////////////////////////////////////////////////////////////
             }
             controller.Move(climbDirection * Time.deltaTime);
             AlignPlayerToRope();
