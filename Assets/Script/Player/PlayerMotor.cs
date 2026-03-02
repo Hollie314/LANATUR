@@ -22,8 +22,6 @@ public class PlayerMotor : MonoBehaviour
     [Header("Movements")]
     // Movements
     [SerializeField] private LayerMask layerGround;
-    [SerializeField] private Vector3 raycastOrigin;
-    [SerializeField] private float raycastRadius;
     [SerializeField] private float groundSnapForce = -5f;
     [SerializeField] private float groundedRayLength;
     [SerializeField] private float gravity = -9.81f;
@@ -105,10 +103,7 @@ public class PlayerMotor : MonoBehaviour
 
     private bool CheckIsGrounded(float rayLength, out RaycastHit groundHit)
     {
-        Vector3 origin = transform.position + raycastOrigin;
-
-        // if (Physics.SphereCast(transform.position, rayLength, Vector3.down, out groundHit, rayLength, layerGround))
-        if(Physics.SphereCast(origin, raycastRadius, Vector3.down, out groundHit, raycastRadius, layerGround))
+        if (Physics.Raycast(transform.position, Vector3.down, out groundHit, rayLength))
         {
             //SFX
             if(!canJump)
@@ -118,7 +113,6 @@ public class PlayerMotor : MonoBehaviour
             }
             return true;
         }
-
         return false;
     }
 
@@ -127,10 +121,8 @@ public class PlayerMotor : MonoBehaviour
         Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, groundNormal);
         Vector3 verticalVelocity = playerVelocity - groundVelocity;
         
-        if (controller.isGrounded && verticalVelocity.y <= 0f)
+        if (controller.isGrounded && verticalVelocity.y < 0f)
         {
-            Debug.Log("Gravity Ground");
-
             if (playerVelocity.y < 0f)
                 playerVelocity.y = groundSnapForce;   // <-- THIS is the fix
 
@@ -142,7 +134,6 @@ public class PlayerMotor : MonoBehaviour
         
         else
         {
-            Debug.Log("Gravity Air");
             playerVelocity.y += gravity * Time.deltaTime;
             if (playerVelocity.y <= MaxFallGravity)
                 playerVelocity.y = MaxFallGravity;
@@ -169,6 +160,7 @@ public class PlayerMotor : MonoBehaviour
 
         Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, groundNormal);
         Vector3 verticalVelocity = playerVelocity - groundVelocity;
+        Debug.Log($"ProcessMove 1) Player Velocity: {playerVelocity}, ground Velocity: {groundVelocity}, vertical Velocity: {verticalVelocity} - time:{Time.time}");
         float targetSpeed = crouchActive ? crouchSpeed : speed;
         if (sprinting)
             targetSpeed *= sprintmultiplier;
@@ -176,9 +168,13 @@ public class PlayerMotor : MonoBehaviour
         Vector3 groundInput = Vector3.ProjectOnPlane(transform.TransformDirection(moveDirection), groundNormal).normalized;
         groundVelocity = groundInput * targetSpeed;
         
+        // It can be useful if there are too much slopes, the use is to NOT fall from the slops
+        verticalVelocity.x = 0f;
+        verticalVelocity.z = 0f;
+        
         playerInput = groundInput;
         playerVelocity = groundVelocity + verticalVelocity;
-        
+        Debug.Log($"ProcessMove 2) Player Velocity: {playerVelocity}, ground Velocity: {groundVelocity}, vertical Velocity: {verticalVelocity} - time:{Time.time}");
     }
 
     private void HandleNoise()
@@ -195,7 +191,6 @@ public class PlayerMotor : MonoBehaviour
                     playerMoveAudioSource,
                     CrouchSFX
                 );
-                Debug.Log("NOISE crouch");
                 
                 //SFX
                 if (!playerMoveAudioSource.isPlaying || !playerMoveAudioSource.clip == CrouchSFX)
@@ -217,7 +212,6 @@ public class PlayerMotor : MonoBehaviour
                         playerMoveAudioSource,
                         SprintSFX
                     );
-                    Debug.Log("NOISE sprint");
                     
                     //SFX
                     if (!playerMoveAudioSource.isPlaying || !playerMoveAudioSource.clip == SprintSFX)
@@ -237,7 +231,6 @@ public class PlayerMotor : MonoBehaviour
                         playerMoveAudioSource,
                         WalkSFX
                     );
-                    Debug.Log("NOISE walk");
                     
                     //SFX
                     if (!playerMoveAudioSource.isPlaying || !playerMoveAudioSource.clip == WalkSFX)
@@ -255,11 +248,9 @@ public class PlayerMotor : MonoBehaviour
 
     public void JumpStart()
     {
-        Debug.Log("Jump");
         if (!canJump)
             return;
         
-        Debug.Log("actually jumping");
         //SFX
         playerJumpAudioSource.clip = jumpSFX;
         playerJumpAudioSource.Play();
@@ -270,7 +261,6 @@ public class PlayerMotor : MonoBehaviour
 
     public void JumpCanceled()
     {
-        Debug.Log("Jump canceled");
         isJumping =  false;
         playerVelocity.y *= 0.5f;
     }
@@ -286,13 +276,6 @@ public class PlayerMotor : MonoBehaviour
     public void Sprint()
     {
         sprinting = !sprinting;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Vector3 origin = transform.position + raycastOrigin;
-        
-        Gizmos.DrawWireSphere(origin, raycastRadius);
     }
 
     // --------- Nouveaux getters publics ----------
