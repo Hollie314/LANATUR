@@ -24,7 +24,8 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: dc279a5ff8fdac54b97064103f16453e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _LAYER_FULL
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -53,6 +54,16 @@ Material:
     m_Floats:
     - _Absorption_coefficient: 0
     - _Animation_Speed: 0.5
+    - _Background_Emission_Strength: 0
+    - _Caustic_Distortion_Amount: 0
+    - _Caustic_Distortion_Big: 0.5
+    - _Caustic_Distortion_Ratio: 1
+    - _Caustic_Distortion_Small: 1
+    - _Caustic_Emission_Strength: 0
+    - _Caustic_Noise_Ratio: 1
+    - _Caustic_Noise_density_Big: 1
+    - _Caustic_Noise_density_Small: 1
+    - _Caustic_Opacity: 1
     - _Displacement_Intensity: 1.35
     - _Distance_Treshold: 1.16
     - _Foam_Noise_Density: 0.67
@@ -62,13 +73,16 @@ Material:
     - _Foam_Transparency: 1
     - _Foam_voronoi_density: 1.28
     - _I0: 0.98
+    - _LAYER: 0
     - _Level_High: 1.7
     - _Level_Low: 0.22
     - _Normals_Intensity: 0.09
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Refraction_density: 0
     - _Rim_Absorption_coefficient: -0.6
     - _Rim_Depth: 1
+    - _Rim_Emission_Strength: 0
     - _Rim_Transparency: 0.77
     - _Ripple_Noise_density: 0.07
     - _Ripple_Opacity: 0.82
@@ -87,6 +101,7 @@ Material:
     - _step: -1.77
     - _u: -2.43
     m_Colors:
+    - _Clamp_Value_Refraction: {r: 1, g: 1, b: 0, a: 0}
     - _Depth_color: {r: 0.26189387, g: 0.4877811, b: 0.7584905, a: 1}
     - _Foam_Color: {r: 1, g: 1, b: 1, a: 1}
     - _ObjectPos: {r: 452.5, g: 13.38, b: 255.09, a: 0}
