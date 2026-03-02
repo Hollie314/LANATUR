@@ -46,6 +46,12 @@ public class AlbumUI : SerializedMonoBehaviour
         ChangeEntryPhoto = FindFirstObjectByType<ChangeEntryPhoto>();
     }
 
+    // TO EDIT ----------------------------------------------------------------------------------------------------------------------------------------------------------
+    public void GoToEntry()
+    {
+        return;
+    }
+
     #region changeSortMethodes
     public void ChangeSortMethodeToEncyclopedia()
     {
@@ -302,7 +308,7 @@ public class AlbumUI : SerializedMonoBehaviour
             ListSelectedPhotos.Add(photoClicked);
             // Change Panel
             panelPhoto.SetActive(true);
-            // vérifier si la photo est dans l'encyclopédie
+            // vï¿½rifier si la photo est dans l'encyclopï¿½die
             if (ListInEncyclopedia != null)
             {
                 if (ListInEncyclopedia.Contains(photoClicked))
