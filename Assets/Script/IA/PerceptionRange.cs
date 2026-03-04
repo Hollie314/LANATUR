@@ -5,7 +5,7 @@ public class PerceptionRange : MonoBehaviour, IStimulusListener
     public bool Detected = false;
     public float soundRadius = 5f;
     public float lightRadius = 5f;
-    public float soundIntensity = 5f;
+    public float soundIntensity;
     public float lightIntensity = 5f;
     public bool showDebugVisuals = true;
     
@@ -30,13 +30,11 @@ public class PerceptionRange : MonoBehaviour, IStimulusListener
         
         float distance = Vector3.Distance(transform.position, position) - radius - soundRadius;
         
-        if (intensity < soundIntensity)
-            return;
-        
         if(distance > 0) 
             return;
         
-        Detected = true;
+        soundIntensity = intensity;
+        
     }
 
     public void OnLightReceived(Vector3 position, float intensity, float radius, GameObject source)
@@ -66,6 +64,6 @@ public class PerceptionRange : MonoBehaviour, IStimulusListener
 
     public void StopDetection()
     {
-        Detected = false;
+        soundIntensity = 0;
     }
 }
