@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
+using UnityEngine.UI;
 
 public class SortAlbum : MonoBehaviour
 {
@@ -42,13 +45,34 @@ public class SortAlbum : MonoBehaviour
     private List<PhotoInfos> AlbumSortedType2;
     private Dictionary<PhotoInfos, GameObject> albumDictionary = new Dictionary<PhotoInfos, GameObject>();
 
-    private GameObject scroll1 = new GameObject();
-    private GameObject scroll2 = new GameObject();
-    private GameObject scroll3 = new GameObject();
+    private GameObject scroll1;
+    private GameObject scroll2;
+    private GameObject scroll3;
+    
+    private static Album album = new Album();
+    
+    private static void Awake()
+    {
+        album = Album.Load();
+    }
     
     // When Album is Enabled, reset it in case new photos appeared
     void OnEnable()
     {
+        
+        switch (albumSize)
+        {
+            case AlbumSize.Large:
+                SizeLarge();
+                break;
+            case AlbumSize.Medium:
+                SizeMedium();
+                break;
+            case AlbumSize.Small:
+                SizeSmall();
+                break;
+        }
+        
         switch (sortType1)
         {
             case SortType1.All:
@@ -61,7 +85,7 @@ public class SortAlbum : MonoBehaviour
                 SortSpecies();
                 break;
             case SortType1.Encyclopedia:
-                SortEncyclopedia();
+                SortNotes();
                 break;
             case SortType1.Ren:
                 SortRen();
@@ -87,7 +111,7 @@ public class SortAlbum : MonoBehaviour
                 SortSpecies();
                 break;
             case 3:
-                SortEncyclopedia();
+                SortNotes();
                 break;
             case 4:
                 SortRen();
@@ -101,36 +125,82 @@ public class SortAlbum : MonoBehaviour
     private void SortAll()
     {
         sortType1 = SortType1.All;
+        AlbumSortedType1 = album.photoInfos;
         Sort2(false);
     }
     
     private void SortFav()
     {
         sortType1 = SortType1.Fav;
+        AlbumSortedType1 = new List<PhotoInfos>();
+        if (!album.photoInfos.IsNullOrEmpty())
+        {
+            foreach (PhotoInfos photoInfo in album.photoInfos)
+            {
+                if(photoInfo.imageFav)
+                    AlbumSortedType1.Add(photoInfo);
+            }
+        }
         Sort2(false);
     }
 
     private void SortSpecies()
     {
         sortType1 = SortType1.Species;
+        AlbumSortedType1 = new List<PhotoInfos>();
+        if (!album.photoInfos.IsNullOrEmpty())
+        {
+            foreach (PhotoInfos photoInfo in album.photoInfos)
+            {
+                if(photoInfo.imageType == PhotoInfos.ImageTypes.Encyclopedia)
+                    AlbumSortedType1.Add(photoInfo);
+            }
+        }
         Sort2(false);
     }
     
-    private void SortEncyclopedia()
+    private void SortNotes()
     {
         sortType1 = SortType1.Encyclopedia;
+        AlbumSortedType1 = new List<PhotoInfos>();
+        if (!album.photoInfos.IsNullOrEmpty())
+        {
+            foreach (PhotoInfos photoInfo in album.photoInfos)
+            {
+                if(photoInfo.imageUsedInNotes)
+                    AlbumSortedType1.Add(photoInfo);
+            }
+        }
         Sort2(false);
     }
     
     private void SortRen()
     {
         sortType1 = SortType1.Ren;
+        AlbumSortedType1 = new List<PhotoInfos>();
+        if (!album.photoInfos.IsNullOrEmpty())
+        {
+            foreach (PhotoInfos photoInfo in album.photoInfos)
+            {
+                if(photoInfo.imageType == PhotoInfos.ImageTypes.Ren)
+                    AlbumSortedType1.Add(photoInfo);
+            }
+        }
         Sort2(false);
     }
     
     private void SortCorpo()
     {
         sortType1 = SortType1.Corporation;
+        AlbumSortedType1 = new List<PhotoInfos>();
+        if (!album.photoInfos.IsNullOrEmpty())
+        {
+            foreach (PhotoInfos photoInfo in album.photoInfos)
+            {
+                if(photoInfo.imageType == PhotoInfos.ImageTypes.Corpo)
+                    AlbumSortedType1.Add(photoInfo);
+            }
+        }
         Sort2(false);
     }
     #endregion
@@ -168,7 +238,7 @@ public class SortAlbum : MonoBehaviour
     {
         sortType2 = SortType2.OldestFirst;
         
-        int lastphotoDate = 0;
+        System.DateTime lastphotoDate = new DateTime(0000, 00, 00, 00, 00, 00, 00);
         bool isSorted = false;
         int numberOfLoops = 0;
         
@@ -177,24 +247,27 @@ public class SortAlbum : MonoBehaviour
             List<PhotoInfos> sortingList = new List<PhotoInfos>();
             int index = 0;
             // Parcourir chaque photos à afficher
-            foreach (PhotoInfos photoInfo in AlbumSortedType1)
+            if (!AlbumSortedType1.IsNullOrEmpty())
             {
-                isSorted = true;
-                sortingList.Add(photoInfo);
-                if (index > 1)
+                foreach (PhotoInfos photoInfo in AlbumSortedType1)
                 {
-                    // Si la photo précédente est plus récente:
-                    if (photoInfo.imageDate > lastphotoDate)
+                    isSorted = true;
+                    sortingList.Add(photoInfo);
+                    if (index > 1)
                     {
-                        // inverser l'ordre dans la liste
-                        PhotoInfos previous = sortingList[index-1];
-                        sortingList[index-1] = photoInfo;
-                        sortingList[index] = previous;
-                        isSorted = false;
+                        // Si la photo précédente est plus récente:
+                        if (photoInfo.imageDate > lastphotoDate)
+                        {
+                            // inverser l'ordre dans la liste
+                            PhotoInfos previous = sortingList[index-1];
+                            sortingList[index-1] = photoInfo;
+                            sortingList[index] = previous;
+                            isSorted = false;
+                        }
+                        lastphotoDate = sortingList[index].imageDate;
                     }
-                    lastphotoDate = sortingList[index].imageDate;
+                    index++;
                 }
-                index++;
             }
             AlbumSortedType2 = sortingList;
             numberOfLoops++;
@@ -206,10 +279,49 @@ public class SortAlbum : MonoBehaviour
     private void SortByDate_NewestFirst()
     {
         sortType2 = SortType2.NewestFirst;
-        foreach (PhotoInfos photoInfo in AlbumSortedType1)
+        
+        Debug.Log(DateTime.Now);
+        System.DateTime lastphotoDate = new DateTime(2025, 01, 01, 01, 01, 01, 01);
+        bool isSorted = false;
+        int numberOfLoops = 0;
+        
+        while (!isSorted || numberOfLoops < 40)
         {
-            
+            List<PhotoInfos> sortingList = new List<PhotoInfos>();
+            int index = 0;
+            isSorted = true;
+            // Parcourir chaque photos à afficher
+            if (!AlbumSortedType1.IsNullOrEmpty())
+            {
+                foreach (PhotoInfos photoInfo in AlbumSortedType1)
+                {
+                    sortingList.Add(photoInfo);
+                    if (index > 1)
+                    {
+                        // Si la photo précédente est plus récente:
+                        if (photoInfo.imageDate < lastphotoDate)
+                        {
+                            // inverser l'ordre dans la liste
+                            PhotoInfos previous = sortingList[index-1];
+                            sortingList[index-1] = photoInfo;
+                            sortingList[index] = previous;
+                            isSorted = false;
+                        }
+                        lastphotoDate = sortingList[index].imageDate;
+                    }
+                    Debug.Log("Bah ouais fils de pute");
+                    index++;
+                }
+            }
+            AlbumSortedType2 = sortingList;
+            numberOfLoops++;
+            Debug.Log(numberOfLoops);
+            Debug.Log($"is sorted: {isSorted}");
+            Debug.Log($"sorting list: {sortingList}");
+            if (numberOfLoops >= 60){return;}
+            if(isSorted){break;}
         }
+        
         ShowPhotos();
     }
     #endregion
@@ -280,31 +392,54 @@ public class SortAlbum : MonoBehaviour
     private void ShowPhotos()
     {
         int index = 0;
-        foreach (PhotoInfos photoInfo in AlbumSortedType2)
+        if (!AlbumSortedType2.IsNullOrEmpty())
         {
-            // Vérifier si la photo existe déjà en mémoire
-            GameObject photo = new GameObject();
-            if (albumDictionary.ContainsKey(photoInfo)) { photo = albumDictionary[photoInfo]; }
-            else
+            foreach (PhotoInfos photoInfo in AlbumSortedType2)
             {
-                photo = CreatePhoto(photoInfo);
-                albumDictionary.Add(photoInfo, photo);
-            }
+                // Vérifier si la photo existe déjà en mémoire
+                GameObject photo = new GameObject();
+                if (albumDictionary.ContainsKey(photoInfo)) { photo = albumDictionary[photoInfo]; }
+                else
+                {
+                    photo = CreatePhoto(photoInfo);
+                    albumDictionary.Add(photoInfo, photo);
+                }
             
-            if (index % 3 == 0 && (albumSize == AlbumSize.Large))
-                Instantiate(photo, scroll3.transform);
-            else if (index % 2 == 0 && (albumSize == AlbumSize.Large || albumSize == AlbumSize.Medium))
-                Instantiate(photo, scroll2.transform);
-            else
-                Instantiate(photo, scroll1.transform);
-            index++;
+                if (index % 3 == 0 && (albumSize == AlbumSize.Large))
+                    Instantiate(photo, scroll3.transform);
+                else if (index % 2 == 0 && (albumSize == AlbumSize.Large || albumSize == AlbumSize.Medium))
+                    Instantiate(photo, scroll2.transform);
+                else
+                    Instantiate(photo, scroll1.transform);
+                index++;
+            }
         }
     }
 
     private GameObject CreatePhoto(PhotoInfos photoInfo)
     {
         GameObject photo = PhotoPrefab;
-        if(photoInfo.imageUsedInEncyclopedia){}
+        // Load image
+        byte[] bytes = System.IO.File.ReadAllBytes(photoInfo.imagePath);
+        Texture2D texture = new Texture2D(2, 2);
+        texture.LoadImage(bytes);
+        Sprite photoSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
+        photo.GetComponent<Image>().sprite = photoSprite;
+        
+        if (photoInfo.imageUsedInNotes)
+        {
+            photo.transform.GetChild(0).gameObject.SetActive(true);
+        }
+        
+        if (!(photoInfo.imageType == PhotoInfos.ImageTypes.None))
+        {
+            photo.transform.GetChild(1).gameObject.SetActive(true);
+        }
+
+        if (photoInfo.imageFav)
+        {
+            photo.transform.GetChild(2).gameObject.SetActive(true);
+        }
         return photo;
     }
     #endregion

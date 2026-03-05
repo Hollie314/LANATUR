@@ -35,9 +35,9 @@ public class AlbumUI : SerializedMonoBehaviour
     private bool selectionMultipleOn;
     public GameObject SelectionMultipleOptions;
 
-    private static void Initialize()
+    private static void Awake()
     {
-
+        album = Album.Load();
     }
 
     public void OnEnable()
@@ -110,7 +110,7 @@ public class AlbumUI : SerializedMonoBehaviour
         EncyclopediaDictionary.Add("not encyclopedia", new List<PhotoInfos>());
         foreach (PhotoInfos infos in sortedSpecies)
         {
-            if(infos.imageUsedInEncyclopedia == true)
+            if(infos.imageUsedInNotes == true)
             {
                 EncyclopediaDictionary["encyclopedia"].Add(infos);
             }
@@ -241,7 +241,7 @@ public class AlbumUI : SerializedMonoBehaviour
             // Update Dictionary
             albumDictionary.Add(newPicture, infos);
 
-            if (infos.imageUsedInEncyclopedia)
+            if (infos.imageUsedInNotes)
                 ListInEncyclopedia.Add(newPicture);
         }
         // Update picturesNumber
@@ -252,7 +252,7 @@ public class AlbumUI : SerializedMonoBehaviour
     {
         // photo index
         // photo on encyclopedia
-        if (infos.imageUsedInEncyclopedia)
+        if (infos.imageUsedInNotes)
         {
             GameObject vignette = photo.transform.GetChild(0).gameObject;
             vignette.SetActive(true);

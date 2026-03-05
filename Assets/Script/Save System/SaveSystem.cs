@@ -22,7 +22,7 @@ public static class SaveSystem
         DeleteAlbum(album);
     }
 
-    public static PhotoInfos SavePicture(Texture2D image, string tag, bool isInEncyclopedia, EncyclopedieEntry encyclopedieEntry)
+    public static PhotoInfos SavePicture(Texture2D image, string tag, bool isInEncyclopedia, EncyclopedieEntry encyclopedieEntry, PhotoInfos.ImageTypes type)
     {
         album = Album.Load();
         byte[] png = image.EncodeToPNG();
@@ -34,8 +34,11 @@ public static class SaveSystem
         {
             imagePath = filePath,
             imageTag = tag,
-            imageUsedInEncyclopedia = isInEncyclopedia,
-            entry = encyclopedieEntry
+            imageUsedInNotes = isInEncyclopedia,
+            entry = encyclopedieEntry,
+            imageType = type,
+            imageDate = System.DateTime.Now,
+            imageFav = false
         };
 
         album.photoInfos.Add(photoInfos);
