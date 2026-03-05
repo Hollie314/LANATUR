@@ -5,12 +5,13 @@ public class PerceptionRange : MonoBehaviour, IStimulusListener
     public bool Detected = false;
     public float soundRadius = 5f;
     public float lightRadius = 5f;
-    public float soundIntensity;
+    [HideInInspector] public float soundIntensity = 0;
     public float lightIntensity = 5f;
     public bool showDebugVisuals = true;
     
     void OnEnable()
     {
+        soundIntensity = 0;
         Debug.Log($"Instance exist {WorldStimulusManager.Instance != null}");
         if(WorldStimulusManager.Instance != null)
             WorldStimulusManager.Instance.RegisterListener(this);
@@ -32,7 +33,7 @@ public class PerceptionRange : MonoBehaviour, IStimulusListener
         
         if(distance > 0) 
             return;
-        
+        Debug.Log($"{gameObject.name} hears {source.name} with intensity of {intensity}");
         soundIntensity = intensity;
         
     }

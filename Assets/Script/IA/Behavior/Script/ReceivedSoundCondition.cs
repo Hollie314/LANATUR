@@ -11,7 +11,8 @@ public partial class ReceivedSoundCondition : Condition
 
     public override bool IsTrue()
     {
-        if (Intensity.Value >= Range.Value.soundIntensity)
+        Debug.Log($"hears {Range.Value.soundIntensity}");
+        if (Intensity.Value <= Range.Value.soundIntensity)
             return true;
         return false;
     }
