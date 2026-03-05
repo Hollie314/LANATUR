@@ -79,7 +79,7 @@ public class PlayerInteractions : MonoBehaviour
     public void OnInteractInput(InputAction.CallbackContext context)
     {
         // Debug
-        Debug.Log("Interact");
+        Debug.Log("Interact pressed");
 
         if (interactable != null && interactable.CanInteract)
         {

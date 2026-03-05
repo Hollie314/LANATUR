@@ -21,8 +21,7 @@ public class QuestScriptable : ScriptableObject
     
     public string questName;
     public string questDesciption;
-        
-    [ShowIf("questType", QuestType.GoToPoint)] [ShowIf("questType", QuestType.CompletePuzzle)] 
+    
     public List<string> GoToPoints;
     [ShowIf("questType", QuestType.PhotographSpecie)] public List<GameObject> SpeciesToPhotograph;
 
