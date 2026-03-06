@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using RTGStandard;
 using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
@@ -41,6 +42,11 @@ public class SortAlbum : MonoBehaviour
     [SerializeField] private TMP_Dropdown DropdownSortType1;
     [SerializeField] private TMP_Dropdown DropdownSortType2;
     
+    [Header("Photo scales")]
+    [SerializeField] private Vector2 smallPhotoScale;
+    [SerializeField] private Vector2 mediumPhotoScale;
+    [SerializeField] private Vector2 largePhotoScale;
+    
     private List<PhotoInfos> AlbumSortedType1;
     private List<PhotoInfos> AlbumSortedType2;
     private Dictionary<PhotoInfos, GameObject> albumDictionary = new Dictionary<PhotoInfos, GameObject>();
@@ -48,6 +54,8 @@ public class SortAlbum : MonoBehaviour
     private GameObject scroll1;
     private GameObject scroll2;
     private GameObject scroll3;
+
+    private Vector2 currentPhotoScale;
     
     private Album album = new Album();
     
@@ -63,6 +71,10 @@ public class SortAlbum : MonoBehaviour
     void OnEnable()
     {
         album = Album.Load();
+        foreach (PhotoInfos photoInfos in album.photoInfos)
+        {
+            Debug.Log($"photo date: {photoInfos.imageDate}");
+        }
         
         switch (albumSize)
         {
@@ -251,48 +263,50 @@ public class SortAlbum : MonoBehaviour
         sortType2 = SortType2.OldestFirst;
         
         Debug.Log(DateTime.Now);
-        System.DateTime lastphotoDate = new DateTime(2025, 01, 01, 01, 01, 01, 01);
+        long lastphotoDate = new DateTime(2025, 01, 01, 01, 01, 01, 01).ToBinary();
         bool isSorted = false;
         int numberOfLoops = 0;
+        AlbumSortedType2 = AlbumSortedType1;
         
         while (!isSorted || numberOfLoops < 40)
         {
             List<PhotoInfos> sortingList = new List<PhotoInfos>();
             int index = 0;
+            Debug.Log($"photo date old1st: index[{numberOfLoops}]");
             isSorted = true;
             // Parcourir chaque photos à afficher
             if (!AlbumSortedType1.IsNullOrEmpty())
             {
-                foreach (PhotoInfos photoInfo in AlbumSortedType1)
+                foreach (PhotoInfos photoInfo in AlbumSortedType2)
                 {
                     sortingList.Add(photoInfo);
-                    if (index > 1)
+                    if (index > 0)
                     {
-                        Debug.Log($"photo date index[{index}] sort old1st {photoInfo.imageDate}");
                         // Si la photo précédente est plus récente:
-                        if (photoInfo.imageDate > lastphotoDate)
+                        if (DateTime.FromBinary(photoInfo.imageDate) > DateTime.FromBinary(lastphotoDate))
                         {
+                            Debug.Log($"photo date old1st: Inversed indexes{lastphotoDate}");
                             // inverser l'ordre dans la liste
                             PhotoInfos previous = sortingList[index-1];
                             sortingList[index-1] = photoInfo;
                             sortingList[index] = previous;
                             isSorted = false;
                         }
-                        lastphotoDate = sortingList[index].imageDate;
                     }
+                    lastphotoDate = sortingList[index].imageDate;
                     index++;
                 }
             }
             AlbumSortedType2 = sortingList;
             numberOfLoops++;
             Debug.Log(numberOfLoops);
-            if (numberOfLoops >= 60){return;}
+            if (numberOfLoops >= 60){break;}
             if(isSorted){break;}
         }
-        //Debug
-        foreach (PhotoInfos photoInfo in AlbumSortedType2)
+        Debug.Log("photo date old1st: finished");
+        foreach (PhotoInfos photoInfos in AlbumSortedType2)
         {
-            Debug.Log($"photo date end sort old1st {photoInfo.imageDate}");
+            Debug.Log($"photo date old1st: {photoInfos.imageDate}");
         }
         DestroyScrollview();
         ShowPhotos();
@@ -303,9 +317,11 @@ public class SortAlbum : MonoBehaviour
         sortType2 = SortType2.NewestFirst;
         
         Debug.Log(DateTime.Now);
-        System.DateTime lastphotoDate = new DateTime(2025, 01, 01, 01, 01, 01, 01);
+        long lastphotoDate = new DateTime(2025, 01, 01, 01, 01, 01, 01).ToBinary();
+        Debug.Log($"photo date last new1st: {lastphotoDate}");
         bool isSorted = false;
         int numberOfLoops = 0;
+        AlbumSortedType2 = AlbumSortedType1;
         
         while (!isSorted || numberOfLoops < 40)
         {
@@ -315,23 +331,23 @@ public class SortAlbum : MonoBehaviour
             // Parcourir chaque photos à afficher
             if (!AlbumSortedType1.IsNullOrEmpty())
             {
-                foreach (PhotoInfos photoInfo in AlbumSortedType1)
+                foreach (PhotoInfos photoInfo in AlbumSortedType2)
                 {
                     sortingList.Add(photoInfo);
-                    if (index > 1)
+                    if (index > 0)
                     {
-                        Debug.Log($"photo date index[{index}] sort old1st {photoInfo.imageDate}");
                         // Si la photo précédente est plus récente:
-                        if (photoInfo.imageDate < lastphotoDate)
+                        if (DateTime.FromBinary(photoInfo.imageDate) < DateTime.FromBinary(lastphotoDate))
                         {
+                            Debug.Log("Inversed indexes");
                             // inverser l'ordre dans la liste
                             PhotoInfos previous = sortingList[index-1];
                             sortingList[index-1] = photoInfo;
                             sortingList[index] = previous;
                             isSorted = false;
                         }
-                        lastphotoDate = sortingList[index].imageDate;
                     }
+                    lastphotoDate = sortingList[index].imageDate;
                     index++;
                 }
             }
@@ -341,10 +357,9 @@ public class SortAlbum : MonoBehaviour
             if (numberOfLoops >= 60){return;}
             if(isSorted){break;}
         }
-        //Debug
-        foreach (PhotoInfos photoInfo in AlbumSortedType2)
+        foreach (PhotoInfos photoInfos in AlbumSortedType2)
         {
-            Debug.Log($"photo date end sort new1st{photoInfo.imageDate}");
+            Debug.Log($"photo date new1st: {photoInfos.imageDate}");
         }
         DestroyScrollview();
         ShowPhotos();
@@ -374,6 +389,7 @@ public class SortAlbum : MonoBehaviour
     private void SizeSmall()
     {
         albumSize = AlbumSize.Small;
+        currentPhotoScale = smallPhotoScale;
         DestroyScrollview();
         
         scroll2.SetActive(false);
@@ -385,6 +401,7 @@ public class SortAlbum : MonoBehaviour
     private void SizeMedium()
     {
         albumSize = AlbumSize.Medium;
+        currentPhotoScale = mediumPhotoScale;
         DestroyScrollview();
         
         //Utiliser 2 scrolls
@@ -397,6 +414,7 @@ public class SortAlbum : MonoBehaviour
     private void SizeLarge()
     {
         albumSize = AlbumSize.Large;
+        currentPhotoScale = largePhotoScale;
         DestroyScrollview();
         
         //Utiliser 3 scrolls
@@ -435,6 +453,7 @@ public class SortAlbum : MonoBehaviour
                 GameObject photo = new GameObject();
                 // if (albumDictionary.ContainsKey(photoInfo)) { photo = albumDictionary[photoInfo]; }
                 photo = CreatePhoto(photoInfo);
+                photo.GetComponent<RectTransform>().sizeDelta = currentPhotoScale;
 
                 if (index % 3 == 0 && (albumSize == AlbumSize.Large))
                 {

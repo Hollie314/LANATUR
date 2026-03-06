@@ -12,7 +12,7 @@ public struct PhotoInfos
     };
     
     [SerializeField] public string imagePath;
-    [SerializeField] public System.DateTime imageDate;
+    public long imageDate;
     [SerializeField] public string imageTag;
     [SerializeField] public EncyclopedieEntry entry;
     [SerializeField] public bool imageUsedInNotes;

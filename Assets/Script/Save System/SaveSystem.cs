@@ -37,7 +37,7 @@ public static class SaveSystem
             imageUsedInNotes = isInEncyclopedia,
             entry = encyclopedieEntry,
             imageType = type,
-            imageDate = System.DateTime.Now,
+            imageDate = System.DateTime.Now.ToBinary(),
             imageFav = false
         };
 
