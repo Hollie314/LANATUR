@@ -49,11 +49,14 @@ public class SortAlbum : MonoBehaviour
     private GameObject scroll2;
     private GameObject scroll3;
     
-    private static Album album = new Album();
+    private Album album = new Album();
     
-    private static void Awake()
+    private void Awake()
     {
         album = Album.Load();
+        scroll1 = ScrollVerticalLayout.transform.GetChild(0).gameObject;
+        scroll2 = ScrollVerticalLayout.transform.GetChild(1).gameObject;
+        scroll3 = ScrollVerticalLayout.transform.GetChild(2).gameObject;
     }
     
     // When Album is Enabled, reset it in case new photos appeared
@@ -220,12 +223,12 @@ public class SortAlbum : MonoBehaviour
             switch (DropdownSortType2.value)
             {
                 case 0:
-                    Debug.Log("Sort Oldest First");
-                    SortByDate_OldestFirst();
-                    break;
-                case 1:
                     Debug.Log("Sort Newest First");
                     SortByDate_NewestFirst();
+                    break;
+                case 1:
+                    Debug.Log("Sort Oldest First");
+                    SortByDate_OldestFirst();
                     break;
             }
         }
@@ -233,11 +236,11 @@ public class SortAlbum : MonoBehaviour
         {
             switch (sortType2)
             {
-                case SortType2.OldestFirst:
-                    SortByDate_OldestFirst();
-                    break;
                 case SortType2.NewestFirst:
                     SortByDate_NewestFirst();
+                    break;
+                case SortType2.OldestFirst:
+                    SortByDate_OldestFirst();
                     break;
             }
         }
@@ -247,23 +250,25 @@ public class SortAlbum : MonoBehaviour
     {
         sortType2 = SortType2.OldestFirst;
         
-        System.DateTime lastphotoDate = new DateTime(0000, 00, 00, 00, 00, 00, 00);
+        Debug.Log(DateTime.Now);
+        System.DateTime lastphotoDate = new DateTime(2025, 01, 01, 01, 01, 01, 01);
         bool isSorted = false;
         int numberOfLoops = 0;
         
-        while (!isSorted || numberOfLoops < 500)
+        while (!isSorted || numberOfLoops < 40)
         {
             List<PhotoInfos> sortingList = new List<PhotoInfos>();
             int index = 0;
+            isSorted = true;
             // Parcourir chaque photos à afficher
             if (!AlbumSortedType1.IsNullOrEmpty())
             {
                 foreach (PhotoInfos photoInfo in AlbumSortedType1)
                 {
-                    isSorted = true;
                     sortingList.Add(photoInfo);
                     if (index > 1)
                     {
+                        Debug.Log($"photo date index[{index}] sort old1st {photoInfo.imageDate}");
                         // Si la photo précédente est plus récente:
                         if (photoInfo.imageDate > lastphotoDate)
                         {
@@ -280,8 +285,16 @@ public class SortAlbum : MonoBehaviour
             }
             AlbumSortedType2 = sortingList;
             numberOfLoops++;
+            Debug.Log(numberOfLoops);
+            if (numberOfLoops >= 60){return;}
+            if(isSorted){break;}
         }
-        
+        //Debug
+        foreach (PhotoInfos photoInfo in AlbumSortedType2)
+        {
+            Debug.Log($"photo date end sort old1st {photoInfo.imageDate}");
+        }
+        DestroyScrollview();
         ShowPhotos();
     }
 
@@ -307,6 +320,7 @@ public class SortAlbum : MonoBehaviour
                     sortingList.Add(photoInfo);
                     if (index > 1)
                     {
+                        Debug.Log($"photo date index[{index}] sort old1st {photoInfo.imageDate}");
                         // Si la photo précédente est plus récente:
                         if (photoInfo.imageDate < lastphotoDate)
                         {
@@ -324,14 +338,15 @@ public class SortAlbum : MonoBehaviour
             AlbumSortedType2 = sortingList;
             numberOfLoops++;
             Debug.Log(numberOfLoops);
-            /*
-            Debug.Log($"is sorted: {isSorted}");
-            Debug.Log($"sorting list: {sortingList}");
-            */
             if (numberOfLoops >= 60){return;}
             if(isSorted){break;}
         }
-        
+        //Debug
+        foreach (PhotoInfos photoInfo in AlbumSortedType2)
+        {
+            Debug.Log($"photo date end sort new1st{photoInfo.imageDate}");
+        }
+        DestroyScrollview();
         ShowPhotos();
     }
     #endregion
@@ -361,8 +376,8 @@ public class SortAlbum : MonoBehaviour
         albumSize = AlbumSize.Small;
         DestroyScrollview();
         
-        //Utiliser un seul scroll
-        scroll1 = Instantiate(new GameObject(), ScrollVerticalLayout.transform);
+        scroll2.SetActive(false);
+        scroll3.SetActive(false);
         
         ShowPhotos();
     }
@@ -373,8 +388,8 @@ public class SortAlbum : MonoBehaviour
         DestroyScrollview();
         
         //Utiliser 2 scrolls
-        scroll1 = Instantiate(new GameObject(), ScrollVerticalLayout.transform);
-        scroll2 = Instantiate(new GameObject(), ScrollVerticalLayout.transform);
+        scroll2.SetActive(true);
+        scroll3.SetActive(false);
         
         ShowPhotos();
     }
@@ -385,18 +400,25 @@ public class SortAlbum : MonoBehaviour
         DestroyScrollview();
         
         //Utiliser 3 scrolls
-        scroll1 = Instantiate(new GameObject(), ScrollVerticalLayout.transform);
-        scroll2 = Instantiate(new GameObject(), ScrollVerticalLayout.transform);
-        scroll3 = Instantiate(new GameObject(), ScrollVerticalLayout.transform);
+        scroll2.SetActive(true);
+        scroll3.SetActive(true);
         
         ShowPhotos();
     }
     
     private void DestroyScrollview()
     {
-        for (int i = 0; i < ScrollVerticalLayout.transform.childCount; i++)
+        for (int i = 0; i < scroll1.transform.childCount; i++)
         {
-            Destroy(ScrollVerticalLayout.transform.GetChild(i).gameObject);
+            Destroy(scroll1.transform.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < scroll2.transform.childCount; i++)
+        {
+            Destroy(scroll2.transform.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < scroll3.transform.childCount; i++)
+        {
+            Destroy(scroll3.transform.GetChild(i).gameObject);
         }
     }
     #endregion
@@ -411,12 +433,8 @@ public class SortAlbum : MonoBehaviour
             {
                 // Vérifier si la photo existe déjà en mémoire
                 GameObject photo = new GameObject();
-                if (albumDictionary.ContainsKey(photoInfo)) { photo = albumDictionary[photoInfo]; }
-                else
-                {
-                    photo = CreatePhoto(photoInfo);
-                    albumDictionary.Add(photoInfo, photo);
-                }
+                // if (albumDictionary.ContainsKey(photoInfo)) { photo = albumDictionary[photoInfo]; }
+                photo = CreatePhoto(photoInfo);
 
                 if (index % 3 == 0 && (albumSize == AlbumSize.Large))
                 {

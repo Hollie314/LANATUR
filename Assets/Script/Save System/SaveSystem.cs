@@ -41,6 +41,8 @@ public static class SaveSystem
             imageFav = false
         };
 
+        Debug.Log($"photo date: {photoInfos.imageDate}");
+
         album.photoInfos.Add(photoInfos);
 
         Album.Save(album);
