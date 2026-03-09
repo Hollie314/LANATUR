@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3714268887719244414}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.0000000074505797, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.2049217, y: 0.53763026, z: 1.0328369}
   m_ConstrainProportionsScale: 0
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 242602050064771355}
   - {fileID: 8968484805796505859}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -98.05, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1922528113526372747
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -132,10 +132,11 @@ MonoBehaviour:
   interactionText: {fileID: 7181663914278374055}
   startsQuest: 0
   updateQuest: 0
-  NoiseRadius: 10
+  NoiseRadius: 20
   NoiseOn: 10
-  clip: {fileID: 8300000, guid: ee65bf5dcc4758248b021ebde5dcfb6a, type: 3}
+  clip: {fileID: 8300000, guid: ef6e0577a492bcf4da73f2909e5d227d, type: 3}
   isActive: 1
+  audioSource: {fileID: 635718196257784459}
 --- !u!82 &635718196257784459
 AudioSource:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -157,8 +158,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 5
+  MaxDistance: 25
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -193,7 +194,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -371,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3268180496438814722, guid: 6ce9b66048550d443a886b1023e7a7be, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3268180496438814722, guid: 6ce9b66048550d443a886b1023e7a7be, type: 3}
       propertyPath: m_StaticEditorFlags

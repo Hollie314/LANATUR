@@ -1,11 +1,12 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
-
 
 [CustomEditor(typeof(Screenshots))]
 class CustomEditor_Screenshots : Editor
 {
     private Screenshots screenshots;
+
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -15,3 +16,4 @@ class CustomEditor_Screenshots : Editor
         }
     }
 }
+#endif
