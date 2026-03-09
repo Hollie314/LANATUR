@@ -50,6 +50,7 @@ public class SortAlbum : MonoBehaviour
     private List<PhotoInfos> AlbumSortedType1;
     private List<PhotoInfos> AlbumSortedType2;
     private Dictionary<PhotoInfos, GameObject> albumDictionary = new Dictionary<PhotoInfos, GameObject>();
+    [HideInInspector] public List<GameObject> AlbumDisplayedPhotos = new List<GameObject>();
 
     private GameObject scroll1;
     private GameObject scroll2;
@@ -68,7 +69,7 @@ public class SortAlbum : MonoBehaviour
     }
     
     // When Album is Enabled, reset it in case new photos appeared
-    void OnEnable()
+    private void OnEnable()
     {
         album = Album.Load();
         foreach (PhotoInfos photoInfos in album.photoInfos)
@@ -444,6 +445,7 @@ public class SortAlbum : MonoBehaviour
     #region ShowPhotos
     private void ShowPhotos()
     {
+        AlbumDisplayedPhotos.Clear();
         int index = 1;
         if (!AlbumSortedType2.IsNullOrEmpty())
         {
@@ -457,17 +459,17 @@ public class SortAlbum : MonoBehaviour
 
                 if (index % 3 == 0 && (albumSize == AlbumSize.Large))
                 {
-                    Instantiate(photo, scroll3.transform);
+                    AlbumDisplayedPhotos.Add(Instantiate(photo, scroll3.transform));
                     Debug.Log($"scroll 3");
                 }
                 else if (index % 2 == 0 && (albumSize == AlbumSize.Large || albumSize == AlbumSize.Medium))
                 {
-                    Instantiate(photo, scroll2.transform);
+                    AlbumDisplayedPhotos.Add(Instantiate(photo, scroll2.transform));
                     Debug.Log($"scroll 2");
                 }
                 else
                 {
-                    Instantiate(photo, scroll1.transform);
+                    AlbumDisplayedPhotos.Add(Instantiate(photo, scroll1.transform));
                     Debug.Log($"scroll 1");
                 }
                 index++;

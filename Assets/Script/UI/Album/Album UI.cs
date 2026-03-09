@@ -9,11 +9,10 @@ using UnityEngine.UI;
 public class AlbumUI : SerializedMonoBehaviour
 {
     [Header("Scripts")]
-    [SerializeField] private ChangeEntryPhoto ChangeEntryPhoto;
-    [SerializeField] private SortAlbum _sortAlbum;
+    [SerializeField] private ChangeEntryPhoto changeEntryPhoto;
+    [SerializeField] private SortAlbum sortAlbum;
 
     [Header("Canvas / Panels")]
-    [SerializeField] private GameObject canvasCamera;
     [SerializeField] private GameObject panelAlbum, panelPhoto;
     
     [Header("Buttons")]
@@ -23,75 +22,79 @@ public class AlbumUI : SerializedMonoBehaviour
     [SerializeField] private GameObject SelectionMultipleOptions;
 
     private GameObject PhotoZoomedOn;
-    private List<GameObject> ListSelectedPhotos = new List<GameObject>();
-    private bool selectionMultipleOn;
+    [HideInInspector] public List<GameObject> ListSelectedPhotos = new List<GameObject>();
+    private bool selectionMultipleOn = false;
 
-    public void On_BackToCamera()
+    private void OnDisable()
     {
-        canvasCamera.SetActive(true);
-        DestroyImages();
-        this.gameObject.SetActive(false);
-    }
-
-    public void On_PhotoClicked(GameObject photoClicked)
-    {
-        return;
         if (selectionMultipleOn)
         {
-            if ((ListSelectedPhotos.IsNullOrEmpty() || !ListSelectedPhotos.Contains(photoClicked)) && !ListInEncyclopedia.Contains(photoClicked))
-            {
-                ListSelectedPhotos.Add(photoClicked);
-                photoClicked.gameObject.transform.GetChild(2).gameObject.GetComponent<Toggle>().isOn = true;
-            }
-            else
-            {
-                ListSelectedPhotos.Remove(photoClicked);
-                photoClicked.gameObject.transform.GetChild(2).gameObject.GetComponent<Toggle>().isOn = false;
-            }
+            SelectionMultiple();
+        }
+    }
+
+    public void QuitAlbum()
+    {
+        OpenUI openUI = FindFirstObjectByType<OpenUI>();
+        if (openUI != null)
+        {
+            openUI.QuitUI(new PlayerInteractions());
+        }
+    }
+
+    public void SelectionMultiple()
+    {
+        ListSelectedPhotos.Clear();
+        selectionMultipleOn = !selectionMultipleOn;
+        foreach (GameObject photo in sortAlbum.AlbumDisplayedPhotos)
+        {
+            GameObject frame = photo.transform.GetChild(1).gameObject;
+            frame.GetComponent<PhotoFrame>().canBeSelected = selectionMultipleOn;
+            frame.transform.GetChild(2).gameObject.SetActive(selectionMultipleOn);
+            if(!selectionMultipleOn)
+                frame.transform.GetChild(2).GetComponent<Toggle>().isOn = false;
+        }
+        SelectionMultipleOptions.SetActive(selectionMultipleOn);
+    }
+    
+    public void QuitPhoto()
+    {
+        panelAlbum.SetActive(true);
+        panelPhoto.SetActive(false);
+    }
+    
+    public void ShowPhoto (Sprite photoSprite, PhotoInfos photoInfos)
+    {
+        // Change Panel
+        panelPhoto.SetActive(true);
+        // verifier si la photo est dans l'encyclop�die
+        if (photoInfos.imageUsedInNotes)
+        {
+            // Ne pas activer le bouton supprimer
+            PanelPhoto_ButtonDelete.SetActive(false);
+
+            // Ne pas activer le bouton remplacer
+            PanelPhoto_ButtonReplace.SetActive(false);
         }
         else
         {
-            ListSelectedPhotos.Clear();
-            ListSelectedPhotos.Add(photoClicked);
-            // Change Panel
-            panelPhoto.SetActive(true);
-            // v�rifier si la photo est dans l'encyclop�die
-            if (ListInEncyclopedia != null)
-            {
-                if (ListInEncyclopedia.Contains(photoClicked))
-                {
-                    // Ne pas activer le bouton supprimer
-                    PanelPhoto_ButtonDelete.SetActive(false);
+            // Activer le bouton supprimer
+            PanelPhoto_ButtonDelete.SetActive(true);
 
-                    // Ne pas activer le bouton remplacer
-                    PanelPhoto_ButtonReplace.SetActive(false);
-                }
-                else
-                {
-                    // Activer le bouton supprimer
-                    PanelPhoto_ButtonDelete.SetActive(true);
-
-                    // Activer le bouton remplacer
-                    PanelPhoto_ButtonReplace.SetActive(true);
-                }
-            }
-
-            PanelPhoto_Photo.GetComponent<Image>().sprite = photoClicked.GetComponent<Image>().sprite;
-
-            // Turn off album Panel
-            panelAlbum.SetActive(false);
+            // Activer le bouton remplacer
+            PanelPhoto_ButtonReplace.SetActive(true);
         }
+
+        PanelPhoto_Photo.GetComponent<Image>().sprite = photoSprite;
+        // Turn off album Panel
+        panelAlbum.SetActive(false);
     }
 
-    public void On_BackToAlbumClicked()
-    {
-        panelAlbum.SetActive(true);
-
-        panelPhoto.SetActive(false);
-    }
 
     public void On_DeletePhotoClicked()
     {
+        return;
+        /*
         foreach (var photo in ListSelectedPhotos)
         {
             SaveSystem.DeletePicture(albumDictionary[photo]);
@@ -104,10 +107,13 @@ public class AlbumUI : SerializedMonoBehaviour
         SortByType();
 
         On_BackToAlbumClicked();
+        */
     }
 
     public void On_ChangeEncyclopediaPhotoClicked(GameObject photo)
     {
+        return;
+        /*
         foreach (GameObject picture in ListInEncyclopedia)
         {
             if (albumDictionary[picture].imageTag == albumDictionary[photo].imageTag)
@@ -120,12 +126,6 @@ public class AlbumUI : SerializedMonoBehaviour
         ListInEncyclopedia.Add(photo);
         ChangeEntryPhoto.AddPhotoToEntries(albumDictionary[photo]);
         // albumDictionary[photo].imageUsedInEncyclopedia = true;
-    }
-
-    public void On_SelectionMultipleClicked()
-    {
-        ListSelectedPhotos.Clear();
-        selectionMultipleOn = !selectionMultipleOn;
-        SelectionMultipleOptions.SetActive(selectionMultipleOn);
+        */
     }
 }
