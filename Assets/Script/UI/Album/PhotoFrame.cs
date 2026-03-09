@@ -27,12 +27,12 @@ public class PhotoFrame : MonoBehaviour
             _toggle.isOn = !_toggle.isOn;
             if (_toggle.isOn)
             {
-                albumUI.ListSelectedPhotos.Add(transform.parent.gameObject);
+                albumUI.ListSelectedPhotos.Add(photoInfos);
                 _toggle.gameObject.transform.GetChild(0).GetComponent<Image>().color = toggleBackgroundOn;
             }
             else
             {
-                albumUI.ListSelectedPhotos.Remove(transform.parent.gameObject);
+                albumUI.ListSelectedPhotos.Remove(photoInfos);
                 _toggle.gameObject.transform.GetChild(0).GetComponent<Image>().color = toggleBackgroundOff;
             }
         }
@@ -40,6 +40,8 @@ public class PhotoFrame : MonoBehaviour
         else
         {
             albumUI.ShowPhoto(GetComponent<Image>().sprite, photoInfos);
+            albumUI.ListSelectedPhotos.Clear();
+            albumUI.ListSelectedPhotos.Add(photoInfos);
         }
     }
 }

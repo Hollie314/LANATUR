@@ -22,7 +22,7 @@ public class AlbumUI : SerializedMonoBehaviour
     [SerializeField] private GameObject SelectionMultipleOptions;
 
     private GameObject PhotoZoomedOn;
-    [HideInInspector] public List<GameObject> ListSelectedPhotos = new List<GameObject>();
+    [HideInInspector] public List<PhotoInfos> ListSelectedPhotos = new List<PhotoInfos>();
     private bool selectionMultipleOn = false;
 
     private void OnDisable()
@@ -31,6 +31,8 @@ public class AlbumUI : SerializedMonoBehaviour
         {
             SelectionMultiple();
         }
+        panelAlbum.SetActive(true);
+        panelPhoto.SetActive(false);
     }
 
     public void QuitAlbum()
@@ -91,28 +93,43 @@ public class AlbumUI : SerializedMonoBehaviour
     }
 
 
-    public void On_DeletePhotoClicked()
+    public void DeletePhoto()
+    {
+        foreach (PhotoInfos photo in ListSelectedPhotos)
+        {
+            SaveSystem.DeletePicture(photo);
+        }
+        ListSelectedPhotos.Clear();
+        sortAlbum.LoadUI();
+        if(panelPhoto.activeSelf)
+            QuitPhoto();
+    }
+
+    public void FavUnfavPhoto()
+    {
+        foreach (PhotoInfos photo in ListSelectedPhotos)
+        {
+            SaveSystem.ModifyPicture(photo, true);
+        }
+        ListSelectedPhotos.Clear();
+        if(panelAlbum.activeSelf)
+            sortAlbum.LoadUI();
+    }
+    
+    public void ChangeUsedInNotes()
     {
         return;
-        /*
-        foreach (var photo in ListSelectedPhotos)
+        
+        foreach (PhotoInfos photo in ListSelectedPhotos)
         {
-            SaveSystem.DeletePicture(albumDictionary[photo]);
+            SaveSystem.ModifyPicture(photo, false, true);
         }
-
-        ListSelectedPhotos.Clear ();
-
-        DestroyImages();
-
-        SortByType();
-
-        On_BackToAlbumClicked();
-        */
+        ListSelectedPhotos.Clear();
+        sortAlbum.LoadUI();
     }
 
     public void On_ChangeEncyclopediaPhotoClicked(GameObject photo)
     {
-        return;
         /*
         foreach (GameObject picture in ListInEncyclopedia)
         {

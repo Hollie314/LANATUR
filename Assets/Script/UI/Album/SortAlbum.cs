@@ -41,6 +41,7 @@ public class SortAlbum : MonoBehaviour
     [SerializeField] private TMP_Dropdown DropdownSize;
     [SerializeField] private TMP_Dropdown DropdownSortType1;
     [SerializeField] private TMP_Dropdown DropdownSortType2;
+    [SerializeField] private TextMeshProUGUI photoNumber;
     
     [Header("Photo scales")]
     [SerializeField] private Vector2 smallPhotoScale;
@@ -71,7 +72,15 @@ public class SortAlbum : MonoBehaviour
     // When Album is Enabled, reset it in case new photos appeared
     private void OnEnable()
     {
+        LoadUI();
+    }
+
+    public void LoadUI()
+    {
         album = Album.Load();
+        
+        UpdateNumber();
+        
         foreach (PhotoInfos photoInfos in album.photoInfos)
         {
             Debug.Log($"photo date: {photoInfos.imageDate}");
@@ -111,6 +120,11 @@ public class SortAlbum : MonoBehaviour
                 SortCorpo();
                 break;
         }
+    }
+
+    public void UpdateNumber()
+    {
+        photoNumber.text = $"{album.photoInfos.Count.ToString()} / 150";
     }
 
     #region SortType1
@@ -490,6 +504,7 @@ public class SortAlbum : MonoBehaviour
         texture.LoadImage(bytes);
         Sprite photoSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
         photo.transform.GetChild(1).GetComponent<Image>().sprite = photoSprite;
+        photo.transform.GetChild(1).GetComponent<PhotoFrame>().photoInfos = photoInfo;
         
         if (photoInfo.imageUsedInNotes)
         {
