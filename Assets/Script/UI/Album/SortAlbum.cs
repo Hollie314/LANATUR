@@ -487,16 +487,16 @@ public class SortAlbum : MonoBehaviour
         Texture2D texture = new Texture2D(2, 2);
         texture.LoadImage(bytes);
         Sprite photoSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-        photo.GetComponent<Image>().sprite = photoSprite;
+        photo.transform.GetChild(1).GetComponent<Image>().sprite = photoSprite;
         
         if (photoInfo.imageUsedInNotes)
         {
-            photo.transform.GetChild(0).gameObject.SetActive(true);
+            photo.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
         }
         
         if (!(photoInfo.imageType == PhotoInfos.ImageTypes.None))
         {
-            photo.transform.GetChild(1).gameObject.SetActive(true);
+            photo.transform.GetChild(1).transform.GetChild(1).gameObject.SetActive(true);
         }
 
         if (photoInfo.imageFav)

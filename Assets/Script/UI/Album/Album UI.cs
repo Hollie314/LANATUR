@@ -8,277 +8,23 @@ using UnityEngine.UI;
 
 public class AlbumUI : SerializedMonoBehaviour
 {
-    [SerializeField] ChangeEntryPhoto ChangeEntryPhoto;
+    [Header("Scripts")]
+    [SerializeField] private ChangeEntryPhoto ChangeEntryPhoto;
+    [SerializeField] private SortAlbum _sortAlbum;
 
-    public GameObject canvasCamera;
-    public GameObject panelAlbum, panelPhoto;
-    public GameObject albumLayoutUp, albumLayoutDown;
-    public TextMeshProUGUI picturesNumber;
-    public Dictionary<string, Sprite> tagVignettes;
-    public Sprite EncyclopediaVignette;
-    public GameObject PanelPhoto_Photo;
-    public GameObject PanelPhoto_ButtonDelete;
-    public GameObject PanelPhoto_ButtonReplace;
+    [Header("Canvas / Panels")]
+    [SerializeField] private GameObject canvasCamera;
+    [SerializeField] private GameObject panelAlbum, panelPhoto;
+    
+    [Header("Buttons")]
+    [SerializeField] private GameObject PanelPhoto_Photo;
+    [SerializeField] private GameObject PanelPhoto_ButtonDelete;
+    [SerializeField] private GameObject PanelPhoto_ButtonReplace;
+    [SerializeField] private GameObject SelectionMultipleOptions;
 
     private GameObject PhotoZoomedOn;
-
-    public enum SortMethodes {Encyclopedia, Species, Date}
-    public SortMethodes SortMethodeUsed;
-
-    public static Album album = new Album();
-    public GameObject AlbumLayout;
-    public GameObject PicturePrefab;
-
-    private Dictionary<GameObject, PhotoInfos> albumDictionary = new Dictionary<GameObject, PhotoInfos>();
-    private List<GameObject> ListInEncyclopedia = new List<GameObject>();
     private List<GameObject> ListSelectedPhotos = new List<GameObject>();
     private bool selectionMultipleOn;
-    public GameObject SelectionMultipleOptions;
-
-    private static void Awake()
-    {
-        album = Album.Load();
-    }
-
-    public void OnEnable()
-    {
-        SortByType();
-        ChangeEntryPhoto = FindFirstObjectByType<ChangeEntryPhoto>();
-    }
-
-    // TO EDIT ----------------------------------------------------------------------------------------------------------------------------------------------------------
-    public void GoToEntry()
-    {
-        return;
-    }
-
-    #region changeSortMethodes
-    public void ChangeSortMethodeToEncyclopedia()
-    {
-        SortMethodeUsed = SortMethodes.Encyclopedia;
-        DestroyImages();
-        SortByType();
-    }
-
-    public void ChangeSortMethodeToSpecies()
-    {
-        SortMethodeUsed = SortMethodes.Species;
-        DestroyImages();
-        SortByType();
-    }
-
-    public void ChangeSortMethodeToDate()
-    {
-        SortMethodeUsed = SortMethodes.Date;
-        DestroyImages();
-        SortByType();
-    }
-    #endregion
-
-    #region Sort
-    public void SortByType()
-    {
-        Debug.Log("sorting Album started");
-        album = Album.Load();
-        Debug.Log($"Album count = {album.photoInfos.Count}");
-        if (!album.photoInfos.IsNullOrEmpty())
-        {
-            switch (SortMethodeUsed)
-            {
-                case SortMethodes.Encyclopedia:
-                    ShowAlbumPhotos(SortByEncyclopedia());
-                    break;
-
-                case SortMethodes.Species:
-                    ShowAlbumPhotos(SortBySpecies());
-                    break;
-
-                case SortMethodes.Date:
-                    SortByDate();
-                    break;
-            }
-        }
-        Debug.Log("sorting Album ended");
-    }
-
-    public List<PhotoInfos> SortByEncyclopedia()
-    {
-        // Sort in a dictionary
-        List<PhotoInfos> sortedSpecies = SortBySpecies();
-        Dictionary<string, List<PhotoInfos>> EncyclopediaDictionary = new Dictionary<string, List<PhotoInfos>>();
-        EncyclopediaDictionary.Add("encyclopedia", new List<PhotoInfos>());
-        EncyclopediaDictionary.Add("not encyclopedia", new List<PhotoInfos>());
-        foreach (PhotoInfos infos in sortedSpecies)
-        {
-            if(infos.imageUsedInNotes == true)
-            {
-                EncyclopediaDictionary["encyclopedia"].Add(infos);
-            }
-            else
-            {
-                EncyclopediaDictionary["not encyclopedia"].Add(infos);
-            }
-        }
-
-        // Sort the dictionary into a list
-        List<PhotoInfos> SortedPhotoInfos = new List<PhotoInfos>();
-        foreach (List<PhotoInfos> infosList in EncyclopediaDictionary.Values)
-        {
-            foreach (PhotoInfos infos in infosList)
-            {
-                SortedPhotoInfos.Add(infos);
-            }
-        }
-
-        // Show
-        return SortedPhotoInfos;
-    }
-
-    public List<PhotoInfos> SortBySpecies()
-    {
-        // Sort in a dictionary
-        Dictionary<string, List<PhotoInfos>> SpeciesDictionary = new Dictionary<string, List<PhotoInfos>>();
-        foreach (PhotoInfos infos in album.photoInfos)
-        {
-            if (!SpeciesDictionary.ContainsKey(infos.imageTag))
-            {
-                List<PhotoInfos> photoInfosList = new List<PhotoInfos>();
-                photoInfosList.Add(infos);
-                SpeciesDictionary.Add(infos.imageTag, photoInfosList);
-            }
-            else
-            {
-                SpeciesDictionary[infos.imageTag].Add(infos);
-            }
-        }
-
-        // Sort the dictionary into a list
-        List<PhotoInfos> SortedPhotoInfos = new List<PhotoInfos>();
-        foreach (List<PhotoInfos> infosList in SpeciesDictionary.Values)
-        {
-            foreach (PhotoInfos infos in infosList)
-            {
-                SortedPhotoInfos.Add(infos);
-            }
-        }
-
-        // Show
-        return SortedPhotoInfos;
-    }
-
-    public void SortByDate()
-    {
-        // Sort in a dictionary
-        Dictionary<string, List<PhotoInfos>> SpeciesDictionary = new Dictionary<string, List<PhotoInfos>>();
-        foreach (PhotoInfos infos in album.photoInfos)
-        {
-            if (!SpeciesDictionary.ContainsKey(infos.imageTag))
-            {
-                List<PhotoInfos> photoInfosList = new List<PhotoInfos>();
-                photoInfosList.Add(infos);
-                SpeciesDictionary.Add(infos.imageTag, photoInfosList);
-            }
-            else
-            {
-                SpeciesDictionary[infos.imageTag].Add(infos);
-            }
-        }
-
-        // Sort the dictionary into a list
-        List<PhotoInfos> SortedPhotoInfos = new List<PhotoInfos>();
-        foreach (List<PhotoInfos> infosList in SpeciesDictionary.Values)
-        {
-            foreach (PhotoInfos infos in infosList)
-            {
-                SortedPhotoInfos.Add(infos);
-            }
-        }
-
-        // Show
-        ShowAlbumPhotos(SortedPhotoInfos);
-    }
-
-    public void ShowAlbumPhotos(List<PhotoInfos> SortedPhotoInfos)
-    {
-        albumDictionary.Clear();
-        int index = 0;
-        GameObject newPicture;
-
-        foreach (PhotoInfos infos in SortedPhotoInfos)
-        {
-            Debug.Log("Updating Album");
-
-            // Create picture
-            if (index % 2 == 0)
-            {
-                if (index == 0)
-                {
-                    newPicture = PicturePrefab;
-                }
-                else
-                {
-                    newPicture = Instantiate(PicturePrefab, AlbumLayout.transform.GetChild(0));
-                }
-            }
-            else
-            {
-                newPicture = Instantiate(PicturePrefab, AlbumLayout.transform.GetChild(1));
-            }
-            index++;
-
-            // Load image
-            Debug.Log("about to load bytes");
-            byte[] bytes = System.IO.File.ReadAllBytes(infos.imagePath);
-            Debug.Log("Loaded bytes");
-            Texture2D texture = new Texture2D(2, 2);
-            texture.LoadImage(bytes);
-            Sprite photoSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-            newPicture.GetComponent<Image>().sprite = photoSprite;
-
-            // Update Photo UI
-            UpdatePhotoUI(newPicture, infos.imageTag, infos);
-
-            // Update Dictionary
-            albumDictionary.Add(newPicture, infos);
-
-            if (infos.imageUsedInNotes)
-                ListInEncyclopedia.Add(newPicture);
-        }
-        // Update picturesNumber
-        picturesNumber.text = $"{index}/150"; // change later with {maxPictures}
-    }
-
-    public void UpdatePhotoUI(GameObject photo, string tag, PhotoInfos infos)
-    {
-        // photo index
-        // photo on encyclopedia
-        if (infos.imageUsedInNotes)
-        {
-            GameObject vignette = photo.transform.GetChild(0).gameObject;
-            vignette.SetActive(true);
-            vignette.GetComponent<Image>().sprite = EncyclopediaVignette;
-        }
-        else
-        {
-            GameObject vignette = photo.transform.GetChild(0).gameObject;
-            vignette.SetActive(false);
-        }
-
-        // photo species
-        Debug.Log(tag);
-        if(tagVignettes.ContainsKey(tag))
-        {
-            GameObject vignette = photo.transform.GetChild(1).gameObject;
-            vignette.SetActive(true);
-            vignette.GetComponent<Image>().sprite = tagVignettes[tag];
-        }
-        else
-        {
-            GameObject vignette = photo.transform.GetChild(1).gameObject;
-            vignette.SetActive(false);
-        }
-    }
-    #endregion
 
     public void On_BackToCamera()
     {
@@ -289,6 +35,7 @@ public class AlbumUI : SerializedMonoBehaviour
 
     public void On_PhotoClicked(GameObject photoClicked)
     {
+        return;
         if (selectionMultipleOn)
         {
             if ((ListSelectedPhotos.IsNullOrEmpty() || !ListSelectedPhotos.Contains(photoClicked)) && !ListInEncyclopedia.Contains(photoClicked))
@@ -357,18 +104,6 @@ public class AlbumUI : SerializedMonoBehaviour
         SortByType();
 
         On_BackToAlbumClicked();
-    }
-
-    public void DestroyImages()
-    {
-        for (int i = 1; i < albumLayoutUp.transform.childCount; i++)
-        {
-            Destroy(albumLayoutUp.transform.GetChild(i).gameObject);
-        }
-        for (int i = 0; i < albumLayoutDown.transform.childCount; i++)
-        {
-            Destroy(albumLayoutDown.transform.GetChild(i).gameObject);
-        }
     }
 
     public void On_ChangeEncyclopediaPhotoClicked(GameObject photo)
