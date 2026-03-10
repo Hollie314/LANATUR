@@ -12,17 +12,15 @@ public static class SaveSystem
 
     private static void Initialize()
     {
-        Debug.Log($"path: {picturesFolder}");
         if(!Directory.Exists(picturesFolder))
         {
             Directory.CreateDirectory(picturesFolder);
-            Debug.Log("picturesFolder created");
         }
         album = Album.Load();
         DeleteAlbum(album);
     }
 
-    public static PhotoInfos SavePicture(Texture2D image, string tag, bool isInEncyclopedia, EncyclopedieEntry encyclopedieEntry)
+    public static PhotoInfos SavePicture(Texture2D image, string tag, bool isInEncyclopedia, EncyclopedieEntry encyclopedieEntry, PhotoInfos.ImageTypes type)
     {
         album = Album.Load();
         byte[] png = image.EncodeToPNG();
@@ -34,26 +32,37 @@ public static class SaveSystem
         {
             imagePath = filePath,
             imageTag = tag,
-            imageUsedInEncyclopedia = isInEncyclopedia,
-            entry = encyclopedieEntry
+            imageUsedInNotes = isInEncyclopedia,
+            entry = encyclopedieEntry,
+            imageType = type,
+            imageDate = System.DateTime.Now.ToBinary(),
+            imageFav = false
         };
 
         album.photoInfos.Add(photoInfos);
 
         Album.Save(album);
-        Debug.Log("PhotoInfos saved " + photoInfos.imagePath + " " + photoInfos.imageTag);
         return photoInfos;
     }
 
     public static void DeletePicture(PhotoInfos infos)
     {
         album = Album.Load();
-        Debug.Log("SaveSystem Delete Picture Started");
         album.photoInfos.Remove(infos);
         File.Delete(infos.imagePath);
         Album.Save(album);
-        Debug.Log($"Photo infos still in album: { album.photoInfos.Contains(infos)}");
-        Debug.Log("SaveSystem Delete Picture Ended");
+    }
+
+    public static void ModifyPicture(PhotoInfos infos, bool isFav = false, bool usedInNotes  = false )
+    {
+        album = Album.Load();
+        album.photoInfos.Remove(infos);
+        if(isFav)
+            infos.imageFav = !infos.imageFav;
+        if(usedInNotes)
+            infos.imageUsedInNotes = !infos.imageUsedInNotes;
+        album.photoInfos.Add(infos);
+        Album.Save(album);
     }
 
     public static void DeleteAlbum(Album album)
@@ -66,7 +75,6 @@ public static class SaveSystem
         album.photoInfos.Clear();
         Album.Save(album);
         File.Delete($"{Application.persistentDataPath}/album.json");
-        Debug.Log("Deleted album");
     }
 
     public static void SavePosition()

@@ -123,7 +123,6 @@ public class Camera_Shot : MonoBehaviour
                 ZoomCursor(maxZoomIn);
             }
         }
-        return;
     }
 
     private void OnTargetExitView()
@@ -169,12 +168,11 @@ public class Camera_Shot : MonoBehaviour
                     if(info.imageTag == target.tag)
                     {
                         isNewSpecies = false;
-                        
                     }
                 }
                 if (isNewSpecies)
                 {
-                    PhotoInfos infos = SaveSystem.SavePicture(screenCapture, target.tag, true, target.GetComponent<UpdateEntry>().EncyclopedieEntry[0]);
+                    PhotoInfos infos = SaveSystem.SavePicture(screenCapture, target.tag, true, target.GetComponent<UpdateEntry>().EncyclopedieEntry[0], target.GetComponent<UpdateEntry>().EntryType);
                     if ( target.GetComponent<UpdateEntry>() != null)
                     {
                         target.GetComponent<UpdateEntry>().UpdateEntry_Func();
@@ -186,14 +184,14 @@ public class Camera_Shot : MonoBehaviour
                 }
                 else
                 {
-                    SaveSystem.SavePicture(screenCapture, target.tag, false, null);
+                    SaveSystem.SavePicture(screenCapture, target.tag, false, null, PhotoInfos.ImageTypes.None);
                     Debug.Log("not a new species");
                     SpecieTakenInPhoto?.Invoke(target.tag);
                 }
             }
             else
             {
-                PhotoInfos infos = SaveSystem.SavePicture(screenCapture, target.tag, true, target.GetComponent<UpdateEntry>().EncyclopedieEntry[0]);
+                PhotoInfos infos = SaveSystem.SavePicture(screenCapture, target.tag, true, target.GetComponent<UpdateEntry>().EncyclopedieEntry[0], target.GetComponent<UpdateEntry>().EntryType);
                 if (target.GetComponent<UpdateEntry>() != null)
                 {
                     target.GetComponent<UpdateEntry>().UpdateEntry_Func();
@@ -206,7 +204,7 @@ public class Camera_Shot : MonoBehaviour
         }
         else
         {
-            SaveSystem.SavePicture(screenCapture, null, false, null);
+            SaveSystem.SavePicture(screenCapture, null, false, null, PhotoInfos.ImageTypes.None);
             Debug.Log("no target");
         }
         
