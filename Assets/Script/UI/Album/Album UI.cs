@@ -19,6 +19,7 @@ public class AlbumUI : SerializedMonoBehaviour
     [SerializeField] private GameObject PanelPhoto_Photo;
     [SerializeField] private GameObject PanelPhoto_ButtonDelete;
     [SerializeField] private GameObject PanelPhoto_ButtonReplace;
+    [SerializeField] private Toggle SelectionMultipleToggle;
     [SerializeField] private GameObject SelectionMultipleOptions;
 
     private GameObject PhotoZoomedOn;
@@ -27,12 +28,7 @@ public class AlbumUI : SerializedMonoBehaviour
 
     private void OnDisable()
     {
-        if (selectionMultipleOn)
-        {
-            SelectionMultiple();
-        }
-        panelAlbum.SetActive(true);
-        panelPhoto.SetActive(false);
+        QuitPhoto();
     }
 
     public void QuitAlbum()
@@ -42,6 +38,7 @@ public class AlbumUI : SerializedMonoBehaviour
         {
             openUI.QuitUI(new PlayerInteractions());
         }
+        QuitPhoto();
     }
 
     public void SelectionMultiple()
@@ -57,10 +54,15 @@ public class AlbumUI : SerializedMonoBehaviour
                 frame.transform.GetChild(2).GetComponent<Toggle>().isOn = false;
         }
         SelectionMultipleOptions.SetActive(selectionMultipleOn);
+        SelectionMultipleToggle.isOn  = selectionMultipleOn;
     }
     
     public void QuitPhoto()
     {
+        if (selectionMultipleOn)
+        {
+            SelectionMultiple();
+        }
         panelAlbum.SetActive(true);
         panelPhoto.SetActive(false);
     }
@@ -100,9 +102,9 @@ public class AlbumUI : SerializedMonoBehaviour
             SaveSystem.DeletePicture(photo);
         }
         ListSelectedPhotos.Clear();
-        sortAlbum.LoadUI();
         if(panelPhoto.activeSelf)
             QuitPhoto();
+        sortAlbum.LoadUI();
     }
 
     public void FavUnfavPhoto()

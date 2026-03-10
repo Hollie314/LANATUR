@@ -60,6 +60,8 @@ public class SortAlbum : MonoBehaviour
     private Vector2 currentPhotoScale;
     
     private Album album = new Album();
+
+    private Vector2 scrollViewSize = new Vector2(1920f, 945.57f);
     
     private void Awake()
     {
@@ -86,19 +88,6 @@ public class SortAlbum : MonoBehaviour
             Debug.Log($"photo date: {photoInfos.imageDate}");
         }
         
-        switch (albumSize)
-        {
-            case AlbumSize.Large:
-                SizeLarge();
-                break;
-            case AlbumSize.Medium:
-                SizeMedium();
-                break;
-            case AlbumSize.Small:
-                SizeSmall();
-                break;
-        }
-        
         switch (sortType1)
         {
             case SortType1.All:
@@ -118,6 +107,19 @@ public class SortAlbum : MonoBehaviour
                 break;
             case SortType1.Corporation:
                 SortCorpo();
+                break;
+        }
+        
+        switch (albumSize)
+        {
+            case AlbumSize.Large:
+                SizeLarge();
+                break;
+            case AlbumSize.Medium:
+                SizeMedium();
+                break;
+            case AlbumSize.Small:
+                SizeSmall();
                 break;
         }
     }
@@ -488,16 +490,33 @@ public class SortAlbum : MonoBehaviour
                 }
                 index++;
                 Debug.Log($"index show photo: {index}");
+                Destroy(photo);
             }
         }
         Debug.Log($"album null: {album.photoInfos.IsNullOrEmpty()}, sortType1: {AlbumSortedType1.IsNullOrEmpty()}, sortType2: {AlbumSortedType2.IsNullOrEmpty()}");
         if(!album.photoInfos.IsNullOrEmpty() && !AlbumSortedType1.IsNullOrEmpty() && !AlbumSortedType2.IsNullOrEmpty())
             Debug.Log($"album count: {album.photoInfos.Count}, sortType1: {AlbumSortedType1.Count}, sortType2: {AlbumSortedType2.Count}");
+
+        switch (albumSize)
+        {
+            case AlbumSize.Large:
+                scrollViewSize.x = currentPhotoScale.x * Mathf.CeilToInt(AlbumSortedType2.Count / 3 + 1) + 45 * AlbumSortedType2.Count / 3;
+                break;
+            case AlbumSize.Medium:
+                scrollViewSize.x = currentPhotoScale.x * Mathf.CeilToInt(AlbumSortedType2.Count / 2 + 1) + 45 * AlbumSortedType2.Count / 2;
+                break;
+            case AlbumSize.Small:
+                scrollViewSize.x = currentPhotoScale.x * (AlbumSortedType2.Count + 1) + 45 * (AlbumSortedType2.Count - 1);
+                break;
+        }
+        
+        scrollViewSize.x = Mathf.Clamp(scrollViewSize.x, 1920f, Mathf.Infinity);
+        ScrollVerticalLayout.GetComponent<RectTransform>().sizeDelta = scrollViewSize;
     }
 
     private GameObject CreatePhoto(PhotoInfos photoInfo)
     {
-        GameObject photo = PhotoPrefab;
+        GameObject photo = Instantiate(PhotoPrefab);
         // Load image
         byte[] bytes = System.IO.File.ReadAllBytes(photoInfo.imagePath);
         Texture2D texture = new Texture2D(2, 2);

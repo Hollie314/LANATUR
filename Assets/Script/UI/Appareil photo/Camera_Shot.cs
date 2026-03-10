@@ -123,7 +123,6 @@ public class Camera_Shot : MonoBehaviour
                 ZoomCursor(maxZoomIn);
             }
         }
-        return;
     }
 
     private void OnTargetExitView()
