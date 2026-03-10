@@ -17,7 +17,7 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] private float noiseRadius_Walking;
     [SerializeField] private float noiseRadius_Crouching;
     [SerializeField] private float noiseRadius_Running;
-    [SerializeField] MakeNoise _makeNoise;
+    [SerializeField] private MakeNoise _makeNoise;
     
     [Header("Movements")]
     // Movements
@@ -124,7 +124,7 @@ public class PlayerMotor : MonoBehaviour
         if (controller.isGrounded && verticalVelocity.y < 0f)
         {
             if (playerVelocity.y < 0f)
-                playerVelocity.y = groundSnapForce;   // <-- THIS is the fix
+                playerVelocity.y = groundSnapForce;
 
             if (crouching && !crouchActive)
                 crouchActive = true;
@@ -137,16 +137,6 @@ public class PlayerMotor : MonoBehaviour
             playerVelocity.y += gravity * Time.deltaTime;
             if (playerVelocity.y <= MaxFallGravity)
                 playerVelocity.y = MaxFallGravity;
-            
-            /*
-            if (playerVelocity.y > 0.2f)
-            else
-            {
-                float easedGravity = Mathf.Pow(gravityMultiplierUsed, 2);
-                gravityMultiplierUsed = Mathf.Lerp(gravity, MaxFallGravity, easedGravity);
-                playerVelocity.y += MaxFallGravity * Time.deltaTime;
-            }
-            */
         }
     }
 
@@ -168,7 +158,6 @@ public class PlayerMotor : MonoBehaviour
         Vector3 groundInput = Vector3.ProjectOnPlane(transform.TransformDirection(moveDirection), groundNormal).normalized;
         groundVelocity = groundInput * targetSpeed;
         
-        // It can be useful if there are too much slopes, the use is to NOT fall from the slops
         verticalVelocity.x = 0f;
         verticalVelocity.z = 0f;
         
@@ -192,8 +181,7 @@ public class PlayerMotor : MonoBehaviour
                     CrouchSFX
                 );
                 
-                //SFX
-                if (!playerMoveAudioSource.isPlaying || !playerMoveAudioSource.clip == CrouchSFX)
+                if (!playerMoveAudioSource.isPlaying || playerMoveAudioSource.clip != CrouchSFX)
                 {
                     playerMoveAudioSource.clip = CrouchSFX;
                     playerMoveAudioSource.Play();
@@ -213,8 +201,7 @@ public class PlayerMotor : MonoBehaviour
                         SprintSFX
                     );
                     
-                    //SFX
-                    if (!playerMoveAudioSource.isPlaying || !playerMoveAudioSource.clip == SprintSFX)
+                    if (!playerMoveAudioSource.isPlaying || playerMoveAudioSource.clip != SprintSFX)
                     {
                         playerMoveAudioSource.clip = SprintSFX;
                         playerMoveAudioSource.Play();
@@ -232,8 +219,7 @@ public class PlayerMotor : MonoBehaviour
                         WalkSFX
                     );
                     
-                    //SFX
-                    if (!playerMoveAudioSource.isPlaying || !playerMoveAudioSource.clip == WalkSFX)
+                    if (!playerMoveAudioSource.isPlaying || playerMoveAudioSource.clip != WalkSFX)
                     {
                         playerMoveAudioSource.clip = WalkSFX;
                         playerMoveAudioSource.Play();
@@ -241,7 +227,6 @@ public class PlayerMotor : MonoBehaviour
                 }
             }
         }
-        //SFX
         else
             playerMoveAudioSource.Stop();
     }
@@ -251,7 +236,6 @@ public class PlayerMotor : MonoBehaviour
         if (!canJump)
             return;
         
-        //SFX
         playerJumpAudioSource.clip = jumpSFX;
         playerJumpAudioSource.Play();
 
@@ -278,7 +262,6 @@ public class PlayerMotor : MonoBehaviour
         sprinting = !sprinting;
     }
 
-    // --------- Nouveaux getters publics ----------
     public bool IsCrouching => crouching;
     public bool IsSprinting => sprinting;
 }

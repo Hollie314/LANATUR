@@ -19,7 +19,7 @@ public class OnOff : MonoBehaviour, IInteractable
     [SerializeField] private bool isActive;
 
     private MakeNoise _makeNoise;
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
 
     private void Awake()
     {

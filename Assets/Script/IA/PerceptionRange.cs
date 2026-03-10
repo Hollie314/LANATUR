@@ -22,6 +22,8 @@ public class PerceptionRange : MonoBehaviour, IStimulusListener
         if(WorldStimulusManager.Instance != null)
             WorldStimulusManager.Instance.UnregisterListener(this);
     }
+    
+    // tu te crée une variable currentSoundAffect, tu assigne On sound
     public void OnSoundReceived(Vector3 position, float intensity, float radius, GameObject source)
     {
         Debug.Log("j'entend");
@@ -37,6 +39,8 @@ public class PerceptionRange : MonoBehaviour, IStimulusListener
         soundIntensity = intensity;
         
     }
+    
+//On send end : 
 
     public void OnLightReceived(Vector3 position, float intensity, float radius, GameObject source)
     {

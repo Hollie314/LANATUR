@@ -9,5 +9,6 @@ public enum IguaneMaleState
 	Patrol,
 	Fuite,
 	Nid,
-	Appat
+	Appat,
+	Reveil
 }
