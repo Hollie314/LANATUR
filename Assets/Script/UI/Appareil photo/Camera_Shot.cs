@@ -9,43 +9,50 @@ using UnityEngine.UI;
 
 public class Camera_Shot : MonoBehaviour
 {
-    [Header("Photo Taker")]
-    // public
+    [Header("Other UI")]
     [SerializeField] private Camera_UI Camera_UI;
     [SerializeField] ChangeEntryPhoto ChangeEntryPhoto;
+    
+    [Header("Photo Layers")]
+    [SerializeField] private LayerMask MaskCameraVisible;
+    [SerializeField] private LayerMask MaskCameraOnShot;
+    [SerializeField] private LayerMask animals_LayerMask;
+
+    [Header("Raycast")]
+    [SerializeField] private List<AnimalPart> animalsOnScreen = new List<AnimalPart>();
+    
+    [Header("Cursor Zoom")]
+    [SerializeField] private Color colorOnNothing;
+    [SerializeField] private Color colorOnTarget;
+    [SerializeField] private float maxZoomIn;
+    [SerializeField] private float maxZoomOut;
+    
+    [Header("SFX")]
+    [SerializeField] private AudioSource SFX_OpenPhotoUI;
+    [SerializeField] private AudioSource SFX_TakePhoto;
+    [SerializeField] private AudioSource SFX_TargetLocked;
+
+    [Header("VFX")]
+    [SerializeField] private GameObject placeholderVFX;
     [SerializeField] private GameObject ShotAnim;
-    public LayerMask MaskCameraVisible;
-    public LayerMask MaskCameraOnShot;
-    public LayerMask animals_LayerMask;
+
+    // Events
     public static event Action PictureTaken;
     public static event Action<string> SpecieTakenInPhoto;
-    public static Album album = new Album();
 
     // private
     private Texture2D screenCapture;
     private GameObject target;
-
-    [Header("SFX")]
-    // public
-    public AudioSource placeholderSFX;
-
-    // private
-
-    [Header("VFX")]
-    // public
-    public GameObject placeholderVFX;
     
-    [Header("Raycast")]
-    public List<AnimalPart> animalsOnScreen = new List<AnimalPart>();
-
-    [SerializeField] private float maxZoomIn;
-    [SerializeField] private float maxZoomOut;
-    // private
-
-    private void OnEnable() // new
+    // Album
+    public static Album album = new Album();
+    
+    private void OnEnable()
     {
         AnimalPart.ExitView += OnTargetExitView;
+        
         ChangeEntryPhoto = FindFirstObjectByType<ChangeEntryPhoto>();
+        
         AnimalPart[]  animals = FindObjectsOfType<AnimalPart>();
         foreach (AnimalPart animalPart in animals)
         {
@@ -53,7 +60,7 @@ public class Camera_Shot : MonoBehaviour
         }
     }
 
-    private void OnDisable() // new
+    private void OnDisable()
     {
         AnimalPart.ExitView -= OnTargetExitView;
         animalsOnScreen.Clear();
@@ -64,11 +71,10 @@ public class Camera_Shot : MonoBehaviour
         screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false); // Change dimensions
     }
 
-
     private void Update()
     {
         CameraDetection();
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))     // Use new input system ---------------------------------------------------------------------------------------------------
         {
             StartCoroutine(TakePicture());
             PictureTaken?.Invoke();
@@ -104,32 +110,7 @@ public class Camera_Shot : MonoBehaviour
         }
     }
 
-    private void ZoomCursor(float zoom)
-    {
-        transform.parent.transform.localScale = Vector3.one * zoom;
-    }
-
-    private void CameraDetection()
-    {
-        RaycastHit hitInfo;
-        //Debug.Log(Camera.main.farClipPlane);
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hitInfo, Camera.main.farClipPlane, animals_LayerMask))
-        {
-            {
-                target = hitInfo.collider.gameObject;
-                Debug.Log($"{target.name} {Time.fixedTime}");
-                target.GetComponent<AnimalPart>().BecomeTarget();
-                
-                ZoomCursor(maxZoomIn);
-            }
-        }
-    }
-
-    private void OnTargetExitView()
-    {
-        target = null;
-    }
-
+    #region TakePhoto
     IEnumerator TakePicture()
     {
         yield return new WaitForEndOfFrame();
@@ -212,11 +193,36 @@ public class Camera_Shot : MonoBehaviour
         ShotAnim.GetComponent<Image>().sprite = photoSprite;
         ShotAnim.GetComponent<Animator>().Play("Photo_Flash");
 
-
-
         // Reset all
         Camera.main.targetTexture = null;
         RenderTexture.active = null;
         Destroy(rt);
+    }
+    #endregion
+
+    private void ZoomCursor(float zoom)
+    {
+        transform.parent.transform.localScale = Vector3.one * zoom;
+    }
+
+    private void CameraDetection()
+    {
+        RaycastHit hitInfo;
+        //Debug.Log(Camera.main.farClipPlane);
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hitInfo, Camera.main.farClipPlane, animals_LayerMask))
+        {
+            {
+                target = hitInfo.collider.gameObject;
+                Debug.Log($"{target.name} {Time.fixedTime}");
+                target.GetComponent<AnimalPart>().BecomeTarget();
+                
+                ZoomCursor(maxZoomIn);
+            }
+        }
+    }
+
+    private void OnTargetExitView()
+    {
+        target = null;
     }
 }
