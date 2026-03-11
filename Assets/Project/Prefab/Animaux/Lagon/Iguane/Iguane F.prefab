@@ -704,12 +704,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6977491950172250962}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 0}
+  m_Graph: {fileID: -1430853951869800494, guid: 76e37f2ccd7b38e418443723c067bd08, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 7020973727551586684
   - rid: 7020973727551586685
@@ -718,13 +718,9 @@ MonoBehaviour:
   - rid: 7020973727551586688
   - rid: 7020973727551586689
   - rid: 7020973727551586690
-  - rid: 7020973727551586691
-  - rid: 7020973727551586692
-  - rid: 7020973727551586797
-  - rid: 7020973727551586798
   - rid: 7020973727551586799
   - rid: 7020973727551586800
-  - rid: 8822709002209329697
+  - rid: 8822709158246088972
   - rid: 7020973730990915705
   m_OriginalGraph: {fileID: 0}
   m_IsInitialised: 0
@@ -788,38 +784,6 @@ MonoBehaviour:
           m_Value1: 10510280952303905956
         Name: Make Noise
         m_Value: {fileID: 7652601897733044281}
-    - rid: 7020973727551586691
-      type: {class: 'BlackboardVariable`1[[ShoutAtTarget, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 6430662261939984600
-          m_Value1: 5437600211225286659
-        Name: Shout At Target
-        m_Value: {fileID: 8564539199447615938}
-    - rid: 7020973727551586692
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 5374426556090694409
-          m_Value1: 14219168446976446004
-        Name: Appat
-        m_Value: {fileID: 3001610117867761408, guid: d6903e8cd6d70104993b869563b0a969, type: 3}
-    - rid: 7020973727551586797
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 7110457796431961813
-          m_Value1: 11432985280337850244
-        Name: IguaneProtected
-        m_Value: {fileID: 0}
-    - rid: 7020973727551586798
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 6228677879182206610
-          m_Value1: 7292497301993154445
-        Name: Nid
-        m_Value: {fileID: 0}
     - rid: 7020973727551586799
       type: {class: 'BlackboardVariable`1[[WaypointManager, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -844,14 +808,14 @@ MonoBehaviour:
           m_Value1: 6757401096815351069
         Name: AIZone
         m_Value: {fileID: 0}
-    - rid: 8822709002209329697
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+    - rid: 8822709158246088972
+      type: {class: 'BlackboardVariable`1[[ShoutAtTarget, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
-          m_Value0: 4084904142179226963
-          m_Value1: 13600604798103420378
-        Name: WeakNoise
-        m_Value: 5
+          m_Value0: 3279805706341280703
+          m_Value1: 12576649257495789070
+        Name: Shout At Target
+        m_Value: {fileID: 8564539199447615938}
 --- !u!114 &8564539199447615938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,7 +823,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6977491950172250962}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6321feb42feed5248a9a66b8cef738dc, type: 3}
   m_Name: 
@@ -873,7 +837,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6977491950172250962}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af6b5457d78e5134fa9ce6046175e198, type: 3}
   m_Name: 
@@ -891,7 +855,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6977491950172250962}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad41be17180891488fa2384d7333eca, type: 3}
   m_Name: 
@@ -910,7 +874,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6977491950172250962}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc7864e111e13c247bab03bb914cf63c, type: 3}
   m_Name: 
@@ -928,7 +892,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6977491950172250962}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97c16eec9b8714248b5b646337120f1f, type: 3}
   m_Name: 
