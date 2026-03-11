@@ -19,6 +19,7 @@ public class AlbumUI : SerializedMonoBehaviour
     [SerializeField] private GameObject PanelPhoto_Photo;
     [SerializeField] private GameObject PanelPhoto_ButtonDelete;
     [SerializeField] private GameObject PanelPhoto_ButtonReplace;
+    [SerializeField] private GameObject PanelPhoto_ButtonCarnet;
     [SerializeField] private Toggle SelectionMultipleToggle;
     [SerializeField] private GameObject SelectionMultipleOptions;
 
@@ -79,6 +80,9 @@ public class AlbumUI : SerializedMonoBehaviour
 
             // Ne pas activer le bouton remplacer
             PanelPhoto_ButtonReplace.SetActive(false);
+            
+            // Activer le bouton Carnet
+            PanelPhoto_ButtonCarnet.SetActive(true);
         }
         else
         {
@@ -87,6 +91,9 @@ public class AlbumUI : SerializedMonoBehaviour
 
             // Activer le bouton remplacer
             PanelPhoto_ButtonReplace.SetActive(true);
+            
+            // ne pas activer le bouton Carnet
+            PanelPhoto_ButtonCarnet.SetActive(false);
         }
 
         PanelPhoto_Photo.GetComponent<Image>().sprite = photoSprite;

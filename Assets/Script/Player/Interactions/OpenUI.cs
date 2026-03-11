@@ -11,6 +11,7 @@ public class OpenUI : MonoBehaviour
     [SerializeField] private GameObject UI_Pause;
     
     private bool isCameraOpen = false;
+    [HideInInspector] public bool canChangeCameraUI = true;
     
     public static event Action<OpenUI> OnCameraWalk;
     public static event Action<OpenUI> OnCameraPhoto;
@@ -43,6 +44,10 @@ public class OpenUI : MonoBehaviour
     // UI To CAMERA
     public void OpenCamera(PlayerInteractions playerInteractions)  // Je vais faire un Prefab UI parent de toutes les UI, ça sera dedans
     {
+        if (!canChangeCameraUI)
+            return;
+        
+        Debug.Log("can change and did change");
         UI_Camera.SetActive(!UI_Camera.activeSelf);
         UI_Carnet.SetActive(false);
         UI_Album.SetActive(false);
@@ -171,6 +176,9 @@ public class OpenUI : MonoBehaviour
         }
         else if (UI_Camera.activeSelf)
         {
+            if (!canChangeCameraUI)
+                return;
+            
             UI_Camera.SetActive(false);
             OnCameraWalk?.Invoke(this);
         }
@@ -192,6 +200,9 @@ public class OpenUI : MonoBehaviour
         }
         else if (UI_Camera.activeSelf)
         {
+            if (!canChangeCameraUI)
+                return;
+            
             UI_Camera.SetActive(false);
             OnCameraWalk?.Invoke(this);
         }

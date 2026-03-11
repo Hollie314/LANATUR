@@ -473,20 +473,41 @@ public class SortAlbum : MonoBehaviour
                 photo = CreatePhoto(photoInfo);
                 photo.GetComponent<RectTransform>().sizeDelta = currentPhotoScale;
 
-                if (index % 3 == 0 && (albumSize == AlbumSize.Large))
+                switch (albumSize)
                 {
-                    AlbumDisplayedPhotos.Add(Instantiate(photo, scroll3.transform));
-                    Debug.Log($"scroll 3");
-                }
-                else if (index % 2 == 0 && (albumSize == AlbumSize.Large || albumSize == AlbumSize.Medium))
-                {
-                    AlbumDisplayedPhotos.Add(Instantiate(photo, scroll2.transform));
-                    Debug.Log($"scroll 2");
-                }
-                else
-                {
-                    AlbumDisplayedPhotos.Add(Instantiate(photo, scroll1.transform));
-                    Debug.Log($"scroll 1");
+                    case AlbumSize.Small:
+                        AlbumDisplayedPhotos.Add(Instantiate(photo, scroll1.transform));
+                        Debug.Log($"scroll 1");
+                        break;
+                    case AlbumSize.Medium:
+                        if (index % 2 == 0)
+                        {
+                            AlbumDisplayedPhotos.Add(Instantiate(photo, scroll2.transform));
+                            Debug.Log($"scroll 2");
+                        }
+                        else if (index % 2 == 1)
+                        {
+                            AlbumDisplayedPhotos.Add(Instantiate(photo, scroll1.transform));
+                            Debug.Log($"scroll 1");
+                        }
+                        break;
+                    case AlbumSize.Large:
+                        if (index % 3 == 0)
+                        {
+                            AlbumDisplayedPhotos.Add(Instantiate(photo, scroll3.transform));
+                            Debug.Log($"scroll 3");
+                        }
+                        else if (index % 3 == 2)
+                        {
+                            AlbumDisplayedPhotos.Add(Instantiate(photo, scroll2.transform));
+                            Debug.Log($"scroll 2");
+                        }
+                        else if (index % 3 == 1)
+                        {
+                            AlbumDisplayedPhotos.Add(Instantiate(photo, scroll1.transform));
+                            Debug.Log($"scroll 1");
+                        }
+                        break;
                 }
                 index++;
                 Debug.Log($"index show photo: {index}");
