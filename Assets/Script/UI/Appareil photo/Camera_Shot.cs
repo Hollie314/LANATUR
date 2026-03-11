@@ -17,11 +17,17 @@ public class Camera_Shot : MonoBehaviour
     [SerializeField] private LayerMask MaskCameraVisible;
     [SerializeField] private LayerMask MaskCameraOnShot;
     [SerializeField] private LayerMask animals_LayerMask;
+    
+    [Header("Cap Photo")]
+    [SerializeField] private float timeBetweenPictures;
+    [SerializeField] private float timeBeforeClosingUI;
+    private float timeSinceLastPicture;
 
     [Header("Raycast")]
     [HideInInspector] public List<AnimalPart> interestPointsVisible = new List<AnimalPart>();
     
     [Header("Cursor Zoom")]
+    [SerializeField] private GameObject photoCursor;
     [SerializeField] private Color colorOnNothing;
     [SerializeField] private Color colorOnTarget;
     [SerializeField] private float maxDistanceToZoom;
@@ -45,12 +51,18 @@ public class Camera_Shot : MonoBehaviour
     // private
     private Texture2D screenCapture;
     private GameObject target;
+    private OpenUI _openUI;
+    private bool canChangeCameraUI = true;
     
     // Album
     public static Album album = new Album();
     
     private void OnEnable()
     {
+        canChangeCameraUI = true;
+        _openUI = FindObjectOfType<OpenUI>();
+        _openUI.canChangeCameraUI = true;
+        
         AnimalPart.ExitView += OnTargetExitView;
         
         ChangeEntryPhoto = FindFirstObjectByType<ChangeEntryPhoto>();
@@ -78,49 +90,64 @@ public class Camera_Shot : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log($"Can change camera: {canChangeCameraUI}, OpenUI: {_openUI.canChangeCameraUI}");
+        
+        timeSinceLastPicture += Time.deltaTime;
+        if (!canChangeCameraUI && timeSinceLastPicture >= timeBeforeClosingUI)
+        {
+            canChangeCameraUI = true;
+            _openUI.canChangeCameraUI = true;
+        }
+        
         CameraDetection();
         if (Input.GetMouseButtonDown(0))     // Use new input system ---------------------------------------------------------------------------------------------------
         {
-            StartCoroutine(TakePicture());
-            PictureTaken?.Invoke();
+            //Caper les interactions
+            if (timeSinceLastPicture >= timeBetweenPictures)
+            {
+                timeSinceLastPicture = 0f;
+                canChangeCameraUI = false;
+                _openUI.canChangeCameraUI = false;
+                
+                StartCoroutine(TakePicture());
+                PictureTaken?.Invoke();
+            }
         }
 
         // ZoomCursor
-        if (target == null)
+        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        float closestDistance = Mathf.Infinity;
+        foreach (AnimalPart interestPoint in interestPointsVisible)
         {
-            Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
-            float closestDistance = Mathf.Infinity;
-            foreach (AnimalPart interestPoint in interestPointsVisible)
-            {
-                // Convert object world position to screen space
-                Vector3 screenPos = Camera.main.WorldToScreenPoint(interestPoint.transform.position);
+            // Convert object world position to screen space
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(interestPoint.transform.position);
 
-                // Make a 2D vector (ignore Z)
-                Vector2 screenPos2D = new Vector2(screenPos.x, screenPos.y);
+            // Make a 2D vector (ignore Z)
+            Vector2 screenPos2D = new Vector2(screenPos.x, screenPos.y);
 
-                // Calculate 2D distance from center
-                float distance = Vector2.Distance(screenCenter, screenPos2D);
-                if (distance < closestDistance)
-                    closestDistance = distance;
-            }
-
-            if (closestDistance >= maxDistanceToZoom)
-            {
-                SetCursorSizeAndColor(cursorSizeOnNothing, colorOnNothing);
-                return;
-            }
-
-            float percentage = (closestDistance / maxDistanceToZoom) * 100;
-            float zoom = Mathf.Lerp(cursorSizeOnTarget, cursorSizeOnNothing, percentage);
-            Color color = Color.Lerp(colorOnTarget, colorOnNothing, percentage);
-            SetCursorSizeAndColor(zoom, color);
+            // Calculate 2D distance from center
+            float distance = Vector2.Distance(screenCenter, screenPos2D);
+            if (distance < closestDistance)
+                closestDistance = distance;
         }
+
+        if (closestDistance >= maxDistanceToZoom)
+        {
+            SetCursorSizeAndColor(cursorSizeOnNothing, colorOnNothing);
+            return;
+        }
+
+        float percentage = (closestDistance / maxDistanceToZoom);
+        float zoom = Mathf.Lerp(cursorSizeOnTarget, cursorSizeOnNothing, percentage);
+        Color color = Color.Lerp(colorOnTarget, colorOnNothing, percentage);
+        Debug.Log($"closest distance: {closestDistance}, percentage: {percentage}, Zoom: {zoom}, cursorSizeOnTarget: {cursorSizeOnTarget}, cursorSizeOnNothing: {cursorSizeOnNothing}");
+        SetCursorSizeAndColor(zoom, color);
     }
     
     private void SetCursorSizeAndColor(float zoom, Color color)
     {
-        transform.parent.transform.localScale = Vector3.one * zoom;
-        transform.parent.GetComponent<Image>().color = color;
+        photoCursor.GetComponent<RectTransform>().localScale = Vector3.one * zoom;
+        photoCursor.GetComponent<Image>().color = color;
     }
 
     private void CameraDetection()
@@ -130,13 +157,15 @@ public class Camera_Shot : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hitInfo, Camera.main.farClipPlane, animals_LayerMask))
         {
             {
-                target = hitInfo.collider.gameObject;
-                Debug.Log($"{target.name} {Time.fixedTime}");
-                target.GetComponent<AnimalPart>().BecomeTarget();
+                if (!target == hitInfo.collider.gameObject)
+                {
+                    target = hitInfo.collider.gameObject;
+                    Debug.Log($"{target.name} {Time.fixedTime}");
+                    target.GetComponent<AnimalPart>().BecomeTarget();
                 
-                audioSource_Photo.clip = SFX_TargetLocked;
-                audioSource_Photo.Play();
-                SetCursorSizeAndColor(cursorSizeOnTarget, colorOnTarget);
+                    audioSource_Photo.clip = SFX_TargetLocked;
+                    audioSource_Photo.Play();
+                }
             }
         }
     }

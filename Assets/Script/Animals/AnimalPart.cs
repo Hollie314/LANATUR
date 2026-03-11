@@ -20,7 +20,7 @@ public class AnimalPart : MonoBehaviour
             if (CheckIfVisible() == false)
             {
                 isTarget = false ;
-                OnTargetCuzsor.SetActive(false);
+                //OnTargetCuzsor.SetActive(false);
                 ExitView?.Invoke();
             }
         }
@@ -44,7 +44,7 @@ public class AnimalPart : MonoBehaviour
     public void BecomeTarget()
     {
         isTarget = true;
-        OnTargetCuzsor.SetActive(true);
+        //OnTargetCuzsor.SetActive(true);
     }
 
     private bool CheckIfVisible()
