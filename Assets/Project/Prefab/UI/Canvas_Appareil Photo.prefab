@@ -1068,7 +1068,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera_UI: {fileID: 7093013362998775398}
   ChangeEntryPhoto: {fileID: 0}
-  ShotAnim: {fileID: 2755776999128714385}
   MaskCameraVisible:
     serializedVersion: 2
     m_Bits: 2047
@@ -1078,11 +1077,18 @@ MonoBehaviour:
   animals_LayerMask:
     serializedVersion: 2
     m_Bits: 512
-  placeholderSFX: {fileID: 3149415111068152748}
+  interestPointsVisible: []
+  colorOnNothing: {r: 0, g: 0, b: 0, a: 0}
+  colorOnTarget: {r: 0, g: 0, b: 0, a: 0}
+  maxDistanceToZoom: 0
+  cursorSizeOnNothing: 0
+  cursorSizeOnTarget: 0
+  audioSource_Photo: {fileID: 3149415111068152748}
+  SFX_OpenPhotoUI: {fileID: 8300000, guid: ef6e0577a492bcf4da73f2909e5d227d, type: 3}
+  SFX_TakePhoto: {fileID: 8300000, guid: d0c4cf91446ffa645b6b77abcdfdd927, type: 3}
+  SFX_TargetLocked: {fileID: 8300000, guid: adf3fe46fc8e3834fa8688c50dac722c, type: 3}
   placeholderVFX: {fileID: 0}
-  animalsOnScreen: []
-  maxZoomIn: 3
-  maxZoomOut: 5
+  ShotAnim: {fileID: 2755776999128714385}
 --- !u!82 &3149415111068152748
 AudioSource:
   m_ObjectHideFlags: 0

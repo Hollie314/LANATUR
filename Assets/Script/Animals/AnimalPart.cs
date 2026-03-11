@@ -7,9 +7,11 @@ using static UnityEngine.GraphicsBuffer;
 
 public class AnimalPart : MonoBehaviour
 {
+    [SerializeField] private GameObject OnTargetCuzsor;
+    
     public static event Action ExitView;
     private bool isTarget = false;
-    public Camera_Shot CameraShot { get; set; }
+    [HideInInspector] public Camera_Shot CameraShot { get; set; }
 
     private void Update()
     {
@@ -18,7 +20,7 @@ public class AnimalPart : MonoBehaviour
             if (CheckIfVisible() == false)
             {
                 isTarget = false ;
-                Debug.Log("target exited view");
+                OnTargetCuzsor.SetActive(false);
                 ExitView?.Invoke();
             }
         }
@@ -27,15 +29,14 @@ public class AnimalPart : MonoBehaviour
         {
             if (CheckIfVisible())
             {
-                if (!CameraShot.animalsOnScreen.Contains(this))
+                if (!CameraShot.interestPointsVisible.Contains(this))
                 {
-                    CameraShot.animalsOnScreen.Add(this);
-                    Debug.Log("added");
+                    CameraShot.interestPointsVisible.Add(this);
                 }
             }
-            else if (CameraShot.animalsOnScreen.Contains(this))
+            else if (CameraShot.interestPointsVisible.Contains(this))
             {
-                CameraShot.animalsOnScreen.Remove(this);
+                CameraShot.interestPointsVisible.Remove(this);
             }
         }
     }
@@ -43,6 +44,7 @@ public class AnimalPart : MonoBehaviour
     public void BecomeTarget()
     {
         isTarget = true;
+        OnTargetCuzsor.SetActive(true);
     }
 
     private bool CheckIfVisible()
