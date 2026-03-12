@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4200675136114704375}
-  m_Layer: 0
+  - component: {fileID: 5398740816309154834}
+  - component: {fileID: 1884494310390726912}
+  - component: {fileID: 1196627574704903990}
+  m_Layer: 9
   m_Name: Plante_Ballon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +35,63 @@ Transform:
   - {fileID: 8191927360326616918}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5398740816309154834
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7907504346101593614}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6381094, y: 1, z: 1.6853924}
+  m_Center: {x: 0.15525472, y: 0, z: -0.15871847}
+--- !u!114 &1884494310390726912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7907504346101593614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
+  OnTargetCuzsor: {fileID: 0}
+--- !u!114 &1196627574704903990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7907504346101593614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
+  EntryType: 2
+  EncyclopedieEntry: []
+  UpdateType: 1
+  NoteDeRen: []
+  Caracteristique:
+  - "Une plante \xE9trange dont les bulles rouges brillent l\xE9g\xE8rement dans
+    l\u2019eau lumineuse."
+  Anecdote: []
+  Photo: []
+  Dessin: []
+  DessinMignon: []
 --- !u!1001 &8513259003704189117
 PrefabInstance:
   m_ObjectHideFlags: 0

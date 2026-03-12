@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6040491222453718488}
   - component: {fileID: 2173722859414268794}
-  m_Layer: 0
+  - component: {fileID: -8378027198454380936}
+  - component: {fileID: -18909045636054247}
+  m_Layer: 9
   m_Name: Corail_tubulaire_small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,6 +58,43 @@ CapsuleCollider:
   m_Height: 2.3320694
   m_Direction: 1
   m_Center: {x: -0.11500549, y: 0.6660347, z: -0.04345703}
+--- !u!114 &-8378027198454380936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7827822980297475939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
+  EntryType: 0
+  EncyclopedieEntry:
+  - {fileID: 11400000, guid: 0f81664a8667607429677d9cd59578a4, type: 2}
+  UpdateType: 1
+  NoteDeRen: []
+  Caracteristique:
+  - "De longs tubes de corail qui \xE9mettent une lumi\xE8re douce, illuminant la
+    grotte comme des lanternes naturelles."
+  Anecdote: []
+  Photo: []
+  Dessin: []
+  DessinMignon: []
+--- !u!114 &-18909045636054247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7827822980297475939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
+  OnTargetCuzsor: {fileID: 0}
 --- !u!1001 &8306795935275898662
 PrefabInstance:
   m_ObjectHideFlags: 0

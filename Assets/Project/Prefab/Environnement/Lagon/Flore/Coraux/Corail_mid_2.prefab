@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 733554025459544418}
-  m_Layer: 0
+  - component: {fileID: -8364800046571243142}
+  - component: {fileID: -3143304509451485616}
+  m_Layer: 9
   m_Name: Corail_mid_2
-  m_TagString: Untagged
+  m_TagString: Corail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -32,6 +34,43 @@ Transform:
   - {fileID: 939929174348826293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8364800046571243142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351651545885828770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
+  OnTargetCuzsor: {fileID: 0}
+--- !u!114 &-3143304509451485616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351651545885828770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
+  EntryType: 2
+  EncyclopedieEntry:
+  - {fileID: 11400000, guid: c61833c8372c1e946a509db314240703, type: 2}
+  UpdateType: 1
+  NoteDeRen: []
+  Caracteristique:
+  - "Des formations color\xE9es qui poussent dans le sable et diffusent une lumi\xE8re
+    naturelle dans toute la grotte."
+  Anecdote: []
+  Photo: []
+  Dessin: []
+  DessinMignon: []
 --- !u!1001 &757156588513124702
 PrefabInstance:
   m_ObjectHideFlags: 0
