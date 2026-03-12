@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3785905115945504175}
   - component: {fileID: 533334439981065410}
   - component: {fileID: 6317311077546968436}
+  - component: {fileID: 131329188618802159}
+  - component: {fileID: -5451002002286860685}
   m_Layer: 9
   m_Name: Corail_tubulaire_big_1
   m_TagString: Coraux tube
@@ -70,6 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
+  OnTargetCuzsor: {fileID: 0}
 --- !u!114 &6317311077546968436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,16 +85,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
+  EntryType: 0
   EncyclopedieEntry:
   - {fileID: 11400000, guid: 0f81664a8667607429677d9cd59578a4, type: 2}
   UpdateType: 1
   NoteDeRen: []
   Caracteristique:
-  - "C'est coraux \xE9mette de la lumi\xE8re."
+  - "De longs tubes de corail qui \xE9mettent une lumi\xE8re douce, illuminant la
+    grotte comme des lanternes naturelles."
   Anecdote: []
   Photo: []
   Dessin: []
   DessinMignon: []
+--- !u!114 &131329188618802159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3605461352592404541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
+  EntryType: 0
+  EncyclopedieEntry: []
+  UpdateType: 0
+  NoteDeRen: []
+  Caracteristique: []
+  Anecdote: []
+  Photo: []
+  Dessin: []
+  DessinMignon: []
+--- !u!114 &-5451002002286860685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3605461352592404541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
+  OnTargetCuzsor: {fileID: 0}
 --- !u!1001 &8696174843045202544
 PrefabInstance:
   m_ObjectHideFlags: 0
