@@ -7,8 +7,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class AnimalPart : MonoBehaviour
 {
-    [SerializeField] private GameObject OnTargetCuzsor;
-    
     public static event Action ExitView;
     private bool isTarget = false;
     [HideInInspector] public Camera_Shot CameraShot { get; set; }
@@ -39,28 +37,29 @@ public class AnimalPart : MonoBehaviour
                 CameraShot.interestPointsVisible.Remove(this);
             }
         }
+        
+        Debug.Log($"{this.gameObject.name} is target:  {isTarget}");
     }
 
     public void BecomeTarget()
     {
         isTarget = true;
-        //OnTargetCuzsor.SetActive(true);
     }
 
     private bool CheckIfVisible()
     {
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        Debug.Log($"{this.gameObject.name} is visible part 0");
         if (planes.All(plane => plane.GetDistanceToPoint(transform.position) >= 0))
         {
+            Debug.Log($"{this.gameObject.name} is visible part 1");
             Vector3 cameraPos = Camera.main.transform.position;
             Vector3 direction = (transform.position - cameraPos).normalized;
 
             if (Physics.Raycast(cameraPos, direction, out RaycastHit hit))
             {
-                if (hit.transform == transform)
-                {
-                    return true;
-                }
+                Debug.Log($"{this.gameObject.name} is visible part 2");
+                return true;
             }
         }
         return false;

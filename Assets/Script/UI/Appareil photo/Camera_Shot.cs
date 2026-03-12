@@ -34,6 +34,9 @@ public class Camera_Shot : MonoBehaviour
     [SerializeField] private float cursorSizeOnNothing;
     [SerializeField] private float cursorSizeOnTarget;
     
+    [Header("Lock target")]
+    [SerializeField] private GameObject lockTarget;
+    
     [Header("SFX")]
     [SerializeField] private AudioSource audioSource_Photo;
     [SerializeField] private AudioClip SFX_OpenPhotoUI;
@@ -59,6 +62,8 @@ public class Camera_Shot : MonoBehaviour
     
     private void OnEnable()
     {
+        lockTarget.SetActive(false);
+        
         canChangeCameraUI = true;
         _openUI = FindObjectOfType<OpenUI>();
         _openUI.canChangeCameraUI = true;
@@ -114,6 +119,22 @@ public class Camera_Shot : MonoBehaviour
             }
         }
 
+        if (target != null)
+        {
+            if(!lockTarget.activeSelf)
+                lockTarget.SetActive(true);
+            // Convert object world position to screen space
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(target.transform.position);
+            // Make a 2D vector (ignore Z)
+            Vector2 screenPos2D = new Vector2(screenPos.x, screenPos.y);
+            lockTarget.transform.position = screenPos2D;
+        }
+        else
+        {
+            if(lockTarget.activeSelf)
+                lockTarget.SetActive(false);
+        }
+
         // ZoomCursor
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         float closestDistance = Mathf.Infinity;
@@ -165,6 +186,11 @@ public class Camera_Shot : MonoBehaviour
                 
                     audioSource_Photo.clip = SFX_TargetLocked;
                     audioSource_Photo.Play();
+                    return;
+                    if (interestPointsVisible.Contains(target.GetComponent<AnimalPart>()))
+                    {
+                        
+                    }
                 }
             }
         }
@@ -231,7 +257,7 @@ public class Camera_Shot : MonoBehaviour
                 }
                 else
                 {
-                    SaveSystem.SavePicture(screenCapture, target.tag, false, null, PhotoInfos.ImageTypes.None);
+                    SaveSystem.SavePicture(screenCapture, target.tag, false, null, target.GetComponent<UpdateEntry>().EntryType);
                     Debug.Log("not a new species");
                     SpecieTakenInPhoto?.Invoke(target.tag);
                 }
