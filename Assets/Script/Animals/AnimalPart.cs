@@ -39,6 +39,8 @@ public class AnimalPart : MonoBehaviour
                 CameraShot.interestPointsVisible.Remove(this);
             }
         }
+        
+        Debug.Log($"{this.gameObject.name} is target:  {isTarget}");
     }
 
     public void BecomeTarget()
@@ -50,15 +52,19 @@ public class AnimalPart : MonoBehaviour
     private bool CheckIfVisible()
     {
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        Debug.Log($"{this.gameObject.name} is visible part 0");
         if (planes.All(plane => plane.GetDistanceToPoint(transform.position) >= 0))
         {
+            Debug.Log($"{this.gameObject.name} is visible part 1");
             Vector3 cameraPos = Camera.main.transform.position;
             Vector3 direction = (transform.position - cameraPos).normalized;
 
             if (Physics.Raycast(cameraPos, direction, out RaycastHit hit))
             {
+                Debug.Log($"{this.gameObject.name} is visible part 2");
                 if (hit.transform == transform)
                 {
+                    Debug.Log($"{this.gameObject.name} is visible part 3");
                     return true;
                 }
             }
