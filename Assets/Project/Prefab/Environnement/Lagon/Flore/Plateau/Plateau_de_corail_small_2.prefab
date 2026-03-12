@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 5868913612915460645}
   - component: {fileID: 6161245378193969075}
   - component: {fileID: 4068050599630000815}
-  m_Layer: 0
+  - component: {fileID: 3271149992431360639}
+  - component: {fileID: -8344448468874101724}
+  m_Layer: 9
   m_Name: Plateau_de_corail_small_2
-  m_TagString: Untagged
+  m_TagString: Plateau_coraux
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -120,6 +122,39 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.416071, y: 2.1638856, z: 2.788641}
   m_Center: {x: -0.97227484, y: 2.0680573, z: 7.425471}
+--- !u!114 &3271149992431360639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233255294237294542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
+--- !u!114 &-8344448468874101724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233255294237294542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
+  EntryType: 0
+  EncyclopedieEntry: []
+  UpdateType: 0
+  NoteDeRen: []
+  Caracteristique: []
+  Anecdote: []
+  Photo: []
+  Dessin: []
+  DessinMignon: []
 --- !u!1001 &8581018003126320944
 PrefabInstance:
   m_ObjectHideFlags: 0
