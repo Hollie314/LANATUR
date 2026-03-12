@@ -7,8 +7,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class AnimalPart : MonoBehaviour
 {
-    [SerializeField] private GameObject OnTargetCuzsor;
-    
     public static event Action ExitView;
     private bool isTarget = false;
     [HideInInspector] public Camera_Shot CameraShot { get; set; }
@@ -46,7 +44,6 @@ public class AnimalPart : MonoBehaviour
     public void BecomeTarget()
     {
         isTarget = true;
-        //OnTargetCuzsor.SetActive(true);
     }
 
     private bool CheckIfVisible()
