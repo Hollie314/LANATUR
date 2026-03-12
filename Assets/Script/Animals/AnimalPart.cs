@@ -62,11 +62,7 @@ public class AnimalPart : MonoBehaviour
             if (Physics.Raycast(cameraPos, direction, out RaycastHit hit))
             {
                 Debug.Log($"{this.gameObject.name} is visible part 2");
-                if (hit.transform == transform)
-                {
-                    Debug.Log($"{this.gameObject.name} is visible part 3");
-                    return true;
-                }
+                return true;
             }
         }
         return false;

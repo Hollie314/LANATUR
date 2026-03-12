@@ -180,14 +180,16 @@ public class Camera_Shot : MonoBehaviour
             {
                 if (!target == hitInfo.collider.gameObject)
                 {
+                    target = hitInfo.collider.gameObject;
+                    Debug.Log($"{target.name} {Time.fixedTime}");
+                    target.GetComponent<AnimalPart>().BecomeTarget();
+                
+                    audioSource_Photo.clip = SFX_TargetLocked;
+                    audioSource_Photo.Play();
+                    return;
                     if (interestPointsVisible.Contains(target.GetComponent<AnimalPart>()))
                     {
-                        target = hitInfo.collider.gameObject;
-                        Debug.Log($"{target.name} {Time.fixedTime}");
-                        target.GetComponent<AnimalPart>().BecomeTarget();
-                
-                        audioSource_Photo.clip = SFX_TargetLocked;
-                        audioSource_Photo.Play();
+                        
                     }
                 }
             }
@@ -255,7 +257,7 @@ public class Camera_Shot : MonoBehaviour
                 }
                 else
                 {
-                    SaveSystem.SavePicture(screenCapture, target.tag, false, null, PhotoInfos.ImageTypes.None);
+                    SaveSystem.SavePicture(screenCapture, target.tag, false, null, target.GetComponent<UpdateEntry>().EntryType);
                     Debug.Log("not a new species");
                     SpecieTakenInPhoto?.Invoke(target.tag);
                 }
