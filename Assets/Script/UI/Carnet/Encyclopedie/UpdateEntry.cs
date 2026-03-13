@@ -5,7 +5,7 @@ using Sirenix.Utilities;
 public class UpdateEntry : MonoBehaviour
 {
     public PhotoInfos.ImageTypes EntryType;
-    [SerializeField] public List<EncyclopedieEntry> EncyclopedieEntry;
+    public List<EncyclopedieEntry> EncyclopedieEntry;
 
     public EncyclopedieEntry.UpdateTypes UpdateType;
 
