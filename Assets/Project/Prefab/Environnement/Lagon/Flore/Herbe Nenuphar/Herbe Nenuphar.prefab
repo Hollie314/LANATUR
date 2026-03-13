@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7628938091345409719}
   m_Layer: 9
   m_Name: Herbe Nenuphar
-  m_TagString: Untagged
+  m_TagString: Plante Nenuphar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
   EntryType: 2
-  EncyclopedieEntry: []
+  EncyclopedieEntry:
+  - {fileID: 11400000, guid: 920952bb9ca83804fa2e152de0fd0ad4, type: 2}
   UpdateType: 1
   NoteDeRen: []
   Caracteristique:
@@ -69,7 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
-  OnTargetCuzsor: {fileID: 0}
 --- !u!65 &7628938091345409719
 BoxCollider:
   m_ObjectHideFlags: 0
