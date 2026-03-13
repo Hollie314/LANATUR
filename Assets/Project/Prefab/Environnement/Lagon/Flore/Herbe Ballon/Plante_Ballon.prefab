@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1196627574704903990}
   m_Layer: 9
   m_Name: Plante_Ballon
-  m_TagString: Untagged
+  m_TagString: Herbe Ballon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
-  OnTargetCuzsor: {fileID: 0}
 --- !u!114 &1196627574704903990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +81,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
   EntryType: 2
-  EncyclopedieEntry: []
+  EncyclopedieEntry:
+  - {fileID: 11400000, guid: 3da68d6c050fc6e4bb244b8eae931c0c, type: 2}
   UpdateType: 1
   NoteDeRen: []
   Caracteristique:
