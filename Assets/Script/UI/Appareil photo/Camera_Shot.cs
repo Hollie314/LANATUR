@@ -86,6 +86,12 @@ public class Camera_Shot : MonoBehaviour
     {
         AnimalPart.ExitView -= OnTargetExitView;
         interestPointsVisible.Clear();
+        lockTarget.SetActive(false);
+        if (!target == null)
+        {
+            target.GetComponent<AnimalPart>().isTarget = false;
+            target = null;
+        }
     }
 
     private void Start()
@@ -173,26 +179,26 @@ public class Camera_Shot : MonoBehaviour
 
     private void CameraDetection()
     {
+        if (interestPointsVisible.IsNullOrEmpty())
+            return;
+        
         RaycastHit hitInfo;
         //Debug.Log(Camera.main.farClipPlane);
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hitInfo, Camera.main.farClipPlane, animals_LayerMask))
         {
-            {
                 if (!target == hitInfo.collider.gameObject)
                 {
-                    target = hitInfo.collider.gameObject;
-                    Debug.Log($"{target.name} {Time.fixedTime}");
-                    target.GetComponent<AnimalPart>().BecomeTarget();
-                
-                    audioSource_Photo.clip = SFX_TargetLocked;
-                    audioSource_Photo.Play();
-                    return;
-                    if (interestPointsVisible.Contains(target.GetComponent<AnimalPart>()))
+                    if (interestPointsVisible.Contains(hitInfo.collider.gameObject.GetComponent<AnimalPart>()))
                     {
-                        
+                        target = hitInfo.collider.gameObject;
+                        Debug.Log($"{target.name} {Time.fixedTime}");
+                        target.GetComponent<AnimalPart>().BecomeTarget();
+                
+                        audioSource_Photo.clip = SFX_TargetLocked;
+                        audioSource_Photo.Play();
+                        return;
                     }
                 }
-            }
         }
     }
 

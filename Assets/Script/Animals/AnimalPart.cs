@@ -8,11 +8,35 @@ using static UnityEngine.GraphicsBuffer;
 public class AnimalPart : MonoBehaviour
 {
     public static event Action ExitView;
-    private bool isTarget = false;
+    private Camera_UI camera_UI;
+    [HideInInspector] public bool isTarget = false;
     [HideInInspector] public Camera_Shot CameraShot { get; set; }
+    private bool activate = false;
+
+    void OnBecameVisible()
+    {
+        Debug.Log($"AnimalPart became visible");
+        enable = true;
+        camera_UI = FindFirstObjectByType<Camera_UI>();
+        activate = true;
+    }
+
+    void OnBecameInvisible()
+    {
+        enable = false;
+        Debug.Log($"AnimalPart became invisible");
+        activate = false;
+    }
 
     private void Update()
     {
+        Debug.Log($"AnimalPart existe au moins");
+        Debug.Log($"AnimalPart camera_UI: {camera_UI == null},  activate: {activate}");
+        if (camera_UI == null || !camera_UI.gameObject.activeSelf)
+            return;
+        if (!activate)
+            return;
+        
         if (isTarget)
         {
             if (CheckIfVisible() == false)
@@ -59,7 +83,11 @@ public class AnimalPart : MonoBehaviour
             if (Physics.Raycast(cameraPos, direction, out RaycastHit hit))
             {
                 Debug.Log($"{this.gameObject.name} is visible part 2");
-                return true;
+                if (hit.collider.gameObject == this.gameObject)
+                {
+                    Debug.Log($"{this.gameObject.name} is visible part 3");
+                    return true;
+                }
             }
         }
         return false;
