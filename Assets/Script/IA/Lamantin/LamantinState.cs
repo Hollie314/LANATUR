@@ -6,7 +6,7 @@ public enum LamantinState
 {
 	Idle,
 	Patrol,
-	Fuit,
+	Follow,
+	Stop,
 	Frappe,
-	Appat
 }
