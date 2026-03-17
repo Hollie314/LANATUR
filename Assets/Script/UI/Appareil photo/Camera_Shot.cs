@@ -26,6 +26,7 @@ public class Camera_Shot : MonoBehaviour
 
     [Header("Raycast")]
     [HideInInspector] public List<GameObject> interestPointsVisible = new List<GameObject>();
+    [SerializeField] private float distanceToSeePoint;
     
     [Header("Cursor Zoom")]
     [SerializeField] private GameObject photoCursor;
@@ -112,6 +113,18 @@ public class Camera_Shot : MonoBehaviour
             {
                 if (obj.TryGetComponent<UpdateEntry>(out UpdateEntry animalPart))
                 {
+                    //how far you can check a point
+                    
+                    Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+                    Vector3 screenPos = Camera.main.WorldToScreenPoint(obj.transform.position);
+                    // Make a 2D vector (ignore Z)
+                    Vector2 screenPos2D = new Vector2(screenPos.x, screenPos.y);
+                    // Calculate 2D distance from center
+                    float distance = Vector2.Distance(screenCenter, screenPos2D);
+                    Debug.Log($"{obj.name} is visible part -1, distance: {distance}");
+                    if (distance > distanceToSeePoint)
+                        continue;
+                    
                     Debug.Log($"{obj.name} is visible part 0");
                     if (planes.All(plane => plane.GetDistanceToPoint(obj.transform.position) >= 0))
                     {
