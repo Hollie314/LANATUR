@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -24,7 +25,7 @@ public class Camera_Shot : MonoBehaviour
     private float timeSinceLastPicture;
 
     [Header("Raycast")]
-    [HideInInspector] public List<AnimalPart> interestPointsVisible = new List<AnimalPart>();
+    [HideInInspector] public List<GameObject> interestPointsVisible = new List<GameObject>();
     
     [Header("Cursor Zoom")]
     [SerializeField] private GameObject photoCursor;
@@ -68,29 +69,74 @@ public class Camera_Shot : MonoBehaviour
         _openUI = FindObjectOfType<OpenUI>();
         _openUI.canChangeCameraUI = true;
         
-        AnimalPart.ExitView += OnTargetExitView;
-        
         ChangeEntryPhoto = FindFirstObjectByType<ChangeEntryPhoto>();
         
         audioSource_Photo.clip = SFX_OpenPhotoUI;
         audioSource_Photo.Play();
-        
-        AnimalPart[]  animals = FindObjectsOfType<AnimalPart>();
-        foreach (AnimalPart animalPart in animals)
-        {
-            animalPart.CameraShot = this;
-        }
     }
 
     private void OnDisable()
     {
-        AnimalPart.ExitView -= OnTargetExitView;
         interestPointsVisible.Clear();
+        lockTarget.SetActive(false);
+        if (target != null)
+        {
+            target = null;
+        }
     }
 
     private void Start()
     {
         screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false); // Change dimensions
+    }
+    
+    public List<GameObject> GetVisibleObjects()
+    {
+        List<GameObject> visibleObjects = new List<GameObject>();
+
+        // Get all renderers in the scene
+        Renderer[] renderers = FindObjectsOfType<Renderer>();
+
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+
+        foreach (Renderer rend in renderers)
+        {
+            GameObject obj = rend.gameObject;
+
+            // Check layer
+            if (((1 << obj.layer) & animals_LayerMask) == 0)
+                continue;
+
+            // Check if inside camera frustum
+            if (GeometryUtility.TestPlanesAABB(planes, rend.bounds))
+            {
+                if (obj.TryGetComponent<UpdateEntry>(out UpdateEntry animalPart))
+                {
+                    Debug.Log($"{obj.name} is visible part 0");
+                    if (planes.All(plane => plane.GetDistanceToPoint(obj.transform.position) >= 0))
+                    {
+                        Debug.Log($"{obj.name} is visible part 1");
+                        Vector3 cameraPos = Camera.main.transform.position;
+                        Vector3 direction = (obj.transform.position - cameraPos).normalized;
+
+                        if (Physics.Raycast(cameraPos, direction, out RaycastHit hit))
+                        {
+                            Debug.Log($"{obj.name} is visible part 2");
+                            if (hit.collider.gameObject == obj)
+                            {
+                                Debug.Log($"{obj.name} is visible part 3");
+                                
+                                // Fin
+                                visibleObjects.Add(obj);
+                                Debug.Log($"added {obj.name}");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return visibleObjects;
     }
 
     private void Update()
@@ -103,7 +149,10 @@ public class Camera_Shot : MonoBehaviour
             canChangeCameraUI = true;
             _openUI.canChangeCameraUI = true;
         }
-        
+
+        interestPointsVisible = GetVisibleObjects();
+        if (!interestPointsVisible.Contains(target))
+            target = null;
         CameraDetection();
         if (Input.GetMouseButtonDown(0))     // Use new input system ---------------------------------------------------------------------------------------------------
         {
@@ -138,18 +187,23 @@ public class Camera_Shot : MonoBehaviour
         // ZoomCursor
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         float closestDistance = Mathf.Infinity;
-        foreach (AnimalPart interestPoint in interestPointsVisible)
+        if (!interestPointsVisible.IsNullOrEmpty())
         {
-            // Convert object world position to screen space
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(interestPoint.transform.position);
+            foreach (GameObject interestPoint in interestPointsVisible)
+            {
+                Debug.Log($"added list length; {interestPointsVisible.Count}");
+                    Debug.Log($"added doing {interestPoint.gameObject.name}");
+                    // Convert object world position to screen space
+                    Vector3 screenPos = Camera.main.WorldToScreenPoint(interestPoint.transform.position);
 
-            // Make a 2D vector (ignore Z)
-            Vector2 screenPos2D = new Vector2(screenPos.x, screenPos.y);
+                    // Make a 2D vector (ignore Z)
+                    Vector2 screenPos2D = new Vector2(screenPos.x, screenPos.y);
 
-            // Calculate 2D distance from center
-            float distance = Vector2.Distance(screenCenter, screenPos2D);
-            if (distance < closestDistance)
-                closestDistance = distance;
+                    // Calculate 2D distance from center
+                    float distance = Vector2.Distance(screenCenter, screenPos2D);
+                    if (distance < closestDistance)
+                        closestDistance = distance;
+            }
         }
 
         if (closestDistance >= maxDistanceToZoom)
@@ -173,26 +227,25 @@ public class Camera_Shot : MonoBehaviour
 
     private void CameraDetection()
     {
+        if (interestPointsVisible.IsNullOrEmpty())
+            return;
+        
         RaycastHit hitInfo;
         //Debug.Log(Camera.main.farClipPlane);
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hitInfo, Camera.main.farClipPlane, animals_LayerMask))
         {
-            {
                 if (!target == hitInfo.collider.gameObject)
                 {
-                    target = hitInfo.collider.gameObject;
-                    Debug.Log($"{target.name} {Time.fixedTime}");
-                    target.GetComponent<AnimalPart>().BecomeTarget();
-                
-                    audioSource_Photo.clip = SFX_TargetLocked;
-                    audioSource_Photo.Play();
-                    return;
-                    if (interestPointsVisible.Contains(target.GetComponent<AnimalPart>()))
+                    if (interestPointsVisible.Contains(hitInfo.collider.gameObject))
                     {
-                        
+                        target = hitInfo.collider.gameObject;
+                        Debug.Log($"{target.name} {Time.fixedTime}");
+                
+                        audioSource_Photo.clip = SFX_TargetLocked;
+                        audioSource_Photo.Play();
+                        return;
                     }
                 }
-            }
         }
     }
 
