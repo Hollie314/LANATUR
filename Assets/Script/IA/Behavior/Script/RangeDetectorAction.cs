@@ -5,7 +5,7 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "detection", story: "Check for closest target in layer", category: "Action", id: "d024bc68f12566b4b483a6e2b2a03bc3")]
+[NodeDescription(name: "RangeDetector", story: "Check in Range [Detector] the closest Target in [Layer]", category: "Action", id: "1e1c56034c4e8f962af9266e24ecd759")]
 public partial class RangeDetectorAction : Action
 {
     [SerializeReference] public BlackboardVariable<RangeDetection> Detector;
@@ -18,3 +18,4 @@ public partial class RangeDetectorAction : Action
         return detected == null ? Status.Failure : Status.Success;
     }
 }
+
