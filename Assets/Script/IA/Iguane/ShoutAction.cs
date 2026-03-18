@@ -13,8 +13,12 @@ public partial class ShoutAction : Action
     [SerializeReference] public BlackboardVariable<int> Time;
     protected override Status OnStart()
     {
-        Shout.Value.TryShout(Time.Value, Self.Value);
-        return Status.Success;
+        if (!Shout.Value.isShouting)
+        {
+            Shout.Value.TryShout(Time.Value, Self.Value);
+            return Status.Success;
+        }
+        return Status.Failure;
     }
 
     
