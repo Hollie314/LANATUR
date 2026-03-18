@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 2322446164362004892}
   - component: {fileID: 7154449300553285356}
   - component: {fileID: 6065178625375714339}
-  - component: {fileID: 1586730435537116318}
   - component: {fileID: 1648974481198796246}
   m_Layer: 9
   m_Name: 'Lamantin '
@@ -145,11 +144,9 @@ MonoBehaviour:
   m_Graph: {fileID: 3354583017775015583, guid: 99571d2b6e972d5438599a440f00eefa, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 7020973768811217457
-  - rid: 8822709273060704445
-  - rid: 8822709273060704444
-  - rid: 8822709273060704443
-  - rid: 8822709273060704442
-  - rid: 8822709273060704441
+  - rid: 8822709292540101041
+  - rid: 8822709292540101040
+  - rid: 8822709292540101039
   m_OriginalGraph: {fileID: 3354583017775015583, guid: 99571d2b6e972d5438599a440f00eefa, type: 2}
   m_IsInitialised: 0
   m_IsStarted: 0
@@ -164,46 +161,30 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 6193291128357094844}
-    - rid: 8822709273060704441
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 8396376221135697212
-          m_Value1: 18011494195802248688
-        Name: TargetDestructible
-        m_Value: {fileID: 0}
-    - rid: 8822709273060704442
-      type: {class: 'BlackboardVariable`1[[PerceptionRange, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 4498893162363050618
-          m_Value1: 8402689303438272554
-        Name: Perception Range
-        m_Value: {fileID: 2076529700233470203}
-    - rid: 8822709273060704443
+    - rid: 8822709292540101039
       type: {class: 'BlackboardVariable`1[[RangeDetection, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
-          m_Value0: 14446096842785351612
-          m_Value1: 4616157368315666478
+          m_Value0: 18552999810168277
+          m_Value1: 2401429595392573025
         Name: Range Detection
         m_Value: {fileID: 772372241321413858}
-    - rid: 8822709273060704444
+    - rid: 8822709292540101040
+      type: {class: 'BlackboardVariable`1[[PerceptionRange, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 7656320985703951329
+          m_Value1: 18052036899179774479
+        Name: New Perception Range
+        m_Value: {fileID: 2076529700233470203}
+    - rid: 8822709292540101041
       type: {class: 'BlackboardVariable`1[[LineOfSightDetector, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
-          m_Value0: 7894508950293887147
-          m_Value1: 4401696905883323726
-        Name: Line Of Sight Detector
+          m_Value0: 6260162332368478115
+          m_Value1: 13245214946424248660
+        Name: New Line Of Sight Detector
         m_Value: {fileID: 1898520210545639547}
-    - rid: 8822709273060704445
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 8696561007825146848
-          m_Value1: 2947753798575679120
-        Name: Appat
-        m_Value: {fileID: 3001610117867761408, guid: d6903e8cd6d70104993b869563b0a969, type: 3}
 --- !u!195 &6133717598406550325
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -299,7 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerceptionRange
   Detected: 0
-  soundRadius: 5
+  soundRadius: 45
   lightRadius: 5
   soundIntensity: 5
   lightIntensity: 5
@@ -334,10 +315,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad41be17180891488fa2384d7333eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RangeDetection
-  detectionRadius: 40
+  detectionRadius: 55
   detectionMask:
   - serializedVersion: 2
     m_Bits: 64
+  - serializedVersion: 2
+    m_Bits: 8
   - serializedVersion: 2
     m_Bits: 2048
   showDebugVisuals: 1
@@ -474,18 +457,6 @@ MonoBehaviour:
   Photo: []
   Dessin: []
   DessinMignon: []
---- !u!114 &1586730435537116318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6193291128357094844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
 --- !u!114 &1648974481198796246
 MonoBehaviour:
   m_ObjectHideFlags: 0
