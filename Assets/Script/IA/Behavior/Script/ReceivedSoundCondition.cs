@@ -11,10 +11,11 @@ public partial class ReceivedSoundCondition : Condition
 
     public override bool IsTrue()
     {
+        if (Range.Value == null)
+            return false;
+
         Debug.Log($"hears {Range.Value.soundIntensity}");
-        if (Intensity.Value <= Range.Value.soundIntensity)
-            return true;
-        return false;
+
+        return Range.Value.soundIntensity >= Intensity.Value;
     }
-    
 }
