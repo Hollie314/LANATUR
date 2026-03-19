@@ -2,43 +2,50 @@ using UnityEngine;
 
 public class LineOfSightDetector : MonoBehaviour
 {
-    [SerializeField]
-    private LayerMask m_playerLayerMask;
-    [SerializeField]
-    private float m_detectionRange = 10.0f;
-    [SerializeField]
-    private float m_detectionHeight = 3f;
-
+    [SerializeField] private LayerMask m_playerLayerMask;
+    [SerializeField] private float m_detectionRange = 10.0f;
     [SerializeField] private bool showDebugVisuals = true;
 
+    /// <summary>
+    /// Retourne le GameObject détecté s'il est visible dans le rayon
+    /// </summary>
     public GameObject PerformDetection(GameObject potentialTarget)
     {
-        RaycastHit hit;
-        Vector3 direction = potentialTarget.transform.position - transform.position;
-        Physics.Raycast(transform.position + Vector3.up * m_detectionHeight,
-            direction, out hit, m_detectionRange, m_playerLayerMask);
+        if (potentialTarget == null) return null;
 
-        if (hit.collider != null && hit.collider.gameObject == potentialTarget)
-        {
-            if (showDebugVisuals && this.enabled)
-            {
-                Debug.DrawLine(transform.position + Vector3.up * m_detectionHeight,
-                    potentialTarget.transform.position, Color.green);
-            }
-            return hit.collider.gameObject;
-        }
-        else
-        {
+        Vector3 origin = transform.position;
+
+        // Vérifie que le target est dans le rayon
+        if (Vector3.Distance(origin, potentialTarget.transform.position) > m_detectionRange)
             return null;
+
+        // Raycast vers le target pour vérifier la ligne de vue
+        Vector3 direction = (potentialTarget.transform.position - origin).normalized;
+        RaycastHit hit;
+        if (Physics.Raycast(origin, direction, out hit, m_detectionRange, m_playerLayerMask.value))
+        {
+            if (hit.collider.gameObject == potentialTarget)
+            {
+                if (showDebugVisuals && this.enabled)
+                {
+                    Debug.DrawLine(origin, potentialTarget.transform.position, Color.green, 2f);
+                }
+                return potentialTarget;
+            }
         }
+
+        // Debug visuel si bloqué
+        if (showDebugVisuals)
+            Debug.DrawLine(origin, potentialTarget.transform.position, Color.red, 2f);
+
+        return null;
     }
 
     private void OnDrawGizmos()
     {
-        if (showDebugVisuals)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position + Vector3.up * m_detectionHeight, 0.3f);
-        }
+        if (!showDebugVisuals) return;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, m_detectionRange);
     }
 }

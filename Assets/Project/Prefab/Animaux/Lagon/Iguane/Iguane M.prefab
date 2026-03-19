@@ -332,7 +332,6 @@ GameObject:
   - component: {fileID: 7118915214642455142}
   - component: {fileID: 6096110069060290119}
   - component: {fileID: 1690167717944747469}
-  - component: {fileID: 4554112412378479555}
   - component: {fileID: 988041696996255046}
   - component: {fileID: 6954511483464550056}
   m_Layer: 9
@@ -375,7 +374,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6363655695414583813}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
@@ -391,8 +390,11 @@ MonoBehaviour:
   - rid: 7020973722286948470
   - rid: 7020973722286948471
   - rid: 7020973722286948472
-  - rid: 8822709021219750097
-  - rid: 8822709034246733825
+  - rid: 8822709034246733828
+  - rid: 7020973839490744747
+  - rid: 7020973839490744748
+  - rid: 8822709021219750101
+  - rid: 8822709034246733824
   m_OriginalGraph: {fileID: 0}
   m_IsInitialised: 0
   m_IsStarted: 0
@@ -473,22 +475,46 @@ MonoBehaviour:
           m_Value1: 14219168446976446004
         Name: Appat
         m_Value: {fileID: 3001610117867761408, guid: d6903e8cd6d70104993b869563b0a969, type: 3}
-    - rid: 8822709021219750097
+    - rid: 7020973839490744747
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6030732775194686169
+          m_Value1: 9593061581693131604
+        Name: Temps de sommeil
+        m_Value: 500
+    - rid: 7020973839490744748
+      type: {class: 'BlackboardVariable`1[[IguaneMaleState, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12549957114898330593
+          m_Value1: 13749075048257719427
+        Name: IguaneMaleState
+        m_Value: 1
+    - rid: 8822709021219750101
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
           m_Value0: 13138590060342624220
           m_Value1: 3830199588176120718
         Name: WeakNoise
-        m_Value: 5
-    - rid: 8822709034246733825
+        m_Value: 15
+    - rid: 8822709034246733824
+      type: {class: 'BlackboardVariable`1[[System.Int32, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 7048608108036803166
+          m_Value1: 5517629478290265544
+        Name: NumberRoadTrip
+        m_Value: 2
+    - rid: 8822709034246733828
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
           m_Value0: 2289212918552691329
           m_Value1: 14566787924550822083
         Name: Vitesse
-        m_Value: 6
+        m_Value: 4
 --- !u!114 &5526032865976009256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,7 +522,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6363655695414583813}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af6b5457d78e5134fa9ce6046175e198, type: 3}
   m_Name: 
@@ -506,6 +532,8 @@ MonoBehaviour:
   lightRadius: 5
   soundIntensity: 6
   lightIntensity: 5
+  soundDecayRate: 5
+  memoryBias: 1.1
   showDebugVisuals: 1
 --- !u!114 &2310208273500112454
 MonoBehaviour:
@@ -514,7 +542,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6363655695414583813}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad41be17180891488fa2384d7333eca, type: 3}
   m_Name: 
@@ -522,9 +550,7 @@ MonoBehaviour:
   detectionRadius: 10
   detectionMask:
   - serializedVersion: 2
-    m_Bits: 0
-  - serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   showDebugVisuals: 1
 --- !u!114 &1035803051660015211
 MonoBehaviour:
@@ -533,16 +559,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6363655695414583813}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc7864e111e13c247bab03bb914cf63c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LineOfSightDetector
   m_playerLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_detectionRange: 10
-  m_detectionHeight: 3
   showDebugVisuals: 1
 --- !u!65 &6960914323395345698
 BoxCollider:
@@ -709,19 +734,6 @@ MonoBehaviour:
   Photo: []
   Dessin: []
   DessinMignon: []
---- !u!114 &4554112412378479555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6363655695414583813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71e9c17c79e965a4fb644aba9ed5d969, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AnimalPart
-  OnTargetCuzsor: {fileID: 0}
 --- !u!114 &988041696996255046
 MonoBehaviour:
   m_ObjectHideFlags: 0
