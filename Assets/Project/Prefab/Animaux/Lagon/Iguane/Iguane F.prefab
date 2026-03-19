@@ -837,10 +837,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerceptionRange
   Detected: 0
-  soundRadius: 10
+  soundRadius: 20
   lightRadius: 5
   soundIntensity: 5
   lightIntensity: 5
+  soundDecayRate: 5
+  memoryBias: 1.1
   showDebugVisuals: 1
 --- !u!114 &648988060577465968
 MonoBehaviour:
@@ -879,7 +881,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 584
   m_detectionRange: 10
-  m_detectionHeight: 3
   showDebugVisuals: 1
 --- !u!114 &7652601897733044281
 MonoBehaviour:
