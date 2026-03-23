@@ -16,7 +16,7 @@ public class OnOff : MonoBehaviour, IInteractable
     [SerializeField] private float NoiseRadius = 10f;
     [SerializeField] private float NoiseOn = 10f;
     [SerializeField] private AudioClip clip;
-    [SerializeField] private bool isActive;
+    [SerializeField] public bool isActive;
 
     private MakeNoise _makeNoise;
     [SerializeField] private AudioSource audioSource;
