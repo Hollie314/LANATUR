@@ -22,6 +22,7 @@ public class OpenUI : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = false;
+        Time.timeScale = 1f;
     }
 
     private void OnEnable()

@@ -29,8 +29,13 @@ public class DialogueTelephoneManager : MonoBehaviour
     { 
         ConversationManager.OnConversationStarted += ConversationStart;
         ConversationManager.OnConversationEnded += ConversationEnd;
+        /*
         currentConversation = FirstConversation;
         _conversationManager.StartConversation(FirstConversation);
+        */
+        
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
     
     private void OnDisable()
@@ -43,29 +48,31 @@ public class DialogueTelephoneManager : MonoBehaviour
     {
         currentMessage = currentConversation.Deserialize().Root;
         currentMessage.Event.AddListener(OnReceiveMessage);
+        Debug.Log("Conversation Started");
     }
 
     public void ConversationEnd()
     {
-        
+        Debug.Log("Conversation Ended");
     }
     
     public void OnReceiveMessage()
     {
-        Debug.Log("ça marche");
+        Debug.Log("conversation: Receive message ça marche");
         conversationManagerGO.transform.GetChild(0).gameObject.SetActive(false);
         GameObject message = Instantiate(messagePrefab, Content.transform);
+        // message.transform.SetSiblingIndex(0);
         TextMeshProUGUI messageSender = message.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI messageText = message.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI messageText = message.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         messageSender.text = currentMessage.Name;
         messageText.text = currentMessage.Text;
         // messageText.color = Color.red;
         messageText.font = currentMessage.TMPFont;
-        Debug.Log("ça a fini");
+        Debug.Log("conversation: Receive message ça a fini d'instancier");
         
         if (currentConversation.Deserialize().Root.NodeType == ConversationNode.eNodeType.Option)
         {
-            Debug.Log("option");
+            Debug.Log("conversation: Receive message option");
         }
         currentMessage.Event.RemoveListener(OnReceiveMessage);
 
@@ -85,5 +92,6 @@ public class DialogueTelephoneManager : MonoBehaviour
         }
         
         currentMessage.Event.AddListener(OnReceiveMessage);
+        Debug.Log("conversation: Receive message ça a fini");
     }
 }
