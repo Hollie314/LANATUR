@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7230393918160382185}
   - component: {fileID: 316258369957274496}
   - component: {fileID: 6133717598406550325}
+  - component: {fileID: 4066899598912984486}
   - component: {fileID: 716788713882535763}
   - component: {fileID: 5422144953544364784}
   - component: {fileID: 2076529700233470203}
@@ -104,7 +105,6 @@ GameObject:
   - component: {fileID: 7154449300553285356}
   - component: {fileID: 6065178625375714339}
   - component: {fileID: 1648974481198796246}
-  - component: {fileID: 131771599990364111}
   m_Layer: 9
   m_Name: 'Lamantin '
   m_TagString: Lamantin
@@ -207,6 +207,27 @@ NavMeshAgent:
   m_BaseOffset: -0.45
   m_WalkableMask: 8
   m_ObstacleAvoidanceType: 4
+--- !u!65 &4066899598912984486
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193291128357094844}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.1636074, y: 1.9136603, z: 6.8755465}
+  m_Center: {x: -0.15960109, y: -0.03902687, z: 0.15612614}
 --- !u!54 &716788713882535763
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -232,7 +253,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &5422144953544364784
 MonoBehaviour:
@@ -450,24 +471,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OnScanned
   Scans: {fileID: 1752617663731481239}
---- !u!114 &131771599990364111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6193291128357094844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3091df4a2b358e04bb0c5026f5af0492, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MysteryStudio.EasyCollider.AddCollidersToMeshes
-  colliderType: 0
-  applyToChildren: 1
-  convex: 0
-  showColliderPreview: 0
-  selectedTag: Untagged
-  selectedLayer: 0
 --- !u!1 &6338292209656563736
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,10 +732,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6520789765945652243, guid: d609e8b68c1215147832746e33cbda7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a1b07f1c768d85b4f94273277d553045, type: 2}
+    - target: {fileID: -4470101324573242752, guid: d609e8b68c1215147832746e33cbda7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a1b07f1c768d85b4f94273277d553045, type: 2}
+    - target: {fileID: -1979711261482165004, guid: d609e8b68c1215147832746e33cbda7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a1b07f1c768d85b4f94273277d553045, type: 2}
+    - target: {fileID: -436192377709220901, guid: d609e8b68c1215147832746e33cbda7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a1b07f1c768d85b4f94273277d553045, type: 2}
+    - target: {fileID: 247882837948243072, guid: d609e8b68c1215147832746e33cbda7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a1b07f1c768d85b4f94273277d553045, type: 2}
     - target: {fileID: 919132149155446097, guid: d609e8b68c1215147832746e33cbda7c, type: 3}
       propertyPath: m_Name
       value: MSH_Lamantin
       objectReference: {fileID: 0}
+    - target: {fileID: 5435161711740806650, guid: d609e8b68c1215147832746e33cbda7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a1b07f1c768d85b4f94273277d553045, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
