@@ -7,8 +7,8 @@ public enum IguaneMaleState
 	Idle,
 	Dors,
 	Patrol,
-	Fuite,
+	Crie,
 	Nid,
 	Appat,
-	Reveil
+	Fuit
 }
