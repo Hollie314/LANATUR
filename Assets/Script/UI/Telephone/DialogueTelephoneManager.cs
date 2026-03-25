@@ -1,14 +1,20 @@
 using UnityEngine;
 using DialogueEditor;
 using System.Collections.Generic;
+using Sirenix.Utilities;
 using TMPro;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class DialogueTelephoneManager : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private GameObject messagePrefab;
+    [SerializeField] private GameObject messageRempliPrefab;
+    [SerializeField] private GameObject messageVidePrefab;
     [SerializeField] private GameObject conversationManagerGO;
-    [SerializeField] private GameObject Content;
+    [SerializeField] private GameObject ScrollView;
+    [SerializeField] private GameObject ContentReceived;
+    [SerializeField] private GameObject ContentSent;
     
     
     [Header("DialogueEditor")]    
@@ -16,6 +22,7 @@ public class DialogueTelephoneManager : MonoBehaviour
 
     [HideInInspector] public NPCConversation currentConversation;
     private SpeechNode currentMessage;
+    private List<SpeechNode> nextMessages = new List<SpeechNode>();
     public NPCConversation FirstConversation;
     
     void Start()
@@ -46,22 +53,45 @@ public class DialogueTelephoneManager : MonoBehaviour
 
     public void ConversationStart()
     {
-        currentMessage = currentConversation.Deserialize().Root;
-        currentMessage.Event.AddListener(OnReceiveMessage);
+        SpeechNode root = currentConversation.Deserialize().Root;
+        nextMessages.Add(root);
+        nextMessages[0].Event.AddListener(() => OnReceiveMessage(nextMessages[0]));;
         Debug.Log("Conversation Started");
     }
 
     public void ConversationEnd()
     {
         Debug.Log("Conversation Ended");
+        nextMessages.Clear();
+        currentMessage = null;
     }
     
-    public void OnReceiveMessage()
+    public void OnReceiveMessage(SpeechNode speechNodeReceived)
     {
+        currentMessage = speechNodeReceived;
+        foreach (SpeechNode speechNode in nextMessages)
+        {
+            speechNode.Event.RemoveListener(() => OnReceiveMessage(speechNode));;
+        }
+        nextMessages.Clear();
+        
         Debug.Log("conversation: Receive message ça marche");
         conversationManagerGO.transform.GetChild(0).gameObject.SetActive(false);
-        GameObject message = Instantiate(messagePrefab, Content.transform);
-        // message.transform.SetSiblingIndex(0);
+
+        GameObject message = new GameObject();
+        GameObject messageVide = new GameObject();
+        if (currentMessage.Name == "Noor") 
+        {
+            messageVide = Instantiate(messageVidePrefab, ContentReceived.transform);
+            message = Instantiate(messageRempliPrefab, ContentSent.transform);
+            Debug.Log("conversation: Noor");
+        }
+        else { 
+            message = Instantiate(messageRempliPrefab, ContentReceived.transform);
+            messageVide = Instantiate(messageVidePrefab, ContentSent.transform);
+            Debug.Log("conversation: Else");
+        }
+        
         TextMeshProUGUI messageSender = message.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI messageText = message.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         messageSender.text = currentMessage.Name;
@@ -74,24 +104,39 @@ public class DialogueTelephoneManager : MonoBehaviour
         {
             Debug.Log("conversation: Receive message option");
         }
-        currentMessage.Event.RemoveListener(OnReceiveMessage);
 
-        if (currentMessage.Connections[0] is SpeechConnection)
+        if (!currentMessage.Connections.IsNullOrEmpty())
         {
-            foreach(SpeechConnection connection in currentMessage.Connections)
+            if (currentMessage.Connections[0] is SpeechConnection)
             {
-                currentMessage = connection.SpeechNode;
-            } 
+                foreach(SpeechConnection connection in currentMessage.Connections)
+                {
+                    nextMessages.Add(connection.SpeechNode);
+                } 
+            }
+            else
+            {
+                foreach(OptionConnection connection in currentMessage.Connections)
+                {
+                    OptionNode node = connection.OptionNode;
+                    foreach (SpeechConnection speechConnection in node.Connections)
+                    {
+                        nextMessages.Add(speechConnection.SpeechNode);
+                    }
+                } 
+            }
         }
-        else
+
+        foreach (SpeechNode speechNode in nextMessages)
         {
-            foreach(Connection connection in currentMessage.Connections)
-            {
-            
-            } 
+            speechNode.Event.AddListener(() => OnReceiveMessage(speechNode));;
         }
         
-        currentMessage.Event.AddListener(OnReceiveMessage);
         Debug.Log("conversation: Receive message ça a fini");
+
+        Vector2 ScrollViewSize = ScrollView.GetComponent<RectTransform>().sizeDelta;
+        Vector2 MessageSize = message.GetComponent<RectTransform>().sizeDelta;
+        
+        ScrollView.GetComponent<RectTransform>().sizeDelta = new Vector2(ScrollViewSize.x, ScrollViewSize.y + MessageSize.y + ContentReceived.GetComponent<VerticalLayoutGroup>().spacing);
     }
 }
