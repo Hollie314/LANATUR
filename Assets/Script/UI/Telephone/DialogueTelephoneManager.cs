@@ -55,8 +55,8 @@ public class DialogueTelephoneManager : MonoBehaviour
     {
         SpeechNode root = currentConversation.Deserialize().Root;
         nextMessages.Add(root);
-        nextMessages[0].Event.AddListener(() => OnReceiveMessage(nextMessages[0]));;
-        Debug.Log("Conversation Started");
+        nextMessages[0].Event.AddListener(() => OnReceiveMessage(nextMessages[0]));
+        Debug.Log($"Conversation Started, next message is {nextMessages[0].Text}");
     }
 
     public void ConversationEnd()
@@ -125,6 +125,11 @@ public class DialogueTelephoneManager : MonoBehaviour
                     }
                 } 
             }
+        }
+        else
+        {
+            _conversationManager.EndConversation();
+            Debug.Log("Conversation Ended");
         }
 
         foreach (SpeechNode speechNode in nextMessages)
