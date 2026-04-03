@@ -36,6 +36,5 @@ public class ShoutAtTarget : MonoBehaviour
         invokedSphere = Instantiate(ShoutSphere, Iguane.transform.position, Quaternion.identity);
         isShouting = true;
         ShoutingTime = shoutTime;
-        roarEffect.Play();
     }
 }
