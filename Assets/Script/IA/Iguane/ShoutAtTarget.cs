@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(AudioSource))]
 public class ShoutAtTarget : MonoBehaviour
@@ -6,10 +7,12 @@ public class ShoutAtTarget : MonoBehaviour
     [SerializeField] private GameObject ShoutSphere;
 
     [SerializeField] private float shoutFinalRadius;
+    [SerializeField] private VisualEffect roarEffect;
     public bool isShouting { get; private set; }
     private float ShoutingTime;
     private float timePassed;
     private GameObject invokedSphere;
+    
 
     private void Update()
     {
@@ -33,5 +36,6 @@ public class ShoutAtTarget : MonoBehaviour
         invokedSphere = Instantiate(ShoutSphere, Iguane.transform.position, Quaternion.identity);
         isShouting = true;
         ShoutingTime = shoutTime;
+        roarEffect.Play();
     }
 }
