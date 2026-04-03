@@ -146,15 +146,6 @@ public class AlbumUI : SerializedMonoBehaviour
         conv.messageFont = null;
         conv.sprite = photo.GetComponent<Image>().sprite;
         conv.infos = ListSelectedPhotos[0];
-        conv.containsImage = true;
-        
-        PanelPhoto_ButtonDelete.GetComponent<Image>().sprite = photo.GetComponent<Image>().sprite;
-        
-        /*
-        byte[] bytes = System.IO.File.ReadAllBytes(photoInfo.imagePath);
-        Texture2D texture = new Texture2D(2, 2);
-        texture.LoadImage(bytes);
-        */
         
         Debug.Log($"Conv.sprite is null: {conv.sprite == null}");
         dialogueTelephoneManager.messagesToInstantiate.Add(conv);

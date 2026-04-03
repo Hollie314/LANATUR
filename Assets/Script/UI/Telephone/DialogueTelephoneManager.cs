@@ -16,6 +16,7 @@ public class DialogueTelephoneManager : MonoBehaviour
     [SerializeField] private GameObject ScrollView;
     [SerializeField] private GameObject ContentReceived;
     [SerializeField] private GameObject ContentSent;
+    [SerializeField] private Sprite spritedemerd;
     
     
     [Header("DialogueEditor")]    
@@ -153,22 +154,16 @@ public class DialogueTelephoneManager : MonoBehaviour
         
         TextMeshProUGUI messageSender = messageRempli.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI messageText = messageRempli.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        Sprite messageSprite = messageRempli.transform.GetChild(1).GetComponent<Image>().sprite;
         
         messageSender.text = message.sender;
         if (message.message != null)
             messageText.text = message.message;
         if (message.sprite != null)
         {
-            messageSprite = message.sprite;
-        }
-        if (message.containsImage)
-        {
-            byte[] bytes = System.IO.File.ReadAllBytes(message.infos.imagePath);
-            Texture2D texture = new Texture2D(2, 2);
-            texture.LoadImage(bytes);
-            // Sprite photoSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
-            messageSprite =  Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+            messageRempli.transform.GetChild(1).GetComponent<Image>().sprite = message.sprite;
+            Debug.Log("a mis sprite 1");
+            messageRempli.transform.GetChild(1).GetComponent<Image>().SetNativeSize();
+            messageRempli.GetComponent<RectTransform>().sizeDelta = messageRempli.transform.GetChild(1).GetComponent<Image>().rectTransform.sizeDelta;
         }
         if(message.messageFont != null)
             messageText.font = message.messageFont;
