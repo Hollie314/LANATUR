@@ -78,27 +78,7 @@ public class DialogueTelephoneManager : MonoBehaviour
         Debug.Log("conversation: Receive message ça marche");
         conversationManagerGO.transform.GetChild(0).gameObject.SetActive(false);
 
-        GameObject message = new GameObject();
-        GameObject messageVide = new GameObject();
-        if (currentMessage.Name == "Noor") 
-        {
-            messageVide = Instantiate(messageVidePrefab, ContentReceived.transform);
-            message = Instantiate(messageRempliPrefab, ContentSent.transform);
-            Debug.Log("conversation: Noor");
-        }
-        else { 
-            message = Instantiate(messageRempliPrefab, ContentReceived.transform);
-            messageVide = Instantiate(messageVidePrefab, ContentSent.transform);
-            Debug.Log("conversation: Else");
-        }
-        
-        TextMeshProUGUI messageSender = message.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI messageText = message.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        messageSender.text = currentMessage.Name;
-        messageText.text = currentMessage.Text;
-        // messageText.color = Color.red;
-        messageText.font = currentMessage.TMPFont;
-        Debug.Log("conversation: Receive message ça a fini d'instancier");
+        GameObject message = SendMessage(currentMessage.Name, currentMessage.Text, currentMessage.TMPFont);
         
         if (currentConversation.Deserialize().Root.NodeType == ConversationNode.eNodeType.Option)
         {
@@ -143,5 +123,40 @@ public class DialogueTelephoneManager : MonoBehaviour
         Vector2 MessageSize = message.GetComponent<RectTransform>().sizeDelta;
         
         ScrollView.GetComponent<RectTransform>().sizeDelta = new Vector2(ScrollViewSize.x, ScrollViewSize.y + MessageSize.y + ContentReceived.GetComponent<VerticalLayoutGroup>().spacing);
+    }
+
+    public GameObject SendMessage(string sender, string message = null, TMP_FontAsset messageFont = null, Sprite sprite = null)
+    {
+        GameObject messageRempli = new GameObject();
+        GameObject messageVide = new GameObject();
+        if (currentMessage.Name == "Noor") 
+        {
+            messageVide = Instantiate(messageVidePrefab, ContentReceived.transform);
+            messageRempli = Instantiate(messageRempliPrefab, ContentSent.transform);
+            Debug.Log("conversation: Noor");
+        }
+        else { 
+            messageRempli = Instantiate(messageRempliPrefab, ContentReceived.transform);
+            messageVide = Instantiate(messageVidePrefab, ContentSent.transform);
+            Debug.Log("conversation: Else");
+        }
+        
+        TextMeshProUGUI messageSender = messageRempli.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI messageText = messageRempli.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        Sprite messageSprite = messageRempli.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+        
+        messageSender.text = sender;
+        if (messageText != null)
+            messageText.text = message;
+        if (sprite != null)
+        {
+            messageSprite = sprite;
+            
+        }
+        if(messageFont != null)
+            messageText.font = messageFont;
+        Debug.Log("conversation: Receive message ça a fini d'instancier");
+        
+        return messageRempli;
     }
 }

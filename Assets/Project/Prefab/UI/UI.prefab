@@ -126,6 +126,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5444191004408895936}
     m_Modifications:
     - target: {fileID: 126723253986848094, guid: 5d76e237b340cc346b04ca78aab85c10, type: 3}
+      propertyPath: dialogueTelephoneManager
+      value: 
+      objectReference: {fileID: 3080074136350935826}
+    - target: {fileID: 126723253986848094, guid: 5d76e237b340cc346b04ca78aab85c10, type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 126723253986848094, guid: 5d76e237b340cc346b04ca78aab85c10, type: 3}
@@ -717,65 +721,73 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Canvas T\xE9l\xE9phone"
       objectReference: {fileID: 0}
-    - target: {fileID: 1489265028436149836, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 450224393718680143, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1489265028436149836, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 1489265028436149836, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1489265028436149836, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2559487285967069597, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
+      propertyPath: m_Value
+      value: 0.49999985
+      objectReference: {fileID: 0}
     - target: {fileID: 3124900133569064939, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_Size
-      value: 0.99999994
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3471806901047678097, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3471806901047678097, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3471806901047678097, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 3471806901047678097, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 4404518816049383637, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4404518816049383637, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.49999985
       objectReference: {fileID: 0}
     - target: {fileID: 4404518816049383637, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.49999985
       objectReference: {fileID: 0}
     - target: {fileID: 6361819462922258045, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6361819462922258045, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 6562168698234280042, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6562168698234280042, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 8300974816132855523, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_Pivot.x
@@ -867,6 +879,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8300974816132855523, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
   m_PrefabInstance: {fileID: 7124973381936868528}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3080074136350935826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5214713794045224866, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
+  m_PrefabInstance: {fileID: 7124973381936868528}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e749905c782032a4cbe8b88ea94d8d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConversationsManager
 --- !u!1001 &7976383063931074911
 PrefabInstance:
   m_ObjectHideFlags: 0
