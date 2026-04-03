@@ -88,7 +88,7 @@ public class Camera_Shot : MonoBehaviour
 
     private void Start()
     {
-        screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false); // Change dimensions
+        screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, true); // Change dimensions
     }
     
     public List<GameObject> GetVisibleObjects()
@@ -290,7 +290,7 @@ public class Camera_Shot : MonoBehaviour
 
         Rect regionToRead = new Rect(0, 0, Screen.width, Screen.height);
 
-        screenCapture.ReadPixels(regionToRead, 0, 0, false);
+        screenCapture.ReadPixels(regionToRead, 0, 0, true);
         screenCapture.Apply();
         
         Camera.main.cullingMask = MaskCameraVisible;

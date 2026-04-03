@@ -138,9 +138,26 @@ public class AlbumUI : SerializedMonoBehaviour
         sortAlbum.LoadUI();
     }
 
-    public void SendPhoto(Image photo)
+    public void SendPhoto(GameObject photo)
     {
-        dialogueTelephoneManager.SendMessage("Noor", photo.sprite);
+        Message conv = new Message();
+        conv.sender = "Noor";
+        conv.message = null;
+        conv.messageFont = null;
+        conv.sprite = photo.GetComponent<Image>().sprite;
+        conv.infos = ListSelectedPhotos[0];
+        conv.containsImage = true;
+        
+        PanelPhoto_ButtonDelete.GetComponent<Image>().sprite = photo.GetComponent<Image>().sprite;
+        
+        /*
+        byte[] bytes = System.IO.File.ReadAllBytes(photoInfo.imagePath);
+        Texture2D texture = new Texture2D(2, 2);
+        texture.LoadImage(bytes);
+        */
+        
+        Debug.Log($"Conv.sprite is null: {conv.sprite == null}");
+        dialogueTelephoneManager.messagesToInstantiate.Add(conv);
     }
 
     public void On_ChangeEncyclopediaPhotoClicked(GameObject photo)

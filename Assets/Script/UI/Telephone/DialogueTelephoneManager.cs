@@ -3,6 +3,7 @@ using DialogueEditor;
 using System.Collections.Generic;
 using Sirenix.Utilities;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -21,6 +22,8 @@ public class DialogueTelephoneManager : MonoBehaviour
     [SerializeField] private ConversationManager _conversationManager;
 
     [HideInInspector] public NPCConversation currentConversation;
+    [HideInInspector] public List<Message> messagesToInstantiate = new List<Message>();
+    
     private SpeechNode currentMessage;
     private List<SpeechNode> nextMessages = new List<SpeechNode>();
     public NPCConversation FirstConversation;
@@ -43,6 +46,12 @@ public class DialogueTelephoneManager : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+
+        foreach (Message message in messagesToInstantiate)
+        {
+            SendMessage(message);
+        }
+        messagesToInstantiate.Clear();
     }
     
     private void OnDisable()
@@ -78,7 +87,13 @@ public class DialogueTelephoneManager : MonoBehaviour
         Debug.Log("conversation: Receive message ça marche");
         conversationManagerGO.transform.GetChild(0).gameObject.SetActive(false);
 
-        GameObject message = SendMessage(currentMessage.Name, currentMessage.Text, currentMessage.TMPFont);
+        Message conv = new Message();
+        conv.sender = currentMessage.Name;
+        conv.message = currentMessage.Text;
+        conv.messageFont = currentMessage.TMPFont;
+        conv.sprite = null;
+        
+        SendMessage(conv);
         
         if (currentConversation.Deserialize().Root.NodeType == ConversationNode.eNodeType.Option)
         {
@@ -118,18 +133,13 @@ public class DialogueTelephoneManager : MonoBehaviour
         }
         
         Debug.Log("conversation: Receive message ça a fini");
-
-        Vector2 ScrollViewSize = ScrollView.GetComponent<RectTransform>().sizeDelta;
-        Vector2 MessageSize = message.GetComponent<RectTransform>().sizeDelta;
-        
-        ScrollView.GetComponent<RectTransform>().sizeDelta = new Vector2(ScrollViewSize.x, ScrollViewSize.y + MessageSize.y + ContentReceived.GetComponent<VerticalLayoutGroup>().spacing);
     }
 
-    public GameObject SendMessage(string sender, string message = null, TMP_FontAsset messageFont = null, Sprite sprite = null)
+    public void SendMessage(Message message)
     {
         GameObject messageRempli = new GameObject();
         GameObject messageVide = new GameObject();
-        if (currentMessage.Name == "Noor") 
+        if (message.sender == "Noor") 
         {
             messageVide = Instantiate(messageVidePrefab, ContentReceived.transform);
             messageRempli = Instantiate(messageRempliPrefab, ContentSent.transform);
@@ -143,20 +153,30 @@ public class DialogueTelephoneManager : MonoBehaviour
         
         TextMeshProUGUI messageSender = messageRempli.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI messageText = messageRempli.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        Sprite messageSprite = messageRempli.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+        Sprite messageSprite = messageRempli.transform.GetChild(1).GetComponent<Image>().sprite;
         
-        messageSender.text = sender;
-        if (messageText != null)
-            messageText.text = message;
-        if (sprite != null)
+        messageSender.text = message.sender;
+        if (message.message != null)
+            messageText.text = message.message;
+        if (message.sprite != null)
         {
-            messageSprite = sprite;
-            
+            messageSprite = message.sprite;
         }
-        if(messageFont != null)
-            messageText.font = messageFont;
+        if (message.containsImage)
+        {
+            byte[] bytes = System.IO.File.ReadAllBytes(message.infos.imagePath);
+            Texture2D texture = new Texture2D(2, 2);
+            texture.LoadImage(bytes);
+            // Sprite photoSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
+            messageSprite =  Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+        }
+        if(message.messageFont != null)
+            messageText.font = message.messageFont;
         Debug.Log("conversation: Receive message ça a fini d'instancier");
         
-        return messageRempli;
+        Vector2 ScrollViewSize = ScrollView.GetComponent<RectTransform>().sizeDelta;
+        Vector2 MessageSize = messageRempli.GetComponent<RectTransform>().sizeDelta;
+        
+        ScrollView.GetComponent<RectTransform>().sizeDelta = new Vector2(ScrollViewSize.x, ScrollViewSize.y + MessageSize.y + ContentReceived.GetComponent<VerticalLayoutGroup>().spacing);
     }
 }
