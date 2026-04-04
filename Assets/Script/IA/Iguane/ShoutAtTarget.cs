@@ -7,7 +7,6 @@ public class ShoutAtTarget : MonoBehaviour
     [SerializeField] private GameObject ShoutSphere;
 
     [SerializeField] private float shoutFinalRadius;
-    [SerializeField] private VisualEffect roarEffect;
     public bool isShouting { get; private set; }
     private float ShoutingTime;
     private float timePassed;
