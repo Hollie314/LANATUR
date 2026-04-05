@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BreakableObject : MonoBehaviour
 {
     public bool broken;
+    [SerializeField] private Animator animator;
+    [SerializeField] private UnityEvent unityEvent;
 
     [Header("Replacement")]
     public GameObject replacementPrefab;
@@ -10,22 +13,23 @@ public class BreakableObject : MonoBehaviour
     public void Break()
     {
         if (broken) return;
-
+        animator.SetBool("IsDestruct", true);
         broken = true;
+        unityEvent?.Invoke();   
 
         Debug.Log("Object broken");
 
         // Spawn replacement
-        if (replacementPrefab != null)
-        {
-            Instantiate(
-                replacementPrefab,
-                transform.position,
-                transform.rotation
-            );
-        }
+        //if (replacementPrefab != null)
+       // {
+           // Instantiate(
+              //  replacementPrefab,
+              //  transform.position,
+              //  transform.rotation
+            //);
+       // }
 
         // Destroy original
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
