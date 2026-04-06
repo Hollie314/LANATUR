@@ -392,6 +392,8 @@ MonoBehaviour:
   currentConversation: {fileID: 0}
   messagesToInstantiate: []
   FirstConversation: {fileID: 7337103964386864097}
+  dialogues:
+  - {fileID: 5856780669765543958}
 --- !u!1 &1248605522083823934
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,7 +742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8536282536802482850}
-  - component: {fileID: 7697609825238317133}
+  - component: {fileID: 5856780669765543958}
   m_Layer: 0
   m_Name: 1stDiscussion
   m_TagString: Untagged
@@ -767,7 +769,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7697609825238317133
+--- !u!114 &5856780669765543958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -776,22 +778,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2249349003027501536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83189876d4d389f43b7dd2e925aa112e, type: 3}
+  m_Script: {fileID: 11500000, guid: 97dc9052787c4cd46a4b0d5d937ab4ea, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueEditor.NPCConversation
-  CurrentIDCounter: 1
-  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[],"EditorInfo":{"isRoot":true,"xPos":113.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":null,"parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":null,"OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
-  saveVersion: 110
-  DefaultName: 
-  DefaultSprite: {fileID: 0}
-  DefaultFont: {fileID: 0}
-  NodeSerializedDataList:
-  - {fileID: 0}
-  ContinueFont: {fileID: 0}
-  EndConversationFont: {fileID: 0}
-  Event:
-    m_PersistentCalls:
-      m_Calls: []
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversation: {fileID: 7337103964386864097}
+  conditions:
+    imagePath: 
+    imageDate: 0
+    imageTag: 
+    entry: {fileID: 0}
+    imageUsedInNotes: 0
+    imageFav: 0
+    imageType: 0
+  quests:
+  - {fileID: 11400000, guid: f07f63f2dc8108641a7edcc94900fc8a, type: 2}
 --- !u!1 &2494670137652490461
 GameObject:
   m_ObjectHideFlags: 0

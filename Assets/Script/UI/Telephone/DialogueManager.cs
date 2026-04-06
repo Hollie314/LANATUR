@@ -8,21 +8,9 @@ using Unity.VisualScripting;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class DialogueTelephoneManager : MonoBehaviour
+public class DialogueManager : MonoBehaviour
 {
-    [Header("UI")]
-    [SerializeField] private GameObject messageRempliPrefab;
-    [SerializeField] private GameObject messageVidePrefab;
-    [SerializeField] private GameObject conversationManagerGO;
-    [SerializeField] private GameObject ScrollView;
-    [SerializeField] private GameObject ContentReceived;
-    [SerializeField] private GameObject ContentSent;
-    [SerializeField] private Sprite spritedemerd;
-    
-    
-    [Header("DialogueEditor")]    
-    [SerializeField] private ConversationManager _conversationManager;
-
+    [Header("DialogueEditor")]
     [HideInInspector] public NPCConversation currentConversation;
     [HideInInspector] public List<Message> messagesToInstantiate = new List<Message>();
     
@@ -38,27 +26,14 @@ public class DialogueTelephoneManager : MonoBehaviour
     {
         currentConversation = FirstConversation;
         currentDialogue = dialogues[0];
-        _conversationManager.StartConversation(FirstConversation);
-        Debug.Log($"conversation started: {_conversationManager.IsConversationActive}");
+        ConversationManager.Instance.StartConversation(FirstConversation);
+        Debug.Log($"conversation started: {ConversationManager.Instance.IsConversationActive}");
     }
     
     private void OnEnable()
     { 
         ConversationManager.OnConversationStarted += ConversationStart;
         ConversationManager.OnConversationEnded += ConversationEnd;
-        /*
-        currentConversation = FirstConversation;
-        _conversationManager.StartConversation(FirstConversation);
-        */
-        
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
-
-        foreach (Message message in messagesToInstantiate)
-        {
-            SendMessage(message);
-        }
-        messagesToInstantiate.Clear();
     }
     
     private void OnDisable()
@@ -100,7 +75,6 @@ public class DialogueTelephoneManager : MonoBehaviour
         nextMessages.Clear();
         
         Debug.Log("conversation: Receive message ça marche");
-        conversationManagerGO.transform.GetChild(0).gameObject.SetActive(false);
 
         Message conv = new Message();
         conv.sender = currentMessage.Name;
@@ -138,7 +112,7 @@ public class DialogueTelephoneManager : MonoBehaviour
         }
         else
         {
-            _conversationManager.EndConversation();
+            ConversationManager.Instance.EndConversation();
             Debug.Log("Conversation Ended");
         }
 
@@ -148,49 +122,5 @@ public class DialogueTelephoneManager : MonoBehaviour
         }
         
         Debug.Log("conversation: Receive message ça a fini");
-    }
-    
-
-    public void SendMessage(Message message)
-    {
-        GameObject messageRempli = new GameObject();
-        GameObject messageVide = new GameObject();
-        if (message.sender == "Noor") 
-        {
-            messageVide = Instantiate(messageVidePrefab, ContentReceived.transform);
-            messageRempli = Instantiate(messageRempliPrefab, ContentSent.transform);
-            Debug.Log("conversation: Noor");
-        }
-        else { 
-            messageRempli = Instantiate(messageRempliPrefab, ContentReceived.transform);
-            messageVide = Instantiate(messageVidePrefab, ContentSent.transform);
-            Debug.Log("conversation: Else");
-        }
-        
-        TextMeshProUGUI messageSender = messageRempli.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI messageText = messageRempli.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        
-        messageSender.text = message.sender;
-        if (message.message != null)
-            messageText.text = message.message;
-        if (message.sprite != null)
-        {
-            messageRempli.transform.GetChild(1).GetComponent<Image>().sprite = message.sprite;
-            Debug.Log("a mis sprite 1");
-            messageRempli.transform.GetChild(1).GetComponent<Image>().SetNativeSize();
-            messageRempli.GetComponent<RectTransform>().sizeDelta = messageRempli.transform.GetChild(1).GetComponent<Image>().rectTransform.sizeDelta;
-            foreach (Dialogue dialogue in dialogues)
-            {
-                // vérifier si l'image déclenche un dialogue
-            }
-        }
-        if(message.messageFont != null)
-            messageText.font = message.messageFont;
-        Debug.Log("conversation: Receive message ça a fini d'instancier");
-        
-        Vector2 ScrollViewSize = ScrollView.GetComponent<RectTransform>().sizeDelta;
-        Vector2 MessageSize = messageRempli.GetComponent<RectTransform>().sizeDelta;
-        
-        ScrollView.GetComponent<RectTransform>().sizeDelta = new Vector2(ScrollViewSize.x, ScrollViewSize.y + MessageSize.y + ContentReceived.GetComponent<VerticalLayoutGroup>().spacing);
     }
 }
