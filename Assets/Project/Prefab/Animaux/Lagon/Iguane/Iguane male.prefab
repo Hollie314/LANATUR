@@ -765,7 +765,7 @@ GameObject:
   - component: {fileID: 978383161007094091}
   - component: {fileID: 5465688445322705407}
   m_Layer: 9
-  m_Name: Iguane F
+  m_Name: Iguane male
   m_TagString: Iguane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -960,8 +960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShoutAtTarget
   ShoutSphere: {fileID: 8776513140138690467, guid: e0f29b7681235ae46b1eb096f0da6d47, type: 3}
-  shoutFinalRadius: 8
-  roarEffect: {fileID: 144147111017297795}
+  shoutFinalRadius: 15
 --- !u!114 &2286199110457000891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -994,12 +993,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad41be17180891488fa2384d7333eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RangeDetection
-  detectionRadius: 10
+  detectionRadius: 25
   detectionMask:
   - serializedVersion: 2
     m_Bits: 8
   - serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 16384
   - serializedVersion: 2
     m_Bits: 64
   showDebugVisuals: 1

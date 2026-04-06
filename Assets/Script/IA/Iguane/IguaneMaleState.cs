@@ -10,5 +10,6 @@ public enum IguaneMaleState
 	Crie,
 	Nid,
 	Appat,
-	Fuit
+	Fuit,
+	Mange
 }

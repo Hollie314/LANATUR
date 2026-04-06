@@ -126,6 +126,9 @@ GameObject:
   - component: {fileID: 5568686362564399043}
   - component: {fileID: 4126982814718431927}
   - component: {fileID: 8443096783227269432}
+  - component: {fileID: 2855223288070986529}
+  - component: {fileID: 1283589565470874526}
+  - component: {fileID: 4133536727096183785}
   m_Layer: 0
   m_Name: Corps
   m_TagString: Untagged
@@ -265,6 +268,59 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: -0.09, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &2855223288070986529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3164823058352841902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4990d2e1f5d18734aa90a545c522d741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwitchLayer
+  newLayerName: Animaux_sensible
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1283589565470874526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3164823058352841902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4990d2e1f5d18734aa90a545c522d741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwitchLayer
+  newLayerName: Default
+  unityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4133536727096183785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3164823058352841902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
+  EntryType: 2
+  EncyclopedieEntry: []
+  UpdateType: 1
+  NoteDeRen: []
+  Caracteristique: []
+  Anecdote: []
+  Photo: []
+  Dessin: []
+  DessinMignon: []
 --- !u!1 &6709942526967535734
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,8 +336,7 @@ GameObject:
   - component: {fileID: 8556306008702290135}
   - component: {fileID: 5924383640853900831}
   - component: {fileID: 1215914140960972876}
-  - component: {fileID: 2570746652652690595}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Tortilleur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerceptionRange
   Detected: 0
-  soundRadius: 20
+  soundRadius: 50
   lightRadius: 5
   soundIntensity: 0
   lightIntensity: 5
@@ -584,24 +639,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2570746652652690595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6709942526967535734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
-  EntryType: 2
-  EncyclopedieEntry: []
-  UpdateType: 1
-  NoteDeRen: []
-  Caracteristique: []
-  Anecdote: []
-  Photo: []
-  Dessin: []
-  DessinMignon: []
