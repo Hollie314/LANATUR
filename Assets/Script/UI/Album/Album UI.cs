@@ -11,6 +11,7 @@ public class AlbumUI : SerializedMonoBehaviour
     [Header("Scripts")]
     [SerializeField] private ChangeEntryPhoto changeEntryPhoto;
     [SerializeField] private SortAlbum sortAlbum;
+    [SerializeField] private DialogueTelephoneManager dialogueTelephoneManager;
 
     [Header("Canvas / Panels")]
     [SerializeField] private GameObject panelAlbum, panelPhoto;
@@ -135,6 +136,19 @@ public class AlbumUI : SerializedMonoBehaviour
         }
         ListSelectedPhotos.Clear();
         sortAlbum.LoadUI();
+    }
+
+    public void SendPhoto(GameObject photo)
+    {
+        Message conv = new Message();
+        conv.sender = "Noor";
+        conv.message = null;
+        conv.messageFont = null;
+        conv.sprite = photo.GetComponent<Image>().sprite;
+        conv.infos = ListSelectedPhotos[0];
+        
+        Debug.Log($"Conv.sprite is null: {conv.sprite == null}");
+        dialogueTelephoneManager.messagesToInstantiate.Add(conv);
     }
 
     public void On_ChangeEncyclopediaPhotoClicked(GameObject photo)

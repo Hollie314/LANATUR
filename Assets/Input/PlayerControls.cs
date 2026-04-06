@@ -174,6 +174,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""OpenTelephone"",
+                    ""type"": ""Button"",
+                    ""id"": ""0507fd31-6612-4ac6-85f8-9042fed0096e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""QuitUI"",
                     ""type"": ""Button"",
                     ""id"": ""a8f89aeb-5568-42bd-9340-7ea48e1c5e26"",
@@ -531,6 +540,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6bafb195-85fe-4e04-ab82-08eabe983c68"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenTelephone"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1234,6 +1254,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_OnFoot_OpenCamera = m_OnFoot.FindAction("OpenCamera", throwIfNotFound: true);
         m_OnFoot_OpenCarnet = m_OnFoot.FindAction("OpenCarnet", throwIfNotFound: true);
         m_OnFoot_OpenAlbum = m_OnFoot.FindAction("OpenAlbum", throwIfNotFound: true);
+        m_OnFoot_OpenTelephone = m_OnFoot.FindAction("OpenTelephone", throwIfNotFound: true);
         m_OnFoot_QuitUI = m_OnFoot.FindAction("QuitUI", throwIfNotFound: true);
         m_OnFoot_Pause = m_OnFoot.FindAction("Pause", throwIfNotFound: true);
         // UI
@@ -1342,6 +1363,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_OpenCamera;
     private readonly InputAction m_OnFoot_OpenCarnet;
     private readonly InputAction m_OnFoot_OpenAlbum;
+    private readonly InputAction m_OnFoot_OpenTelephone;
     private readonly InputAction m_OnFoot_QuitUI;
     private readonly InputAction m_OnFoot_Pause;
     /// <summary>
@@ -1391,6 +1413,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "OnFoot/OpenAlbum".
         /// </summary>
         public InputAction @OpenAlbum => m_Wrapper.m_OnFoot_OpenAlbum;
+        /// <summary>
+        /// Provides access to the underlying input action "OnFoot/OpenTelephone".
+        /// </summary>
+        public InputAction @OpenTelephone => m_Wrapper.m_OnFoot_OpenTelephone;
         /// <summary>
         /// Provides access to the underlying input action "OnFoot/QuitUI".
         /// </summary>
@@ -1452,6 +1478,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenAlbum.started += instance.OnOpenAlbum;
             @OpenAlbum.performed += instance.OnOpenAlbum;
             @OpenAlbum.canceled += instance.OnOpenAlbum;
+            @OpenTelephone.started += instance.OnOpenTelephone;
+            @OpenTelephone.performed += instance.OnOpenTelephone;
+            @OpenTelephone.canceled += instance.OnOpenTelephone;
             @QuitUI.started += instance.OnQuitUI;
             @QuitUI.performed += instance.OnQuitUI;
             @QuitUI.canceled += instance.OnQuitUI;
@@ -1496,6 +1525,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenAlbum.started -= instance.OnOpenAlbum;
             @OpenAlbum.performed -= instance.OnOpenAlbum;
             @OpenAlbum.canceled -= instance.OnOpenAlbum;
+            @OpenTelephone.started -= instance.OnOpenTelephone;
+            @OpenTelephone.performed -= instance.OnOpenTelephone;
+            @OpenTelephone.canceled -= instance.OnOpenTelephone;
             @QuitUI.started -= instance.OnQuitUI;
             @QuitUI.performed -= instance.OnQuitUI;
             @QuitUI.canceled -= instance.OnQuitUI;
@@ -1844,6 +1876,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOpenAlbum(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenTelephone" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenTelephone(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "QuitUI" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

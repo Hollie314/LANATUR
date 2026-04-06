@@ -10,6 +10,7 @@ public class PlayerInteractions : MonoBehaviour
     public static event Action<PlayerInteractions> OnOpenCamera;
     public static event Action<PlayerInteractions> OnOpenCarnet;
     public static event Action<PlayerInteractions> OnOpenAlbum;
+    public static event Action<PlayerInteractions> OnOpenTelephone;
     public static event Action<PlayerInteractions> OnQuitUI;
     public static event Action<PlayerInteractions> OnPause;
 
@@ -35,6 +36,7 @@ public class PlayerInteractions : MonoBehaviour
         inputManager.Controls.OnFoot.Crouch.performed += OnCrouchInput;
         inputManager.Controls.OnFoot.OpenCamera.performed += OnOpenCameraInput;
         inputManager.Controls.OnFoot.OpenCarnet.performed += OnOpenCarnetInput;
+        inputManager.Controls.OnFoot.OpenTelephone.performed += OnOpenTelephoneInput;
         inputManager.Controls.OnFoot.OpenAlbum.performed += OnOpenAlbumInput;
         inputManager.Controls.OnFoot.QuitUI.performed += OnQuitUIInput;
         inputManager.Controls.OnFoot.Pause.performed += OnPauseInput;
@@ -106,6 +108,15 @@ public class PlayerInteractions : MonoBehaviour
         
         // event OpenCamera
         OnOpenCamera?.Invoke(this);
+    }
+    
+    public void OnOpenTelephoneInput(InputAction.CallbackContext context)
+    {
+        // Debug
+        Debug.Log("Opening Phone");
+        
+        // event OpenCamera
+        OnOpenTelephone?.Invoke(this);
     }
     
     public void OnOpenCarnetInput(InputAction.CallbackContext context)

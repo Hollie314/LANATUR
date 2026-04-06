@@ -8,6 +8,7 @@ public class OpenUI : MonoBehaviour
     [SerializeField] private GameObject UI_Camera;
     [SerializeField] private GameObject UI_Album;
     [SerializeField] private GameObject UI_Carnet;
+    [SerializeField] private GameObject UI_Telephone;
     [SerializeField] private GameObject UI_Pause;
     
     private bool isCameraOpen = false;
@@ -21,6 +22,7 @@ public class OpenUI : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = false;
+        Time.timeScale = 1f;
     }
 
     private void OnEnable()
@@ -28,6 +30,7 @@ public class OpenUI : MonoBehaviour
         PlayerInteractions.OnOpenCamera += OpenCamera;
         PlayerInteractions.OnOpenCarnet += OpenCarnet;
         PlayerInteractions.OnOpenAlbum += OpenAlbum;
+        PlayerInteractions.OnOpenTelephone += OpenTelephone;
         PlayerInteractions.OnQuitUI += QuitUI;
         PlayerInteractions.OnPause += Pause;
     }
@@ -37,6 +40,7 @@ public class OpenUI : MonoBehaviour
         PlayerInteractions.OnOpenCamera -= OpenCamera;
         PlayerInteractions.OnOpenCarnet -= OpenCarnet;
         PlayerInteractions.OnOpenAlbum -= OpenAlbum;
+        PlayerInteractions.OnOpenTelephone -= OpenTelephone;
         PlayerInteractions.OnQuitUI -= QuitUI;
         PlayerInteractions.OnPause -= Pause;
     }
@@ -77,8 +81,35 @@ public class OpenUI : MonoBehaviour
         UI_Carnet.SetActive(!UI_Carnet.activeSelf);
         UI_Camera.SetActive(false);
         UI_Album.SetActive(false);
+        UI_Telephone.SetActive(false);
         
         if (UI_Carnet.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            PauseScene(true);
+            OnCameraWalk?.Invoke(this);
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
+            PauseScene(false);
+            OnCameraWalk?.Invoke(this);
+            
+            if(isCameraOpen)
+                OpenCamera(playerInteractions);
+        }
+    }
+    
+    public void OpenTelephone(PlayerInteractions playerInteractions)
+    {
+        UI_Telephone.SetActive(!UI_Telephone.activeSelf);
+        UI_Carnet.SetActive(false);
+        UI_Camera.SetActive(false);
+        UI_Album.SetActive(false);
+        
+        if (UI_Telephone.activeSelf)
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
@@ -103,6 +134,7 @@ public class OpenUI : MonoBehaviour
         UI_Album.SetActive(!UI_Album.activeSelf);
         UI_Camera.SetActive(false);
         UI_Carnet.SetActive(false);
+        UI_Telephone.SetActive(false);
         
         if (UI_Album.activeSelf)
         {
@@ -125,10 +157,11 @@ public class OpenUI : MonoBehaviour
 
     private void OpenPause()
     {
+        UI_Pause.SetActive(!UI_Pause.activeSelf);
         UI_Album.SetActive(false);
         UI_Camera.SetActive(false);
         UI_Carnet.SetActive(false);
-        UI_Pause.SetActive(!UI_Pause.activeSelf);
+        UI_Telephone.SetActive(false);
         
         if (UI_Pause.activeSelf)
         {
