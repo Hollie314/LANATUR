@@ -588,10 +588,7 @@ GameObject:
   - component: {fileID: 3832212652295509126}
   - component: {fileID: 8246197742194275228}
   - component: {fileID: 4646312889095723161}
-  - component: {fileID: 7230197336434446318}
   - component: {fileID: 1072531237800324719}
-  - component: {fileID: 4435040941853106077}
-  - component: {fileID: 190172341361122513}
   m_Layer: 0
   m_Name: ConversationEventInfo
   m_TagString: Untagged
@@ -652,25 +649,6 @@ MonoBehaviour:
   TMPFont: {fileID: 0}
   Icon: {fileID: 0}
   Audio: {fileID: 0}
---- !u!114 &7230197336434446318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005032890299222969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00abedce3cdbbba46bf2d86c9518c9f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueEditor.NodeEventHolder
-  Event:
-    m_PersistentCalls:
-      m_Calls: []
-  NodeID: 2
-  TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
-  Audio: {fileID: 0}
 --- !u!114 &1072531237800324719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,44 +665,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   NodeID: 3
-  TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
-  Audio: {fileID: 0}
---- !u!114 &4435040941853106077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005032890299222969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00abedce3cdbbba46bf2d86c9518c9f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueEditor.NodeEventHolder
-  Event:
-    m_PersistentCalls:
-      m_Calls: []
-  NodeID: 4
-  TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
-  Audio: {fileID: 0}
---- !u!114 &190172341361122513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005032890299222969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00abedce3cdbbba46bf2d86c9518c9f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueEditor.NodeEventHolder
-  Event:
-    m_PersistentCalls:
-      m_Calls: []
-  NodeID: 5
   TMPFont: {fileID: 0}
   Icon: {fileID: 0}
   Audio: {fileID: 0}
@@ -1189,7 +1129,7 @@ GameObject:
   - component: {fileID: 6001439650809397916}
   - component: {fileID: 830891320630988465}
   m_Layer: 0
-  m_Name: Button_Camille
+  m_Name: Camille
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1306,7 +1246,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6560259037345968247}
-  - component: {fileID: 8043567273405154148}
   - component: {fileID: 326325099094442205}
   - component: {fileID: 3491169748241865642}
   m_Layer: 0
@@ -1331,25 +1270,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3529854817711265169}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8043567273405154148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6368250597993968418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00abedce3cdbbba46bf2d86c9518c9f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueEditor.NodeEventHolder
-  Event:
-    m_PersistentCalls:
-      m_Calls: []
-  NodeID: 6
-  TMPFont: {fileID: 0}
-  Icon: {fileID: 0}
-  Audio: {fileID: 0}
 --- !u!114 &326325099094442205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2106,14 +2026,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueEditor.NPCConversation
   CurrentIDCounter: 9
-  json: "{\"Options\":[{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":6}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":21,\"yPos\":201},\"ID\":2,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Maiseuuuh\",\"parentUIDs\":[1],\"SpeechUID\":-1},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":7}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":305,\"yPos\":202},\"ID\":3,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Oki
-    la mif\",\"parentUIDs\":[1],\"SpeechUID\":-1}],\"Parameters\":[],\"SpeechNodes\":[{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":8}],\"EditorInfo\":{\"isRoot\":true,\"xPos\":172.5,\"yPos\":-154},\"ID\":0,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Yo
-    Noor\",\"parentUIDs\":[],\"AdvanceDialogueAutomatically\":true,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Camille\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":1,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":2},{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":3}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":173,\"yPos\":70},\"ID\":1,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Va
-    sur l'\xEEle encul\xE9.e\",\"parentUIDs\":[8],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Camille\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[],\"EditorInfo\":{\"isRoot\":false,\"xPos\":17,\"yPos\":448},\"ID\":4,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Nadine
-    c'est mon ptit tr\xE9sor \xE0 moi, c'est un butin\",\"parentUIDs\":[6],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Camille\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[],\"EditorInfo\":{\"isRoot\":false,\"xPos\":305,\"yPos\":453},\"ID\":5,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Ren
-    est mort\",\"parentUIDs\":[7],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Camille\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":4}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":23,\"yPos\":311},\"ID\":6,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Maieuuh\",\"parentUIDs\":[2],\"AdvanceDialogueAutomatically\":true,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Noor\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0.4,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":5}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":300,\"yPos\":306},\"ID\":7,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Oki
-    la mif\",\"parentUIDs\":[3],\"AdvanceDialogueAutomatically\":true,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Noor\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0.4,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":1}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":173,\"yPos\":-40},\"ID\":8,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Yo
-    le sang\",\"parentUIDs\":[0],\"AdvanceDialogueAutomatically\":true,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Noor\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0.5,\"Volume\":0}]}"
+  json: "{\"Options\":[{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":7}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":120,\"yPos\":366},\"ID\":3,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Compris
+    boss.\",\"parentUIDs\":[1],\"SpeechUID\":-1}],\"Parameters\":[],\"SpeechNodes\":[{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":8}],\"EditorInfo\":{\"isRoot\":true,\"xPos\":113.5,\"yPos\":22},\"ID\":0,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Moyostal
+    ? Mais comment peuvent - ils \xEAtre ici aussi, et pour Ren tu l'as trouver.\",\"parentUIDs\":[],\"AdvanceDialogueAutomatically\":true,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Camille\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":1,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":3}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":114,\"yPos\":247},\"ID\":1,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Tr\xE8s
+    bien, n'oublie pas de m'envoyer toute photo pouvant servir de preuve pour le
+    rapport.\",\"parentUIDs\":[8],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Camille\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[],\"EditorInfo\":{\"isRoot\":false,\"xPos\":117,\"yPos\":457},\"ID\":7,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Compris
+    boss.\",\"parentUIDs\":[3],\"AdvanceDialogueAutomatically\":true,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Noor\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0.4,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":1}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":113,\"yPos\":135},\"ID\":8,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Seulement
+    ses affaires, je vais explorer une grotte, je te tiens informer.\",\"parentUIDs\":[0],\"AdvanceDialogueAutomatically\":true,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Noor\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0.5,\"Volume\":0}]}"
   saveVersion: 110
   DefaultName: 
   DefaultSprite: {fileID: 0}
@@ -2121,11 +2040,7 @@ MonoBehaviour:
   NodeSerializedDataList:
   - {fileID: 8246197742194275228}
   - {fileID: 4646312889095723161}
-  - {fileID: 7230197336434446318}
   - {fileID: 1072531237800324719}
-  - {fileID: 4435040941853106077}
-  - {fileID: 190172341361122513}
-  - {fileID: 8043567273405154148}
   - {fileID: 326325099094442205}
   - {fileID: 3491169748241865642}
   ContinueFont: {fileID: 0}
