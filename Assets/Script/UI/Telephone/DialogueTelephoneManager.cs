@@ -27,7 +27,8 @@ public class DialogueTelephoneManager : MonoBehaviour
     public NPCConversation FirstConversation;
     
     [Header("Dialogues")]
-    [SerializeField] private List<Dialogue> dialogues = new List<Dialogue>();
+    [SerializeField] private List<Dialogue> dialoguesWhenImageWithConditions = new List<Dialogue>();
+    [SerializeField] private List<Dialogue> dialoguesWhenImageWithoutConditions = new List<Dialogue>();
     private Dialogue currentDialogue;
     
     private void OnEnable()
@@ -81,10 +82,28 @@ public class DialogueTelephoneManager : MonoBehaviour
             Debug.Log("a mis sprite 1");
             messageRempli.transform.GetChild(1).GetComponent<Image>().SetNativeSize();
             messageRempli.GetComponent<RectTransform>().sizeDelta = messageRempli.transform.GetChild(1).GetComponent<Image>().rectTransform.sizeDelta;
-            foreach (Dialogue dialogue in dialogues)
+            
+            bool foundADialogue = false;
+            Dialogue dialogueFound = null;
+            foreach (Dialogue dialogue in dialoguesWhenImageWithConditions)
             {
-                // vérifier si l'image déclenche un dialogue
+                if (dialogue.conditions.imageTag != null && message.infos.imageTag != null)
+                {
+                    if (dialogue.conditions.imageTag == message.infos.imageTag)
+                    {
+                        foundADialogue = true;
+                        dialogueFound = dialogue;
+                    }
+                }
             }
+            if (!foundADialogue)
+            {
+                dialogueFound = dialoguesWhenImageWithoutConditions[Random.Range(0, dialoguesWhenImageWithoutConditions.Count)];
+            }
+            DialogueManager dialogueManager = FindFirstObjectByType<DialogueManager>();
+            if(dialogueFound.conversation != null)
+                dialogueManager.StartConv(dialogueFound);
+            
         }
         if(message.messageFont != null)
             messageText.font = message.messageFont;
