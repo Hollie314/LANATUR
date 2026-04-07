@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
         nextMessages.Add(root);
         OnReceiveMessage(nextMessages[0]);
         // nextMessages[0].Event.AddListener(() => OnReceiveMessage(nextMessages[0]));
-        Debug.Log($"Conversation Started, next message is {nextMessages[0].Text}");
+        //Debug.Log($"Conversation Started, next message is {nextMessages[0].Text}");
     }
 
     public void ConversationEnd()
