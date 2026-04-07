@@ -717,11 +717,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd976517c2105934cb3a66dd2ffcb08b, type: 3}
+--- !u!114 &81042643971485363 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5102407216649418489, guid: bd976517c2105934cb3a66dd2ffcb08b, type: 3}
+  m_PrefabInstance: {fileID: 5174793814485964874}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97dc9052787c4cd46a4b0d5d937ab4ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
 --- !u!224 &840755084151176755 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5510850985347262073, guid: bd976517c2105934cb3a66dd2ffcb08b, type: 3}
   m_PrefabInstance: {fileID: 5174793814485964874}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8687827782092975574 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4558156127043909020, guid: bd976517c2105934cb3a66dd2ffcb08b, type: 3}
+  m_PrefabInstance: {fileID: 5174793814485964874}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97dc9052787c4cd46a4b0d5d937ab4ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
 --- !u!1001 &5221824894136602930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -888,6 +910,22 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0.49999985
       objectReference: {fileID: 0}
+    - target: {fileID: 5214713794045224866, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
+      propertyPath: dialoguesWhenImageWithConditions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5214713794045224866, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
+      propertyPath: 'dialoguesWhenImageWithConditions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8687827782092975574}
+    - target: {fileID: 5214713794045224866, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
+      propertyPath: dialoguesWhenImageWithoutConditions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5214713794045224866, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
+      propertyPath: 'dialoguesWhenImageWithoutConditions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 81042643971485363}
     - target: {fileID: 6361819462922258045, guid: 6315fc3851279bb42bb67db7928c0e7e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

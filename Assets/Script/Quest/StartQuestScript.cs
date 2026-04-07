@@ -24,6 +24,7 @@ namespace Quests
             }
         }
         
+        [Button("tg")]
         public void StartGivingQuest(QuestScriptable quest)
         {
             GiveQuest(quest);
