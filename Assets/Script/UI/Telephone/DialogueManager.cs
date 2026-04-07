@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     
     [Header("Dialogues")]
     [SerializeField] private List<Dialogue> dialogues = new List<Dialogue>();
+    [SerializeField] private DialogueTelephoneManager dialogueTelephoneManager;
     private Dialogue currentDialogue;
     
     void Start()
@@ -42,11 +43,19 @@ public class DialogueManager : MonoBehaviour
         ConversationManager.OnConversationEnded -= ConversationEnd; 
     }
 
+    public void StartConv(Dialogue dialogue)
+    {
+        currentConversation = dialogue.conversation;
+        currentDialogue = dialogue;
+        ConversationManager.Instance.StartConversation(dialogue.conversation);
+    }
+
     public void ConversationStart()
     {
         SpeechNode root = currentConversation.Deserialize().Root;
         nextMessages.Add(root);
-        nextMessages[0].Event.AddListener(() => OnReceiveMessage(nextMessages[0]));
+        OnReceiveMessage(nextMessages[0]);
+        // nextMessages[0].Event.AddListener(() => OnReceiveMessage(nextMessages[0]));
         Debug.Log($"Conversation Started, next message is {nextMessages[0].Text}");
     }
 
@@ -82,7 +91,7 @@ public class DialogueManager : MonoBehaviour
         conv.messageFont = currentMessage.TMPFont;
         conv.sprite = null;
         
-        SendMessage(conv);
+        dialogueTelephoneManager.messagesToInstantiate.Add(conv);
         
         if (currentConversation.Deserialize().Root.NodeType == ConversationNode.eNodeType.Option)
         {
@@ -112,8 +121,8 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("Conversation Ending");
             ConversationManager.Instance.EndConversation();
-            Debug.Log("Conversation Ended");
         }
 
         foreach (SpeechNode speechNode in nextMessages)

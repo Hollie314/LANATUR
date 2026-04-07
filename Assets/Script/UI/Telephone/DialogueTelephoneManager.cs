@@ -17,12 +17,8 @@ public class DialogueTelephoneManager : MonoBehaviour
     [SerializeField] private GameObject ScrollView;
     [SerializeField] private GameObject ContentReceived;
     [SerializeField] private GameObject ContentSent;
-    [SerializeField] private Sprite spritedemerd;
-    
     
     [Header("DialogueEditor")]    
-    [SerializeField] private ConversationManager _conversationManager;
-
     [HideInInspector] public NPCConversation currentConversation;
     [HideInInspector] public List<Message> messagesToInstantiate = new List<Message>();
     
@@ -34,23 +30,8 @@ public class DialogueTelephoneManager : MonoBehaviour
     [SerializeField] private List<Dialogue> dialogues = new List<Dialogue>();
     private Dialogue currentDialogue;
     
-    void Start()
-    {
-        currentConversation = FirstConversation;
-        currentDialogue = dialogues[0];
-        _conversationManager.StartConversation(FirstConversation);
-        Debug.Log($"conversation started: {_conversationManager.IsConversationActive}");
-    }
-    
     private void OnEnable()
     { 
-        ConversationManager.OnConversationStarted += ConversationStart;
-        ConversationManager.OnConversationEnded += ConversationEnd;
-        /*
-        currentConversation = FirstConversation;
-        _conversationManager.StartConversation(FirstConversation);
-        */
-        
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
 
@@ -60,94 +41,15 @@ public class DialogueTelephoneManager : MonoBehaviour
         }
         messagesToInstantiate.Clear();
     }
-    
-    private void OnDisable()
-    { 
-        ConversationManager.OnConversationStarted -= ConversationStart; 
-        ConversationManager.OnConversationEnded -= ConversationEnd; 
-    }
 
-    public void ConversationStart()
+    private void FixedUpdate()
     {
-        SpeechNode root = currentConversation.Deserialize().Root;
-        nextMessages.Add(root);
-        nextMessages[0].Event.AddListener(() => OnReceiveMessage(nextMessages[0]));
-        Debug.Log($"Conversation Started, next message is {nextMessages[0].Text}");
-    }
-
-    public void ConversationEnd()
-    {
-        Debug.Log("Conversation Ended");
-        nextMessages.Clear();
-        currentMessage = null;
-        if (! currentDialogue.quests.IsNullOrEmpty())
+        foreach (Message message in messagesToInstantiate)
         {
-            foreach (QuestScriptable quest in currentDialogue.quests)
-            {
-                StartQuestScript _startQuestScript = FindObjectOfType<StartQuestScript>();
-                _startQuestScript.StartGivingQuest(quest);
-            }
+            Debug.Log($"conv Send message {message.message}");
+            SendMessage(message);
         }
-    }
-    
-    public void OnReceiveMessage(SpeechNode speechNodeReceived)
-    {
-        currentMessage = speechNodeReceived;
-        foreach (SpeechNode speechNode in nextMessages)
-        {
-            speechNode.Event.RemoveListener(() => OnReceiveMessage(speechNode));;
-        }
-        nextMessages.Clear();
-        
-        Debug.Log("conversation: Receive message ça marche");
-        conversationManagerGO.transform.GetChild(0).gameObject.SetActive(false);
-
-        Message conv = new Message();
-        conv.sender = currentMessage.Name;
-        conv.message = currentMessage.Text;
-        conv.messageFont = currentMessage.TMPFont;
-        conv.sprite = null;
-        
-        SendMessage(conv);
-        
-        if (currentConversation.Deserialize().Root.NodeType == ConversationNode.eNodeType.Option)
-        {
-            Debug.Log("conversation: Receive message option");
-        }
-
-        if (!currentMessage.Connections.IsNullOrEmpty())
-        {
-            if (currentMessage.Connections[0] is SpeechConnection)
-            {
-                foreach(SpeechConnection connection in currentMessage.Connections)
-                {
-                    nextMessages.Add(connection.SpeechNode);
-                } 
-            }
-            else
-            {
-                foreach(OptionConnection connection in currentMessage.Connections)
-                {
-                    OptionNode node = connection.OptionNode;
-                    foreach (SpeechConnection speechConnection in node.Connections)
-                    {
-                        nextMessages.Add(speechConnection.SpeechNode);
-                    }
-                } 
-            }
-        }
-        else
-        {
-            _conversationManager.EndConversation();
-            Debug.Log("Conversation Ended");
-        }
-
-        foreach (SpeechNode speechNode in nextMessages)
-        {
-            speechNode.Event.AddListener(() => OnReceiveMessage(speechNode));;
-        }
-        
-        Debug.Log("conversation: Receive message ça a fini");
+        messagesToInstantiate.Clear();
     }
     
 

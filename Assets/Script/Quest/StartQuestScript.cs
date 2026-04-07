@@ -39,7 +39,9 @@ namespace Quests
 
             if (_quest.questDialogue != null)
             {
-                ConversationManager.Instance.StartConversation(_quest.questDialogue.conversation);
+                Debug.Log("conv start with quest");
+                DialogueManager dialogueManager = FindFirstObjectByType<DialogueManager>();
+                dialogueManager.StartConv(_quest.questDialogue);
             }
             
             switch (_quest.questType)
