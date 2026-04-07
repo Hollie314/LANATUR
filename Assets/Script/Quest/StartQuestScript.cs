@@ -1,6 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using DialogueEditor;
 using System.Collections.Generic;
 using Sirenix.Utilities;
 
@@ -22,6 +23,11 @@ namespace Quests
                 GiveQuest(quest);
             }
         }
+        
+        public void StartGivingQuest(QuestScriptable quest)
+        {
+            GiveQuest(quest);
+        }
 
         public static void GiveQuest(QuestScriptable _quest)
         {
@@ -30,6 +36,13 @@ namespace Quests
             QuestManager _questManager = FindFirstObjectByType<QuestManager>();
             _questManager.activeQuests.Add(_quest);
             Debug.Log("Give Quest 1");
+
+            if (_quest.questDialogue != null)
+            {
+                Debug.Log("conv start with quest");
+                DialogueManager dialogueManager = FindFirstObjectByType<DialogueManager>();
+                dialogueManager.StartConv(_quest.questDialogue);
+            }
             
             switch (_quest.questType)
             {

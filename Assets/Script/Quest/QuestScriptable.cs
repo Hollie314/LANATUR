@@ -13,6 +13,8 @@ public class QuestScriptable : ScriptableObject
         PhotographSpecie
     }
     
+    public Dialogue questDialogue;
+    
     public List<QuestScriptable> QuestToGiveNext = new List<QuestScriptable>();
     public QuestType questType;
     
