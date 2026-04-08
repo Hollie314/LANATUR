@@ -20,6 +20,8 @@ public class DialogueManager : MonoBehaviour
     
     [Header("Dialogues")]
     [SerializeField] private List<Dialogue> dialogues = new List<Dialogue>();
+    public List<Dialogue> dialoguesWhenImageWithConditions = new List<Dialogue>();
+    public List<Dialogue> dialoguesWhenImageWithoutConditions = new List<Dialogue>();
     [SerializeField] private DialogueTelephoneManager dialogueTelephoneManager;
     private Dialogue currentDialogue;
     
@@ -56,7 +58,6 @@ public class DialogueManager : MonoBehaviour
         nextMessages.Add(root);
         OnReceiveMessage(nextMessages[0]);
         // nextMessages[0].Event.AddListener(() => OnReceiveMessage(nextMessages[0]));
-        //Debug.Log($"Conversation Started, next message is {nextMessages[0].Text}");
     }
 
     public void ConversationEnd()

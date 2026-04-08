@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class AlbumUI : SerializedMonoBehaviour
 {
@@ -149,6 +150,29 @@ public class AlbumUI : SerializedMonoBehaviour
         
         Debug.Log($"Conv.sprite is null: {conv.sprite == null}");
         dialogueTelephoneManager.messagesToInstantiate.Add(conv);
+        
+        DialogueManager dialogueManager = FindFirstObjectByType<DialogueManager>();
+        
+        bool foundADialogue = false;
+        Dialogue dialogueFound = null;
+        foreach (Dialogue dialogue in dialogueManager.dialoguesWhenImageWithConditions)
+        {
+            if (dialogue.conditions.imageTag != null && conv.infos.imageTag != null)
+            {
+                if (dialogue.conditions.imageTag == conv.infos.imageTag)
+                {
+                    foundADialogue = true;
+                    dialogueFound = dialogue;
+                }
+            }
+        }
+        if (!foundADialogue)
+        {
+            dialogueFound = dialogueManager.dialoguesWhenImageWithoutConditions[(int) Random.Range(0, dialogueManager.dialoguesWhenImageWithoutConditions.Count -1)];
+        }
+        else{dialogueManager.dialoguesWhenImageWithConditions.Remove(dialogueFound);}
+        if(dialogueFound.conversation != null)
+            dialogueManager.StartConv(dialogueFound);
     }
 
     public void On_ChangeEncyclopediaPhotoClicked(GameObject photo)

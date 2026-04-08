@@ -78,32 +78,12 @@ public class DialogueTelephoneManager : MonoBehaviour
             messageText.text = message.message;
         if (message.sprite != null)
         {
+            messageRempli.GetComponent<RectTransform>().sizeDelta = new Vector2(614, 400);
+            messageVide.GetComponent<RectTransform>().sizeDelta = new Vector2(614, 400);
+            messageRempli.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(614, 345);
             messageRempli.transform.GetChild(1).GetComponent<Image>().sprite = message.sprite;
             Debug.Log("a mis sprite 1");
-            messageRempli.transform.GetChild(1).GetComponent<Image>().SetNativeSize();
-            messageRempli.GetComponent<RectTransform>().sizeDelta = messageRempli.transform.GetChild(1).GetComponent<Image>().rectTransform.sizeDelta;
-            
-            bool foundADialogue = false;
-            Dialogue dialogueFound = null;
-            foreach (Dialogue dialogue in dialoguesWhenImageWithConditions)
-            {
-                if (dialogue.conditions.imageTag != null && message.infos.imageTag != null)
-                {
-                    if (dialogue.conditions.imageTag == message.infos.imageTag)
-                    {
-                        foundADialogue = true;
-                        dialogueFound = dialogue;
-                    }
-                }
-            }
-            if (!foundADialogue)
-            {
-                dialogueFound = dialoguesWhenImageWithoutConditions[Random.Range(0, dialoguesWhenImageWithoutConditions.Count)];
-            }
-            DialogueManager dialogueManager = FindFirstObjectByType<DialogueManager>();
-            if(dialogueFound.conversation != null)
-                dialogueManager.StartConv(dialogueFound);
-            
+            messageRempli.transform.GetChild(1).GetComponent<Image>().GetComponent<RectTransform>().sizeDelta = new Vector2(614, 345);
         }
         if(message.messageFont != null)
             messageText.font = message.messageFont;
