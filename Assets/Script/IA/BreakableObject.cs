@@ -13,8 +13,8 @@ public class BreakableObject : MonoBehaviour
     public void Break()
     {
         if (broken) return;
-        animator.SetBool("IsDestruct", true);
         broken = true;
+        animator.SetBool("IsDestruct", true);
         unityEvent?.Invoke();   
 
         Debug.Log("Object broken");

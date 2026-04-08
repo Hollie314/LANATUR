@@ -28,7 +28,7 @@ public class AlarmNoiseEmitter : MonoBehaviour
     {
         makeNoise = GetComponent<MakeNoise>();
         audioSource = GetComponent<AudioSource>();
-        vfx?.Play();
+        //vfx?.Play();
         audioSource.loop = true;
         audioSource.playOnAwake = false;
     }

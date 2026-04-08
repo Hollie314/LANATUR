@@ -8,5 +8,7 @@ public enum LamantinState
 	Patrol,
 	Follow,
 	Stop,
-	Frappe,
+	Charge,
+	Mange,
+	Appat
 }
