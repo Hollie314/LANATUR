@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(MakeNoise))]
 [RequireComponent(typeof(AudioSource))]
@@ -20,14 +21,14 @@ public class AlarmNoiseEmitter : MonoBehaviour
 
     private MakeNoise makeNoise;
     public AudioSource audioSource;
-
+    [SerializeField] private VisualEffect vfx;
     private float timer;
 
     void Awake()
     {
         makeNoise = GetComponent<MakeNoise>();
         audioSource = GetComponent<AudioSource>();
-
+        //vfx?.Play();
         audioSource.loop = true;
         audioSource.playOnAwake = false;
     }

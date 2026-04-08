@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4572256085819768954}
   - component: {fileID: 6678668076031051629}
+  - component: {fileID: 130766953249050424}
   m_Layer: 15
   m_Name: Corail_mid_1
   m_TagString: Corail
@@ -57,6 +58,24 @@ MonoBehaviour:
   Photo: []
   Dessin: []
   DessinMignon: []
+--- !u!114 &130766953249050424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3825591183882619908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3091df4a2b358e04bb0c5026f5af0492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MysteryStudio.EasyCollider.AddCollidersToMeshes
+  colliderType: 0
+  applyToChildren: 1
+  convex: 0
+  showColliderPreview: 0
+  selectedTag: Untagged
+  selectedLayer: 0
 --- !u!1001 &7947247690098279911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,7 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e88dbfcc94a49e948a150b2fd0461809, type: 3}
       propertyPath: m_Layer
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e88dbfcc94a49e948a150b2fd0461809, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -128,8 +147,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e88dbfcc94a49e948a150b2fd0461809, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1826184831041664013}
   m_SourcePrefab: {fileID: 100100000, guid: e88dbfcc94a49e948a150b2fd0461809, type: 3}
+--- !u!1 &7100807149463746742 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e88dbfcc94a49e948a150b2fd0461809, type: 3}
+  m_PrefabInstance: {fileID: 7947247690098279911}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &-1826184831041664013
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100807149463746742}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8658864137311465706, guid: e88dbfcc94a49e948a150b2fd0461809, type: 3}
 --- !u!4 &7620357577039634956 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e88dbfcc94a49e948a150b2fd0461809, type: 3}

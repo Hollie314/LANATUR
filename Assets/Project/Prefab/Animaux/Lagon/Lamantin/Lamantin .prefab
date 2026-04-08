@@ -141,18 +141,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 3354583017775015583, guid: 99571d2b6e972d5438599a440f00eefa, type: 2}
+  m_Graph: {fileID: 3354583017775015583, guid: 1f4ab676339358745a844506f8195fa7, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 7020973768811217457
   - rid: 8822709292540101041
   - rid: 8822709292540101040
   - rid: 8822709292540101039
+  - rid: 4223415665489870982
+  - rid: 4223415665489870983
   m_OriginalGraph: {fileID: 3354583017775015583, guid: 99571d2b6e972d5438599a440f00eefa, type: 2}
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
     RefIds:
+    - rid: 4223415665489870982
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12372429480418141560
+          m_Value1: 16376130059919796882
+        Name: Animator
+        m_Value: {fileID: 4235443720076613360}
+    - rid: 4223415665489870983
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 17845864327264284291
+          m_Value1: 12280691067344831599
+        Name: NoiseDetection
+        m_Value: 20
     - rid: 7020973768811217457
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -785,6 +803,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d609e8b68c1215147832746e33cbda7c, type: 3}
+--- !u!95 &4235443720076613360 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: d609e8b68c1215147832746e33cbda7c, type: 3}
+  m_PrefabInstance: {fileID: 7759073471293025121}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7793335441334111370 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d609e8b68c1215147832746e33cbda7c, type: 3}
