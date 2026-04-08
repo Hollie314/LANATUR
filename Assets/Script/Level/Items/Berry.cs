@@ -41,18 +41,18 @@ public class Berry : MonoBehaviour, IInteractable
     {
         Debug.Log("Interaction avec la baie");
         holdItem.Hold(this.gameObject);
-        interactionText.SetActive(true);
+        interactionText.SetActive(false); // on cache le texte une fois ramassée
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)
     {
         Debug.Log("Baie peut etre interargie avec");
-        interactionText.SetActive(false);
+        interactionText.SetActive(true); // ← était false, c'était inversé
     }
 
     public void OnPlayerExit(PlayerInteractions interactions)
     {
         Debug.Log("Baie peut plus etre interargie avec");
-        interactionText.SetActive(true);
+        interactionText.SetActive(false); // ← était true, c'était inversé
     }
 }
