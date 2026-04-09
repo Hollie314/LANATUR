@@ -78,3 +78,71 @@ void Voronoi3D_float(float3 UV, float AngleOffset, float CellDensity, out float 
     Out = res.x;
     Cells = res.z;
 }
+
+float mix(float a, float b, float x)
+{
+    return b * x + a * (1.0-x);
+}
+
+void Voronoi3DBlenderSmooth_float(float3 UV, float AngleOffset, float CellDensity, float Smoothness, out float Out, out float Cells)
+{
+    float3 cellPosition = floor(UV * CellDensity);
+    float3 localPosition = frac(UV * CellDensity);
+
+    float3 output = float3(8.0,8.0,8.0);
+    
+    for (int y = -2; y <= 2; y++)
+    {
+        for (int x = -2; x <=2; x++)
+        {
+            for  (int z = -2; z <=2; z++)
+            {
+                float3 cellOffset = float3(x,y,z);
+                float3 pointPosition = cellOffset + voronoi_noise_randomVector(cellPosition + cellOffset, AngleOffset);
+                float distanceToPoint = distance(pointPosition, localPosition);
+
+                output.y = output.x; //Save the previous value
+            
+                float h = smoothstep(0.0, 1.0, 0.5 + 0.5 * (output.x - distanceToPoint) / Smoothness); //Cubic hermite spline
+                output.x = mix(output.x, distanceToPoint, h) - Smoothness * h * (1.0-h); // Interpolate between the two values
+
+                float hc = smoothstep(0.0, 1.0, 0.5 + 0.5 * (output.z - pointPosition.x) / Smoothness); // trying to interpolate the cells, currently not working
+                output.z = mix(output.z, pointPosition.x, hc) - Smoothness * hc * (1.0-hc);
+            }
+        }
+    }
+    Out = output.x;
+    Cells = output.z;
+}
+
+void Voronoi3DSmooth_float(float3 UV, float AngleOffset, float CellDensity, float Smoothness, out float Out, out float Cells)
+{
+    float3 cellPosition = floor(UV * CellDensity);
+    float3 localPosition = frac(UV * CellDensity);
+
+    float3 output = float3(8.0,8.0,8.0);
+    
+    for (int y = -2; y <= 2; y++)
+    {
+        for (int x = -2; x <=2; x++)
+        {
+            for (int z = -2; z <= 2; ++z)
+            {
+                float3 cellOffset = float3(x,y,z);
+                float3 pointPosition = voronoi_noise_randomVector(cellPosition + cellOffset, AngleOffset);
+                float3 tempPosition = cellOffset + pointPosition - localPosition;
+                float distanceToPoint = dot(tempPosition, tempPosition);
+
+                output.y = output.x; //Save the previous value
+            
+                float h = smoothstep(0.0, 1.0, 0.5 + 0.5 * (output.x - distanceToPoint) / Smoothness); //Cubic hermite spline
+                output.x = mix(output.x, distanceToPoint, h) - Smoothness * h * (1.0-h); // Interpolate between the two values
+
+                float hc = smoothstep(0.0, 1.0, 0.5 + 0.5 * (output.z - pointPosition.x) / Smoothness); // trying to interpolate the cells, currently not working
+                output.z = mix(output.z, pointPosition.x, hc) - Smoothness * hc * (1.0-hc);
+            }
+        }
+    }
+    Out = output.x;
+    Cells = output.z;
+}
