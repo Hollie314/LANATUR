@@ -173,6 +173,9 @@ public class AlbumUI : SerializedMonoBehaviour
         else{dialogueManager.dialoguesWhenImageWithConditions.Remove(dialogueFound);}
         if(dialogueFound.conversation != null)
             dialogueManager.StartConv(dialogueFound);
+        
+        OpenUI openUI = FindFirstObjectByType<OpenUI>();
+        openUI.OpenTelephone(new PlayerInteractions());
     }
 
     public void On_ChangeEncyclopediaPhotoClicked(GameObject photo)
