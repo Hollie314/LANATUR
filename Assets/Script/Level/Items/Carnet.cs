@@ -23,6 +23,7 @@ public class Carnet : MonoBehaviour, IInteractable
             
         if (updateQuest)
             this.gameObject.GetComponent<Quests.UpdateQuest>().UpdateQuestProgress();
+        
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)
