@@ -31,20 +31,29 @@ public class OnOff : MonoBehaviour, IInteractable
     {
         if (isActive)
         {
-            if(!audioSource.isPlaying)
-                _makeNoise.Noise(transform.position, NoiseRadius, NoiseOn, gameObject, audioSource, clip);
+            // Le stimulus est émis en continu indépendamment du son
+            WorldStimulusManager.Instance?.EmitSound(transform.position, NoiseRadius, NoiseOn, gameObject);
+
+            // Le son tourne en boucle, on le lance une seule fois
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = clip;
+                //audioSource.loop = true;
+                audioSource.Play();
+            }
         }
     }
 
     public void Interact(PlayerInteractions interactions)
     {
         isActive = !isActive;
+
         if (!isActive)
             audioSource.Stop();
-        
+
         if (startsQuest)
             this.gameObject.GetComponent<Quests.StartQuestScript>().StartQuest();
-            
+
         if (updateQuest)
             this.gameObject.GetComponent<Quests.UpdateQuest>().UpdateQuestProgress();
     }
