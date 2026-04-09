@@ -49,16 +49,20 @@ public class AlarmNoiseEmitter : MonoBehaviour
 
     void EmitNoise()
     {
-        makeNoise.Noise(
+        // Stimulus émis à chaque interval
+        WorldStimulusManager.Instance?.EmitSound(
             transform.position,
             radius,
             intensity,
-            gameObject,
-            audioSource
+            gameObject
         );
 
+        // Son en boucle, lancé une seule fois
         if (!audioSource.isPlaying)
+        {
+            //audioSource.loop = true;
             audioSource.Play();
+        }
     }
 
     // ============================
