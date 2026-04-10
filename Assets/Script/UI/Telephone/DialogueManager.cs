@@ -47,6 +47,10 @@ public class DialogueManager : MonoBehaviour
 
     public void StartConv(Dialogue dialogue)
     {
+        if (ConversationManager.Instance.IsConversationActive)
+        {
+            ConversationManager.Instance.EndConversation();
+        }
         currentConversation = dialogue.conversation;
         currentDialogue = dialogue;
         ConversationManager.Instance.StartConversation(dialogue.conversation);
@@ -84,7 +88,7 @@ public class DialogueManager : MonoBehaviour
         }
         nextMessages.Clear();
         
-        Debug.Log("conversation: Receive message ça marche");
+        Debug.Log($"conversation: Receive message ça marche, message: {currentMessage.Text}");
 
         Message conv = new Message();
         conv.sender = currentMessage.Name;
