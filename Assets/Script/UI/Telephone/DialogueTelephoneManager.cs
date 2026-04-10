@@ -35,12 +35,6 @@ public class DialogueTelephoneManager : MonoBehaviour
     { 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-
-        foreach (Message message in messagesToInstantiate)
-        {
-            SendMessage(message);
-        }
-        messagesToInstantiate.Clear();
     }
 
     private void FixedUpdate()
