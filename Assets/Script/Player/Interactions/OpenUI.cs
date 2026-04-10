@@ -113,7 +113,6 @@ public class OpenUI : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
-            PauseScene(true);
             OnCameraWalk?.Invoke(this);
         }
         else
