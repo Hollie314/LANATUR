@@ -69,7 +69,10 @@ public class PlayerMotor : MonoBehaviour
     {
         isGrounded = CheckIsGrounded(groundedRayLength, out RaycastHit hit);
         if (isGrounded)
+        {
             groundNormal = hit.normal;
+            isJumping = false;
+        }
         else
             groundNormal = Vector3.up;
         
@@ -121,7 +124,7 @@ public class PlayerMotor : MonoBehaviour
         Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, groundNormal);
         Vector3 verticalVelocity = playerVelocity - groundVelocity;
         
-        if (controller.isGrounded && verticalVelocity.y < 0f)
+        if (isGrounded && verticalVelocity.y < 0f)
         {
             if (playerVelocity.y < 0f)
                 playerVelocity.y = groundSnapForce;
@@ -131,7 +134,6 @@ public class PlayerMotor : MonoBehaviour
             else if (!crouching && crouchActive)
                 crouchActive = false;
         }
-        
         else
         {
             playerVelocity.y += gravity * Time.deltaTime;
@@ -148,22 +150,34 @@ public class PlayerMotor : MonoBehaviour
             z = input.y
         };
 
-        Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, groundNormal);
-        Vector3 verticalVelocity = playerVelocity - groundVelocity;
-        Debug.Log($"ProcessMove 1) Player Velocity: {playerVelocity}, ground Velocity: {groundVelocity}, vertical Velocity: {verticalVelocity} - time:{Time.time}");
-        float targetSpeed = crouchActive ? crouchSpeed : speed;
-        if (sprinting)
-            targetSpeed *= sprintmultiplier;
+        if (!isJumping)
+        {
+            Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, groundNormal);
+            Vector3 verticalVelocity = playerVelocity - groundVelocity;
+            Debug.Log($"ProcessMove 1) Player Velocity: {playerVelocity}, ground Velocity: {groundVelocity}, vertical Velocity: {verticalVelocity} - time:{Time.time}");
+            float targetSpeed = crouchActive ? crouchSpeed : speed;
+            if (sprinting)
+                targetSpeed *= sprintmultiplier;
 
-        Vector3 groundInput = Vector3.ProjectOnPlane(transform.TransformDirection(moveDirection), groundNormal).normalized;
-        groundVelocity = groundInput * targetSpeed;
+            Vector3 groundInput = Vector3.ProjectOnPlane(transform.TransformDirection(moveDirection), groundNormal).normalized;
+            groundVelocity = groundInput * targetSpeed;
         
-        verticalVelocity.x = 0f;
-        verticalVelocity.z = 0f;
+            verticalVelocity.x = 0f;
+            verticalVelocity.z = 0f;
         
-        playerInput = groundInput;
-        playerVelocity = groundVelocity + verticalVelocity;
-        Debug.Log($"ProcessMove 2) Player Velocity: {playerVelocity}, ground Velocity: {groundVelocity}, vertical Velocity: {verticalVelocity} - time:{Time.time}");
+            playerInput = groundInput;
+            playerVelocity = groundVelocity + verticalVelocity;
+            Debug.Log($"ProcessMove 2) Player Velocity: {playerVelocity}, ground Velocity: {groundVelocity}, vertical Velocity: {verticalVelocity} - time:{Time.time}");
+        }
+        else
+        {
+            float targetSpeed = crouchActive ? crouchSpeed : speed;
+            if (sprinting)
+                targetSpeed *= sprintmultiplier;
+            
+            playerInput = transform.TransformDirection(moveDirection);
+            playerVelocity = moveDirection * targetSpeed;
+        }
     }
 
     private void HandleNoise()
@@ -245,6 +259,7 @@ public class PlayerMotor : MonoBehaviour
 
     public void JumpCanceled()
     {
+        return;
         isJumping =  false;
         playerVelocity.y *= 0.5f;
     }
