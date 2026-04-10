@@ -310,7 +310,6 @@ GameObject:
   - component: {fileID: 7266826108694512432}
   - component: {fileID: 723012430616371529}
   - component: {fileID: 3779019543392964413}
-  - component: {fileID: 7262620430037875188}
   - component: {fileID: 7827105168531232679}
   - component: {fileID: 6991042087316444976}
   - component: {fileID: 1725014522912675431}
@@ -349,21 +348,48 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8073303049719556248}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 3354583017775015583, guid: 99571d2b6e972d5438599a440f00eefa, type: 2}
+  m_Graph: {fileID: 3354583017775015583, guid: 1f4ab676339358745a844506f8195fa7, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 7020973768811217457
   - rid: 8822709292540101041
+  - rid: 4223415721832743112
+  - rid: 4223415721832743113
+  - rid: 4223415721832743114
   m_OriginalGraph: {fileID: 3354583017775015583, guid: 99571d2b6e972d5438599a440f00eefa, type: 2}
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
     RefIds:
+    - rid: 4223415721832743112
+      type: {class: 'BlackboardVariable`1[[PerceptionRange, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 7656320985703951329
+          m_Value1: 18052036899179774479
+        Name: New Perception Range
+        m_Value: {fileID: 7827105168531232679}
+    - rid: 4223415721832743113
+      type: {class: 'BlackboardVariable`1[[RangeDetection, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 18552999810168277
+          m_Value1: 2401429595392573025
+        Name: Range Detection
+        m_Value: {fileID: 1725014522912675431}
+    - rid: 4223415721832743114
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12372429480418141560
+          m_Value1: 16376130059919796882
+        Name: Animator
+        m_Value: {fileID: 2153277008193861404}
     - rid: 7020973768811217457
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -450,18 +476,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7262620430037875188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8073303049719556248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40c5ba2f18aeab54891ef22bea561eab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BreakObject
 --- !u!114 &7827105168531232679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,6 +533,8 @@ MonoBehaviour:
     m_Bits: 8
   - serializedVersion: 2
     m_Bits: 2048
+  - serializedVersion: 2
+    m_Bits: 16384
   showDebugVisuals: 1
 --- !u!114 &7388463921890797564
 MonoBehaviour:
@@ -781,7 +797,7 @@ Animator:
   m_GameObject: {fileID: 6148213039774812267}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: d609e8b68c1215147832746e33cbda7c, type: 3}
-  m_Controller: {fileID: 9100000, guid: d64d38ad7e3cdad4b960560128272e12, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3ab282352d212964d81a52965aecdcaa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
