@@ -15,13 +15,13 @@ public partial class SwitchLayerAction : Action
     {
         if (Self?.Value == null)
         {
-            Debug.LogWarning("SwitchLayerAction : Self est null");
+            //Debug.LogWarning("SwitchLayerAction : Self est null");
             return Status.Failure;
         }
 
         if (Layer.Value < 0 || Layer.Value > 31)
         {
-            Debug.LogWarning($"SwitchLayerAction : index layer '{Layer.Value}' invalide (doit être entre 0 et 31)");
+            //Debug.LogWarning($"SwitchLayerAction : index layer '{Layer.Value}' invalide (doit être entre 0 et 31)");
             return Status.Failure;
         }
 

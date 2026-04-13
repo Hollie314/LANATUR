@@ -28,23 +28,6 @@ public class FlatKitOutline : ScriptableRendererFeature {
     private static int fadeRangeStart => Shader.PropertyToID("_FadeRangeStart");
     private static int fadeRangeEnd => Shader.PropertyToID("_FadeRangeEnd");
 
-    /// <summary>
-    /// Access the runtime effect material to override outline parameters at runtime
-    /// without mutating the Settings asset.
-    ///
-    /// Shader (2022.3+ path): "Hidden/FlatKit/OutlineWrap"
-    ///
-    /// Common shader properties/keywords:
-    /// - Floats: _Thickness, _DepthThresholdMin/_Max, _NormalThresholdMin/_Max, _ColorThresholdMin/_Max,
-    ///           _FadeRangeStart, _FadeRangeEnd
-    /// - Colors: _EdgeColor
-    /// - Keywords: OUTLINE_USE_DEPTH, OUTLINE_USE_NORMALS, OUTLINE_USE_COLOR,
-    ///             OUTLINE_ONLY, RESOLUTION_INVARIANT_THICKNESS, OUTLINE_FADE_OUT
-    ///
-    /// Note: Inspector changes on the Settings asset may overwrite your values if applied later.
-    /// </summary>
-    public Material EffectMaterial => _effectMaterial;
-
     public override void Create() {
         // Settings.
         {
@@ -90,6 +73,7 @@ public class FlatKitOutline : ScriptableRendererFeature {
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData) {
         if (settings == null || !settings.applyInSceneView && renderingData.cameraData.isSceneViewCamera) return;
         if (renderingData.cameraData.isPreviewCamera) return;
+        if (renderingData.cameraData.renderType == CameraRenderType.Overlay) return;
         if (_effectMaterial == null) return;
 
         _fullScreenPass.Setup(_effectMaterial, _requiresColor, _injectedBeforeTransparents, "Flat Kit Outline",
@@ -160,22 +144,6 @@ public class FlatKitOutline : ScriptableRendererFeature {
     private static readonly int ColorThresholdMin = Shader.PropertyToID("_ColorThresholdMin");
     private static readonly int ColorThresholdMax = Shader.PropertyToID("_ColorThresholdMax");
 
-    /// <summary>
-    /// Access the runtime effect material to override outline parameters at runtime
-    /// without mutating the Settings asset.
-    ///
-    /// Shader (legacy path): "Hidden/FlatKit/OutlineFilter"
-    ///
-    /// Common shader properties/keywords:
-    /// - Floats: _Thickness, _DepthThresholdMin/_Max, _NormalThresholdMin/_Max, _ColorThresholdMin/_Max
-    /// - Colors: _EdgeColor
-    /// - Keywords: OUTLINE_USE_DEPTH, OUTLINE_USE_NORMALS, OUTLINE_USE_COLOR,
-    ///             OUTLINE_ONLY, RESOLUTION_INVARIANT_THICKNESS
-    ///
-    /// Note: Inspector changes on the Settings asset may overwrite your values if applied later.
-    /// </summary>
-    public Material EffectMaterial => _effectMaterial;
-
     public override void Create() {
 #if UNITY_EDITOR
         if (_effectMaterial == null) {
@@ -207,6 +175,7 @@ public class FlatKitOutline : ScriptableRendererFeature {
         if (renderingData.cameraData.isPreviewCamera) return;
         if (!settings.applyInSceneView && renderingData.cameraData.cameraType == CameraType.SceneView) return;
 #endif
+        if (renderingData.cameraData.renderType == CameraRenderType.Overlay) return;
 
         SetMaterialProperties();
 

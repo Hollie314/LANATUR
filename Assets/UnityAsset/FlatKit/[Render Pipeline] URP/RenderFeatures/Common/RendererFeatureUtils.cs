@@ -8,16 +8,18 @@ public static class RendererFeatureUtils {
             return;
         }
 
+        if (material.shader == null || material.shader.name == "Hidden/InternalErrorShader") {
+            return;
+        }
+
 #if UNITY_2021_2_OR_NEWER
-        if (material.shader != null) {
-            // Unity 2021.2+ lets us query the shader's keyword space; only call SetKeyword when the symbol is actually declared
-            // to avoid "keyword doesn't exist" errors on Unity 6.3.
-            var keywordSpace = material.shader.keywordSpace;
-            LocalKeyword localKeyword = keywordSpace.FindKeyword(keyword);
-            if (localKeyword.isValid) {
-                material.SetKeyword(localKeyword, enabled);
-                return;
-            }
+        // Unity 2021.2+ lets us query the shader's keyword space; only call SetKeyword when the symbol is actually declared
+        // to avoid "keyword doesn't exist" errors on Unity 6.3.
+        var keywordSpace = material.shader.keywordSpace;
+        LocalKeyword localKeyword = keywordSpace.FindKeyword(keyword);
+        if (localKeyword.isValid) {
+            material.SetKeyword(localKeyword, enabled);
+            return;
         }
 #endif
 

@@ -17,7 +17,7 @@ public class BreakableObject : MonoBehaviour
         animator.SetBool("IsDestruct", true);
         unityEvent?.Invoke();   
 
-        Debug.Log("Object broken");
+        ////Debug.Log("Object broken");
 
         // Spawn replacement
         //if (replacementPrefab != null)

@@ -34,7 +34,7 @@ namespace Quests
 
         public void EndQuestUI(QuestScriptable _quest, int progression,  bool completed)
         {
-            Debug.Log("quest: ended");
+            //Debug.Log("quest: ended");
             if (!questAudioSource.isPlaying)
             {
                 questAudioSource.clip = questEndedSFX;

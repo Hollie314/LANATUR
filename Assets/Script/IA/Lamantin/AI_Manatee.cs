@@ -82,7 +82,7 @@ public class AI_Manatee : MonoBehaviour
         {
             breakable.Break();
 
-            Debug.Log("Lamantin broke object in state: " + currentState);
+            //Debug.Log("Lamantin broke object in state: " + currentState);
         }
     }
 

@@ -75,7 +75,7 @@ public class AlarmNoiseEmitter : MonoBehaviour
         timer = 0f;
         audioSource.Play();
 
-        Debug.Log("Alarm activated");
+        //Debug.Log("Alarm activated");
     }
 
     public void StopAlarm()
@@ -83,6 +83,6 @@ public class AlarmNoiseEmitter : MonoBehaviour
         alarmActive = false;
         audioSource.Stop();
 
-        Debug.Log("Alarm stopped");
+        //Debug.Log("Alarm stopped");
     }
 }

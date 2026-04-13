@@ -9,7 +9,7 @@ public class BreakObject : MonoBehaviour
     }
     void TryBreakObject(Collider col)
     {
-        Debug.Log("Lamantin broke object in state: ");
+        //Debug.Log("Lamantin broke object in state: ");
 
         BreakableObject breakable = col.GetComponent<BreakableObject>();
 

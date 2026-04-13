@@ -175,7 +175,7 @@
             #pragma multi_compile_fragment _ _WRITE_RENDERING_LAYERS
             #endif
             #if UNITY_VERSION >= 600000
-            #pragma multi_compile _ _FORWARD_PLUS
+            #pragma multi_compile _ _CLUSTER_LIGHT_LOOP
             #pragma multi_compile _ EVALUATE_SH_MIXED EVALUATE_SH_VERTEX
             #define _ENVIRONMENTREFLECTIONS_OFF 1 // Fixes flickering when Probe Blending is enabled on Renderer.
             #pragma multi_compile_fragment _ _SHADOWS_SOFT

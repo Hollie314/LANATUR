@@ -29,12 +29,12 @@ public class WorldStimulusManager : MonoBehaviour
 
     public void EmitSound(Vector3 position, float radius, float intensity, GameObject source)
     {
-        Debug.Log(source.name);
+        //Debug.Log(source.name);
         foreach (var listener in listeners)
         {
             // ORDRE CORRECT
             listener.OnSoundReceived(position, intensity, radius, source);
-            Debug.Log($"appelle {listener}");
+            //Debug.Log($"appelle {listener}");
         }
     }
 

@@ -39,7 +39,7 @@ public class OutlineSettings : ScriptableObject {
 
     [HorizontalLine]
     [Tooltip("Whether to use depth information to draw outlines. This adds lines around objects that are in front of " +
-             "other objects.")]
+             "other objects. In URP, transparent objects are usually excluded from camera depth texture generation.")]
     public bool useDepth = true;
 
     [ShowIf(nameof(useDepth))]
@@ -56,7 +56,7 @@ public class OutlineSettings : ScriptableObject {
 
     [HorizontalLine(1, EColor.Translucent)]
     [Tooltip("Whether to use world-space normals information to draw outlines. This adds lines " +
-             "on sharp edges of objects.")]
+             "on sharp edges of objects. In URP, transparent objects are usually excluded from camera normals texture generation.")]
     public bool useNormals = false;
 
     [ShowIf(nameof(useNormals))]
@@ -92,7 +92,7 @@ public class OutlineSettings : ScriptableObject {
 
     [HorizontalLine]
     [Tooltip("The render stage at which the effect is applied. To exclude transparent objects, like water or UI " +
-             "elements, set this to \"Before Transparent\".")]
+             "elements, set this to \"Before Transparent\". To outline transparent objects reliably, enable \"Use Color\".")]
     public RenderPassEvent renderEvent = RenderPassEvent.BeforeRenderingPostProcessing;
 
     [Tooltip("Only draw the outline, replacing the original color with a complimentary color.")]

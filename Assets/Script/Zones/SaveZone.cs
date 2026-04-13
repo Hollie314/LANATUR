@@ -12,13 +12,13 @@ public class SaveZone : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("save trigger entered");
+        //Debug.Log("save trigger entered");
         if (other.tag == "Player")
         {
             game_Manager.LastPositionSaved = this.transform.position;
-            Debug.Log("position saved");
-            Debug.Log(other.name);
-            Debug.Log(this.transform.position);
+            //Debug.Log("position saved");
+            //Debug.Log(other.name);
+            //Debug.Log(this.transform.position);
         }
     }
 }

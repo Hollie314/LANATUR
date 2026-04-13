@@ -106,6 +106,12 @@ public class PlayerMotor : MonoBehaviour
 
     private bool CheckIsGrounded(float rayLength, out RaycastHit groundHit)
     {
+        if (isJumping && playerVelocity.y > 0)
+        {
+            groundHit = default;
+            return false;
+        }
+
         if (Physics.Raycast(transform.position, Vector3.down, out groundHit, rayLength))
         {
             //SFX
@@ -150,34 +156,25 @@ public class PlayerMotor : MonoBehaviour
             z = input.y
         };
 
-        if (!isJumping)
-        {
-            Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, groundNormal);
-            Vector3 verticalVelocity = playerVelocity - groundVelocity;
-            Debug.Log($"ProcessMove 1) Player Velocity: {playerVelocity}, ground Velocity: {groundVelocity}, vertical Velocity: {verticalVelocity} - time:{Time.time}");
-            float targetSpeed = crouchActive ? crouchSpeed : speed;
-            if (sprinting)
-                targetSpeed *= sprintmultiplier;
 
-            Vector3 groundInput = Vector3.ProjectOnPlane(transform.TransformDirection(moveDirection), groundNormal).normalized;
-            groundVelocity = groundInput * targetSpeed;
-        
-            verticalVelocity.x = 0f;
-            verticalVelocity.z = 0f;
-        
-            playerInput = groundInput;
-            playerVelocity = groundVelocity + verticalVelocity;
-            Debug.Log($"ProcessMove 2) Player Velocity: {playerVelocity}, ground Velocity: {groundVelocity}, vertical Velocity: {verticalVelocity} - time:{Time.time}");
-        }
-        else
-        {
-            float targetSpeed = crouchActive ? crouchSpeed : speed;
-            if (sprinting)
-                targetSpeed *= sprintmultiplier;
-            
-            playerInput = transform.TransformDirection(moveDirection);
-            playerVelocity = moveDirection * targetSpeed;
-        }
+        Vector3 planeNormal = isJumping ? Vector3.up : groundNormal;
+        Vector3 groundVelocity = Vector3.ProjectOnPlane(playerVelocity, planeNormal);
+        Vector3 verticalVelocity = playerVelocity - groundVelocity;
+        //Debug.Log($"ProcessMove 1) Player Velocity: {playerVelocity}, ground Velocity: {groundVelocity}, vertical Velocity: {verticalVelocity} - time:{Time.time}");
+        float targetSpeed = crouchActive ? crouchSpeed : speed;
+        if (sprinting)
+            targetSpeed *= sprintmultiplier;
+
+        Vector3 groundInput = Vector3.ProjectOnPlane(transform.TransformDirection(moveDirection), planeNormal)
+            .normalized;
+        groundVelocity = groundInput * targetSpeed;
+
+        verticalVelocity.x = 0f;
+        verticalVelocity.z = 0f;
+
+        playerInput = groundInput;
+        playerVelocity = groundVelocity + verticalVelocity;
+        //Debug.Log($"ProcessMove 2) Player Velocity: {playerVelocity}, ground Velocity: {groundVelocity}, vertical Velocity: {verticalVelocity} - time:{Time.time}");
     }
 
     private void HandleNoise()

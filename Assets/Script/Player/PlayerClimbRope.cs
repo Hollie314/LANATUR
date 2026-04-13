@@ -68,7 +68,7 @@ public class PlayerClimbRope : MonoBehaviour
     void EnterRope()
     {
         climbing = !climbing;
-        Debug.Log("climbed");
+        //Debug.Log("climbed");
         motor.enabled = false; // désactive le mouvement classique
         input.canMove = false;
         leavingRope = false;
@@ -79,11 +79,11 @@ public class PlayerClimbRope : MonoBehaviour
     void Climb()
     {
 
-        Debug.Log("Climbing");
+        //Debug.Log("Climbing");
 
         Vector2 moveInput = input.OnFoot.Movement.ReadValue<Vector2>();
         float vertical = moveInput.y; // Z/S ou ↑/↓
-        Debug.Log($"vertical is {vertical * climbSpeed}");
+        //Debug.Log($"vertical is {vertical * climbSpeed}");
 
         Vector3 climbDirection = new Vector3(0, vertical * climbSpeed, 0);
         
@@ -108,7 +108,7 @@ public class PlayerClimbRope : MonoBehaviour
         {
             if (climbDirection.y < -0.01f || climbDirection.y > 0.01f)
             {
-                Debug.Log("shakes");
+                //Debug.Log("shakes");
                 Tween.ShakeCamera(Camera.current, strengthFactor: 1.0f); //////////////////////////////////////////////////////////////////////////
             }
             controller.Move(climbDirection * Time.deltaTime);
@@ -157,7 +157,7 @@ public class PlayerClimbRope : MonoBehaviour
             nearRope = false;
             ropeTransform = null;
 
-            Debug.Log("TriggerExit");
+            //Debug.Log("TriggerExit");
             if (climbing)
             {
                 climbing = false;

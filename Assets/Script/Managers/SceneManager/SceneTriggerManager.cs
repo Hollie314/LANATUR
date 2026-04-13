@@ -35,7 +35,7 @@ public class SceneTriggerManager : MonoBehaviour
 			catch(Exception e)
 			{
 				print(e);
-				Debug.LogError("Please, select an index from: " + 0 + " to " + (m_scenesToLoad.Length - 1) + " on scenesToLoad array");
+				//Debug.LogError("Please, select an index from: " + 0 + " to " + (m_scenesToLoad.Length - 1) + " on scenesToLoad array");
 			}
 		}
 	}

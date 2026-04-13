@@ -13,11 +13,11 @@ public struct Album
         string filePath = $"{Application.persistentDataPath}/album.json";
         if (File.Exists(filePath))
         {
-            Debug.Log("Album exists");
+            //Debug.Log("Album exists");
             string json = File.ReadAllText(filePath);
             return JsonUtility.FromJson<Album>(json);
         }
-        Debug.Log("Album doesnt exist");
+        //Debug.Log("Album doesnt exist");
         return new Album() { photoInfos = new List<PhotoInfos>()};
     }
 

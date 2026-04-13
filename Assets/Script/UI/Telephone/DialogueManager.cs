@@ -30,7 +30,7 @@ public class DialogueManager : MonoBehaviour
         currentConversation = FirstConversation;
         currentDialogue = dialogues[0];
         ConversationManager.Instance.StartConversation(FirstConversation);
-        Debug.Log($"conversation started: {ConversationManager.Instance.IsConversationActive}");
+        //Debug.Log($"conversation started: {ConversationManager.Instance.IsConversationActive}");
     }
     
     private void OnEnable()
@@ -66,7 +66,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ConversationEnd()
     {
-        Debug.Log("Conversation Ended");
+        //Debug.Log("Conversation Ended");
         nextMessages.Clear();
         currentMessage = null;
         if (! currentDialogue.quests.IsNullOrEmpty())
@@ -88,7 +88,7 @@ public class DialogueManager : MonoBehaviour
         }
         nextMessages.Clear();
         
-        Debug.Log($"conversation: Receive message ça marche, message: {currentMessage.Text}");
+        //Debug.Log($"conversation: Receive message ça marche, message: {currentMessage.Text}");
 
         Message conv = new Message();
         conv.sender = currentMessage.Name;
@@ -100,7 +100,7 @@ public class DialogueManager : MonoBehaviour
         
         if (currentConversation.Deserialize().Root.NodeType == ConversationNode.eNodeType.Option)
         {
-            Debug.Log("conversation: Receive message option");
+            //Debug.Log("conversation: Receive message option");
         }
 
         if (!currentMessage.Connections.IsNullOrEmpty())
@@ -126,7 +126,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Conversation Ending");
+            //Debug.Log("Conversation Ending");
             ConversationManager.Instance.EndConversation();
         }
 
@@ -135,6 +135,6 @@ public class DialogueManager : MonoBehaviour
             speechNode.Event.AddListener(() => OnReceiveMessage(speechNode));;
         }
         
-        Debug.Log("conversation: Receive message ça a fini");
+        //Debug.Log("conversation: Receive message ça a fini");
     }
 }

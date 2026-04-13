@@ -32,7 +32,7 @@ public class HoldItem : MonoBehaviour
             Baie.GetComponent<Berry>().IsHold = true;
             Baie.GetComponent<Berry>().CurrentLife = Baie.GetComponent<Berry>().LifeTime;
             Baie.GetComponentInParent<IInteractable>().Priority = 1000000;
-            Debug.Log("tiens une baie");
+            //Debug.Log("tiens une baie");
         }
         else
         {
@@ -44,7 +44,7 @@ public class HoldItem : MonoBehaviour
             
             Baie.GetComponent<Berry>().IsHold = false;
             Baie.GetComponentInParent<IInteractable>().Priority = 2;
-            Debug.Log("Lache une baie");
+            //Debug.Log("Lache une baie");
         }
         return;
     }

@@ -14,7 +14,7 @@ public partial class ReceivedSoundCondition : Condition
         if (Range.Value == null)
             return false;
 
-        Debug.Log($"hears {Range.Value.soundIntensity}");
+        ////Debug.Log($"hears {Range.Value.soundIntensity}");
 
         return Range.Value.soundIntensity >= Intensity.Value;
     }

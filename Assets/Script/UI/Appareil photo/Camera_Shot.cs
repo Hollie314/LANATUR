@@ -160,7 +160,7 @@ public class Camera_Shot : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"Can change camera: {canChangeCameraUI}, OpenUI: {_openUI.canChangeCameraUI}");
+        //Debug.Log($"Can change camera: {canChangeCameraUI}, OpenUI: {_openUI.canChangeCameraUI}");
         
         timeSinceLastPicture += Time.deltaTime;
         if (!canChangeCameraUI && timeSinceLastPicture >= timeBeforeClosingUI)
@@ -210,8 +210,8 @@ public class Camera_Shot : MonoBehaviour
         {
             foreach (GameObject interestPoint in interestPointsVisible)
             {
-                Debug.Log($"added list length; {interestPointsVisible.Count}");
-                    Debug.Log($"added doing {interestPoint.gameObject.name}");
+                //Debug.Log($"added list length; {interestPointsVisible.Count}");
+                    //Debug.Log($"added doing {interestPoint.gameObject.name}");
                     // Convert object world position to screen space
                     Vector3 screenPos = Camera.main.WorldToScreenPoint(interestPoint.transform.position);
 
@@ -234,7 +234,7 @@ public class Camera_Shot : MonoBehaviour
         float percentage = (closestDistance / maxDistanceToZoom);
         float zoom = Mathf.Lerp(cursorSizeOnTarget, cursorSizeOnNothing, percentage);
         Color color = Color.Lerp(colorOnTarget, colorOnNothing, percentage);
-        Debug.Log($"closest distance: {closestDistance}, percentage: {percentage}, Zoom: {zoom}, cursorSizeOnTarget: {cursorSizeOnTarget}, cursorSizeOnNothing: {cursorSizeOnNothing}");
+        //Debug.Log($"closest distance: {closestDistance}, percentage: {percentage}, Zoom: {zoom}, cursorSizeOnTarget: {cursorSizeOnTarget}, cursorSizeOnNothing: {cursorSizeOnNothing}");
         SetCursorSizeAndColor(zoom, color);
     }
     
@@ -250,7 +250,7 @@ public class Camera_Shot : MonoBehaviour
             return;
         
         RaycastHit hitInfo;
-        //Debug.Log(Camera.main.farClipPlane);
+        ////Debug.Log(Camera.main.farClipPlane);
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hitInfo, Camera.main.farClipPlane, animals_LayerMask))
         {
             Debug.Log($"CAMERASHOT is visible part 5 {hitInfo.collider.name} {Time.fixedTime}");
@@ -336,12 +336,12 @@ public class Camera_Shot : MonoBehaviour
                     }
                     
                     SpecieTakenInPhoto?.Invoke(target.tag);
-                    Debug.Log("new species");
+                    //Debug.Log("new species");
                 }
                 else
                 {
                     SaveSystem.SavePicture(screenCapture, target.tag, false, null, target.GetComponent<UpdateEntry>().EntryType);
-                    Debug.Log("not a new species");
+                    //Debug.Log("not a new species");
                     SpecieTakenInPhoto?.Invoke(target.tag);
                 }
             }
@@ -355,13 +355,13 @@ public class Camera_Shot : MonoBehaviour
                 }
                 
                 SpecieTakenInPhoto?.Invoke(target.tag);
-                Debug.Log("no photos in album");
+                //Debug.Log("no photos in album");
             }
         }
         else
         {
             SaveSystem.SavePicture(screenCapture, null, false, null, PhotoInfos.ImageTypes.None);
-            Debug.Log("no target");
+            //Debug.Log("no target");
         }
         
         Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0.0f, 0.0f, screenCapture.width, screenCapture.height), new Vector2(0.5f, 0.5f), 100.0f);

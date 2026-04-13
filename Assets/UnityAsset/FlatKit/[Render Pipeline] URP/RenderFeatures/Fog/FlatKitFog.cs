@@ -33,24 +33,6 @@ public class FlatKitFog : ScriptableRendererFeature {
     private static int heightFogIntensity => Shader.PropertyToID("_HeightFogIntensity");
     private static int distanceHeightBlend => Shader.PropertyToID("_DistanceHeightBlend");
 
-    /// <summary>
-    /// Access the runtime effect material to override fog parameters at runtime.
-    /// This enables minimal, code-driven tweaks without changing the Settings asset.
-    ///
-    /// Shader (2022.3+ path): "Hidden/FlatKit/FogWrap"
-    ///
-    /// Common shader properties you can set:
-    /// - Textures: _DistanceLUT (Texture2D), _HeightLUT (Texture2D)
-    /// - Floats: _Near, _Far, _LowWorldY, _HighWorldY,
-    ///           _DistanceFogIntensity, _HeightFogIntensity, _DistanceHeightBlend
-    /// - Keywords: USE_DISTANCE_FOG, USE_HEIGHT_FOG, FOG_CAMERA_RELATIVE
-    ///
-    /// Notes:
-    /// - If you supply your own LUTs, set _DistanceLUT/_HeightLUT directly.
-    /// - Settings asset changes (via its inspector) can overwrite your values when applied.
-    /// </summary>
-    public Material EffectMaterial => _effectMaterial;
-
     public override void Create() {
         // Settings.
         {
@@ -93,6 +75,7 @@ public class FlatKitFog : ScriptableRendererFeature {
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData) {
         if (settings == null || !settings.applyInSceneView && renderingData.cameraData.isSceneViewCamera) return;
         if (renderingData.cameraData.isPreviewCamera) return;
+        if (renderingData.cameraData.renderType == CameraRenderType.Overlay) return;
         if (_effectMaterial == null) return;
 
         _fullScreenPass.Setup(_effectMaterial, _requiresColor, _injectedBeforeTransparents, "Flat Kit Fog",
@@ -104,7 +87,7 @@ public class FlatKitFog : ScriptableRendererFeature {
 #if UNITY_EDITOR
     public override void OnCameraPreCull(ScriptableRenderer renderer, in CameraData cameraData) {
         base.OnCameraPreCull(renderer, in cameraData);
-        if (settings == null || _effectMaterial == null) return;
+        if (settings == null) return;
         if (settings.useDistance && !_effectMaterial.GetTexture(distanceLut)) UpdateDistanceLut();
         if (settings.useHeight && !_effectMaterial.GetTexture(heightLut)) UpdateHeightLut();
     }
@@ -215,24 +198,6 @@ public class FlatKitFog : ScriptableRendererFeature {
     private static readonly int HeightFogIntensity = Shader.PropertyToID("_HeightFogIntensity");
     private static readonly int DistanceHeightBlend = Shader.PropertyToID("_DistanceHeightBlend");
 
-    /// <summary>
-    /// Access the runtime effect material to override fog parameters at runtime.
-    /// This enables minimal, code-driven tweaks without changing the Settings asset.
-    ///
-    /// Shader (legacy path): "Hidden/FlatKit/FogFilter"
-    ///
-    /// Common shader properties you can set:
-    /// - Textures: _DistanceLUT (Texture2D), _HeightLUT (Texture2D)
-    /// - Floats: _Near, _Far, _LowWorldY, _HighWorldY,
-    ///           _UseDistanceFog (0/1), _UseDistanceFogOnSky (0/1), _DistanceFogIntensity,
-    ///           _UseHeightFog (0/1), _UseHeightFogOnSky (0/1), _HeightFogIntensity, _DistanceHeightBlend
-    ///
-    /// Notes:
-    /// - If you supply your own LUTs, set _DistanceLUT/_HeightLUT directly.
-    /// - Settings asset changes (via its inspector) can overwrite your values when applied.
-    /// </summary>
-    public Material EffectMaterial => _effectMaterial;
-
     public override void Create() {
 #if UNITY_EDITOR
         if (_effectMaterial == null) {
@@ -263,6 +228,7 @@ public class FlatKitFog : ScriptableRendererFeature {
         if (renderingData.cameraData.isPreviewCamera) return;
         if (!settings.applyInSceneView && renderingData.cameraData.cameraType == CameraType.SceneView) return;
 #endif
+        if (renderingData.cameraData.renderType == CameraRenderType.Overlay) return;
 
         SetMaterialProperties();
 

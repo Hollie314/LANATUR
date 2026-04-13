@@ -107,7 +107,7 @@ public class SceneManagement : MonoBehaviour
 
 		while (!asyncOp.isDone)
 		{
-			Debug.Log("Loading scene: " + (asyncOp.progress * 100).ToString() + " %");
+			//Debug.Log("Loading scene: " + (asyncOp.progress * 100).ToString() + " %");
 			yield return null;
 		}
 
@@ -137,7 +137,7 @@ public class SceneManagement : MonoBehaviour
 
 	void SceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		Debug.Log("Scene loaded sucessufully: " + scene.name);
+		//Debug.Log("Scene loaded sucessufully: " + scene.name);
 
 		if (lastLoadedSceneIsActive)
 		{
@@ -148,11 +148,11 @@ public class SceneManagement : MonoBehaviour
 
 	void ActiveSceneChanged(Scene scene, Scene mode)
 	{
-		Debug.Log("Active scene changed. Previour scene: " + scene.name);
+		//Debug.Log("Active scene changed. Previour scene: " + scene.name);
 	}
 
 	void SceneUnloaded(Scene scene)
 	{
-		Debug.Log("Scene " + scene.name + " unloaded");
+		//Debug.Log("Scene " + scene.name + " unloaded");
 	}
 }

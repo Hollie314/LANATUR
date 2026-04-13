@@ -81,7 +81,7 @@ public class PlayerInteractions : MonoBehaviour
     public void OnInteractInput(InputAction.CallbackContext context)
     {
         // Debug
-        Debug.Log("Interact pressed");
+        //Debug.Log("Interact pressed");
 
         if (interactable != null && interactable.CanInteract)
         {
@@ -92,19 +92,19 @@ public class PlayerInteractions : MonoBehaviour
     public void OnJumpInput(InputAction.CallbackContext context)
     {
         // Debug
-        Debug.Log("Jump");
+        //Debug.Log("Jump");
     }
     
     public void OnCrouchInput(InputAction.CallbackContext context)
     {
         // Debug
-        Debug.Log("Crouch");
+        //Debug.Log("Crouch");
     }
     
     public void OnOpenCameraInput(InputAction.CallbackContext context)
     {
         // Debug
-        Debug.Log("Opening Camera");
+        //Debug.Log("Opening Camera");
         
         // event OpenCamera
         OnOpenCamera?.Invoke(this);
@@ -113,7 +113,7 @@ public class PlayerInteractions : MonoBehaviour
     public void OnOpenTelephoneInput(InputAction.CallbackContext context)
     {
         // Debug
-        Debug.Log("Opening Phone");
+        //Debug.Log("Opening Phone");
         
         // event OpenCamera
         OnOpenTelephone?.Invoke(this);
@@ -122,7 +122,7 @@ public class PlayerInteractions : MonoBehaviour
     public void OnOpenCarnetInput(InputAction.CallbackContext context)
     {
         // Debug
-        Debug.Log("Opening Carnet");
+        //Debug.Log("Opening Carnet");
         
         // event OpenCarnet
         OnOpenCarnet?.Invoke(this);
@@ -131,7 +131,7 @@ public class PlayerInteractions : MonoBehaviour
     public void OnOpenAlbumInput(InputAction.CallbackContext context)
     {
         // Debug
-        Debug.Log("Opening Carnet");
+        //Debug.Log("Opening Carnet");
         
         // event OpenCarnet
         OnOpenAlbum?.Invoke(this);
@@ -140,7 +140,7 @@ public class PlayerInteractions : MonoBehaviour
     public void OnQuitUIInput(InputAction.CallbackContext context)
     {
         // Debug
-        Debug.Log("Quit UI");
+        //Debug.Log("Quit UI");
         
         // event OpenCarnet
         OnQuitUI?.Invoke(this);
@@ -149,7 +149,7 @@ public class PlayerInteractions : MonoBehaviour
     public void OnPauseInput(InputAction.CallbackContext context)
     {
         // Debug
-        Debug.Log("Pause");
+        //Debug.Log("Pause");
         
         // event OpenCarnet
         OnPause?.Invoke(this);

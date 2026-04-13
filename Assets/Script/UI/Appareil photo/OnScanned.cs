@@ -39,7 +39,7 @@ public class OnScanned : MonoBehaviour
 
         yield return 0;
 
-        Debug.Log("CheckScan");
+        ////Debug.Log("CheckScan");
         Scans.SetActive(!Scans.activeSelf);
         /*
         if (gameManager.CameraIsActive && gameManager.ScanIsActive)

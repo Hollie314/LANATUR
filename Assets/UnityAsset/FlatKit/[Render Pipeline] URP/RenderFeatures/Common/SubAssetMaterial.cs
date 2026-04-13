@@ -23,10 +23,20 @@ public static class SubAssetMaterial {
         var subAssets = AssetDatabase.LoadAllAssetsAtPath(settingsPath);
         const string subAssetName = "Effect Material";
         var existingMaterial = subAssets.FirstOrDefault(o => o.name == subAssetName) as Material;
-        if (existingMaterial != null) return existingMaterial;
-
         var shader = Shader.Find(shaderName);
         if (shader == null) return null;
+
+        if (existingMaterial != null) {
+            if (existingMaterial.shader != shader) {
+                existingMaterial.shader = shader;
+                existingMaterial.shaderKeywords = System.Array.Empty<string>();
+                EditorUtility.SetDirty(existingMaterial);
+                EditorUtility.SetDirty(settings);
+                AssetDatabase.SaveAssets();
+            }
+
+            return existingMaterial;
+        }
 
         var newMaterial = new Material(shader) { name = subAssetName };
         try {
