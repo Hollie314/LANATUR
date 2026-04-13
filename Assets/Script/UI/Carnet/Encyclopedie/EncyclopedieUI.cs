@@ -21,7 +21,7 @@ public class EncyclopedieUI : MonoBehaviour
     void OnEnable()
     {
         Game_Manager = FindFirstObjectByType<Game_Manager>();
-        Debug.Log($"Manager name : {Game_Manager.name} - Encyclopedie Entries : {Game_Manager.EncyclopedieEntries} - Count : {Game_Manager.EncyclopedieEntries.Count}");
+        //Debug.Log($"Manager name : {Game_Manager.name} - Encyclopedie Entries : {Game_Manager.EncyclopedieEntries} - Count : {Game_Manager.EncyclopedieEntries.Count}");
         currentEntry = 1;
 
         if (!Game_Manager.EncyclopedieEntries.IsNullOrEmpty())

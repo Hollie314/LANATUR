@@ -25,7 +25,7 @@ public class MakeNoise : MonoBehaviour
             source
         );
 
-        Debug.Log("Noise emitted at " + position);
+        //Debug.Log("Noise emitted at " + position);
     }
     
 }

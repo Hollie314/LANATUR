@@ -36,11 +36,11 @@ namespace Quests
             _updateQuestUI.StartQuestUI(_quest, 0, false);
             QuestManager _questManager = FindFirstObjectByType<QuestManager>();
             _questManager.activeQuests.Add(_quest);
-            Debug.Log("Give Quest 1");
+            //Debug.Log("Give Quest 1");
 
             if (_quest.questDialogue != null)
             {
-                Debug.Log("conv start with quest");
+                //Debug.Log("conv start with quest");
                 DialogueManager dialogueManager = FindFirstObjectByType<DialogueManager>();
                 dialogueManager.StartConv(_quest.questDialogue);
             }
@@ -58,17 +58,17 @@ namespace Quests
                     break;
             }
             
-            Debug.Log("Give Quest 2");
+            //Debug.Log("Give Quest 2");
             
             if (_quest.validateIfAlreadyCompleted)
             {
-                Debug.Log("Give Quest 3");
+                //Debug.Log("Give Quest 3");
                 if(_quest.completeInOrder)
                     _questManager.CheckCompletionInOrder(_quest);
                 else
                     _questManager.CheckCompletionAllOrder(_quest);
             }
-            Debug.Log("Give Quest 4");
+            //Debug.Log("Give Quest 4");
             
             questAlreadyGiven = true;
         }

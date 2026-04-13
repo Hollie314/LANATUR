@@ -13,7 +13,7 @@ public class RockForRope : MonoBehaviour, IInteractable
 
     public void Interact(PlayerInteractions interactions)
     {
-        Debug.Log("Interaction avec le rocher");
+        //Debug.Log("Interaction avec le rocher");
         Corde.SetActive(true);
         interactionText.SetActive(false);
         
@@ -26,13 +26,13 @@ public class RockForRope : MonoBehaviour, IInteractable
 
     public void OnPlayerEnter(PlayerInteractions interactions)
     {
-        Debug.Log("rocher peut etre interargie avec");
+        //Debug.Log("rocher peut etre interargie avec");
         interactionText.SetActive(true);
     }
 
     public void OnPlayerExit(PlayerInteractions interactions)
     {
-        Debug.Log("rocher peut plus etre interargie avec");
+        //Debug.Log("rocher peut plus etre interargie avec");
         interactionText.SetActive(false);
     }
 }

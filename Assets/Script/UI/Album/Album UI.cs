@@ -148,7 +148,7 @@ public class AlbumUI : SerializedMonoBehaviour
         conv.sprite = photo.GetComponent<Image>().sprite;
         conv.infos = ListSelectedPhotos[0];
         
-        Debug.Log($"Conv.sprite is null: {conv.sprite == null}");
+        //Debug.Log($"Conv.sprite is null: {conv.sprite == null}");
         dialogueTelephoneManager.messagesToInstantiate.Add(conv);
         
         DialogueManager dialogueManager = FindFirstObjectByType<DialogueManager>();

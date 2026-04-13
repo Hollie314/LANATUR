@@ -19,13 +19,13 @@ public class ShoutAtTarget : MonoBehaviour
         {
             timePassed += Time.deltaTime;
             invokedSphere.transform.localScale = Vector3.one * Mathf.Lerp(0, ShoutingTime, timePassed) * shoutFinalRadius;
-            Debug.Log($"Sphere Scale: {invokedSphere.transform.localScale}");
+            ////Debug.Log($"Sphere Scale: {invokedSphere.transform.localScale}");
             if (timePassed >= ShoutingTime)
             {
                 timePassed = 0;
                 isShouting = false;
                 Destroy(invokedSphere);
-                Debug.Log("Sphere Destroyed");
+                //Debug.Log("Sphere Destroyed");
             }
         }
     }

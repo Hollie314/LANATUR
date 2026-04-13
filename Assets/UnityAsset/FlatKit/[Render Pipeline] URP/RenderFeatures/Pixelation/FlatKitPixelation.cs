@@ -17,19 +17,6 @@ public class FlatKitPixelation : ScriptableRendererFeature {
     private const string ShaderName = "Hidden/FlatKit/PixelationWrap";
     private static int pixelSizeProperty => Shader.PropertyToID("_PixelSize");
 
-    /// <summary>
-    /// Access the runtime effect material to override pixelation parameters at runtime
-    /// without mutating the Settings asset.
-    ///
-    /// Shader: "Hidden/FlatKit/PixelationWrap"
-    ///
-    /// Common shader properties:
-    /// - Floats: _PixelSize (computed as 1 / resolution by default)
-    ///
-    /// Note: Inspector changes on the Settings asset may overwrite your values if applied later.
-    /// </summary>
-    public Material EffectMaterial => _effectMaterial;
-
     public override void Create() {
         // Settings.
         {
@@ -72,6 +59,7 @@ public class FlatKitPixelation : ScriptableRendererFeature {
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData) {
         if (settings == null || !settings.applyInSceneView && renderingData.cameraData.isSceneViewCamera) return;
         if (renderingData.cameraData.isPreviewCamera) return;
+        if (renderingData.cameraData.renderType == CameraRenderType.Overlay) return;
         if (_effectMaterial == null) return;
 
         _fullScreenPass.Setup(_effectMaterial, _requiresColor, _injectedBeforeTransparents, "Flat Kit Pixelation",

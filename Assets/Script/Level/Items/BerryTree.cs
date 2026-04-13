@@ -17,7 +17,7 @@ public class BerryTree : MonoBehaviour, IInteractable
 
     public void Interact(PlayerInteractions interactions)
     {
-        Debug.Log("Interaction avec la baie");
+        ////Debug.Log("Interaction avec la baie");
 
         // Spawn la baie puis la met directement en main
         GameObject baieObj = Instantiate(Baie, BaieSpawn.position, Quaternion.identity);

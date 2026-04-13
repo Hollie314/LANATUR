@@ -165,8 +165,13 @@
             #pragma multi_compile_fragment _ _LIGHT_LAYERS
             #pragma multi_compile_fragment _ _LIGHT_COOKIES
             #endif
-            #if UNITY_VERSION >= 202220
+            #if UNITY_VERSION >= 202220 && UNITY_VERSION < 600000
             #pragma multi_compile _ _FORWARD_PLUS
+            #endif
+            #if UNITY_VERSION >= 600000
+            #pragma multi_compile _ _CLUSTER_LIGHT_LOOP
+            #endif
+            #if UNITY_VERSION >= 202220
             #pragma multi_compile_fragment _ _WRITE_RENDERING_LAYERS
             #endif
             #if UNITY_VERSION >= 60000000

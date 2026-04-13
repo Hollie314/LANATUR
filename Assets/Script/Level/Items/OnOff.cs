@@ -60,13 +60,13 @@ public class OnOff : MonoBehaviour, IInteractable
 
     public void OnPlayerEnter(PlayerInteractions interactions)
     {
-        Debug.Log("cassette peut etre interargie avec");
+        //Debug.Log("cassette peut etre interargie avec");
         interactionText.SetActive(true);
     }
 
     public void OnPlayerExit(PlayerInteractions interactions)
     {
-        Debug.Log("cassette peut plus etre interargie avec");
+        //Debug.Log("cassette peut plus etre interargie avec");
         interactionText.SetActive(false);
     }
 }

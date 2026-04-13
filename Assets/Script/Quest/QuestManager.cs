@@ -33,7 +33,7 @@ public class QuestManager : MonoBehaviour
     {
         if(!speciesInPhoto.Contains(specie))
             speciesInPhoto.Add(specie);
-        Debug.Log("quest: recieved specie: " + specie);
+        //Debug.Log("quest: recieved specie: " + specie);
         
         // Update uniquement cet event
         if(!activeQuests.IsNullOrEmpty())
@@ -44,7 +44,7 @@ public class QuestManager : MonoBehaviour
     {
         if(!eventsReceived.Contains(objectiveUpdated))
             eventsReceived.Add(objectiveUpdated);
-        Debug.Log("quest: recieved event: " + objectiveUpdated);
+        //Debug.Log("quest: recieved event: " + objectiveUpdated);
         
         // Update uniquement cet event
         if(!activeQuests.IsNullOrEmpty())
@@ -59,7 +59,7 @@ public class QuestManager : MonoBehaviour
         int i = 0;
         while(stillUpdating)
         {
-            Debug.Log("yup, quest fucks there");
+            //Debug.Log("yup, quest fucks there");
             if (activeQuests.IsNullOrEmpty())
             {
                 stillUpdating = false;
@@ -75,26 +75,26 @@ public class QuestManager : MonoBehaviour
                     CheckCompletionAllOrder(activeQuests[i], objectiveUpdated);
             }
             
-            Debug.Log($"i: {i}");
+            //Debug.Log($"i: {i}");
             i++;
             
             if (i > 10)
             {
-                Debug.Log("quest return iteration");
+                //Debug.Log("quest return iteration");
                 stillUpdating = false;
             }
 
             if (Time.deltaTime > 20f)
             {
-                Debug.Log("quest return time");
-                Debug.Log($"quest i: {i}");
+                //Debug.Log("quest return time");
+                //Debug.Log($"quest i: {i}");
                 return;
             }
 
             
         }
 
-        Debug.Log("ouais hein, quest fucks there");
+        //Debug.Log("ouais hein, quest fucks there");
         
         foreach (QuestScriptable quest in toClearQuests)
             ClearQuest(quest);
@@ -115,10 +115,10 @@ public class QuestManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("quest INORDER 1");
+            //Debug.Log("quest INORDER 1");
             if (objectiveEventStr == (quest.currentProgressionGO.tag))
             {
-                Debug.Log("quest INORDER 2");
+                //Debug.Log("quest INORDER 2");
                 UpdateProgressionInOrder(quest);
             }
         }
@@ -200,12 +200,12 @@ public class QuestManager : MonoBehaviour
         switch (quest.questType)
         {
             case QuestScriptable.QuestType.CompletePuzzle:
-                Debug.Log("quest order 3");
+                //Debug.Log("quest order 3");
                 index = quest.GoToPoints.IndexOf((quest.currentProgressionStr));
-                Debug.Log($"quest index :{index}");
+                //Debug.Log($"quest index :{index}");
                 if (index + 1 > quest.GoToPoints.Count - 1)
                 {
-                    Debug.Log("quest order 4");
+                    //Debug.Log("quest order 4");
                     // end quest
                     EndQuest(quest);
                     return;
@@ -220,12 +220,12 @@ public class QuestManager : MonoBehaviour
                 return;
 
             case QuestScriptable.QuestType.GoToPoint:
-                Debug.Log("quest order 3");
+                //Debug.Log("quest order 3");
                 index = quest.GoToPoints.IndexOf((quest.currentProgressionStr));
-                Debug.Log($"quest index :{index}");
+                //Debug.Log($"quest index :{index}");
                 if (index + 1 > quest.GoToPoints.Count - 1)
                 {
-                    Debug.Log("quest order 4");
+                    //Debug.Log("quest order 4");
                     // end quest
                     EndQuest(quest);
                     return;
@@ -240,7 +240,7 @@ public class QuestManager : MonoBehaviour
                 return;
 
             case QuestScriptable.QuestType.PhotographSpecie:
-                Debug.Log("quest INORDER 3");
+                //Debug.Log("quest INORDER 3");
                 index = quest.SpeciesToPhotograph.IndexOf((quest.currentProgressionGO));
                 if (index + 1 > quest.SpeciesToPhotograph.Count - 1)
                 {
@@ -250,7 +250,7 @@ public class QuestManager : MonoBehaviour
                 }
 
                 quest.currentProgressionGO = quest.SpeciesToPhotograph[index + 1];
-                Debug.Log($"quest currentprogression: {quest.currentProgressionGO.tag}");
+                //Debug.Log($"quest currentprogression: {quest.currentProgressionGO.tag}");
                 // Show progression
                 return;
         }
@@ -263,14 +263,14 @@ public class QuestManager : MonoBehaviour
         switch (quest.questType)
         {
             case QuestScriptable.QuestType.CompletePuzzle:
-                Debug.Log("l'update a eu lieu");
+                //Debug.Log("l'update a eu lieu");
                 quest.CompletedObjectivesStr.Add(objectiveCompleted);
-                Debug.Log($"completed objectives: {quest.CompletedObjectivesStr.Count}");
-                Debug.Log($"All objectives: {quest.GoToPoints.Count}");
+                //Debug.Log($"completed objectives: {quest.CompletedObjectivesStr.Count}");
+                //Debug.Log($"All objectives: {quest.GoToPoints.Count}");
                 if (quest.CompletedObjectivesStr.Count >= quest.GoToPoints.Count)
                 {
                     EndQuest(quest);
-                    Debug.Log("quest: 1");
+                    //Debug.Log("quest: 1");
                     return;
                 }
 
@@ -278,14 +278,14 @@ public class QuestManager : MonoBehaviour
                 return;
             
             case QuestScriptable.QuestType.PhotographSpecie:
-                Debug.Log("l'update a eu lieu");
+                //Debug.Log("l'update a eu lieu");
                 quest.CompletedObjectivesStr.Add(objectiveCompleted);
-                Debug.Log($"quest completed objectives: {quest.CompletedObjectivesStr.Count}");
-                Debug.Log($"quest All objectives: {quest.SpeciesToPhotograph.Count}");
+                //Debug.Log($"quest completed objectives: {quest.CompletedObjectivesStr.Count}");
+                //Debug.Log($"quest All objectives: {quest.SpeciesToPhotograph.Count}");
                 if (quest.CompletedObjectivesStr.Count >= quest.SpeciesToPhotograph.Count)
                 {
                     EndQuest(quest);
-                    Debug.Log("quest: 1");
+                    //Debug.Log("quest: 1");
                     return;
                 }
 
@@ -293,14 +293,14 @@ public class QuestManager : MonoBehaviour
                 return;
             
             case QuestScriptable.QuestType.GoToPoint:
-                Debug.Log("l'update a eu lieu");
+                //Debug.Log("l'update a eu lieu");
                 quest.CompletedObjectivesStr.Add(objectiveCompleted);
-                Debug.Log($"completed objectives: {quest.CompletedObjectivesStr.Count}");
-                Debug.Log($"All objectives: {quest.GoToPoints.Count}");
+                //Debug.Log($"completed objectives: {quest.CompletedObjectivesStr.Count}");
+                //Debug.Log($"All objectives: {quest.GoToPoints.Count}");
                 if (quest.CompletedObjectivesStr.Count >= quest.GoToPoints.Count)
                 {
                     EndQuest(quest);
-                    Debug.Log("quest: 1");
+                    //Debug.Log("quest: 1");
                     return;
                 }
 
@@ -311,11 +311,11 @@ public class QuestManager : MonoBehaviour
 
     private void EndQuest(QuestScriptable quest)
     {
-        Debug.Log("End quest");
+        //Debug.Log("End quest");
         UpdateQuestUI _updateQuestUI = FindFirstObjectByType<UpdateQuestUI>();
         int progression = Mathf.Max(quest.GoToPoints.Count, quest.SpeciesToPhotograph.Count);
         _updateQuestUI.EndQuestUI(quest, progression, true);
-        Debug.Log("Frr ???");
+        //Debug.Log("Frr ???");
 
         toClearQuests.Add(quest);
 
@@ -323,9 +323,9 @@ public class QuestManager : MonoBehaviour
         {
             foreach (QuestScriptable nextQuest in quest.QuestToGiveNext)
             {
-                Debug.Log("giving next quest");
+                //Debug.Log("giving next quest");
                 StartQuestScript.GiveQuest(nextQuest);
-                Debug.Log("gave next quest");
+                //Debug.Log("gave next quest");
             }
         }
     }

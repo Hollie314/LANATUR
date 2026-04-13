@@ -44,13 +44,13 @@ public class Camera_InputManager : MonoBehaviour
 
             if (scroll.y > 0f)
             {
-                Debug.Log("Zoom");
+                //Debug.Log("Zoom");
                 OnZoom?.Invoke(this);
             }
         
             else if (scroll.y < 0f)
             {
-                Debug.Log("Dezoom");
+                //Debug.Log("Dezoom");
                 OnDezoom?.Invoke(this);
             }
     }
@@ -58,7 +58,7 @@ public class Camera_InputManager : MonoBehaviour
     public void OnFlashInput(InputAction.CallbackContext context)
     {
             // Debug
-            Debug.Log("Flash");
+            //Debug.Log("Flash");
         
             FlashToggle.isOn = !FlashToggle.isOn;
     }
@@ -66,7 +66,7 @@ public class Camera_InputManager : MonoBehaviour
     public void OnScanInput(InputAction.CallbackContext context)
     {
             // Debug
-            Debug.Log("Scan");
+            //Debug.Log("Scan");
         
             ScanToggle.isOn = !ScanToggle.isOn;
     }
@@ -74,7 +74,7 @@ public class Camera_InputManager : MonoBehaviour
     public void OnVisionNocturneInput(InputAction.CallbackContext context)
     {
             // Debug
-            Debug.Log("Vision nocturne");
+            //Debug.Log("Vision nocturne");
         
             VisionNocturneToggle.isOn = !VisionNocturneToggle.isOn;
     }

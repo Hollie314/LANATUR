@@ -2,7 +2,6 @@
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 #if UNITY_6000_0_OR_NEWER
-using System;
 using UnityEngine.Rendering.RenderGraphModule;
 #endif
 
@@ -10,9 +9,11 @@ public class ScreenRenderPass : ScriptableRenderPass {
     private Material _passMaterial;
     private bool _requiresColor;
     private bool _isBeforeTransparents;
+#if !UNITY_6000_4_OR_NEWER
     private PassData _passData;
-    private ProfilingSampler _profilingSampler;
     private RTHandle _copiedColor;
+#endif
+    private ProfilingSampler _profilingSampler;
 
     private static readonly Vector4 BlitScaleBias = new(1f, 1f, 0f, 0f);
     private static readonly MaterialPropertyBlock SharedPropertyBlock = new();
@@ -30,7 +31,9 @@ public class ScreenRenderPass : ScriptableRenderPass {
         var colorCopyDescriptor = renderingData.cameraData.cameraTargetDescriptor;
         colorCopyDescriptor.depthBufferBits = (int)DepthBits.None;
 
-#if UNITY_6000_0_OR_NEWER
+#if UNITY_6000_4_OR_NEWER
+        requiresIntermediateTexture = _requiresColor && !_isBeforeTransparents;
+#elif UNITY_6000_0_OR_NEWER
         requiresIntermediateTexture = _requiresColor && !_isBeforeTransparents;
         RenderingUtils.ReAllocateHandleIfNeeded(ref _copiedColor, colorCopyDescriptor, FilterMode.Point,
             TextureWrapMode.Clamp, name: "_FullscreenPassColorCopy");
@@ -38,11 +41,15 @@ public class ScreenRenderPass : ScriptableRenderPass {
         RenderingUtils.ReAllocateIfNeeded(ref _copiedColor, colorCopyDescriptor, name: "_FullscreenPassColorCopy");
 #endif
 
+#if !UNITY_6000_4_OR_NEWER
         _passData ??= new PassData();
+#endif
     }
 
     public void Dispose() {
+#if !UNITY_6000_4_OR_NEWER
         _copiedColor?.Release();
+#endif
     }
 
 #if UNITY_6000_0_OR_NEWER
@@ -148,8 +155,8 @@ public class ScreenRenderPass : ScriptableRenderPass {
         }
     }
 
-    [Obsolete("This rendering path is for compatibility mode only (when Render Graph is disabled).", false)]
 #endif
+#if !UNITY_6000_4_OR_NEWER
     public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData) {
         _passData.effectMaterial = _passMaterial;
         _passData.requiresColor = _requiresColor;
@@ -160,9 +167,6 @@ public class ScreenRenderPass : ScriptableRenderPass {
         ExecutePass(_passData, ref renderingData, ref context);
     }
 
-#if UNITY_6000_0_OR_NEWER
-    [Obsolete("This rendering path is for compatibility mode only (when Render Graph is disabled).", false)]
-#endif
     private static void ExecutePass(PassData passData, ref RenderingData renderingData,
         ref ScriptableRenderContext context) {
         var passMaterial = passData.effectMaterial;
@@ -237,6 +241,7 @@ public class ScreenRenderPass : ScriptableRenderPass {
         public ProfilingSampler profilingSampler;
         public RTHandle copiedColor;
     }
+#endif
 
 #if UNITY_6000_0_OR_NEWER
     private class CopyPassData {

@@ -10,6 +10,6 @@ public class Camera_Scan : MonoBehaviour
     public void Scan()
     {
         OnScanActive?.Invoke(this);
-        Debug.Log("Scanning");
+        //Debug.Log("Scanning");
     }
 }

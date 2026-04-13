@@ -10,16 +10,16 @@ public class RangeDetector : MonoBehaviour
     {
         if (add)
         {
-            if (GameObjectsDetected.Contains(newObj)) // si le joueur est déjà détecté, sortir
+            if (GameObjectsDetected.Contains(newObj)) // si le joueur est dï¿½jï¿½ dï¿½tectï¿½, sortir
             {
-                Debug.Log("Joueur déjà détecté - return");
+                ////Debug.Log("Joueur dï¿½jï¿½ dï¿½tectï¿½ - return");
                 return;
             }
             else
             {
                 if (!charCrouched) // si le joueur n'est pas crouch, l'ajouter
                 {
-                    Debug.Log("Joueur debout - ajouté");
+                    ////Debug.Log("Joueur debout - ajoutï¿½");
                     GameObjectsDetected.Add(newObj);
                     return;
                 }
@@ -27,7 +27,7 @@ public class RangeDetector : MonoBehaviour
                 {
                     if (crouchTrigger) // Si le Trigger est celui de crouch, l'ajouter
                     {
-                        Debug.Log("Joueur dans crouch trigger - ajouté");
+                        ////Debug.Log("Joueur dans crouch trigger - ajoutï¿½");
                         GameObjectsDetected.Add(newObj);
                         return;
                     }
@@ -37,16 +37,16 @@ public class RangeDetector : MonoBehaviour
         }
         else
         {
-            if (!GameObjectsDetected.Contains(newObj)) // Si le joueur n'était déjà pas présent, sortir
+            if (!GameObjectsDetected.Contains(newObj)) // Si le joueur n'ï¿½tait dï¿½jï¿½ pas prï¿½sent, sortir
             {
-                Debug.Log("Joueur n'existe pas - return");
+                ////Debug.Log("Joueur n'existe pas - return");
                 return;
             }
             else
             {
                 if(charCrouched) // Si le joueur est crouch, le retirer
                 {
-                    Debug.Log("Joueur crouch - retiré");
+                    ////Debug.Log("Joueur crouch - retirï¿½");
                     GameObjectsDetected.Remove(newObj);
                     return;
                 }
@@ -54,7 +54,7 @@ public class RangeDetector : MonoBehaviour
                 {
                     if (!crouchTrigger) // Si le trigger est celui de base, le retirer
                     {
-                        Debug.Log("Joueur sorti de base trigger - retiré");
+                        ////Debug.Log("Joueur sorti de base trigger - retirï¿½");
                         GameObjectsDetected.Remove(newObj);
                         return;
                     }

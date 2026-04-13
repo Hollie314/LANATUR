@@ -129,12 +129,12 @@ namespace LKHGames
                 }
 
                // AssetDatabase.CreateFolder("Assets" + newfolderPath, folderNameArray[folderNameArray.Length - 2]);
-                Debug.Log("<color=#FFFF00><b>Path saving location not found, New folder was created</b></color>");
+                //Debug.Log("<color=#FFFF00><b>Path saving location not found, New folder was created</b></color>");
             }
 //endif
 
             File.WriteAllBytes(Application.dataPath + savingPath + fileName + saveFormat, _bytes);
-            Debug.Log("<color=#00FF00><b> GradientTexture_" + saveFormat + " baked successfully. Saved in the following path: " + "Assets" + savingPath + "</b></color>");
+            //Debug.Log("<color=#00FF00><b> GradientTexture_" + saveFormat + " baked successfully. Saved in the following path: " + "Assets" + savingPath + "</b></color>");
         }
     }
 }

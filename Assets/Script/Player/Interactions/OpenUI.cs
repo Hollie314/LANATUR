@@ -51,7 +51,7 @@ public class OpenUI : MonoBehaviour
         if (!canChangeCameraUI)
             return;
         
-        Debug.Log("can change and did change");
+        //Debug.Log("can change and did change");
         UI_Camera.SetActive(!UI_Camera.activeSelf);
         UI_Carnet.SetActive(false);
         UI_Album.SetActive(false);
@@ -62,7 +62,7 @@ public class OpenUI : MonoBehaviour
             Cursor.visible = false;
             PauseScene(false);
             OnCameraPhoto?.Invoke(this);
-            Debug.Log("Open Camera");
+            //Debug.Log("Open Camera");
             isCameraOpen = true;
         }
         else
@@ -70,7 +70,7 @@ public class OpenUI : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
             OnCameraWalk?.Invoke(this);
-            Debug.Log("Close Camera");
+            //Debug.Log("Close Camera");
             isCameraOpen =  false;
         }
     }
@@ -182,13 +182,13 @@ public class OpenUI : MonoBehaviour
         {
             //Pause
             Time.timeScale = 0;
-            Debug.Log("Scene Paused");
+            //Debug.Log("Scene Paused");
         }
         else
         {
             //Unpause
             Time.timeScale = 1;
-            Debug.Log("Scene Unpaused");
+            //Debug.Log("Scene Unpaused");
         }
     }
     

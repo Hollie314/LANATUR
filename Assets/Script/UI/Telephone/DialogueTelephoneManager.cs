@@ -37,7 +37,7 @@ public class DialogueTelephoneManager : MonoBehaviour
         
         foreach (Message message in messagesToInstantiate)
         {
-            Debug.Log($"conv Send message ONENABLE {message.message}");
+            //Debug.Log($"conv Send message ONENABLE {message.message}");
             SendMessage(message);
         }
         messagesToInstantiate.Clear();
@@ -47,7 +47,7 @@ public class DialogueTelephoneManager : MonoBehaviour
     {
         foreach (Message message in messagesToInstantiate)
         {
-            Debug.Log($"conv Send message {message.message}");
+            //Debug.Log($"conv Send message {message.message}");
             SendMessage(message);
         }
         messagesToInstantiate.Clear();
@@ -82,7 +82,7 @@ public class DialogueTelephoneManager : MonoBehaviour
         }
         if(message.messageFont != null)
             messageText.font = message.messageFont;
-        Debug.Log("conversation: Receive message ça a fini d'instancier");
+        //Debug.Log("conversation: Receive message ça a fini d'instancier");
         
         /*
         Vector2 ScrollViewSize = ScrollView.GetComponent<RectTransform>().sizeDelta;

@@ -80,7 +80,9 @@ public class ObjectOutlineRendererFeature : RenderObjects {
         settings.overrideShaderPassIndex = 1;
 #endif
 
-        settings.filterSettings.LayerMask = -1;
+        if (settings.filterSettings.LayerMask == 0) {
+            settings.filterSettings.LayerMask = -1;
+        }
         settings.filterSettings.PassNames = new[] { "Outline" };
 
         if (autoReferenceMaterials) {

@@ -28,7 +28,7 @@ public class Digicode : MonoBehaviour, IInteractable
 
     public void Interact(PlayerInteractions interactions)
     {
-        Debug.Log("Interaction avec le digicode");
+        //Debug.Log("Interaction avec le digicode");
         interactionText.SetActive(!interactionText.activeSelf);
 
         transform.GetChild(0).gameObject.SetActive(!transform.GetChild(0).gameObject.activeSelf);
@@ -51,7 +51,7 @@ public class Digicode : MonoBehaviour, IInteractable
         if (!CanInteract)
             return;
 
-        Debug.Log("cassette peut etre interargie avec");
+        //Debug.Log("cassette peut etre interargie avec");
         interactionText.SetActive(true);
     }
 
@@ -60,7 +60,7 @@ public class Digicode : MonoBehaviour, IInteractable
         if (!CanInteract)
             return;
 
-        Debug.Log("cassette peut plus etre interargie avec");
+        //Debug.Log("cassette peut plus etre interargie avec");
         interactionText.SetActive(false);
     }
 

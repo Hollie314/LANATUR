@@ -55,15 +55,15 @@ public class Camera_Zoom : MonoBehaviour
     private void ZoomUp(Camera_InputManager camera_input_manager)
     {
         ZoomSlider.value += increment;
-        Debug.Log(ZoomSlider.value);
+        //Debug.Log(ZoomSlider.value);
     }
 
     private void Dezoom(Camera_InputManager camera_input_manager)
     {
         ZoomSlider.value -= increment;
-        Debug.Log(ZoomSlider.value);
+        //Debug.Log(ZoomSlider.value);
         ZoomSlider.value = Mathf.Clamp(ZoomSlider.value, 1, MaxZoom);
-        Debug.Log(ZoomSlider.value);
+        //Debug.Log(ZoomSlider.value);
     }
 
     // Update is called once per frame

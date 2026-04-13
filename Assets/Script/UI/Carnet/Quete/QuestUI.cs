@@ -18,7 +18,7 @@ namespace UI.Quest
         void OnEnable()
         {
             Quest_Manager = FindFirstObjectByType<QuestManager>();
-            Debug.Log($"Manager name : {Quest_Manager.name} - Quests : {Quest_Manager.activeQuests} - Count : {Quest_Manager.activeQuests.Count}");
+            //Debug.Log($"Manager name : {Quest_Manager.name} - Quests : {Quest_Manager.activeQuests} - Count : {Quest_Manager.activeQuests.Count}");
             currentPage = 1;
 
             if (!Quest_Manager.activeQuests.IsNullOrEmpty()) // Change
@@ -44,7 +44,7 @@ namespace UI.Quest
             if (currentPage <= 1)
             {
                 currentPage = Mathf.CeilToInt(Quest_Manager.activeQuests.Count / 6) +1;
-                Debug.Log($"Current page : {currentPage}");
+                //Debug.Log($"Current page : {currentPage}");
                 UpdateUI(currentPage);
                 return;
             }
@@ -69,7 +69,7 @@ namespace UI.Quest
             DestroyPage();
             int index = (page -1)*6 +1;
             
-            Debug.Log("index: " + index);
+            //Debug.Log("index: " + index);
             for (int i = 0; i < 6; i++)
             {
                 if(Quest_Manager.activeQuests.Count < index) {return;}

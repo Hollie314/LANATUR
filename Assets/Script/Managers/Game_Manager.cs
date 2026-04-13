@@ -29,13 +29,13 @@ public class Game_Manager : MonoBehaviour
 
     private void ChangeCameraActive(OpenUI openUI) // Destroy
     {
-        Debug.Log("Change Camera Active");
+        //Debug.Log("Change Camera Active");
         CameraIsActive = !CameraIsActive;
     }
 
     private void ChangeScanActive(Camera_Scan Camera_Scan)
     {
-        Debug.Log("Change Scan Active");
+        //Debug.Log("Change Scan Active");
         ScanIsActive = !ScanIsActive;
     }
 

@@ -60,7 +60,7 @@ public class PerceptionRange : MonoBehaviour, IStimulusListener
         // ✅ accepte le nouveau stimulus
         soundIntensity = strength;
 
-        Debug.Log($"{gameObject.name} hears {source.name} with strength {strength}");
+        //Debug.Log($"{gameObject.name} hears {source.name} with strength {strength}");
     }
 
     public void OnLightReceived(Vector3 position, float intensity, float radius, GameObject source)
