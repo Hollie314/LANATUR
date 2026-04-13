@@ -89,7 +89,7 @@ public class Camera_Shot : MonoBehaviour
 
     private void Start()
     {
-        screenCapture = new Texture2D(Screen.width, Screen.height, DefaultFormat.HDR, TextureCreationFlags.MipChain); // Change dimensions
+        screenCapture = new Texture2D(Screen.width, Screen.height, DefaultFormat.HDR, TextureCreationFlags.None); // Change dimensions
     }
     
     public List<GameObject> GetVisibleObjects()
@@ -298,7 +298,7 @@ public class Camera_Shot : MonoBehaviour
     {
         // Create Texture
         Camera.main.cullingMask = MaskCameraOnShot;
-        RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
+        RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24, DefaultFormat.HDR);
         Camera.main.targetTexture = rt;
 
         Camera.main.Render();
