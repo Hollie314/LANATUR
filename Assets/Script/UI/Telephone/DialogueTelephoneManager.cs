@@ -11,12 +11,11 @@ using UnityEngine.UI;
 public class DialogueTelephoneManager : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private GameObject messageRempliPrefab;
-    [SerializeField] private GameObject messageVidePrefab;
+    [SerializeField] private GameObject messageNoor;
+    [SerializeField] private GameObject messageAutre;
     [SerializeField] private GameObject conversationManagerGO;
     [SerializeField] private GameObject ScrollView;
-    [SerializeField] private GameObject ContentReceived;
-    [SerializeField] private GameObject ContentSent;
+    [SerializeField] private GameObject Content;
     
     [Header("DialogueEditor")]    
     [HideInInspector] public NPCConversation currentConversation;
@@ -57,42 +56,39 @@ public class DialogueTelephoneManager : MonoBehaviour
 
     public void SendMessage(Message message)
     {
-        GameObject messageRempli = new GameObject();
-        GameObject messageVide = new GameObject();
+        GameObject messageSent = new GameObject();
         if (message.sender == "Noor") 
         {
-            messageVide = Instantiate(messageVidePrefab, ContentReceived.transform);
-            messageRempli = Instantiate(messageRempliPrefab, ContentSent.transform);
-            Debug.Log("conversation: Noor");
+            messageSent = Instantiate(messageNoor, Content.transform);
         }
         else { 
-            messageRempli = Instantiate(messageRempliPrefab, ContentReceived.transform);
-            messageVide = Instantiate(messageVidePrefab, ContentSent.transform);
-            Debug.Log("conversation: Else");
+            messageSent = Instantiate(messageAutre, Content.transform);
         }
         
-        TextMeshProUGUI messageSender = messageRempli.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI messageText = messageRempli.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI messageSender = messageSent.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();  ////////////////////////////////////////////////////////////
+        TextMeshProUGUI messageText = messageSent.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         
         messageSender.text = message.sender;
         if (message.message != null)
             messageText.text = message.message;
         if (message.sprite != null)
         {
-            messageRempli.GetComponent<RectTransform>().sizeDelta = new Vector2(614, 400);
-            messageVide.GetComponent<RectTransform>().sizeDelta = new Vector2(614, 400);
-            messageRempli.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(614, 345);
-            messageRempli.transform.GetChild(1).GetComponent<Image>().sprite = message.sprite;
-            Debug.Log("a mis sprite 1");
-            messageRempli.transform.GetChild(1).GetComponent<Image>().GetComponent<RectTransform>().sizeDelta = new Vector2(614, 345);
+            // messageSent.GetComponent<RectTransform>().sizeDelta = new Vector2(614, 400);
+            // messageSent.transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(614, 345);
+            messageSent.transform.GetChild(0).transform.GetChild(2).GetComponent<Image>().sprite = message.sprite;
+            messageSent.transform.GetChild(0).transform.GetChild(2).gameObject.SetActive(true);
+            messageSent.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
+            // messageSent.transform.GetChild(1).GetComponent<Image>().GetComponent<RectTransform>().sizeDelta = new Vector2(614, 345);
         }
         if(message.messageFont != null)
             messageText.font = message.messageFont;
         Debug.Log("conversation: Receive message ça a fini d'instancier");
         
+        /*
         Vector2 ScrollViewSize = ScrollView.GetComponent<RectTransform>().sizeDelta;
-        Vector2 MessageSize = messageRempli.GetComponent<RectTransform>().sizeDelta;
+        Vector2 MessageSize = messageSent.GetComponent<RectTransform>().sizeDelta;
         
         ScrollView.GetComponent<RectTransform>().sizeDelta = new Vector2(ScrollViewSize.x, ScrollViewSize.y + MessageSize.y + ContentReceived.GetComponent<VerticalLayoutGroup>().spacing);
+        */
     }
 }
