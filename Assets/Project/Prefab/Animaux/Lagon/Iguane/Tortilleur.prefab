@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8556306008702290135}
   - component: {fileID: 5924383640853900831}
   - component: {fileID: 1215914140960972876}
-  - component: {fileID: 4466316168221377331}
   m_Layer: 0
   m_Name: Tortilleur
   m_TagString: Untagged
@@ -319,22 +318,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4466316168221377331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6709942526967535734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4990d2e1f5d18734aa90a545c522d741, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SwitchLayer
-  newLayerName: 
-  unityEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &8801602325934030304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -403,6 +386,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6987983358264480342}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1729110265110458263}
   m_SourcePrefab: {fileID: 100100000, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
 --- !u!1 &8567248915647266993 stripped
 GameObject:
@@ -489,6 +475,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1729110265110458263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8567248915647266993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8630bfdf52dbdb4e8b2781147ea8732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LookAtPlayer
 --- !u!4 &9056505564211829259 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
