@@ -39,6 +39,9 @@ public class Camera_Shot : MonoBehaviour
     
     [Header("Lock target")]
     [SerializeField] private GameObject lockTarget;
+
+    [SerializeField] private float TimeToCheckVisible = 0.3f;
+    private float timeSinceLastCheckVisible = 0f;
     
     [Header("SFX")]
     [SerializeField] private AudioSource audioSource_Photo;
@@ -112,7 +115,7 @@ public class Camera_Shot : MonoBehaviour
             // Check if inside camera frustum
             if (GeometryUtility.TestPlanesAABB(planes, rend.bounds))
             {
-                Debug.Log($"CAMERASHOT {obj.name} is visible part -2");
+                // Debug.Log($"CAMERASHOT {obj.name} is visible part -2");
                 if (obj.TryGetComponent<UpdateEntry>(out UpdateEntry animalPart) || obj.transform.parent.TryGetComponent<UpdateEntry>(out UpdateEntry updatePart))
                 {
                     //how far you can check a point
@@ -123,23 +126,23 @@ public class Camera_Shot : MonoBehaviour
                     Vector2 screenPos2D = new Vector2(screenPos.x, screenPos.y);
                     // Calculate 2D distance from center
                     float distance = Vector2.Distance(screenCenter, screenPos2D);
-                    Debug.Log($"CAMERASHOT {obj.name} is visible part -1, distance: {distance}");
+                    // Debug.Log($"CAMERASHOT {obj.name} is visible part -1, distance: {distance}");
                     if (distance > distanceToSeePoint)
                         continue;
                     
-                    Debug.Log($"CAMERASHOT {obj.name} is visible part 0");
+                    // Debug.Log($"CAMERASHOT {obj.name} is visible part 0");
                     if (planes.All(plane => plane.GetDistanceToPoint(obj.transform.position) >= 0))
                     {
-                        Debug.Log($"CAMERASHOT {obj.name} is visible part 1");
+                        // Debug.Log($"CAMERASHOT {obj.name} is visible part 1");
                         Vector3 cameraPos = Camera.main.transform.position;
                         Vector3 direction = (obj.transform.position - cameraPos).normalized;
 
                         if (Physics.Raycast(cameraPos, direction, out RaycastHit hit))
                         {
-                            Debug.Log($"CAMERASHOT {obj.name} is visible part 2, hit.name: {hit.collider.name}");
+                            // Debug.Log($"CAMERASHOT {obj.name} is visible part 2, hit.name: {hit.collider.name}");
                             if (hit.collider.gameObject == obj || hit.collider.gameObject == obj.transform.parent.gameObject)
                             {
-                                Debug.Log($"CAMERASHOT {obj.name} is visible part 3");
+                                // Debug.Log($"CAMERASHOT {obj.name} is visible part 3");
                                 
                                 // Fin
                                 if (! obj.TryGetComponent<UpdateEntry>(out UpdateEntry onSenBranle))
@@ -147,7 +150,7 @@ public class Camera_Shot : MonoBehaviour
                                     obj = obj.transform.parent.gameObject;
                                 }
                                 visibleObjects.Add(obj);
-                                Debug.Log($"CAMERASHOT is visible part 4 added {obj.name}");
+                                // Debug.Log($"CAMERASHOT is visible part 4 added {obj.name}");
                             }
                         }
                     }
@@ -169,7 +172,13 @@ public class Camera_Shot : MonoBehaviour
             _openUI.canChangeCameraUI = true;
         }
 
-        interestPointsVisible = GetVisibleObjects();
+        timeSinceLastCheckVisible += Time.deltaTime;
+        if (timeSinceLastCheckVisible >= TimeToCheckVisible)
+        {
+            timeSinceLastCheckVisible = 0f;
+            interestPointsVisible = GetVisibleObjects();
+        }
+        
         if (!interestPointsVisible.Contains(target))
             target = null;
         CameraDetection();
@@ -253,14 +262,14 @@ public class Camera_Shot : MonoBehaviour
         ////Debug.Log(Camera.main.farClipPlane);
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hitInfo, Camera.main.farClipPlane, animals_LayerMask))
         {
-            Debug.Log($"CAMERASHOT is visible part 5 {hitInfo.collider.name} {Time.fixedTime}");
+            // Debug.Log($"CAMERASHOT is visible part 5 {hitInfo.collider.name} {Time.fixedTime}");
                 if (target != hitInfo.collider.gameObject)
                 {
-                    Debug.Log($"CAMERASHOT is visible part 6 {hitInfo.collider.name} {Time.fixedTime}");
+                    // Debug.Log($"CAMERASHOT is visible part 6 {hitInfo.collider.name} {Time.fixedTime}");
                     if (interestPointsVisible.Contains(hitInfo.collider.gameObject))
                     {
                         target = hitInfo.collider.gameObject;
-                        Debug.Log($"CAMERASHOT is visible part 7 {target.name} {Time.fixedTime}");
+                        // Debug.Log($"CAMERASHOT is visible part 7 {target.name} {Time.fixedTime}");
                 
                         audioSource_Photo.clip = SFX_TargetLocked;
                         audioSource_Photo.Play();
@@ -269,7 +278,7 @@ public class Camera_Shot : MonoBehaviour
                     else if (interestPointsVisible.Contains(hitInfo.collider.gameObject.transform.parent.gameObject))
                     {
                         target = hitInfo.collider.gameObject;
-                        Debug.Log($"CAMERASHOT is visible part 7 {target.name} {Time.fixedTime}");
+                        // Debug.Log($"CAMERASHOT is visible part 7 {target.name} {Time.fixedTime}");
                 
                         audioSource_Photo.clip = SFX_TargetLocked;
                         audioSource_Photo.Play();
