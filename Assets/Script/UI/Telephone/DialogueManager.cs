@@ -25,6 +25,10 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private DialogueTelephoneManager dialogueTelephoneManager;
     private Dialogue currentDialogue;
     
+    [Header("Notifications")]
+    [SerializeField] private GameObject notificationLayout;
+    [SerializeField] private GameObject notificationPrefab;
+    
     void Start()
     {
         currentConversation = FirstConversation;
@@ -97,6 +101,7 @@ public class DialogueManager : MonoBehaviour
         conv.sprite = null;
         
         dialogueTelephoneManager.messagesToInstantiate.Add(conv);
+        ShowNotification(conv);
         
         if (currentConversation.Deserialize().Root.NodeType == ConversationNode.eNodeType.Option)
         {
@@ -136,5 +141,16 @@ public class DialogueManager : MonoBehaviour
         }
         
         //Debug.Log("conversation: Receive message ça a fini");
+    }
+
+    private void ShowNotification(Message message)
+    {
+        GameObject notif = Instantiate(notificationPrefab, notificationLayout.transform);
+        notif.SetActive(true);
+        notif.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = message.message;
+        if (notificationLayout.transform.childCount > 3)
+        {
+            Destroy(notificationLayout.transform.GetChild(0).gameObject);
+        }
     }
 }
