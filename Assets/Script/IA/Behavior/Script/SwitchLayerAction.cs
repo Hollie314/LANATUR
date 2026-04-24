@@ -14,20 +14,21 @@ public partial class SwitchLayerAction : Action
     protected override Status OnStart()
     {
         if (Self?.Value == null)
-        {
-            //Debug.LogWarning("SwitchLayerAction : Self est null");
             return Status.Failure;
-        }
 
         if (Layer.Value < 0 || Layer.Value > 31)
-        {
-            //Debug.LogWarning($"SwitchLayerAction : index layer '{Layer.Value}' invalide (doit être entre 0 et 31)");
             return Status.Failure;
-        }
 
-        Self.Value.layer = Layer.Value;
+        SetLayerRecursively(Self.Value, Layer.Value);
 
         return Status.Success;
+    }
+
+    private void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+            SetLayerRecursively(child.gameObject, layer);
     }
 
     protected override Status OnUpdate()
