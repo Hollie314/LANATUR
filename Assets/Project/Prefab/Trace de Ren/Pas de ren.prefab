@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4136938019784823519}
   - component: {fileID: 65330075902814229}
+  - component: {fileID: 4175014982688850147}
   - component: {fileID: 8477448321433126941}
   - component: {fileID: 8868927117010022839}
-  - component: {fileID: 4175014982688850147}
   m_Layer: 12
   m_Name: Pas de ren
   m_TagString: Untagged
@@ -64,49 +64,6 @@ MonoBehaviour:
   m_VisibleInScene: 1
   version: 1
   m_DecalLayerMask: 1
---- !u!65 &8477448321433126941
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7904192741333207107}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6.51, y: 4.36, z: 4.98}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8868927117010022839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7904192741333207107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
-  EntryType: 0
-  EncyclopedieEntry:
-  - {fileID: 11400000, guid: 2b14f20affa83644fbe8b37b1132f9ef, type: 2}
-  UpdateType: 1
-  NoteDeRen: []
-  Caracteristique: []
-  Anecdote: []
-  Photo: []
-  Dessin: []
-  DessinMignon: []
 --- !u!23 &4175014982688850147
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -156,3 +113,46 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8477448321433126941
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904192741333207107}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.51, y: 4.36, z: 4.98}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8868927117010022839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904192741333207107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
+  EntryType: 0
+  EncyclopedieEntry:
+  - {fileID: 11400000, guid: 2b14f20affa83644fbe8b37b1132f9ef, type: 2}
+  UpdateType: 1
+  NoteDeRen: []
+  Caracteristique: []
+  Anecdote: []
+  Photo: []
+  Dessin: []
+  DessinMignon: []

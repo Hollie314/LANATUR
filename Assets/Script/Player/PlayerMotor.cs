@@ -112,7 +112,7 @@ public class PlayerMotor : MonoBehaviour
             return false;
         }
 
-        if (Physics.Raycast(transform.position, Vector3.down, out groundHit, rayLength))
+        if (Physics.Raycast(transform.position, Vector3.down, out groundHit, rayLength, layerGround))
         {
             //SFX
             if(!canJump)
