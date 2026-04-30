@@ -33,12 +33,11 @@ public class OnOff : MonoBehaviour, IInteractable
         {
             // Le stimulus est émis en continu indépendamment du son
             WorldStimulusManager.Instance?.EmitSound(transform.position, NoiseRadius, NoiseOn, gameObject);
-
-            // Le son tourne en boucle, on le lance une seule fois
+            
             if (!audioSource.isPlaying)
             {
                 audioSource.clip = clip;
-                //audioSource.loop = true;
+                audioSource.loop = true;
                 audioSource.Play();
             }
         }
