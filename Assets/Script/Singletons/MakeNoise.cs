@@ -13,8 +13,12 @@ public class MakeNoise : MonoBehaviour
         // jouer son si fourni
         if (audioSource != null && audioClip != null)
         {
-            audioSource.clip = audioClip;
-            audioSource.Play();
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = audioClip;
+                audioSource.Play();
+            }
+            
         }
 
         // envoyer stimulus au monde
