@@ -451,6 +451,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -751,7 +752,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2967403922743102577}
-  - component: {fileID: 1771677366388442078}
   - component: {fileID: 5470238024703801864}
   - component: {fileID: 5895886645097685874}
   - component: {fileID: 8564539199447615938}
@@ -789,14 +789,6 @@ Transform:
   - {fileID: 8612019967089664091}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 136.906, z: 0}
---- !u!33 &1771677366388442078
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6977491950172250962}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &5470238024703801864
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -804,7 +796,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6977491950172250962}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -960,7 +952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShoutAtTarget
   ShoutSphere: {fileID: 8776513140138690467, guid: e0f29b7681235ae46b1eb096f0da6d47, type: 3}
-  shoutFinalRadius: 15
+  shoutFinalRadius: 10
 --- !u!114 &2286199110457000891
 MonoBehaviour:
   m_ObjectHideFlags: 0

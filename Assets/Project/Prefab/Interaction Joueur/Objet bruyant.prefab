@@ -16,13 +16,14 @@ GameObject:
   - component: {fileID: 635718196257784459}
   - component: {fileID: 29057712428081638}
   - component: {fileID: 1487706101732295819}
+  - component: {fileID: 8913257576729641657}
   m_Layer: 12
   m_Name: Objet bruyant
-  m_TagString: Untagged
+  m_TagString: RadioRen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2857278468655495468
 Transform:
   m_ObjectHideFlags: 0
@@ -33,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.454968, y: 0.53763026, z: 1.3812656}
+  m_LocalScale: {x: 1.7952935, y: 0.52609223, z: 1.0101057}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 242602050064771355}
@@ -151,21 +152,21 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
-  m_Pitch: 0
-  Loop: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 117
   DopplerLevel: 1
-  MinDistance: 5
-  MaxDistance: 25
+  MinDistance: 15
+  MaxDistance: 60
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -260,7 +261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
   EntryType: 0
-  EncyclopedieEntry: []
+  EncyclopedieEntry:
+  - {fileID: 11400000, guid: b89c3afb4ee7f6741ac597c197cfcadf, type: 2}
   UpdateType: 0
   NoteDeRen: []
   Caracteristique: []
@@ -268,6 +270,20 @@ MonoBehaviour:
   Photo: []
   Dessin: []
   DessinMignon: []
+--- !u!114 &8913257576729641657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3714268887719244414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6e10ae08a1eff438454e6be3f4b9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Quests.UpdateQuest
+  _quest: {fileID: 11400000, guid: b45cbf354ba0a3c4c8cac9b704a2206b, type: 2}
+  ObjectiveString: d
 --- !u!1 &9168831845869930570
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +394,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5688202044395332261
 PrefabInstance:
