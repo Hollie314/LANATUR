@@ -16,20 +16,28 @@ public class RangeDetection : MonoBehaviour
 
     public GameObject UpdateDetector(int layer)
     {
-        // Perform sphere check
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, detectionMask[layer]);
+        Collider[] colliders = Physics.OverlapSphere(
+            transform.position,
+            detectionRadius,
+            detectionMask[layer]
+        );
 
-        if (colliders.Length > 0)
+        foreach (Collider collider in colliders)
         {
-            DetectedTarget = colliders[0].gameObject;
+            // Ignore soi-même et ses enfants
+            if (collider.transform == transform ||
+                collider.transform.IsChildOf(transform))
+            {
+                continue;
+            }
+
+            DetectedTarget = collider.gameObject;
+            return DetectedTarget;
         }
-        else
-        {
-            DetectedTarget = null;
-        }
-        return DetectedTarget;
+
+        DetectedTarget = null;
+        return null;
     }
-
     // Debug visualization
     private void OnDrawGizmos()
     {
