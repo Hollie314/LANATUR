@@ -24,7 +24,8 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: dc279a5ff8fdac54b97064103f16453e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _LAYER_FULL
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -54,8 +55,18 @@ Material:
     - _Absorption_coefficient: -2.6
     - _Animation_Speed: 0.65
     - _Background_Emission_Strength: 0
+    - _Caustic_Distortion_Amount: 0
+    - _Caustic_Distortion_Big: 0.5
+    - _Caustic_Distortion_Ratio: 1
+    - _Caustic_Distortion_Small: 1
+    - _Caustic_Emission_Strength: 0
+    - _Caustic_Gamma: 1
+    - _Caustic_Intensity: 1
+    - _Caustic_Noise_Density: 1
+    - _Caustic_Smoothness: 0
     - _Displacement_Intensity: 0
     - _Distance_Treshold: 1.16
+    - _Foam_Gamma: 1
     - _Foam_Noise_Density: 0.67
     - _Foam_Smoothness: 1
     - _Foam_Step: -1.62
@@ -64,9 +75,20 @@ Material:
     - _Foam_voronoi_density: 1.28
     - _I0: 0.98
     - _IOR: -0.03
+    - _LAYER: 0
     - _Level_High: 1.7
     - _Level_Low: 0.22
+    - _Mask_Gamma: 1
+    - _Mask_Ratio: 1
+    - _Mask_Smoothness: 0
+    - _Mask_density: 1
+    - _Noise_Scale: 0.3
+    - _Noise_amount: 0
+    - _Noise_sharpness: 0
     - _Normals_Intensity: 0
+    - _Pollution_Distance: 30
+    - _Pollution_Emission: 0
+    - _Pollution_Sharpness: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Refraction_density: 0
@@ -78,12 +100,16 @@ Material:
     - _Ripple_Noise_density: 0.17
     - _Ripple_Opacity: 0.48
     - _Ripple_density: 0.46
+    - _Smoothness_Offset: 0
     - _Speed: 0.89
+    - _StepValues: 0
+    - _Step_Edge: 0.5
     - _Step_transparency: 0
     - _UnderFoam_Step: 0.98
     - _UnderRim_Absorption_coefficient: -3.8
     - _UnderRim_Depth: 0.198
     - _UnderRim_Transparency: 0
+    - _Underfoam_Gamma: 0
     - _Water_Smoothness: 0
     - _Water_transparency: 0.344
     - _a: 0.94
@@ -96,7 +122,12 @@ Material:
     - _Clamp_Value_Refraction: {r: 1, g: 1, b: 0, a: 0}
     - _Depth_color: {r: 0.26189387, g: 0.4877811, b: 0.7584905, a: 1}
     - _Foam_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Marker_1: {r: 0, g: 0, b: 0, a: 0}
+    - _Marker_2: {r: 0, g: 0, b: 0, a: 0}
+    - _Marker_3: {r: 0, g: 0, b: 0, a: 0}
+    - _Marker_4: {r: 0, g: 0, b: 0, a: 0}
     - _ObjectPos: {r: 452.5, g: 13.38, b: 255.09, a: 0}
+    - _Pollution_color: {r: 0, g: 0, b: 0, a: 1}
     - _UnderFoam_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Water_Color: {r: 0.61698115, g: 1, b: 0.8933555, a: 1}
     - _ab: {r: 0, g: 1, b: 0, a: 0}
