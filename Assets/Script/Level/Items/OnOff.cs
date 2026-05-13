@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class OnOff : MonoBehaviour, IInteractable
 {
@@ -18,6 +19,9 @@ public class OnOff : MonoBehaviour, IInteractable
     [SerializeField] private AudioClip clip;
     [SerializeField] public bool isActive;
 
+    [Header("Effects")]
+    [SerializeField] private VisualEffect vfx;
+
     private MakeNoise _makeNoise;
     [SerializeField] private AudioSource audioSource;
 
@@ -25,6 +29,10 @@ public class OnOff : MonoBehaviour, IInteractable
     {
         _makeNoise = GetComponent<MakeNoise>();
         audioSource = GetComponent<AudioSource>();
+
+        // S'assure que le VFX est éteint au début
+        if (vfx != null)
+            vfx.Stop();
     }
 
     public void Update()
@@ -39,6 +47,10 @@ public class OnOff : MonoBehaviour, IInteractable
                 audioSource.clip = clip;
                 audioSource.loop = true;
                 audioSource.Play();
+
+                // Lance le VFX quand le son démarre
+                if (vfx != null)
+                    vfx.Play();
             }
         }
     }
@@ -48,7 +60,13 @@ public class OnOff : MonoBehaviour, IInteractable
         isActive = !isActive;
 
         if (!isActive)
+        {
             audioSource.Stop();
+
+            // Stop le VFX quand on éteint
+            if (vfx != null)
+                vfx.Stop();
+        }
 
         if (startsQuest)
             this.gameObject.GetComponent<Quests.StartQuestScript>().StartQuest();
@@ -59,13 +77,11 @@ public class OnOff : MonoBehaviour, IInteractable
 
     public void OnPlayerEnter(PlayerInteractions interactions)
     {
-        //Debug.Log("cassette peut etre interargie avec");
         interactionText.SetActive(true);
     }
 
     public void OnPlayerExit(PlayerInteractions interactions)
     {
-        //Debug.Log("cassette peut plus etre interargie avec");
         interactionText.SetActive(false);
     }
 }
