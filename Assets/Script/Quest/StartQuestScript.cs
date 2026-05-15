@@ -1,7 +1,4 @@
 using UnityEngine;
-using Sirenix.OdinInspector;
-using UnityEngine;
-using DialogueEditor;
 using System.Collections.Generic;
 using Sirenix.Utilities;
 
@@ -10,21 +7,31 @@ namespace Quests
     public class StartQuestScript : MonoBehaviour
     {
         [SerializeField] private List<QuestScriptable> listQuests = new List<QuestScriptable>();
-        private static bool questAlreadyGiven = false;
+        
+        public bool questAlreadyGiven = false;
 
         public void StartQuest()
         {
+            Debug.Log("quete StartQuest a commencé");
             if (questAlreadyGiven)
+            {
+                Debug.Log("quete StartQuest déjà donnée");
                 return;
+            }
+
             if (listQuests.IsNullOrEmpty())
+            {
+                Debug.Log("quete StartQuest pas de quete a donner");
                 return;
+            }
             foreach (QuestScriptable quest in listQuests)
             {
+                Debug.Log("quete StartQuest donne quete");
                 GiveQuest(quest);
+                questAlreadyGiven = true;
             }
         }
         
-        [Button("tg")]
         public void StartGivingQuest(QuestScriptable quest)
         {
             GiveQuest(quest);
@@ -68,9 +75,8 @@ namespace Quests
                 else
                     _questManager.CheckCompletionAllOrder(_quest);
             }
-            //Debug.Log("Give Quest 4");
-            
-            questAlreadyGiven = true;
+
+            Debug.Log("quete StartQuest a donnée quete trop tot ?");
         }
     }   
 }
