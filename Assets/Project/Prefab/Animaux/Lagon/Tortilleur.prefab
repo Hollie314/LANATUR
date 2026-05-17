@@ -9,14 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5299714119012014931}
+  - component: {fileID: 7295492704826244250}
   - component: {fileID: 2583451860611945097}
   - component: {fileID: 5038103931367942058}
   - component: {fileID: 556909077360539658}
   - component: {fileID: 8556306008702290135}
   - component: {fileID: 5924383640853900831}
   - component: {fileID: 1215914140960972876}
-  - component: {fileID: 7295492704826244250}
-  - component: {fileID: -3530905767672218060}
   - component: {fileID: 1261736634630762885}
   m_Layer: 9
   m_Name: Tortilleur
@@ -42,6 +41,55 @@ Transform:
   - {fileID: 1663389970546049675}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &7295492704826244250
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709942526967535734}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2583451860611945097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,79 +379,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!23 &7295492704826244250
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6709942526967535734}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-3530905767672218060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6709942526967535734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
-  EntryType: 0
-  EncyclopedieEntry:
-  - {fileID: 11400000, guid: 548dde036814b38409887270b07b5f21, type: 2}
-  UpdateType: 1
-  NoteDeRen: []
-  Caracteristique:
-  - "Est-ce une sorte de vers des sables ? C'est \xE7a queue ou sa t\xEAte qui est
-    dehors ?"
-  Anecdote: []
-  Photo: []
-  Dessin: []
-  DessinMignon: []
 --- !u!114 &1261736634630762885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,6 +525,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
+      propertyPath: m_TagString
+      value: Tortilleur
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 1
       objectReference: {fileID: 0}
@@ -557,9 +536,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8091326090294080955}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8038707430689891662}
@@ -572,33 +548,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1729110265110458263}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 611225138734041847}
   m_SourcePrefab: {fileID: 100100000, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
 --- !u!1 &8567248915647266993 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}
   m_PrefabInstance: {fileID: 8801602325934030304}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8091326090294080955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8567248915647266993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
-  EntryType: 2
-  EncyclopedieEntry: []
-  UpdateType: 1
-  NoteDeRen: []
-  Caracteristique: []
-  Anecdote: []
-  Photo: []
-  Dessin: []
-  DessinMignon: []
 --- !u!65 &8038707430689891662
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -630,7 +588,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 3.845, y: 2.165, z: 2.3490002}
+  m_Extents: {x: 3.845, y: 1.815, z: 2.3490002}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 0
@@ -670,6 +628,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8630bfdf52dbdb4e8b2781147ea8732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LookAtPlayer
+--- !u!114 &611225138734041847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8567248915647266993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
+  EntryType: 0
+  EncyclopedieEntry:
+  - {fileID: 11400000, guid: 548dde036814b38409887270b07b5f21, type: 2}
+  UpdateType: 1
+  NoteDeRen: []
+  Caracteristique:
+  - "Est-ce une sorte de vers des sables ? C'est \xE7a queue ou sa t\xEAte qui est
+    dehors ?"
+  Anecdote: []
+  Photo: []
+  Dessin: []
+  DessinMignon: []
 --- !u!4 &9056505564211829259 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c839b7edee8fbba458757c63d0e97f51, type: 3}

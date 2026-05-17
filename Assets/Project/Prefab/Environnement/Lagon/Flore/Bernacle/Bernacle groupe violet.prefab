@@ -40,7 +40,7 @@ LODGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3221212413451593409}
-  serializedVersion: 2
+  serializedVersion: 3
   m_LocalReferencePoint: {x: 0, y: 0, z: 0}
   m_Size: 1
   m_FadeMode: 0
@@ -60,6 +60,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 8115288199525318367}
   m_Enabled: 1
+  m_GlobalIlluminationLOD: 0
 --- !u!1 &3631068902642726670
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,9 +183,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d1b70b0082101234bb0cca82f2b2e31d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6620441245118879525}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d1b70b0082101234bb0cca82f2b2e31d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6385941514294648704}
   m_SourcePrefab: {fileID: 100100000, guid: d1b70b0082101234bb0cca82f2b2e31d, type: 3}
 --- !u!4 &6977315256989107632 stripped
@@ -197,29 +195,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d1b70b0082101234bb0cca82f2b2e31d, type: 3}
   m_PrefabInstance: {fileID: 7448635196888490587}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6620441245118879525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7755119319810285322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891cbb4df28ba5e45a60445c585d24fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpdateEntry
-  EntryType: 0
-  EncyclopedieEntry:
-  - {fileID: 11400000, guid: 53f3494a0090e644bb59395a2f09978c, type: 2}
-  UpdateType: 1
-  NoteDeRen: []
-  Caracteristique:
-  - Ces bernacle sont plus grand que les violets, surement plus vieux.
-  Anecdote: []
-  Photo: []
-  Dessin: []
-  DessinMignon: []
 --- !u!64 &6385941514294648704
 MeshCollider:
   m_ObjectHideFlags: 0
