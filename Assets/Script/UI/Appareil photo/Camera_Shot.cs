@@ -12,6 +12,7 @@ using UnityEngine.UI;
 public class Camera_Shot : MonoBehaviour
 {
     [Header("Other UI")]
+    [SerializeField] private UI_Notifications _uiNotifications;
     [SerializeField] private Camera_UI Camera_UI;
     [SerializeField] ChangeEntryPhoto ChangeEntryPhoto;
     
@@ -316,6 +317,8 @@ public class Camera_Shot : MonoBehaviour
 
     private void CapturePhoto()
     {
+        _uiNotifications.ChangeAlbum(true);
+        
         Camera.main.cullingMask = MaskCameraOnShot;
 
         RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24, DefaultFormat.HDR);
@@ -365,6 +368,7 @@ public class Camera_Shot : MonoBehaviour
                         ChangeEntryPhoto.AddPhotoToEntries(infos);
                     }
                     
+                    _uiNotifications.ChangeCarnet(true);
                     SpecieTakenInPhoto?.Invoke(target.tag);
                 }
                 else

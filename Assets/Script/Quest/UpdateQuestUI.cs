@@ -62,6 +62,11 @@ namespace Quests
 
         private void UpdateInGameUI(QuestScriptable _quest, int progression, bool completed)
         {
+            if (activeMessage != null)
+            {
+                Destroy(activeMessage);
+            }
+            
             NextMessages.Add(Instantiate(QuestUpdateMessagePrefab, QuestInGameUI.transform));
             NextMessages.Last().SetActive(false);
             NextMessages.Last().transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = _quest.name;
@@ -78,18 +83,26 @@ namespace Quests
                 _quest.progression = progression;
                 _quest.MaxProgress = _quest.GoToPoints.Count;
             }
-            
+
             if (completed)
             {
-                NextMessages.Last().transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = $"{progression} / {_quest.MaxProgress}";
+                NextMessages.Last().transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text =
+                    $"{progression} / {_quest.MaxProgress}";
                 NextMessages.Last().transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = "Completed";
                 _quest.progression = progression;
+                timeShowingMessage = 3f;
+                Debug.Log("time court");
+            }
+            else
+            {
+                timeShowingMessage = 101f; 
+                Debug.Log("time long");
             }
         }
 
         private void Update()
         {
-            if (activeMessage != null)
+            if (activeMessage != null && timeShowingMessage < 100f)
             {
                 timeActive += Time.deltaTime;
                 if (timeActive > timeShowingMessage)

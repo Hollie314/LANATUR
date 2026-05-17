@@ -26,8 +26,8 @@ public class DialogueManager : MonoBehaviour
     private Dialogue currentDialogue;
     
     [Header("Notifications")]
-    [SerializeField] private GameObject notificationLayout;
-    [SerializeField] private GameObject notificationPrefab;
+    [SerializeField] private UI_Notifications _uiNotifications;
+    [SerializeField] private GameObject notificationCamilleEcrit;
     
     void Start()
     {
@@ -73,6 +73,7 @@ public class DialogueManager : MonoBehaviour
         //Debug.Log("Conversation Ended");
         nextMessages.Clear();
         currentMessage = null;
+        notificationCamilleEcrit.SetActive(false);
         if (! currentDialogue.quests.IsNullOrEmpty())
         {
             foreach (QuestScriptable quest in currentDialogue.quests)
@@ -101,7 +102,7 @@ public class DialogueManager : MonoBehaviour
         conv.sprite = null;
         
         dialogueTelephoneManager.messagesToInstantiate.Add(conv);
-        ShowNotification(conv);
+        ShowNotification();
         
         if (currentConversation.Deserialize().Root.NodeType == ConversationNode.eNodeType.Option)
         {
@@ -143,14 +144,9 @@ public class DialogueManager : MonoBehaviour
         //Debug.Log("conversation: Receive message ça a fini");
     }
 
-    private void ShowNotification(Message message)
+    private void ShowNotification()
     {
-        GameObject notif = Instantiate(notificationPrefab, notificationLayout.transform);
-        notif.SetActive(true);
-        notif.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = message.message;
-        if (notificationLayout.transform.childCount > 3)
-        {
-            Destroy(notificationLayout.transform.GetChild(0).gameObject);
-        }
+        _uiNotifications.ChangeMessage(true);
+        notificationCamilleEcrit.SetActive(true);
     }
 }

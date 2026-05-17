@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class DialogueTelephoneManager : MonoBehaviour
 {
     [Header("UI")]
+    [SerializeField] private UI_Notifications _uiNotifications;
     [SerializeField] private GameObject messageNoor;
     [SerializeField] private GameObject messageAutre;
     [SerializeField] private GameObject conversationManagerGO;
@@ -41,6 +42,8 @@ public class DialogueTelephoneManager : MonoBehaviour
             SendMessage(message);
         }
         messagesToInstantiate.Clear();
+        
+        _uiNotifications.ChangeMessage(false);
     }
 
     private void FixedUpdate()

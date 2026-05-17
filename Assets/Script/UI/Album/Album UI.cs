@@ -15,6 +15,7 @@ public class AlbumUI : SerializedMonoBehaviour
     [SerializeField] private DialogueTelephoneManager dialogueTelephoneManager;
 
     [Header("Canvas / Panels")]
+    [SerializeField] private UI_Notifications _uiNotifications;
     [SerializeField] private GameObject panelAlbum, panelPhoto;
     
     [Header("Buttons")]
@@ -28,6 +29,11 @@ public class AlbumUI : SerializedMonoBehaviour
     private GameObject PhotoZoomedOn;
     [HideInInspector] public List<PhotoInfos> ListSelectedPhotos = new List<PhotoInfos>();
     private bool selectionMultipleOn = false;
+
+    private void OnEnable()
+    {
+        _uiNotifications.ChangeAlbum(false);
+    }
 
     private void OnDisable()
     {
