@@ -12,12 +12,13 @@ public class PauseMenuButtons : MonoBehaviour
         Cursor.visible = false;
     }
     
-    public void ButtonRestart()
+    public void ButtonRestart(string targetScene)
     {
         Game_Manager game_Manager = FindObjectOfType<Game_Manager>();
-        game_Manager.ResetEntries();
+        if(game_Manager != null)
+            game_Manager.ResetEntries();
         ButtonBack();
-        SceneManager.LoadScene("LDVS");
+        SceneManager.LoadScene(targetScene);
     }
     
     public void ButtonQuit()
