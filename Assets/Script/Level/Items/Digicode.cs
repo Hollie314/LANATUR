@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class Digicode : MonoBehaviour, IInteractable
 {
@@ -12,6 +13,7 @@ public class Digicode : MonoBehaviour, IInteractable
     public bool CanInteract { get; set; } = true;
     
     public static event Action<Digicode> OnCodeEntered;
+    
 
     [Header("Code")]
     [SerializeField] private string code;
@@ -25,12 +27,20 @@ public class Digicode : MonoBehaviour, IInteractable
     [SerializeField] private UnityEvent onCorrectCode;
 
     private string writtenCode;
+    private InputManager _inputManager;
 
     public void Interact(PlayerInteractions interactions)
     {
         //Debug.Log("Interaction avec le digicode");
         interactionText.SetActive(!interactionText.activeSelf);
-
+        _inputManager = FindObjectsByType<InputManager>()[0];
+        Debug.Log($"digicode found _inputManager: {_inputManager.gameObject.name}");
+        _inputManager.Controls.OnFoot.QuitUI.performed += Quit;
+        _inputManager.Controls.OnFoot.Pause.performed += Quit;
+        _inputManager.Controls.OnFoot.OpenAlbum.performed += Quit;
+        _inputManager.Controls.OnFoot.OpenCamera.performed += Quit;
+        _inputManager.Controls.OnFoot.OpenCarnet.performed += Quit;
+        _inputManager.Controls.OnFoot.OpenTelephone.performed += Quit;
         transform.GetChild(0).gameObject.SetActive(!transform.GetChild(0).gameObject.activeSelf);
         if (transform.GetChild(0).gameObject.activeSelf)
         {
@@ -44,6 +54,20 @@ public class Digicode : MonoBehaviour, IInteractable
             Cursor.visible = false;
             Time.timeScale = 1;
         }
+    }
+
+    public void Quit(InputAction.CallbackContext context)
+    {
+        Debug.Log("Digicode Quit");
+        _inputManager.Controls.OnFoot.QuitUI.started -= Quit;
+        _inputManager.Controls.OnFoot.Pause.started -= Quit;
+        _inputManager.Controls.OnFoot.OpenAlbum.performed -= Quit;
+        _inputManager.Controls.OnFoot.OpenCamera.performed -= Quit;
+        _inputManager.Controls.OnFoot.OpenCarnet.performed -= Quit;
+        _inputManager.Controls.OnFoot.OpenTelephone.performed -= Quit;
+        
+        transform.GetChild(0).gameObject.SetActive(false);
+        Debug.Log("Digicode was Quit");
     }
 
     public void OnPlayerEnter(PlayerInteractions interactions)
