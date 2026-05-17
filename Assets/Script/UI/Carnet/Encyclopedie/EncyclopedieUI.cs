@@ -6,6 +6,8 @@ using Sirenix.Utilities;
 
 public class EncyclopedieUI : MonoBehaviour
 {
+    [SerializeField] private UI_Notifications _uiNotifications;
+    
     public Game_Manager Game_Manager;
     public int currentEntry;
 
@@ -28,6 +30,8 @@ public class EncyclopedieUI : MonoBehaviour
         {
             UpdateUI(Game_Manager.EncyclopedieEntries[0]);
         }
+        
+        _uiNotifications.ChangeCarnet(false);
     }
 
     public void GoToNext()
