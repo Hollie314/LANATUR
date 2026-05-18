@@ -20,22 +20,27 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Iguane
-  m_Shader: {fileID: 4800000, guid: f7e38193b7f064d7380403618fd8b69e, type: 3}
+  m_Name: iguane
+  m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - DR_RIM_ON
+  - _BASEMAP_PREMULTIPLY
   - _CELPRIMARYMODE_STEPS
+  - _DETAILMAPBLENDINGMODE_MULTIPLY
   - _EMISSION
+  - _GRADIENTSPACE_WORLD
+  - _OUTLINESPACE_SCREEN
   - _TEXTUREBLENDINGMODE_MULTIPLY
   - _UNITYSHADOWMODE_MULTIPLY
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -150,8 +155,8 @@ Material:
     - _GradientEnabled: 0
     - _GradientSize: 10
     - _GradientSpace: 0
-    - _LightContribution: 0
-    - _LightFalloffSize: 0
+    - _LightContribution: 1
+    - _LightFalloffSize: 0.036
     - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
     - _Metallic: 0
@@ -197,7 +202,7 @@ Material:
     - _ColorDimSteps: {r: 0, g: 0.8627448, b: 1, a: 1}
     - _ColorGradient: {r: 1, g: 0, b: 0, a: 1}
     - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.8134423, g: 1.0592737, b: 0.98616225, a: 1}
+    - _EmissionColor: {r: 3.2537692, g: 4.237095, b: 3.944649, a: 1}
     - _FlatRimColor: {r: 1.5915251, g: 1.5915251, b: 1.5915251, a: 1}
     - _FlatSpecularColor: {r: 1, g: 0.4433962, b: 0.4433962, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
